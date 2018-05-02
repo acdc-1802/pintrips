@@ -1,3 +1,4 @@
+[![Waffle.io - Columns and their card count](https://badge.waffle.io/acdc-1802/pintrips.png?columns=all)](https://waffle.io/acdc-1802/pintrips?utm_source=badge)
 ## PINTRIPS ##
 
 # Milestones
