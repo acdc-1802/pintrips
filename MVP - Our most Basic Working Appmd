@@ -1,0 +1,24 @@
+MVP - Our most Basic Working App
+
+User Database - saves user email, password, username
+User has to sign up/login
+Add a new board button OR go to a previously created board OR go to a shared board
+New User will go to a new board - ask permission to use location
+Map with current location will render with a dot showing current location
+User can input a title => form field
+User can choose whether this board is “shareable”
+User can select a location which will render that location on the board => 
+After filling out search field with pre-rendered locations
+Option => solid pin -> where user is right now
+Option => hollow pin -> where you want to go (date and coordinates will be captured once pin is fulfilled)
+		
+There is a “use location” option => gps button - takes your current location and convert it into coordinates
+Clicking on a pin
+Option => “I’m here now” => pin goes from hollow to full => date, coordinates and pin createdBy are captured in the backend
+Option => delete pin
+ 
+	6) Sharing Option: user puts in someone else’s userName and can share the board with them
+Other user gets a new notification that someone shared a board with them
+First user who created the board and shares it is the only one to share the boards to others
+All users can add/delete pins on the board
+	
