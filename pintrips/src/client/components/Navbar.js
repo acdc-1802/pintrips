@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
-import Navbar from './Navbar'
-class HomePage extends Component {
+class Navbar extends Component {
     render() {
         return (
-            <div>
-            <Navbar/>
+            <div className='navbar'>
+            <p> THIS YOUR HOME AWAY FROM, BUT INCLUDING, HOME </p>
             <Link to="/home"><button>Home</button></Link> 
             </div>
         );
     }
 }
 
-export default HomePage;
+export default Navbar;
