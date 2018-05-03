@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import Navbar from './client/components/Navbar';
+import HomePage from './client/components/HomePage';
 import './App.css';
 const firebase = require("firebase");
 // Required for side-effects
@@ -39,7 +39,13 @@ db.collection('boards').doc()
 class App extends Component {
   render() {
     return (
-      <Navbar/>
+      <div className="App">
+            <header className="App-header">
+              <img src={logo} className="App-logo" alt="logo" />
+              <h1 className="App-title">PinTrips</h1>
+            </header>
+           <HomePage/>
+     </div>
     );
   }
 }
