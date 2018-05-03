@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import LoginPage from './LoginPage';
 const firebase = require("firebase");
 // Required for side-effects
 require("firebase/firestore");
@@ -14,7 +15,7 @@ firebase.initializeApp({
 var db = firebase.firestore();
 
 db.collection('users').add({
-  first: 'Ada', 
+  first: 'Ada',
   last: 'Lovelace',
   born: 1815
 })
@@ -44,7 +45,7 @@ class App extends Component {
           <h1 className="App-title">PinTrips</h1>
         </header>
         <p className="App-intro">
-          Hello World bitches
+          <LoginPage />
         </p>
       </div>
     );
