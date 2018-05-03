@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import LoginPage from './LoginPage';
+import Routes from './routes';
 const firebase = require("firebase");
 // Required for side-effects
 require("firebase/firestore");
@@ -44,9 +45,12 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">PinTrips</h1>
         </header>
-        <p className="App-intro">
+        {/*        
+          <Routes />
+        */}
+        <div className="App-intro">
           <LoginPage />
-        </p>
+        </div>
       </div>
     );
   }
