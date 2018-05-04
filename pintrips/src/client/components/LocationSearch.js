@@ -6,7 +6,7 @@ class LocationSearch extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      address: ''
+      coordinates: []
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -20,7 +20,11 @@ class LocationSearch extends Component {
   handleSelect = (address) => {
     geocodeByAddress(address)
       .then(results => getLatLng(results[0]))
-      .then(latLng => console.log('Success', latLng))
+      .then(latLng => {
+        this.setState({coordinates: [latLng.lat, latLng.lng]})
+        console.log('Success', latLng)
+        console.log('STATE COORDINATES', this.state.coordinates)
+      })
       .catch(error => console.error('Error', error))
   }
 
