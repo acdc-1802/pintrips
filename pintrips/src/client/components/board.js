@@ -4,6 +4,7 @@ const mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
 class Board extends Component {
 
   state = {
+    // just for now default fullstack
     center: [-74.010190, 40.705515]
   }
 
