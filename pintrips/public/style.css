@@ -9,7 +9,7 @@ body {
   background-color: #fff;
   height: 100vh;
   width: 100vw;
-  background-image: url("https://betanews.com/wp-content/uploads/2015/01/Earth.jpg");
+  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6wpTX_Re1488fB2Lq5ngmN3i5f83p5Vmhk7JOjPccOLmByGv4");
   background-attachment: fixed;
   background-size: 50vw;
   background-repeat: no-repeat;
@@ -43,19 +43,48 @@ body {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+.board {
+  padding: 50px
+}
+.home-page {
+  padding: 10vw;
+  background-color: rgb(199, 212, 224);
+  margin-bottom: 0;
+  height: 100vh;
+  background-image: url(https://images.unsplash.com/photo-1483638994033-15b73fe7af18?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=1bcf8222b3bc5a4f787a6263ad46ef15&auto=format&fit=crop&w=500&q=60);
+  background-repeat: no-repeat;
+  background-size: 100vw 100vh;
+  background-attachment: fixed;
 
+  
+}
+.home-main {
+  margin-bottom: 0;
+  display: flex;
+
+  /* margin-left: 160px; */
+
+}
+.image {
+  height: 20vw;
+  width: 20vw;
+  margin-left: 0;
+  
+}
 .navbar {
   margin-top: 0;
     display: flex;
     position: fixed;
-    margin: 0 2em;
-    width: calc(100vw - 8em);
+    margin: 0;
+    width: 100vw;
+    height: 17vh;
     background-color: rgb(236, 218, 218); 
     padding: 20px;
-    border-radius: 0 0 2em 2em;
+    border-radius: 0 0 0 0;
     transform: translateY(-2.5em);
     transition: all 1s;
     z-index: 2;
+    background: linear-gradient(to bottom, rgb(120, 120, 202), rgb(141, 221, 141))
 
 }
 
@@ -101,7 +130,38 @@ body {
    padding: 1em;
  }
 
+.side-bar {
+  margin-top: 15vh;
+  height: 100%; 
+  width: 160px; 
+  position: fixed; 
+  z-index: 1; 
+  top: 0; 
+  left: 0;
+  background-color: rgb(96, 110, 136); 
+  overflow-x: hidden; 
+  padding-top: 20px;
+  background: linear-gradient(to bottom, rgb(141, 221, 141), rgb(120, 120, 202))
 
+}
+
+.side-button {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  justify-content: center;
+  align-items: center;
+  padding-top: 55px;
+  font-family: didot;
+  border-radius: 5px;
+
+
+}
+
+.button {
+  margin: 15px;
+  padding: 10px;
+}
 
 
 

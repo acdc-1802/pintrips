@@ -5,10 +5,11 @@ class Navbar extends Component {
         return (
             <div>
               <header>
-                <div className="nav-button">
-                  <Link to={'/HomePage'}> <button> HOME </button></Link> 
-                </div>
+                <div className="navbar">
                 <h1> PinTrips </h1>
+                
+                <button> HOME </button>
+                </div>
               </header>
             </div>
         );
