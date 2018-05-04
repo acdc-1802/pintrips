@@ -4,9 +4,13 @@ import { Router } from 'react-router-dom'
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import history from './history'
+import { AuthProvider } from 'fireview'
+import * as firebase from 'firebase'
 
 ReactDOM.render(
-  <Router history={history}> 
+  <AuthProvider auth={firebase.auth()}>
+    <Router history={history}>
       <App />
-   </Router>, 
-   document.getElementById('root'))
+    </Router>
+  </AuthProvider>,
+  document.getElementById('root'))
