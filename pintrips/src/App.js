@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import HomePage from './client/components/HomePage';
+import Navbar from './client/components/Navbar';
+import LoginPage from './LoginPage';
 import './App.css';
-
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <div>
+      <div className='App'>
+           <Navbar/>
            
-           <HomePage/>
+           <div className="login-container">
+           <LoginPage/>
+           </div>
+           </div>
      </div>
     );
   }

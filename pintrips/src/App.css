@@ -1,5 +1,16 @@
 .App {
   text-align: center;
+  background-color: #fff;
+  height: 100vh;
+  width: 100vw;
+  background-image: url("https://betanews.com/wp-content/uploads/2015/01/Earth.jpg");
+  background-attachment: fixed;
+  background-size: 50vw;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.active {
+  transform: translateY(0em);
 }
 
 .App-logo {
@@ -8,7 +19,7 @@
 }
 
 .App-header {
-  background-color: #222;
+  background-color: #AFAAB9;
   height: 150px;
   padding: 20px;
   color: white;
@@ -28,11 +39,63 @@
 }
 
 .navbar {
-  display: flex;
-  width: 100vw;
-  height: 12vw;
-  background-color: #8797AF;
-  font-family: BlinkMacSystemFont;
-  text-align: center;
-  justify-content: center;
+  margin-top: 0;
+    display: flex;
+    position: fixed;
+    margin: 0 2em;
+    width: calc(100vw - 8em);
+    background-color: rgb(236, 218, 218); 
+    padding: 20px;
+    border-radius: 0 0 2em 2em;
+    transform: translateY(-2.5em);
+    transition: all 1s;
+    z-index: 2;
+
 }
+
+.login-container {
+  margin-top: 10vh;
+  margin-left: 20vw;
+  margin-bottom: 20vh;
+  margin-right: 20vw;
+  background-color: #fff;
+  opacity: .7;
+  padding: 2em;
+  border-radius: 2em;
+  justify-content: center;
+  justify-items: center;
+ }
+
+  .sign-up {
+   font-family: ;
+   font-size: 20px;
+   justify-content: center;
+  justify-items: center;
+  padding: 1em;
+ }
+
+ .form-group {
+   display: flex;
+   justify-content: center;
+  justify-items: center;
+  /* padding: 1em; */
+}
+
+.form-control {
+  padding-left: 2em;
+  padding-top: 1em;
+  justify-content: center;
+  justify-items: center;
+   
+  }
+  
+  .control-label {
+    justify-content: center;
+   justify-items: center;
+   padding: 1em;
+ }
+
+
+
+
+
