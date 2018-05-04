@@ -12,6 +12,7 @@ class Routes extends Component {
         <Route path='/LoginPage' component={LoginPage} />
         <Route path='/SignupPage' component={SignupPage} />
         <Route path='/HomePage' component={HomePage} />
+        {/* SETS DEFAULT ROUTE TO BE SIGNUP, WILL CHANGE */}
         <Route path='/' component={SignupPage} />
       </Switch>
     )
