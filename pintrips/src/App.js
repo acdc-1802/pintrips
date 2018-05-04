@@ -2,17 +2,6 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import LoginPage from './LoginPage';
-const firebase = require("firebase");
-// Required for side-effects
-require("firebase/firestore");
-
-firebase.initializeApp({
-  apiKey: "AIzaSyBXvgyD8ma7sMx6wKXA_YtspWX0v7pI0wY",
-  authDomain: "pintrips-4e855.firebaseapp.com",
-  projectId: "pintrips-4e855"
-});
-// Initialize Cloud Firestore through Firebase
-let db = firebase.firestore();
 
 class App extends Component {
   render() {
