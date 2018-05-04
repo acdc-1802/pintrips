@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
-import Navbar from './Navbar'
+
 class HomePage extends Component {
     render() {
         return (
             <div>
-            <Navbar/>
-            <Link to="/home"><button>Home</button></Link> 
+              <p> This will be my home. Boards will go here </p>
             </div>
         );
     }
