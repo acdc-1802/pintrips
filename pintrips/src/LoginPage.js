@@ -71,34 +71,57 @@ export default class LoginPage extends Component {
   }
   render () {
     return (
-      <div className='login-container'>
-        <h2>Name</h2>
-        <form onSubmit={this.handleSubmit}>
-          <div>
-            <label htmlFor="email"><small>Email</small></label>
-            <input name="email" type="text" />
-          </div>
-          <div>
-            <label htmlFor="password"><small>Password</small></label>
-            <input name="password" type="password" />
-          </div>
-          <div>
-            { this.state.displayName === 'Login'
-              ? <button>Login</button>
-              : <button>Sign Up</button>// : <Link to='board'>SignUp</Link>
-            }
-            <br/>
-            <button type="submit">SignUp</button>
-            <br/>
-          </div>
-          {/* {error && error.response && <div> {error.response.data} </div>} */}
-          {
-            this.state.users.map(user => (
-              <p>{user.email}</p>
-            ))
-          }
-        </form>
-      </div>
+      <div>
+      
+          
+          <section>
+              <h2> Sign Up </h2>
+              <div className="form-group">
+                <label className="col-md-2 control-label"> Username </label>
+                <div className="col-md-10">
+                <input
+                className="form-control"
+              />
+              </div>
+              </div>
+              <div className="form-group">
+              
+              <label className="control-label"> First Name   </label>
+              <div className="col-md-20">
+                  <input
+                  className="form-control"
+                  />
+                  </div>
+                  </div>
+                  <div className="form-group">
+                  <label className="control-label"> Last Name</label>
+                  <div className="col-md-10">
+                  <input
+                  className="form-control"
+                  
+                  />
+                  </div>
+                  </div>
+                  <div className="form-group">
+                  <label className="col-md-2 control-label"> Email </label>
+                  <div className="col-md-10">
+                  <input
+                  className="form-control"
+                  
+                 
+                  />
+                  </div>
+                  </div>
+                  
+                  
+                  
+                  
+                  </section>
+                  </div>
+                        
+                      
+                    
+      
     )
   }
 }
