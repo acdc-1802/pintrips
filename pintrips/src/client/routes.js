@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter, Route, Switch } from 'react-router-dom';
-import { Board, LoginPage, SignupPage, HomePage, Navbar } from './components';
+import { Board, LoginPage, SignupPage, HomePage, Navbar, AddNewBoard} from './components';
 import App from '../App'
 class Routes extends Component {
   render() {
@@ -8,6 +8,7 @@ class Routes extends Component {
       <Switch>
         {/* PUT ALL YA COMPONENTS IN HERE */}
         <Route path='/Board' component={Board} />
+        <Route path='/AddNewBoard' component={AddNewBoard} />
         <Route path='/LoginPage' component={LoginPage} />
         <Route path='/SignupPage' component={SignupPage} />
         <Route path='/HomePage' component={HomePage} />
