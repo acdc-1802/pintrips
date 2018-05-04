@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 class Navbar extends Component {
     render() {
         return (
-            <div>
+            <div className='navbar'>
               <header>
                 <div className="nav-button">
                   <Link to={'/HomePage'}> <button> HOME </button></Link> 
