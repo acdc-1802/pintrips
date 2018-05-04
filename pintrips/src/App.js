@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import LoginPage from './LoginPage';
-import Routes from './routes';
+// import Routes from './routes';
+// import { Board } from './components'
 const firebase = require("firebase");
 // Required for side-effects
 require("firebase/firestore");
@@ -37,6 +38,7 @@ db.collection('boards').doc()
 .collection('pins').add({
   date: 'Thursday'
 })
+
 class App extends Component {
   render() {
     return (
