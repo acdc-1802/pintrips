@@ -1,20 +1,14 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import HomePage from './client/components/HomePage';
-import Navbar from './client/components/Navbar';
-import LoginPage from './LoginPage';
+import {Navbar} from './client/components';
+import Routes from './client/routes'
 import './App.css';
 class App extends Component {
   render() {
     return (
       <div>
-      <div className='App'>
-           <Navbar/>
-           
-           <div className="login-container">
-           <LoginPage/>
-           </div>
-           </div>
+        <Navbar />
+        <Routes />
      </div>
     );
   }

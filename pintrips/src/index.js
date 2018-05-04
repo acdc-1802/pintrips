@@ -5,8 +5,10 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import history from './history'
+import Routes from './client/routes'
 
 ReactDOM.render(<Router history={history}> 
-  <App />
+      
+      <App />
    </Router>, 
    document.getElementById('root'))

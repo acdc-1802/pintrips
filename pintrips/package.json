@@ -1,15 +1,17 @@
 {
   "name": "pintrips",
   "version": "0.1.0",
+  "main": "index.js",
   "private": true,
   "dependencies": {
     "firebase": "^4.13.0",
+    "mapbox": "^1.0.0-beta10",
     "mapbox-gl": "^0.45.0-beta.1",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
-    "react-router": "^4.2.0",
     "react-redux": "^5.0.7",
     "react-redux-firebase": "^2.1.0",
+    "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.4",
     "redux": "^4.0.0",
