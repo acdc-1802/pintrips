@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+// import { Link } from 'react-router-dom';
 // import { connect } from 'react-redux'
 // import PropTypes from 'prop-types'
 // // import { auth } from '../store'
@@ -84,7 +85,7 @@ export default class LoginPage extends Component {
           <div>
             { this.state.displayName === 'Login'
               ? <button>Login</button>
-              : <button>SignUp</button>
+              : <button>Sign Up</button>// : <Link to='board'>SignUp</Link>
             }
             <br/>
             <button type="submit">SignUp</button>

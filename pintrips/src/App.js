@@ -3,6 +3,8 @@ import logo from './logo.svg';
 import './App.css';
 import LoginPage from './LoginPage';
 
+// import Routes from './routes';
+
 class App extends Component {
   render() {
     return (
@@ -11,9 +13,12 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">PinTrips</h1>
         </header>
-        <p className="App-intro">
+        {/*        
+          <Routes />
+        */}
+        <div className="App-intro">
           <LoginPage />
-        </p>
+        </div>
       </div>
     );
   }
