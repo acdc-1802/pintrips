@@ -121,14 +121,13 @@ body {
   padding-top: 1em;
   justify-content: center;
   justify-items: center;
-   
-  }
+}
   
-  .control-label {
-    justify-content: center;
-   justify-items: center;
-   padding: 1em;
- }
+.control-label {
+  justify-content: center;
+  justify-items: center;
+  padding: 1em;
+}
 
 .side-bar {
   margin-top: 15vh;
@@ -156,6 +155,7 @@ body {
   border-radius: 5px;
 
 
+
 }
 
 .button {
@@ -163,5 +163,25 @@ body {
   padding: 10px;
 }
 
+.map-overlay {
+  display: flex;
+  z-index: 5;
+  flex-direction: column;
+  flex-wrap: wrap;
+  height: calc(100vh);
+}
 
+.footer {
+  position: absolute;
+  bottom: 0;
+  margin: 0 2em;
+  width: calc(100vw - 8em);
+  background-color: white; /* should match nav */
+  border-radius: 2em 2em 0 0;
+}
 
+#expand-up {
+  margin: auto;
+  text-align: center;
+  color: #AFAAB9;
+}
