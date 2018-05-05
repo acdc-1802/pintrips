@@ -48,10 +48,10 @@ body {
 }
 .home-page {
   padding: 10vw;
-  background-color: rgb(199, 212, 224);
+  /* background-color: rgb(199, 212, 224); */
   margin-bottom: 0;
   height: 100vh;
-  background-image: url(https://images.unsplash.com/photo-1483638994033-15b73fe7af18?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=1bcf8222b3bc5a4f787a6263ad46ef15&auto=format&fit=crop&w=500&q=60);
+  /* background-image: url(https://images.unsplash.com/photo-1483638994033-15b73fe7af18?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=1bcf8222b3bc5a4f787a6263ad46ef15&auto=format&fit=crop&w=500&q=60); */
   background-repeat: no-repeat;
   background-size: 100vw 100vh;
   background-attachment: fixed;
@@ -78,13 +78,13 @@ body {
     margin: 0;
     width: 100vw;
     height: 17vh;
-    background-color: rgb(236, 218, 218); 
+    /* background-color: rgb(236, 218, 218);  */
     padding: 20px;
     border-radius: 0 0 0 0;
     transform: translateY(-2.5em);
     transition: all 1s;
     z-index: 2;
-    background: linear-gradient(to bottom, rgb(120, 120, 202), rgb(141, 221, 141))
+    /* background: linear-gradient(to bottom, rgb(120, 120, 202), rgb(141, 221, 141)) */
 
 }
 
@@ -138,10 +138,10 @@ body {
   z-index: 1; 
   top: 0; 
   left: 0;
-  background-color: rgb(96, 110, 136); 
+  /* background-color: rgb(96, 110, 136);  */
   overflow-x: hidden; 
   padding-top: 20px;
-  background: linear-gradient(to bottom, rgb(141, 221, 141), rgb(120, 120, 202))
+  /* background: linear-gradient(to bottom, rgb(141, 221, 141), rgb(120, 120, 202)) */
 
 }
 
