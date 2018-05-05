@@ -11,7 +11,6 @@ class LocationSearch extends Component {
       address: '',
       coordinates: []
     };
-
     this.handleChange = this.handleChange.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
   }
@@ -27,7 +26,13 @@ class LocationSearch extends Component {
       .then(latLng => {
         this.setState({ coordinates:[latLng.lat, latLng.lng] });
       })
-      .then(() => this.props.updateCoordinates(this.state.coordinates))
+      .then(() =>  {
+        if (this.props.forAddPin) {
+          this.props.updateBoardPins(address, this.state.coordinates)
+        } else {
+          this.props.updateCoordinates(this.state.coordinates)
+        }
+      })
       .catch(error => console.error('Error', error))
   }
 
@@ -40,7 +45,7 @@ class LocationSearch extends Component {
       >
 
         {({ getInputProps, suggestions, getSuggestionItemProps }) => (
-          <div>
+          <div className='location-search'>
             <input
               {...getInputProps({
                 placeholder: 'Search Places ...',

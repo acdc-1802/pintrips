@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import ReactMapboxGl, { Layer, Feature } from "react-mapbox-gl";
+import ReactMapboxGl, { Popup, Layer, Feature } from "react-mapbox-gl";
+import LocationSearch from './LocationSearch';
 
 const Map = ReactMapboxGl({
   accessToken: 'pk.eyJ1IjoiZGVzdGlubWNtdXJycnkiLCJhIjoiY2plenRxaGw3MGdsNTJ3b2htMGRydWc3aiJ9.ycslnjgv2J9VZGZHT8EoIw'
@@ -16,6 +17,14 @@ class Board extends Component {
     pins: [ {label: 'place1', coords: [-74.015921, 40.703822]}, {label: 'place2', coords: [-74.013720, 40.711140]}, {label: 'place3', coords: [-74.006376, 40.712368]} ],
     // just for now default fullstack
     center: [-74.010190, 40.705515]
+  }
+
+  submitPin = (label, coords) => {
+    // will instead add to backend and re-render with backend data
+    this.setState({
+      pins: [...this.state.pins, {label, coords}]
+    })
+    setTimeout(console.log(this.state),1500);
   }
 
   render() {
@@ -44,6 +53,12 @@ class Board extends Component {
               }
             </Layer>
           </Map>
+          <div className='search-coords'>
+            <div>
+              <LocationSearch forAddPin={true} updateBoardPins={this.submitPin}/>
+            </div>
+            <button type="submit">ADD NEW PIN</button>
+          </div>
           <div className='footer'>
             <p id='expand-up'>—</p>
           </div>
