@@ -61,24 +61,21 @@ class AddNewBoard extends Component {
       boards.where("creator", "==", creator)
         .get()
         .then(querySnapshot => {
-          querySnapshot.forEach(doc => {
-            users.doc(creator).set({
-              boardOwner: [doc.id]
-            }, { merge: true })
-            console.log(doc.id, " => ", doc.data());
+          return querySnapshot.forEach(doc => {
+            let allBoards = [];
+            allBoards.push(doc.id);
+            return allBoards;
           })
-
         })
-
+        .then(boardsArr => {
+          users.doc(creator).set({
+            boardOwner: boardsArr
+          }, { merge: true })
+        })
     })
-
-
-
-
-
-      .catch(err => {
-        console.log("Error getting documents: ", err);
-      })
+    .catch(err => {
+      console.log("Error getting documents: ", err);
+    })
 
     // users.ref({
 
@@ -97,17 +94,6 @@ class AddNewBoard extends Component {
     return (
       <div>
         <form onSubmit={(e) => this.handleSubmit(e)}>
-<<<<<<< HEAD
-          <div className='login-container'>
-            <label>
-              Board Name:
-            <input type="text" placeholder="Board Name" size="25" value={this.state.name} onChange={this.onTitleChange} />
-            </label>
-            <div>
-              <LocationSearch updateCoordinates={this.submitCoordinates} />
-            </div>
-            <button type="submit">ADD NEW BOARD</button>
-=======
           <div className="login-container">
             <label>
               Board Name:
@@ -117,7 +103,6 @@ class AddNewBoard extends Component {
                 <LocationSearch updateCoordinates={this.submitCoordinates}/>
               </div>
               <button type="submit">ADD NEW BOARD</button>
->>>>>>> master
           </div>
         </form>
       </div>
