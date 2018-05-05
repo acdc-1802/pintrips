@@ -32,15 +32,15 @@ class AddNewBoard extends Component {
   handleSubmit(e) {
     e.preventDefault();
     const creator = this.props._user.uid
-    this.setState({creator})
+    this.setState({ creator })
   }
 
-  onTitleChange(e){
-    this.setState({name: e.target.value})
+  onTitleChange(e) {
+    this.setState({ name: e.target.value })
   }
 
   submitCoordinates(coordinates) {
-    this.setState({coordinates})
+    this.setState({ coordinates })
   }
 
   //add button onClick handler to send map info to firestore
@@ -50,16 +50,18 @@ class AddNewBoard extends Component {
   render() {
     console.log('state', this.state)
     return (
-      <div classname="login-container">
+      <div>
         <form onSubmit={(e) => this.handleSubmit(e)}>
-        <label>
-          Board Name:
-            <input type="text" placeholder="Board Name" size="25" value={this.state.name} onChange={this.onTitleChange}/>
-          </label>
-          <div>
-            <LocationSearch updateCoordinates={this.submitCoordinates}/>
+          <div className='login-container'>
+            <label>
+              Board Name:
+            <input type="text" placeholder="Board Name" size="25" value={this.state.name} onChange={this.onTitleChange} />
+            </label>
+            <div>
+              <LocationSearch updateCoordinates={this.submitCoordinates} />
+            </div>
+            <button type="submit">ADD NEW BOARD</button>
           </div>
-          <button type="submit">ADD NEW BOARD</button>
         </form>
 
       </div>
