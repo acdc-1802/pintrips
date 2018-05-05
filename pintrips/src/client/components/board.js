@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactMapboxGl, { Layer, Feature } from "react-mapbox-gl";
+import ReactMapboxGl, { Popup, Layer, Feature } from "react-mapbox-gl";
 import LocationSearch from './LocationSearch';
 
 const Map = ReactMapboxGl({
@@ -19,11 +19,12 @@ class Board extends Component {
     center: [-74.010190, 40.705515]
   }
 
-  submitCoordinates = (coords) => {
+  submitPin = (label, coords) => {
     // will instead add to backend and re-render with backend data
     this.setState({
-      pins: [...this.state.pins, {label: 'newPlace', coords: coords}]
+      pins: [...this.state.pins, {label, coords}]
     })
+    setTimeout(console.log(this.state),1500);
   }
 
   render() {
@@ -54,7 +55,7 @@ class Board extends Component {
           </Map>
           <div className='search-coords'>
             <div>
-              <LocationSearch updateCoordinates={this.submitCoordinates}/>
+              <LocationSearch forAddPin={true} updateBoardPins={this.submitPin}/>
             </div>
             <button type="submit">ADD NEW PIN</button>
           </div>
