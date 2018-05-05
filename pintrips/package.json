@@ -27,6 +27,7 @@
     "react-tap-event-plugin": "^3.0.2",
     "redux": "^4.0.0",
     "redux-firestore": "^0.4.3",
+    "semantic-ui-less": "^2.3.1",
     "semantic-ui-react": "^0.80.0"
   },
   "scripts": {
