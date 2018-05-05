@@ -57,8 +57,30 @@ class AddNewBoard extends Component {
       name: this.state.name,
       owners: [creator]
     })
+    .then(() => {
+      boards.where("creator", "==", creator)
+        .get()
+        .then(querySnapshot => {
+          querySnapshot.forEach(doc => {
+            users.doc(creator).set({
+              boardOwner: [doc.id]
+            }, { merge: true })
+            console.log(doc.id, " => ", doc.data());
+          })
 
-    // users.add({
+        })
+
+    })
+
+
+
+
+
+      .catch(err => {
+        console.log("Error getting documents: ", err);
+      })
+
+    // users.ref({
 
     // })
   }
