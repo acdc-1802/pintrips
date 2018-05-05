@@ -1,8 +1,9 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 // import { Link } from 'react-router-dom';
 // import { connect } from 'react-redux'
 // import PropTypes from 'prop-types'
 // // import { auth } from '../store'
+import { Form } from 'semantic-ui-react';
 import firebase from 'firebase';
 import db from '../firestore';
 
@@ -47,44 +48,39 @@ export default class LoginPage extends Component {
   }
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <div className='login-container'>
-            <h2> Log In </h2>
-            <div className="form-group">
-              <label className="col-md-2 control-label"> Email </label>
-              <div className="col-md-10">
-                <input
-                  className="form-control"
-                  name='email'
-                  type='text'
-                  defaultValue={this.state.username}
-                  onChange={this.handleChange}
-                />
-              </div>
-            </div>
-            <div className="form-group">
-
-              <label className="control-label"> Password   </label>
-              <div className="col-md-20">
-                <input
-                  className="form-control"
-                  name='password'
-                  type='text'
-                  defaultValue={this.state.username}
-                  onChange={this.handleChange}
-                />
-              </div>
-            </div>
-            <button type='submit'>Login</button>
-          </div>
-        </form>
+      
+      <div >
+      <form onSubmit={this.handleSubmit}>
+      <Form className="login-container">
+        <Form.Group widths='equal' >
+        <div className="form-group">
+          <Form.Input fluid label='Email' placeholder='Email' 
+          
+          className="form-control"
+          name='email'
+          type='text'
+          defaultValue={this.state.username}
+          onChange={this.handleChange}
+        />
+        </div>  
+        <div className="form-group">
+          <Form.Input fluid label='Password' placeholder='Password'
+          
+          className="form-control"
+          name='password'
+          type='text'
+          defaultValue={this.state.username}
+          onChange={this.handleChange}
+        />
+        </div>  
+          
+          
+        </Form.Group>
+        
+        <Form.Button>Submit</Form.Button>
+      </Form>
+      </form>
       </div>
-
-
-
-
     )
   }
 }
-
