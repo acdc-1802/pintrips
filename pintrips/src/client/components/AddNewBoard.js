@@ -3,6 +3,7 @@ import LocationSearch from './LocationSearch';
 import firebase from 'firebase';
 import db from '../firestore';
 import { withAuth } from 'fireview';
+require("firebase/firestore");
 
 class AddNewBoard extends Component {
   constructor() {
@@ -11,7 +12,8 @@ class AddNewBoard extends Component {
       name: '',
       coordinates: [],
       creator: '',
-      locked: 'open'
+      locked: 'open',
+      owners: []
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -21,10 +23,16 @@ class AddNewBoard extends Component {
 
   // componentDidMount() {
   //   if ("geolocation" in navigator) {
-  //     navigator.geolocation.getCurrentPosition(function(position) {
-  //         console.log('position', position)
-  //         submitCoordinates(position)
-  //       })
+  //     function success(position) {
+  //       let latitude  = position.coords.latitude;
+  //       let longitude = position.coords.longitude;
+  //       console.log('SUCCESS', latitude, longitude)
+  //       return [latitude, longtitude]
+  //     }
+  //     function error() {
+  //       console.log("Unable to retrieve your location");
+  //     }
+  //     navigator.geolocation.getCurrentPosition(success, error);
   //   }
   // }
 
@@ -32,36 +40,64 @@ class AddNewBoard extends Component {
   handleSubmit(e) {
     e.preventDefault();
     const creator = this.props._user.uid
-    this.setState({creator})
+    if (!creator) {
+      alert('must be logged in')
+      window.location.href='/'
+    } else {
+      this.setState({creator, owners: [...this.state.owners, creator]})
+    }
+
+    const boards = db.collection('boards')
+    const users = db.collection('users')
+
+    boards.add({
+      coordinates: new firebase.firestore.GeoPoint(this.state.coordinates[0],this.state.coordinates[1]),
+      creator: creator,
+      locked: this.state.locked,
+      name: this.state.name,
+      owners: [creator]
+    })
+
+    // users.add({
+
+    // })
   }
 
-  onTitleChange(e){
-    this.setState({name: e.target.value})
+  onTitleChange(e) {
+    this.setState({ name: e.target.value })
   }
 
   submitCoordinates(coordinates) {
-    this.setState({coordinates})
+    this.setState({ coordinates })
   }
 
-  //add button onClick handler to send map info to firestore
-
-  //user info needs to be passed into  creation via fireview
-
   render() {
-    console.log('state', this.state)
     return (
-      <div classname="login-container">
+      <div>
         <form onSubmit={(e) => this.handleSubmit(e)}>
-        <label>
-          Board Name:
-            <input type="text" placeholder="Board Name" size="25" value={this.state.name} onChange={this.onTitleChange}/>
-          </label>
-          <div>
-            <LocationSearch updateCoordinates={this.submitCoordinates}/>
+<<<<<<< HEAD
+          <div className='login-container'>
+            <label>
+              Board Name:
+            <input type="text" placeholder="Board Name" size="25" value={this.state.name} onChange={this.onTitleChange} />
+            </label>
+            <div>
+              <LocationSearch updateCoordinates={this.submitCoordinates} />
+            </div>
+            <button type="submit">ADD NEW BOARD</button>
+=======
+          <div className="login-container">
+            <label>
+              Board Name:
+                <input type="text" placeholder="Board Name" size="25" value={this.state.name} onChange={this.onTitleChange}/>
+              </label>
+              <div>
+                <LocationSearch updateCoordinates={this.submitCoordinates}/>
+              </div>
+              <button type="submit">ADD NEW BOARD</button>
+>>>>>>> master
           </div>
-          <button type="submit">ADD NEW BOARD</button>
         </form>
-
       </div>
     )
   }
