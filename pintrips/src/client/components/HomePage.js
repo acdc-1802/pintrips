@@ -1,20 +1,24 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Sidebar from './Sidebar';
-import { Button } from 'semantic-ui-react'
+import MapCard from './MapCard';
+
 
 
 
 class HomePage extends Component {
     render() {
        return (
-        <div className="home-page" >
-          <Sidebar />
-            <div className="home-main">
-            
-            </div> 
+         <div className='card-group'>
+          <MapCard />
+          <MapCard />
+          <MapCard />
+          <MapCard />
+          <MapCard />
+          <MapCard />
+          <MapCard />
+          <MapCard />
         </div>
-       
         );
     }
 }

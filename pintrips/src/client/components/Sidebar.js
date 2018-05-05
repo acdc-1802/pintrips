@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { Button, Card, Image, Icon} from 'semantic-ui-react'
+
 
 class Sidebar extends Component {
   render() {
@@ -7,9 +9,10 @@ class Sidebar extends Component {
       <div className="side-bar">
         <div className="side-button">
 
-          <button className="button"> ALL MY BOARDS </button> 
-          <button className="button"> MY SHARED BOARDS </button> 
-          <button className="button"> MY UNIVERSAL BOARD </button> 
+          <Link to={'/HomePage'}className='button'><Button className="button">  MY BOARDS </Button> </Link>
+          <Link to={'/HomePage'}className='button'><Button className="button">  BOARDS SHARED WITH ME </Button> </Link>
+          
+
         </div>
       </div>
     );

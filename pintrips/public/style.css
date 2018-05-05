@@ -1,4 +1,4 @@
-/* body {
+body {
   margin: 0;
   padding: 0;
   font-family: 'Dosis', sans-serif;
@@ -13,7 +13,7 @@ a {
   background-color: #fff;
   height: 100vh;
   width: 100vw;
-  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6wpTX_Re1488fB2Lq5ngmN3i5f83p5Vmhk7JOjPccOLmByGv4");
+  background-image: url("https://betanews.com/wp-content/uploads/2015/01/Earth.jpg");
   background-attachment: fixed;
   background-size: 50vw;
   background-repeat: no-repeat;
@@ -24,10 +24,7 @@ a {
   transform: translateY(0em);
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
+
 
 .App-header {
   background-color: #AFAAB9;
@@ -43,38 +40,30 @@ a {
 .App-intro {
   font-size: large;
 }
-
-@keyframes App-logo-spin {
+.card-group {
+  display: flex;
+  margin-left: 200px;
+  padding: 15px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  
+}
+@keyframes Navbar-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
-.board {
-  padding: 50px
-}
-.home-page {
-  padding: 10vw;
-  /* background-color: rgb(199, 212, 224); */
-  /* margin-bottom: 0; */
-  /* height: 100vh; */ */
-  /* background-image: url(https://images.unsplash.com/photo-1483638994033-15b73fe7af18?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=1bcf8222b3bc5a4f787a6263ad46ef15&auto=format&fit=crop&w=500&q=60); */
-  /* background-repeat: no-repeat;
-  background-size: 100vw 100vh;
-  background-attachment: fixed;
 
-  
-} */
-/* .home-main {
-  margin-bottom: 0;
+.button {
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.ind-card {
+  min-width: 25vw;
   display: flex;
-
-
-
-}
-.image {
-  height: 20vw;
-  width: 20vw;
-  margin-left: 0;
-  
+  padding: 25px;
+  /* flex-wrap: wrap;
+  flex-direction: row; */
 }
 .navbar {
   margin-top: 0;
@@ -107,88 +96,113 @@ a {
 }
 
 #logo {
-  width: 5em;
-  height: 5em;
+  width: 7em;
+  height: 7em;
+  animation: Navbar-logo-spin infinite 20s linear;
+  /* height: 80px; */
+  
 }
 
 .login-container {
   display: flex;
   flex-direction: column;
   background-color: #fff;
-  opacity: .7;
+  /* opacity: .7; */
   padding: 5em;
   border-radius: 2em;
   justify-content: center;
   justify-items: center;
- } */
-  /* text-align: center;
- } */
+  text-align: center;
+  width: 40%;
+  margin-left: 30%;
+  margin-top: 5%;
 
-  /* .sign-up {
-   font-family: sans-serif;
-   font-size: 20px;
-   justify-content: center;
-  justify-items: center;
-  padding: 1em;
- } */
+ }
 
- /* .form-group {
+
+ .form-group {
    display: flex;
+   flex-direction: column;
    justify-content: center;
   justify-items: center;
+  width: 20vw;
   /* padding: 1em; */
-} */
+}
 
-/* .form-control {
+.form-control {
   padding-left: 2em;
   padding-top: 1em;
   justify-content: center;
   justify-items: center;
-} */
+}
   
-/* .control-label {
+.control-label {
   justify-content: center;
   justify-items: center;
   padding: 1em;
-} */
+}
 
-/* .board-container {
+.board-container {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   height: calc(100vh);
-} */
+}
 
-/* #map {
+#map {
   position: absolute;
   width: 100%;
   height: 100%;
-} */
+}
 
-/* .map-overlay {
+.map-overlay {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   height: calc(100vh);
-} */
+}
 
-/* .footer {
+.footer {
   position: absolute;
   bottom: 0;
-  margin: 0 2em;
-  width: calc(100vw - 8em);
-  background-color: white; /* should match nav */
-  /* border-radius: 2em 2em 0 0; */
-/* }  */
-  /* width: calc(100vw);
+  width: calc(100vw);
   background-color: #d1ecb3;
   color: white;
   border-radius: 2em 2em 0 0;
   border: solid 1px white;
-} */
+}
 
-/* #expand-up {
+#expand-up {
   margin: auto;
   text-align: center;
   color: #AFAAB9;
-} */
+}
+
+
+.sign-up {
+  font-family: sans-serif;
+  font-size: 20px;
+  justify-content: center;
+ justify-items: center;
+ padding: 1em;
+}
+
+.side-bar {
+  margin-top: 20vh;
+  display: flex;
+  height: 100%; 
+    width: 160px; 
+    position: fixed; 
+    z-index: 1;
+    top: 0; 
+    left: 0;
+    /* background-color: rgb(97, 65, 65); Black */
+    overflow-x: hidden; 
+    padding-top: 20px;
+}
+
+.side-button {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
