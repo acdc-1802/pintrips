@@ -131,13 +131,24 @@ a {
   height: calc(100vh);
 }
 
-.marker {
-  background-image: url('/attributes/pin.png');
-  background-size: cover;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  cursor: pointer;
+.search-coords {
+  position: absolute;
+  top: 100px;
+  left: 100px;
+  z-index: 5;
+  width: 50%;
+  background-color: white;
+  border: solid 1px lightgray;
+  border-radius: 5px;
+}
+
+.search-coords input {
+  width: 90%;
+  margin: 1em;
+}
+
+.search-coords button {
+  border-radius: 5px;
 }
 
 .footer {

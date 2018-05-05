@@ -40,7 +40,7 @@ class LocationSearch extends Component {
       >
 
         {({ getInputProps, suggestions, getSuggestionItemProps }) => (
-          <div>
+          <div className='location-search'>
             <input
               {...getInputProps({
                 placeholder: 'Search Places ...',
