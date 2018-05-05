@@ -26,7 +26,6 @@ class LocationSearch extends Component {
       .then(results => getLatLng(results[0]))
       .then(latLng => {
         this.setState({ coordinates:[latLng.lat, latLng.lng] });
-        console.log('STATE Location COORDINATES', this.state.coordinates)
       })
       .then(() => this.props.updateCoordinates(this.state.coordinates))
       .catch(error => console.error('Error', error))
