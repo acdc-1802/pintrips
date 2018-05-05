@@ -132,31 +132,27 @@ a {
   height: calc(100vh);
 }
 
-#map {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-}
-
-.map-overlay {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  height: calc(100vh);
+.marker {
+  background-image: url('/attributes/pin.png');
+  background-size: cover;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
 .footer {
   position: absolute;
   bottom: 0;
   width: calc(100vw);
-  background-color: #d1ecb3;
   color: white;
+  background-color: #d1ecb3;
   border-radius: 2em 2em 0 0;
   border: solid 1px white;
+  z-index: 2;
 }
 
 #expand-up {
   margin: auto;
   text-align: center;
-  color: #AFAAB9;
 }
