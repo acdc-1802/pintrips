@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import firebase from 'firebase';
 import db from '../firestore';
 
@@ -123,10 +124,13 @@ class SignupPage extends Component {
             <button type='submit'>Signup</button>
           </div>
         </form>
-      </div>
-
-
-
+        
+        <div>
+        <h2> Already signed up?! </h2>
+        <Link to={'./LoginPage'}> <button> Log In </button> </Link>
+        
+        </div>
+        </div>
 
     )
   }
