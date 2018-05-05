@@ -1,7 +1,11 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: 'Dosis', sans-serif;
+}
+
+a {
+  text-decoration: none;
 }
 
 .App {
@@ -15,6 +19,7 @@ body {
   background-repeat: no-repeat;
   background-position: center;
 }
+
 .active {
   transform: translateY(0em);
 }
@@ -46,29 +51,49 @@ body {
 
 .navbar {
   margin-top: 0;
-    display: flex;
+  height: 5em;
+    display: flex; 
+    flex-direction: row;
+    align-items: center;
     position: fixed;
-    margin: 0 2em;
-    width: calc(100vw - 8em);
-    background-color: white; 
-    padding: 10px;
+    color: white;
+    width: calc(100vw);
+    background-color: #d1ecb3; 
     border-radius: 0 0 2em 2em;
-    transform: translateY(-2.5em);
+    border: solid 1px white;
     transition: all 1s;
     z-index: 2;
 }
 
+.navbar h1 {
+  font-size: 3em;
+}
+
+#back {
+  font-size: 3em;
+  margin: 0 15px;
+  color: white;
+}
+
+#back a {
+  color: white;
+}
+
+#logo {
+  width: 5em;
+  height: 5em;
+}
+
 .login-container {
-  margin-top: 10vh;
-  margin-left: 20vw;
-  margin-bottom: 20vh;
-  margin-right: 20vw;
+  display: flex;
+  flex-direction: column;
   background-color: #fff;
   opacity: .7;
-  padding: 2em;
+  padding: 5em;
   border-radius: 2em;
   justify-content: center;
   justify-items: center;
+  text-align: center;
  }
 
   .sign-up {
@@ -114,7 +139,6 @@ body {
 
 .map-overlay {
   display: flex;
-  z-index: 5;
   flex-direction: column;
   flex-wrap: wrap;
   height: calc(100vh);
@@ -123,10 +147,11 @@ body {
 .footer {
   position: absolute;
   bottom: 0;
-  margin: 0 2em;
-  width: calc(100vw - 8em);
-  background-color: white; /* should match nav */
+  width: calc(100vw);
+  background-color: #d1ecb3;
+  color: white;
   border-radius: 2em 2em 0 0;
+  border: solid 1px white;
 }
 
 #expand-up {
