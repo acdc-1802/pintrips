@@ -48,7 +48,8 @@ export default class LoginPage extends Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit} >
+        <div classname="login-container">
           <h2> Log In </h2>
           <div className="form-group">
             <label className="col-md-2 control-label"> Email </label>
@@ -76,6 +77,7 @@ export default class LoginPage extends Component {
             </div>
           </div>
         <button type='submit'>Login</button>
+        </div>
         </form>
       </div>
 

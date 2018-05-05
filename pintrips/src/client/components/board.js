@@ -27,9 +27,9 @@ class Board extends Component {
     return (
       <div className='board-container'>
         <div id='map'></div>
-        <div className='map-overlay'> 
+        <div className='map-overlay'>
           <div>
-          
+
           </div>
           <div className='footer'>
             <p id='expand-up'>-</p>
