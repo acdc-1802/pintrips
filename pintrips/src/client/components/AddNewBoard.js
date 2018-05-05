@@ -8,8 +8,10 @@ class AddNewBoard extends Component {
   constructor() {
     super();
     this.state = {
-      label: '',
-      coordinates: []
+      name: '',
+      coordinates: [],
+      creator: '',
+      locked: 'open'
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -17,44 +19,52 @@ class AddNewBoard extends Component {
     this.submitCoordinates = this.submitCoordinates.bind(this);
   }
 
+  // componentDidMount() {
+  //   if ("geolocation" in navigator) {
+  //     navigator.geolocation.getCurrentPosition(function(position) {
+  //         console.log('position', position)
+  //         submitCoordinates(position)
+  //       })
+  //   }
+  // }
+
+
   handleSubmit(e) {
     e.preventDefault();
+    const creator = this.props._user.uid
+    this.setState({creator})
   }
 
   onTitleChange(e){
-    this.setState({
-      label: e.target.value
-    })
+    this.setState({name: e.target.value})
   }
 
   submitCoordinates(coordinates) {
-    this.setState({
-      coordinates
-    })
+    this.setState({coordinates})
   }
 
   //add button onClick handler to send map info to firestore
 
-  //user info needs to be passed into board creation via fireview
+  //user info needs to be passed into  creation via fireview
 
   render() {
-    console.log('COORDS IN ADD NEW BOARD', this.state.coordinates)
+    console.log('state', this.state)
     return (
-      <div>
+      <div classname="login-container">
         <form onSubmit={(e) => this.handleSubmit(e)}>
         <label>
           Board Name:
-            <input type="text" placeholder="Board Name" size="25" value={this.state.label} onChange={this.onTitleChange}/>
-            <button type="submit">Add Title</button>
+            <input type="text" placeholder="Board Name" size="25" value={this.state.name} onChange={this.onTitleChange}/>
           </label>
           <div>
             <LocationSearch updateCoordinates={this.submitCoordinates}/>
           </div>
+          <button type="submit">ADD NEW BOARD</button>
         </form>
-        <button >ADD NEW BOARD</button>
+
       </div>
     )
   }
 }
 
-export default AddNewBoard;
+export default withAuth(AddNewBoard);

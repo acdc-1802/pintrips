@@ -20,7 +20,7 @@ export default class LoginPage extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this)
   }
-  handleChange(event){
+  handleChange(event) {
     event.preventDefault();
     const updatedState = {};
     updatedState[event.target.name] = event.target.value;
@@ -49,33 +49,35 @@ export default class LoginPage extends Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          <h2> Log In </h2>
-          <div className="form-group">
-            <label className="col-md-2 control-label"> Email </label>
-            <div className="col-md-10">
-              <input
-                className="form-control"
-                name='email'
-                type='text'
-                defaultValue={this.state.username}
-                onChange={this.handleChange}
-              />
+          <div className='login-container'>
+            <h2> Log In </h2>
+            <div className="form-group">
+              <label className="col-md-2 control-label"> Email </label>
+              <div className="col-md-10">
+                <input
+                  className="form-control"
+                  name='email'
+                  type='text'
+                  defaultValue={this.state.username}
+                  onChange={this.handleChange}
+                />
+              </div>
             </div>
-          </div>
-          <div className="form-group">
+            <div className="form-group">
 
-            <label className="control-label"> Password   </label>
-            <div className="col-md-20">
-              <input
-              className="form-control"
-              name='password'
-              type='text'
-              defaultValue={this.state.username}
-              onChange={this.handleChange}
-              />
+              <label className="control-label"> Password   </label>
+              <div className="col-md-20">
+                <input
+                  className="form-control"
+                  name='password'
+                  type='text'
+                  defaultValue={this.state.username}
+                  onChange={this.handleChange}
+                />
+              </div>
             </div>
+            <button type='submit'>Login</button>
           </div>
-        <button type='submit'>Login</button>
         </form>
       </div>
 

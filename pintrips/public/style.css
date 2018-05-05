@@ -85,16 +85,15 @@ a {
 }
 
 .login-container {
-  margin-top: 10vh;
-  margin-left: 20vw;
-  margin-bottom: 20vh;
-  margin-right: 20vw;
+  display: flex;
+  flex-direction: column;
   background-color: #fff;
   opacity: .7;
-  padding: 2em;
+  padding: 5em;
   border-radius: 2em;
   justify-content: center;
   justify-items: center;
+  text-align: center;
  }
 
   .sign-up {
