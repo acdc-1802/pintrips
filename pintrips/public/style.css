@@ -24,10 +24,7 @@ a {
   transform: translateY(0em);
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
+
 
 .App-header {
   background-color: #AFAAB9;
@@ -43,12 +40,31 @@ a {
 .App-intro {
   font-size: large;
 }
-
-@keyframes App-logo-spin {
+.card-group {
+  display: flex;
+  margin-left: 200px;
+  padding: 15px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  
+}
+@keyframes Navbar-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
 
+.button {
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.ind-card {
+  min-width: 25vw;
+  display: flex;
+  padding: 25px;
+  /* flex-wrap: wrap;
+  flex-direction: row; */
+}
 .navbar {
   margin-top: 0;
   height: 5em;
@@ -80,34 +96,36 @@ a {
 }
 
 #logo {
-  width: 5em;
-  height: 5em;
+  width: 7em;
+  height: 7em;
+  animation: Navbar-logo-spin infinite 20s linear;
+  /* height: 80px; */
+  
 }
 
 .login-container {
   display: flex;
   flex-direction: column;
   background-color: #fff;
-  opacity: .7;
+  /* opacity: .7; */
   padding: 5em;
   border-radius: 2em;
   justify-content: center;
   justify-items: center;
   text-align: center;
+  width: 40%;
+  margin-left: 30%;
+  margin-top: 5%;
+
  }
 
-  .sign-up {
-   font-family: sans-serif;
-   font-size: 20px;
-   justify-content: center;
-  justify-items: center;
-  padding: 1em;
- }
 
  .form-group {
    display: flex;
+   flex-direction: column;
    justify-content: center;
   justify-items: center;
+  width: 20vw;
   /* padding: 1em; */
 }
 
@@ -165,4 +183,34 @@ a {
 #expand-up {
   margin: auto;
   text-align: center;
+  color: #AFAAB9;
+}
+
+
+.sign-up {
+  font-family: sans-serif;
+  font-size: 20px;
+  justify-content: center;
+ justify-items: center;
+ padding: 1em;
+}
+
+.side-bar {
+  margin-top: 20vh;
+  display: flex;
+  height: 100%; 
+    width: 160px; 
+    position: fixed; 
+    z-index: 1;
+    top: 0; 
+    left: 0;
+    /* background-color: rgb(97, 65, 65); Black */
+    overflow-x: hidden; 
+    padding-top: 20px;
+}
+
+.side-button {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
 }
