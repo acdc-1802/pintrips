@@ -1,17 +1,21 @@
 import React, { Component } from 'react';
 import PlacesAutoComplete from 'react-places-autocomplete';
 import { geocodeByAddress, geocodeByPlaceId, getLatLng } from 'react-places-autocomplete';
+import AddNewBoard from './AddNewBoard';
+
 
 class LocationSearch extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      address: '',
       coordinates: []
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
   }
+
 
   handleChange = (address) => {
     this.setState({ address })
@@ -21,10 +25,10 @@ class LocationSearch extends Component {
     geocodeByAddress(address)
       .then(results => getLatLng(results[0]))
       .then(latLng => {
-        this.setState({coordinates: [latLng.lat, latLng.lng]})
-        console.log('Success', latLng)
-        console.log('STATE COORDINATES', this.state.coordinates)
+        this.setState({ coordinates:[latLng.lat, latLng.lng] });
+        console.log('STATE Location COORDINATES', this.state.coordinates)
       })
+      .then(() => this.props.updateCoordinates(this.state.coordinates))
       .catch(error => console.error('Error', error))
   }
 
@@ -35,6 +39,7 @@ class LocationSearch extends Component {
         onChange={this.handleChange}
         onSelect={this.handleSelect}
       >
+
         {({ getInputProps, suggestions, getSuggestionItemProps }) => (
           <div>
             <input
