@@ -85,18 +85,29 @@ class AddNewBoard extends Component {
     // })
   }
 
-  onTitleChange(e){
-    this.setState({name: e.target.value})
+  onTitleChange(e) {
+    this.setState({ name: e.target.value })
   }
 
   submitCoordinates(coordinates) {
-    this.setState({coordinates})
+    this.setState({ coordinates })
   }
 
   render() {
     return (
       <div>
         <form onSubmit={(e) => this.handleSubmit(e)}>
+<<<<<<< HEAD
+          <div className='login-container'>
+            <label>
+              Board Name:
+            <input type="text" placeholder="Board Name" size="25" value={this.state.name} onChange={this.onTitleChange} />
+            </label>
+            <div>
+              <LocationSearch updateCoordinates={this.submitCoordinates} />
+            </div>
+            <button type="submit">ADD NEW BOARD</button>
+=======
           <div className="login-container">
             <label>
               Board Name:
@@ -106,6 +117,7 @@ class AddNewBoard extends Component {
                 <LocationSearch updateCoordinates={this.submitCoordinates}/>
               </div>
               <button type="submit">ADD NEW BOARD</button>
+>>>>>>> master
           </div>
         </form>
       </div>
