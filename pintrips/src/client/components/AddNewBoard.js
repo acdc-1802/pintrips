@@ -57,29 +57,9 @@ class AddNewBoard extends Component {
       name: this.state.name,
       owners: [creator]
     })
-    .then(() => {
-      boards.where("creator", "==", creator)
-        .get()
-        .then(querySnapshot => {
-          return querySnapshot.forEach(doc => {
-            let allBoards = [];
-            allBoards.push(doc.id);
-            return allBoards;
-          })
-        })
-        .then(boardsArr => {
-          users.doc(creator).set({
-            boardOwner: boardsArr
-          }, { merge: true })
-        })
-    })
     .catch(err => {
       console.log("Error getting documents: ", err);
     })
-
-    // users.ref({
-
-    // })
   }
 
   onTitleChange(e) {
