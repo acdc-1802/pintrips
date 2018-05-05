@@ -57,6 +57,13 @@ class AddNewBoard extends Component {
       name: this.state.name,
       owners: [creator]
     })
+    .then(() => {
+      window.location.href = "/Board";
+    })
+    .catch(err => {
+      console.log("Error getting documents: ", err);
+    })
+
     // .then(() => {
     //   boards.where("creator", "==", creator)
     //     .get()
@@ -68,13 +75,6 @@ class AddNewBoard extends Component {
     //       })
     //     }
 
-    .catch(err => {
-      console.log("Error getting documents: ", err);
-    })
-
-    // users.ref({
-
-    // })
   }
 
   onTitleChange(e) {
