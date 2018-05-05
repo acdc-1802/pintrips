@@ -44,7 +44,7 @@ class SignupPage extends Component {
         })
       })
       .then(newUserDoc => {
-        console.log("what I'm returning after creating user", newUserDoc.id)
+        //console.log("what I'm returning after creating user", newUserDoc.id)
         window.location.href = "/HomePage"
       })
       .catch(error => {
