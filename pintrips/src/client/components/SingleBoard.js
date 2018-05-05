@@ -10,7 +10,7 @@ const image = new Image(30, 30);
 image.src = '/attributes/pin.png';
 const images = ['myImage', image];
 
-class Board extends Component {
+class SingleBoard extends Component {
 
   state = {
     // dummy pins
@@ -67,4 +67,4 @@ class Board extends Component {
   }
 }
 
-export default Board;
+export default SingleBoard;
