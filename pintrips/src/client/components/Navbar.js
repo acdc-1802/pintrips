@@ -4,9 +4,7 @@ class Navbar extends Component {
   render() {
     return (
       <div className='navbar'>
-        <div className="nav-button">
-          <Link id='back' to={'/HomePage'}>{`<`}</Link>
-        </div>
+        <Link id='back' to={'/HomePage'}>{`<`}</Link>
         <img id='logo' src='/attributes/logo.png' />
         <h1> Pintrips </h1>
       </div>
