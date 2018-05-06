@@ -7,10 +7,11 @@ import history from './history'
 import { AuthProvider } from 'fireview'
 import * as firebase from 'firebase'
 
+registerServiceWorker();
 ReactDOM.render(
   <AuthProvider auth={firebase.auth()}>
-    <Router history={history}>
-      <App />
-    </Router>
+  <Router history={history}>
+  <App />
+  </Router>
   </AuthProvider>,
   document.getElementById('root'))

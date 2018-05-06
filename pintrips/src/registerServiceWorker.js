@@ -28,29 +28,79 @@ export default function register() {
       // serve assets; see https://github.com/facebookincubator/create-react-app/issues/2374
       return;
     }
-
-    window.addEventListener('load', () => {
-      const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
-
-      if (isLocalhost) {
-        // This is running on localhost. Lets check if a service worker still exists or not.
-        checkValidServiceWorker(swUrl);
-
-        // Add some additional logging to localhost, pointing developers to the
-        // service worker/PWA documentation.
-        navigator.serviceWorker.ready.then(() => {
-          console.log(
-            'This web app is being served cache-first by a service ' +
-              'worker. To learn more, visit https://goo.gl/SC7cgQ'
-          );
-        });
-      } else {
-        // Is not local host. Just register service worker
-        registerValidSW(swUrl);
-      }
-    });
   }
 }
+    window.addEventListener('fetch', function(event) {
+      event.respondWith(
+        caches.open('mysite-dynamic').then(function(cache) {
+          return fetch(event.request).then(function(response) {
+            cache.put(event.request, response.clone());
+            return response;
+          });
+        })
+      );
+    });
+//     window.addEventListener('load', () => {
+//       const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
+
+//       if (isLocalhost) {
+//         // This is running on localhost. Lets check if a service worker still exists or not.
+//         checkValidServiceWorker(swUrl);
+
+//         // Add some additional logging to localhost, pointing developers to the
+//         // service worker/PWA documentation.
+//         navigator.serviceWorker.ready.then(() => {
+//           console.log(
+//             'This web app is being served cache-first by a service ' +
+//               'worker. To learn more, visit https://goo.gl/SC7cgQ'
+//           );
+//         });
+//       } else {
+//         // Is not local host. Just register service worker
+//         registerValidSW(swUrl);
+//       }
+//     });
+//   }
+//  }
+// window.addEventListener('fetch', function(event) {
+//   event.respondWith(
+//     fetch(event.request).catch(function() {
+//       return caches.match(event.request);
+//     })
+//   );
+// });
+// window.addEventListener('fetch', function(event) {
+//   // If a match isn't found in the cache, the response
+//   // will look like a connection error
+//   event.respondWith(caches.match(event.request));
+// });
+// window.addEventListener('fetch', function(event) {
+//   event.respondWith(
+//     caches.open('mysite-dynamic').then(function(cache) {
+//       return cache.match(event.request).then(function (response) {
+//         return response || fetch(event.request).then(function(response) {
+//           cache.put(event.request, response.clone());
+//           return response;
+//         });
+//       });
+//     })
+//   );
+// });
+
+// window.addEventListener('fetch', function(event) {
+//   event.respondWith(
+//     caches.open('mysite-dynamic').then(function(cache) {
+//       return cache.match(event.request).then(function(response) {
+//         var fetchPromise = fetch(event.request).then(function(networkResponse) {
+//           cache.put(event.request, networkResponse.clone());
+//           return networkResponse;
+//         })
+//         return response || fetchPromise;
+//       })
+//     })
+//   );
+// });
+
 
 function registerValidSW(swUrl) {
   navigator.serviceWorker
