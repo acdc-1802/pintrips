@@ -24,7 +24,7 @@ class SingleBoard extends Component {
     this.setState({
       pins: [...this.state.pins, {label, coords}]
     })
-    setTimeout(console.log(this.state),1500);
+    // setTimeout(console.log(this.state),1500);
   }
 
   render() {
@@ -43,14 +43,31 @@ class SingleBoard extends Component {
               id='pins'
               layout={{ 'icon-image': 'myImage' }}
               images={images}>
-              {
+              { this.state.pins &&
                 this.state.pins.map(pin => (
                   <Feature
                     key={pin.label}
                     coordinates={pin.coords}
+                    onMouseEnter={pin.label+'popup'}
+                    onMouseLeave={pin.label+'popup'}
                   />
                 ))
               }
+              {/*
+              {
+                this.state.pins &&
+                this.state.pins.map(pin => (
+                  <Popup 
+                    key={pin.label+'popup'}
+                    coordinates={pin.coords}
+                    anchor='bottom'>
+                    <div className='popup'>
+                      <h4>{pin.label}</h4>
+                    </div>
+                  </Popup>
+                ))
+              }
+              */}
             </Layer>
           </Map>
           <div className='search-coords'>
