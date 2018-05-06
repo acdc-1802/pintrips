@@ -1,5 +1,5 @@
 
-export { default as Board } from './Board';
+export { default as SingleBoard } from './SingleBoard';
 export { default as HomePage } from './HomePage';
 export { default as LoginPage } from './LoginPage';
 export { default as Navbar } from './Navbar';
