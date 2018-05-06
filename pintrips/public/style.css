@@ -149,12 +149,16 @@ a {
   height: calc(100vh);
 }
 
-.search-coords {
+.search-container {
   position: absolute;
-  top: 100px;
-  left: 100px;
+  top: 150px;
+  width: 100%;
+}
+
+.search-coords {
+  margin: 0 auto;
   z-index: 5;
-  width: 50%;
+  width: 70%;
   background-color: white;
   border: solid 1px lightgray;
   border-radius: 5px;
@@ -173,10 +177,9 @@ a {
   position: absolute;
   bottom: 0;
   width: calc(100vw);
-  color: white;
-  background-color: #d1ecb3;
+  background-color: white;
   border-radius: 2em 2em 0 0;
-  border: solid 1px white;
+  border: solid 1px lightgrey;
   z-index: 2;
 }
 

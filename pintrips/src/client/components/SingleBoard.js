@@ -1,30 +1,66 @@
 import React, { Component } from 'react';
 import ReactMapboxGl, { Popup, Layer, Feature } from "react-mapbox-gl";
 import LocationSearch from './LocationSearch';
+import db from '../firestore'
+import firebase from 'firebase'
+import { withAuth } from 'fireview'
+import history from '../../history'
+require('firebase/firestore');
 
 const Map = ReactMapboxGl({
   accessToken: 'pk.eyJ1IjoiZGVzdGlubWNtdXJycnkiLCJhIjoiY2plenRxaGw3MGdsNTJ3b2htMGRydWc3aiJ9.ycslnjgv2J9VZGZHT8EoIw'
 });
 
-const image = new Image(30, 30);
+const image = new Image(70, 70);
 image.src = '/attributes/pin.png';
 const images = ['myImage', image];
 
 class SingleBoard extends Component {
 
   state = {
-    // dummy pins
-    pins: [ {label: 'place1', coords: [-74.015921, 40.703822]}, {label: 'place2', coords: [-74.013720, 40.711140]}, {label: 'place3', coords: [-74.006376, 40.712368]} ],
-    // just for now default fullstack
-    center: [-74.010190, 40.705515]
+    pins: [],
+    newPin: {},
+    center: [-74.006376, 40.712368]
   }
 
-  submitPin = (label, coords) => {
-    // will instead add to backend and re-render with backend data
+  componentDidMount() {
+    const boardId = this.props.match.params.boardId;
+    db.collection('boards').doc(boardId).get()
+      .then(doc => {
+        let board = doc.data()
+        return board;
+      })
+      .then(thisBoard => {
+        this.setState({
+          center: [thisBoard.coordinates._long, thisBoard.coordinates._lat]
+        })
+      })
+      .catch(err => console.error(err));
+      
+    const pinCoordsArr = [];
+    db.collection('boards').doc(boardId).collection('pins').get()
+      .then(thesePins => thesePins.forEach(pin => {
+        pinCoordsArr.push({ label: pin.data().label, coords: [pin.data().coordinates._long, pin.data().coordinates._lat]})
+      }))
+      .then(() => this.setState({
+        pins: pinCoordsArr
+      }));
+  }
+
+  selectPin = (label, coords) => {
     this.setState({
-      pins: [...this.state.pins, {label, coords}]
+      newPin: {label, coords}
     })
-    // setTimeout(console.log(this.state),1500);
+  }
+
+  submitPin = () => {
+    const boardId = this.props.match.params.boardId;
+    db.collection('boards').doc(boardId).collection('pins').add({
+      label: this.state.newPin.label,
+      coordinates: new firebase.firestore.GeoPoint(this.state.newPin.coords[0], this.state.newPin.coords[1]),
+      visited: firebase.firestore.FieldValue.serverTimestamp()
+    })
+    .then(() => history.push(`/SingleBoard/${boardId}`))
   }
 
   render() {
@@ -32,7 +68,7 @@ class SingleBoard extends Component {
       <div className='board-container'>
         <Map 
           style='mapbox://styles/destinmcmurrry/cjgrf7lo100062so52bmvhjkm'
-          zoom={[13.5]}
+          zoom={[12]}
           containerStyle={{
             height: "100vh",
             width: "100vw"
@@ -48,8 +84,6 @@ class SingleBoard extends Component {
                   <Feature
                     key={pin.label}
                     coordinates={pin.coords}
-                    onMouseEnter={pin.label+'popup'}
-                    onMouseLeave={pin.label+'popup'}
                   />
                 ))
               }
@@ -70,11 +104,13 @@ class SingleBoard extends Component {
               */}
             </Layer>
           </Map>
-          <div className='search-coords'>
-            <div>
-              <LocationSearch forAddPin={true} updateBoardPins={this.submitPin}/>
+          <div className='search-container'>
+            <div className='search-coords'>
+              <div>
+                <LocationSearch forAddPin={true} updateBoardPins={this.selectPin}/>
+              </div>
+              <button onClick={this.submitPin} type="submit">ADD NEW PIN</button>
             </div>
-            <button type="submit">ADD NEW PIN</button>
           </div>
           <div className='footer'>
             <p id='expand-up'>—</p>
@@ -84,4 +120,4 @@ class SingleBoard extends Component {
   }
 }
 
-export default SingleBoard;
+export default withAuth(SingleBoard);
