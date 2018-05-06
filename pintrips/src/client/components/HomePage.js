@@ -2,28 +2,30 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import MapCard from './MapCard';
+import firebase from 'firebase'
+import db from '../firestore';
+import { Map, withAuth } from 'fireview';
 
+const allBoards = db.collection('boards')
 
-
-
-class HomePage extends Component {
-    render() {
-       return (
-         <div className='card-group'>
-          <MapCard />
-          <MapCard />
-          <MapCard />
-          <MapCard />
-          <MapCard />
-          <MapCard />
-          <MapCard />
-          <MapCard />
-        </div>
-        );
-    }
+const HomePage = (props) => {
+  const user = props._user;
+  if (!user) return 'You must login';
+  return (
+    <div className='card-group'>
+    <Map from={allBoards.where('creator', '==', `${user.uid}`)}
+    Loading={() => 'Loading...'}
+    Render={(props) => {
+      return (
+        <MapCard board={props} />
+      )
+    }}
+    />
+    </div>
+  );
 }
 
-export default HomePage;
+export default withAuth(HomePage);
 
 
 
