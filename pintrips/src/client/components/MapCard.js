@@ -22,7 +22,7 @@ class MapCard extends Component {
         </Card.Content>
         <Card.Content extra>
         <Card.Description>
-          Note avout travel
+          Note about travel
         </Card.Description>
        
       </Card.Content>

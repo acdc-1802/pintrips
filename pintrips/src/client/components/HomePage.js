@@ -9,15 +9,17 @@ import { Map, withAuth } from 'fireview';
 const allBoards = db.collection('boards')
 
 const HomePage = (props) => {
+  
   const user = props._user;
   if (!user) return 'You must login';
+
   return (
     <div className='card-group'>
     <Map from={allBoards.where('creator', '==', `${user.uid}`)}
     Loading={() => 'Loading...'}
     Render={(props) => {
       return (
-        <MapCard board={props} />
+        <Link to={`SingleBoard/${props._ref.id}`}><MapCard board={props} /></Link>
       )
     }}
     />
