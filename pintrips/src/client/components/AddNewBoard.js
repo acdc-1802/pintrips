@@ -58,23 +58,23 @@ class AddNewBoard extends Component {
       name: this.state.name,
       owners: [creator]
     })
-    // .then(() => {
-    //   boards.where("creator", "==", creator)
-    //     .get()
-    //     .then(querySnapshot => {
-    //       querySnapshot.forEach(doc => {
-    //         doc.set({
-    //           id: doc.uid
-    //         })
-    //       })
-    //     })
-    // })
-    .then(function(docRef) {
-      window.location.href = `/SingleBoard/${docRef.id}`
-    })
-    .catch(err => {
-      console.log("Error getting documents: ", err);
-    })
+      // .then(() => {
+      //   boards.where("creator", "==", creator)
+      //     .get()
+      //     .then(querySnapshot => {
+      //       querySnapshot.forEach(doc => {
+      //         doc.set({
+      //           id: doc.uid
+      //         })
+      //       })
+      //     })
+      // })
+      .then(function (docRef) {
+        window.location.href = `/SingleBoard/${docRef.id}`
+      })
+      .catch(err => {
+        console.log("Error getting documents: ", err);
+      })
 
   }
 
