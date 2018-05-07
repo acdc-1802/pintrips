@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import LocationSearch from './LocationSearch';
+import { Form } from 'semantic-ui-react'
 import firebase from 'firebase';
 import db from '../firestore';
 import { withAuth } from 'fireview';
@@ -97,10 +98,10 @@ class AddNewBoard extends Component {
             <div>
               <LocationSearch updateCoordinates={this.submitCoordinates} />
             </div>
-            <button type="submit">ADD NEW BOARD</button>
+            <Form.Button type='submit'>Add New Board</Form.Button>
           </div>
         </form>
-      </div >
+      </div>
     )
   }
 }
