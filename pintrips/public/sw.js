@@ -1,8 +1,9 @@
-// The SW will be shutdown when not in use to save memory,
-// be aware that any global state is likely to disappear
+import localforage from 'localforage';
 
-var cacheName = 'WWW-EXAMPLE-COM-V1';
-var filesToCache = [
+const request = self.IndexedDB.open('EXAMPLE_DB', 1);
+const db;
+const cacheName = 'WWW-EXAMPLE-COM-V1';
+const filesToCache = [
     '/',                // index.html
     '/index.js',
     '/style.css',
@@ -21,16 +22,22 @@ self.addEventListener('install', function(event) {
   );
 });
 
-self.addEventListener('activate', function(event) {
-  console.log("SW activated");
-});
 
-self.addEventListener('fetch', function(event) {
-  console.log("Caught a fetch!", event.request)
-  event.respondWith(
-    fetch(event.request)
-  );
-});
+// self.addEventListener('activate', function(event) {
+//   console.log("SW activated");
+//   event.waitUntil(
+//     caches.keys()
+//     .then(function(cacheNames) {
+//         return Promise.all(
+//             cacheNames.map(function(cName) {
+//                 if(cName !== cacheName){
+//                     return caches.delete(cName);
+//                 }
+//             })
+//         );
+//     })
+//   );
+// });
 
 self.addEventListener('fetch', function(event) {
   event.respondWith(
@@ -38,9 +45,37 @@ self.addEventListener('fetch', function(event) {
       .then(function(response) {
           if(response){
               return response
+          } else {
+            // clone request stream
+            // as stream once consumed, can not be used again
+            var reqCopy = event.request.clone();
+
+            return fetch(reqCopy, {credentials: 'include'}) // reqCopy stream consumed
+            .then(function(response) {
+                // bad response
+                // response.type !== 'basic' means third party origin request
+                if(!response || response.status !== 200 || response.type !== 'basic') {
+                    return response; // response stream consumed
+                }
+
+                // clone response stream
+                // as stream once consumed, can not be used again
+                var resCopy = response.clone();
+
+                // ================== IN BACKGROUND ===================== //
+
+                // add response to cache and return response
+                caches.open(cacheName)
+                .then(function(cache) {
+                    return cache.put(reqCopy, resCopy); // reqCopy, resCopy streams consumed
+                });
+
+                // ====================================================== //
+
+
+                return response; // response stream consumed
+              })
           }
-          // not in cache, return from network
-          return fetch(event.request, {credentials: 'include'});
       })
   );
 });

@@ -48,6 +48,10 @@
   </script> -->
 
   <script>
+    if(window.indexedDB){
+      console.log('IndexedDB is supported');
+    }
+
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', function () {
         navigator.serviceWorker.register('/sw.js');
