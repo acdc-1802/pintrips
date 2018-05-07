@@ -55,12 +55,16 @@ class SingleBoard extends Component {
 
   submitPin = () => {
     const boardId = this.props.match.params.boardId;
+    this.state.newPin && this.state.newPin.coords &&
     db.collection('boards').doc(boardId).collection('pins').add({
       label: this.state.newPin.label,
       coordinates: new firebase.firestore.GeoPoint(this.state.newPin.coords[0], this.state.newPin.coords[1]),
       visited: firebase.firestore.FieldValue.serverTimestamp()
     })
-    .then(() => history.push(`/SingleBoard/${boardId}`))
+    .then(() => {
+      this.setState({newPin: {}});
+      window.location.href(`/SingleBoard/${boardId}`);
+    })
   }
 
   render() {
