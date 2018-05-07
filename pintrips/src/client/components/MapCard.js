@@ -4,10 +4,19 @@ import { Link } from 'react-router-dom';
 import firebase from 'firebase'
 import db from '../firestore';
 import history from '../../history';
+import ReactMapboxGl from "react-mapbox-gl";
+
+const Map = ReactMapboxGl({
+  accessToken: 'pk.eyJ1IjoiZGVzdGlubWNtdXJycnkiLCJhIjoiY2plenRxaGw3MGdsNTJ3b2htMGRydWc3aiJ9.ycslnjgv2J9VZGZHT8EoIw'
+});
 
 class MapCard extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      center: [this.props.board.coordinates._long, this.props.board.coordinates._lat],
+      zoom: [12]
+    }
     this.handleDelete = this.handleDelete.bind(this);
   }
   handleDelete() {
@@ -20,11 +29,19 @@ class MapCard extends Component {
       .catch(err => console.error('Delete unsuccessful: ', err))
   }
   render() {
+    console.log(this.state);
     return (
       <div className='ind-card'>
         <Card>
+          <Map
+            style='mapbox://styles/destinmcmurrry/cjgwoclek000a2sr3cwgutpdg'
+            zoom={this.state.zoom}
+            containerStyle={{
+              height: "289px",
+              width: "289px"
+            }}
+            center={this.state.center} />
           <Link to={`/SingleBoard/${this.props.id}`}>
-            <Image src='http://geoawesomeness.com/wp-content/uploads/2016/02/Paris-map.png' />
             <Card.Content>
               <Card.Header>
                 {this.props.board.name}
@@ -38,8 +55,9 @@ class MapCard extends Component {
           </Link>
           <Card.Content extra>
             <Card.Description>
+              
               <Popup
-                trigger={<Button color='red' floated='right' content='Delete Board' />}
+                trigger={<Button color='red' floated='right' size='mini' content={<Icon name='trash outline' size='large' fitted={true} />} />}
                 content={
                   <div>
                     <p>Are you sure?</p>

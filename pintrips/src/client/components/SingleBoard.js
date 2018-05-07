@@ -42,7 +42,8 @@ class SingleBoard extends Component {
     const pinCoordsArr = [];
     db.collection('boards').doc(boardId).collection('pins').get()
       .then(thesePins => thesePins.forEach(pin => {
-        pinCoordsArr.push({ label: pin.data().label, coords: [pin.data().coordinates._long, pin.data().coordinates._lat] })
+        pinCoordsArr.push({ label: pin.data().label, coords: [pin.data().coordinates._long, pin.data().coordinates._lat], pinId: pin.id
+        })
       }))
       .then(() => this.setState({
         pins: pinCoordsArr
@@ -95,13 +96,16 @@ class SingleBoard extends Component {
             layout={{ 'icon-image': 'myImage' }}
             images={images}>
             {this.state.pins &&
-              this.state.pins.map(pin => (
-                <Feature
-                  key={pin.label}
-                  coordinates={pin.coords}
-                  onClick={this.markerClick.bind(this, pin)}
-                />
-              ))
+              this.state.pins.map(pin => {
+                return(
+                  <Feature
+                    key={pin.label}
+                    coordinates={pin.coords}
+                    onClick={this.markerClick.bind(this, pin)}
+                  />
+                )
+              }
+              )
             }
           </Layer>
           {
@@ -110,6 +114,7 @@ class SingleBoard extends Component {
                 key={this.state.selectedPin.label}
                 coordinates={this.state.selectedPin.coords}
               >
+              {console.log('pin',this.state.selectedPin)}
                 <div>{this.state.selectedPin.label}</div>
               </Popup>
             )
