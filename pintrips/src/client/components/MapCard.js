@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Card, Image, Icon, Popup } from 'semantic-ui-react';
+import { Button, Card, Image, Icon, Popup, Input } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import firebase from 'firebase'
 import db from '../firestore';
@@ -55,18 +55,36 @@ class MapCard extends Component {
           </Link>
           <Card.Content extra>
             <Card.Description>
-              
-              <Popup
-                trigger={<Button color='red' floated='right' size='mini' content={<Icon name='trash outline' size='large' fitted={true} />} />}
-                content={
-                  <div>
-                    <p>Are you sure?</p>
-                    <Button color='red' content='Delete' onClick={this.handleDelete} />
-                  </div>
-                }
-                on='click'
-                position='top right'
-              />
+              {
+                this.props.owner &&
+                <div>
+                  <Popup
+                    trigger={<Button color='red' floated='right' size='mini' content={<Icon name='trash outline' size='large' fitted={true} />} />}
+                    content={
+                      <div>
+                        <p>Are you sure?</p>
+                        <Button color='red' content='Delete' onClick={this.handleDelete} />
+                      </div>
+                    }
+                    on='click'
+                    position='top right'
+                  />
+                  <Popup
+                    trigger={<Button floated='right' size='mini' content={<Icon name='external share' size='large' fitted={true} />} />}
+                    content={
+                      <div>
+                        <p>Who would you like to share this board with?</p>
+                        <Input size='mini' icon='search' placeholder='Search...' />
+                        <br />
+                        <Button color='blue' size='mini' content='Share' onClick={this.handleSend} />
+                      </div>
+                    }
+                    on='click'
+                    position='top right'
+                  />
+
+                </div>
+              }
             </Card.Description>
           </Card.Content>
         </Card>
