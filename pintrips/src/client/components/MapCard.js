@@ -10,30 +10,32 @@ class MapCard extends Component {
     super(props)
     this.handleDelete = this.handleDelete.bind(this);
   }
-  handleDelete(){
+  handleDelete() {
     let boardId = this.props.id;
     db.collection('boards').doc(boardId).delete()
-    .then(() => {
-      console.log('Board successfully deleted')
-    })
-    .then(() => history.push('/HomePage'))
-    .catch(err => console.error('Delete unsuccessful: ', err))
+      .then(() => {
+        console.log('Board successfully deleted')
+      })
+      .then(() => history.push('/HomePage'))
+      .catch(err => console.error('Delete unsuccessful: ', err))
   }
   render() {
     return (
       <div className='ind-card'>
         <Card>
-          <Image src='http://geoawesomeness.com/wp-content/uploads/2016/02/Paris-map.png' />
-          <Card.Content>
-            <Card.Header>
-              {this.props.board.name}
-            </Card.Header>
-            <Card.Meta>
-              <span className='date'>
-                {this.props.board.locked}
-              </span>
-            </Card.Meta>
-          </Card.Content>
+          <Link to={`/SingleBoard/${this.props.id}`}>
+            <Image src='http://geoawesomeness.com/wp-content/uploads/2016/02/Paris-map.png' />
+            <Card.Content>
+              <Card.Header>
+                {this.props.board.name}
+              </Card.Header>
+              <Card.Meta>
+                <span className='date'>
+                  {this.props.board.locked}
+                </span>
+              </Card.Meta>
+            </Card.Content>
+          </Link>
           <Card.Content extra>
             <Card.Description>
               <Popup
@@ -41,7 +43,7 @@ class MapCard extends Component {
                 content={
                   <div>
                     <p>Are you sure?</p>
-                    <Button color='red' content='Delete' onClick={this.handleDelete}/>
+                    <Button color='red' content='Delete' onClick={this.handleDelete} />
                   </div>
                 }
                 on='click'
@@ -50,7 +52,7 @@ class MapCard extends Component {
             </Card.Description>
           </Card.Content>
         </Card>
-      </div>
+      </div >
     );
   }
 }
