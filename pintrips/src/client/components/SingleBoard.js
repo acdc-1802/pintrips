@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import ReactMapboxGl, { Popup, Layer, Feature, ZoomControl } from "react-mapbox-gl";
 import LocationSearch from './LocationSearch';
-import db from '../firestore'
-import firebase from 'firebase'
-import { withAuth } from 'fireview'
-import history from '../../history'
+import db from '../firestore';
+import firebase from 'firebase';
+import { withAuth } from 'fireview';
+import history from '../../history';
+import { Button, Icon } from 'semantic-ui-react';
 require('firebase/firestore');
 
 const Map = ReactMapboxGl({
   accessToken: 'pk.eyJ1IjoiZGVzdGlubWNtdXJycnkiLCJhIjoiY2plenRxaGw3MGdsNTJ3b2htMGRydWc3aiJ9.ycslnjgv2J9VZGZHT8EoIw'
 });
 
-const image = new Image(70, 70);
+const image = new Image(100, 100);
 image.src = '/attributes/pin.png';
 const images = ['myImage', image];
 
@@ -42,7 +43,8 @@ class SingleBoard extends Component {
     const pinCoordsArr = [];
     db.collection('boards').doc(boardId).collection('pins').get()
       .then(thesePins => thesePins.forEach(pin => {
-        pinCoordsArr.push({ label: pin.data().label, coords: [pin.data().coordinates._long, pin.data().coordinates._lat], pinId: pin.id
+        pinCoordsArr.push({
+          label: pin.data().label, coords: [pin.data().coordinates._long, pin.data().coordinates._lat], pinId: pin.id
         })
       }))
       .then(() => this.setState({
@@ -70,12 +72,23 @@ class SingleBoard extends Component {
         })
   }
 
-  markerClick = (pin) => {
+  markerClick = pin => {
     this.setState({
       selectedPin: pin,
       center: pin.coords,
       zoom: [17]
     })
+  }
+
+  handleDelete = pinId => {
+    const boardId = this.props.match.params.boardId;
+    console.log(`board id: ${boardId} and pin id: ${pinId}`)
+    db.collection('boards').doc(boardId).collection('pins').doc(pinId).delete()
+      .then(() => {
+        console.log('Pin successfully deleted')
+      })
+      // .then(() => history.push(`/SingleBoard/${boardId}`))
+      .catch(err => console.error('Delete unsuccessful: ', err))
   }
 
   render() {
@@ -97,7 +110,7 @@ class SingleBoard extends Component {
             images={images}>
             {this.state.pins &&
               this.state.pins.map(pin => {
-                return(
+                return (
                   <Feature
                     key={pin.label}
                     coordinates={pin.coords}
@@ -114,8 +127,10 @@ class SingleBoard extends Component {
                 key={this.state.selectedPin.label}
                 coordinates={this.state.selectedPin.coords}
               >
-              {console.log('pin',this.state.selectedPin)}
-                <div>{this.state.selectedPin.label}</div>
+                <div>
+                  <div>{this.state.selectedPin.label}</div>
+                    <Button color='red' floated='right' size='mini' content={<Icon name='trash outline' size='large' fitted={true} />} onClick={()=> (<Button onClick={this.handleDelete(this.state.selectedPin.pinId)} />)}/>
+                  </div>
               </Popup>
             )
           }
