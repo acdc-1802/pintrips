@@ -24,7 +24,7 @@ class SingleBoard extends Component {
     selectedPin: null
   }
 
-  componentDidMount() {
+  componentWillMount() {
     const boardId = this.props.match.params.boardId;
     db.collection('boards').doc(boardId).get()
       .then(doc => {
@@ -64,15 +64,17 @@ class SingleBoard extends Component {
       })
         .then(() => {
           this.setState({ newPin: {} });
-          window.location.href(`/SingleBoard/${boardId}`);
+          // window.location.href(`/SingleBoard/${boardId}`);
         })
   }
+
   markerClick = (pin) => {
     this.setState({
       selectedPin: pin,
       center: pin.coords
     })
   }
+
   render() {
     return (
       <div className='board-container'>

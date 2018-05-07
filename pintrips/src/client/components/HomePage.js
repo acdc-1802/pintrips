@@ -15,7 +15,7 @@ const HomePage = (props) => {
   if (!user) return 'You must login';
 
   return (
-    <div>
+    <div className='homepage-container'>
       <div className='card-group'>
         <Map from={allBoards.where('creator', '==', `${user.uid}`)}
           Loading={() => 'Loading...'}
@@ -24,11 +24,17 @@ const HomePage = (props) => {
               <Link to={`SingleBoard/${props._ref.id}`}><MapCard board={props} /></Link>
             )
           }}
-          Empty={() => <small>You don't have any boards yet :{`(`}</small>}
+          Empty={() => {
+            return (
+              <div>
+                <small>You don't have any boards yet :{`(`}</small>
+              </div>
+            )
+          }}
         />
-        <hr />
-        <button onClick={() => history.push('/AddNewBoard')}>Start a new board!</button>
       </div>
+      <hr />
+      <button className='add-btn' onClick={() => history.push('/AddNewBoard')}>Start a new board!</button>
     </div>
   );
 }

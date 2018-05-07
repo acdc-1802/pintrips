@@ -24,13 +24,24 @@ a {
   transform: translateY(0em);
 }
 
-
-
 .App-header {
   background-color: #AFAAB9;
   height: 150px;
   padding: 20px;
   color: white;
+}
+
+.homepage-container {
+  display: flex;
+  margin-left: 200px;
+}
+
+.card-group {
+  display: flex;
+  padding: 15px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: fit-content;
 }
 
 .App-title {
@@ -40,14 +51,7 @@ a {
 .App-intro {
   font-size: large;
 }
-.card-group {
-  display: flex;
-  margin-left: 200px;
-  padding: 15px;
-  flex-direction: row;
-  flex-wrap: wrap;
-  
-}
+
 @keyframes Navbar-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
@@ -65,7 +69,7 @@ a {
   /* flex-wrap: wrap;
   flex-direction: row; */
 }
-.navbar {
+/* .navbar {
   margin-top: 0;
   height: 5em;
     display: flex; 
@@ -79,7 +83,7 @@ a {
     border: solid 1px white;
     transition: all 1s;
     z-index: 2;
-}
+} */
 
 .navbar h1 {
   font-size: 3em;
@@ -216,4 +220,14 @@ a {
   display: flex;
   flex-direction: column;
   padding: 10px;
+}
+
+/* not ideal, will fix */
+.add-btn {
+  font-size: 12px;
+  height: 35px;
+  min-width: 50px;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px;
 }
