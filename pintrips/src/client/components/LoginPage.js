@@ -23,7 +23,8 @@ export default class LoginPage extends Component {
     this.setState(updatedState);
   }
 
-  handleSubmit = event => {;
+  handleSubmit = event => {
+    ;
     event.preventDefault()
     const email = event.target.email.value;
     const password = event.target.password.value;
@@ -47,37 +48,34 @@ export default class LoginPage extends Component {
 
   render() {
     return (
-      <div >
-        <form onSubmit={this.handleSubmit}>
-          <Form className="login-container">
+      <div>
+          <Form className="login-container" onSubmit={this.handleSubmit}>
+          <h3>Login</h3>
+            <Form.Group className="input-container">
+              <Form.Input fluid label='Email' placeholder='Email'
+                className="form-control"
+                name='email'
+                type='text'
+                defaultValue={this.state.username}
+                onChange={this.handleChange}
+              />
 
-            <Form.Group widths='equal' >
-              <div className="form-group">
-                <Form.Input fluid label='Email' placeholder='Email'
-                  className="form-control"
-                  name='email'
-                  type='text'
-                  defaultValue={this.state.username}
-                  onChange={this.handleChange}
-                />
-              </div>
-              <div className="form-group">
-                <Form.Input fluid label='Password' placeholder='Password'
-                  className="form-control"
-                  name='password'
-                  type='text'
-                  defaultValue={this.state.username}
-                  onChange={this.handleChange}
-                />
-              </div>
+              <Form.Input fluid label='Password' placeholder='Password'
+                className="form-control"
+                name='password'
+                type='text'
+                defaultValue={this.state.username}
+                onChange={this.handleChange}
+              />
             </Form.Group>
+
             <Link to={'/SignupPage'}>
               <small>Don't have an account? Sign Up!</small>
             </Link>
+
             <Form.Button>Log In</Form.Button>
 
           </Form>
-        </form>
       </div>
     )
   }

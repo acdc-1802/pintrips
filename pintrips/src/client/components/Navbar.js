@@ -15,34 +15,39 @@ const Navbar = props => {
   }
 
   return (
-    <Menu>
-      <Menu.Menu>
-        <Menu.Item>
-          <Link to='/HomePage'>
-            <img id='logo' src='/attributes/logo.png' className='Navbar-logo' />
-          </Link>
-        </Menu.Item>
-        <Menu.Item>
-          <h1> Pintrips </h1>
-        </Menu.Item>
-        {
-          user &&
-          (
-            <Menu.Item id='navbar-email'>
-              <h4>Welcome, {user.email}</h4>
-            </Menu.Item>
-          )
-        }
-        {
-          user &&
-          (
-            <Menu.Item id='navbar-logout'>
-              <a href='#' onClick={handleLogout}>Logout</a>
-            </Menu.Item>
-          )
-        }
-      </Menu.Menu>
-    </Menu>
+    <div>
+      <Menu className='navbar'>
+          <Menu.Item id='logo'>
+            <Link to='/HomePage'>
+              <img id='logo' src='/attributes/logo.png' className='Navbar-logo' />
+            </Link>
+          </Menu.Item>
+          <Menu.Item id='name'>
+            <h2> Pintrips </h2>
+          </Menu.Item>
+          {
+            user &&
+            (
+              <Menu.Item id='navbar-email'>
+                <p id='welcome'>Welcome, {user.email}</p>
+              </Menu.Item>
+            )
+          }
+          {
+            user &&
+            (
+              <Menu.Item id='navbar-logout'>
+                <a href='#' onClick={handleLogout}>Logout</a>
+              </Menu.Item>
+            )
+          }
+      </Menu>
+      <Menu className='sub-navbar'>
+        <Link to={'/HomePage'}><Menu.Item id='dropdown'>My Boards</Menu.Item></Link>
+        <Link to={'/HomePage'}><Menu.Item id='dropdown'>Shared With Me</Menu.Item></Link>
+        <Link to={'/AddNewBoard'}><Menu.Item id='create-btn'>Create New</Menu.Item></Link>
+      </Menu>
+    </div>
   );
 }
 

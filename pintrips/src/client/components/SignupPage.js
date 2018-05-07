@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { Form } from 'semantic-ui-react';
 import firebase from 'firebase';
 import db from '../firestore';
 
@@ -57,7 +58,7 @@ class SignupPage extends Component {
       <div>
         <form onSubmit={this.handleSignup}>
           <div className='login-container'>
-            <h2> Sign Up </h2>
+            <h3> Create An Account </h3>
             <div className="form-group">
               <label className="col-md-2 control-label"> Username </label>
               <div className="col-md-10">
@@ -122,7 +123,7 @@ class SignupPage extends Component {
             <Link to={'/LoginPage'}>
               <small>Already have an account? Log In!</small>
             </Link>
-            <button type='submit'>Signup</button>
+            <Form.Button type="submit">Log In</Form.Button>
           </div>
         </form>
 

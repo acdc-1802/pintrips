@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Sidebar from './Sidebar';
 import MapCard from './MapCard';
 import firebase from 'firebase'
 import db from '../firestore';
@@ -33,8 +32,6 @@ const HomePage = (props) => {
           }}
         />
       </div>
-      <hr />
-      <button className='add-btn' onClick={() => history.push('/AddNewBoard')}>Start a new board!</button>
     </div>
   );
 }
