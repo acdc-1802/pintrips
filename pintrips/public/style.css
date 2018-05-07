@@ -173,7 +173,7 @@ a {
   border-radius: 5px;
 }
 
-.footer {
+/* .footer {
   position: absolute;
   bottom: 0;
   width: calc(100vw);
@@ -181,7 +181,7 @@ a {
   border-radius: 2em 2em 0 0;
   border: solid 1px lightgrey;
   z-index: 2;
-}
+} */
 
 #expand-up {
   margin: auto;
