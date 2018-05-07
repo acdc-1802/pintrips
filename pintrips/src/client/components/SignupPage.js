@@ -7,26 +7,23 @@ const allUsers = db.collection('users');
 const emailProvider = new firebase.auth.EmailAuthProvider()
 
 class SignupPage extends Component {
-  constructor() {
-    super();
-    this.state = {
-      username: '',
-      first: '',
-      last: '',
-      email: '',
-      password: ''
-    };
-    this.handleSignup = this.handleSignup.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-  }
-  handleChange(event) {
+
+  state = {
+    username: '',
+    first: '',
+    last: '',
+    email: '',
+    password: ''
+  };
+
+  handleChange = event => {
     event.preventDefault();
     const updatedState = {};
     updatedState[event.target.name] = event.target.value;
     this.setState(updatedState);
-    console.log('state', this.state);
   }
-  handleSignup(event) {
+
+  handleSignup = event => {
     event.preventDefault();
     const username = event.target.username.value;
     const first = event.target.first.value;
@@ -54,9 +51,10 @@ class SignupPage extends Component {
         console.log(error)
       })
   }
+
   render() {
     return (
-      <div >
+      <div>
         <form onSubmit={this.handleSignup}>
           <div className='login-container'>
             <h2> Sign Up </h2>
@@ -121,15 +119,13 @@ class SignupPage extends Component {
                 />
               </div>
             </div>
+            <Link to={'/LoginPage'}>
+              <small>Already have an account? Log In!</small>
+            </Link>
             <button type='submit'>Signup</button>
           </div>
         </form>
-        
-        <div>
-        <h2> Already signed up?! </h2>
-        <Link to={'./LoginPage'}> <button> Log In </button> </Link>
-        
-        </div>
+
         </div>
 
     )
