@@ -88,7 +88,7 @@ class MapCard extends Component {
             </Card.Description>
           </Card.Content>
         </Card>
-      </div >
+      </div>
     );
   }
 }
