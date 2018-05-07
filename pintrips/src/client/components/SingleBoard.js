@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactMapboxGl, { Popup, Layer, Feature } from "react-mapbox-gl";
+import ReactMapboxGl, { Popup, Layer, Feature, ZoomControl } from "react-mapbox-gl";
 import LocationSearch from './LocationSearch';
 import db from '../firestore'
 import firebase from 'firebase'
@@ -84,6 +84,7 @@ class SingleBoard extends Component {
             width: "100vw"
           }}
           center={this.state.center}>
+          <ZoomControl />
           <Layer
             type='symbol'
             id='pins'
