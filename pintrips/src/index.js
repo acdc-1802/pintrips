@@ -8,7 +8,6 @@ import { AuthProvider } from 'fireview'
 import * as firebase from 'firebase'
 
 
-registerServiceWorker();
 ReactDOM.render(
   <AuthProvider auth={firebase.auth()}>
   <Router history={history}>
@@ -16,5 +15,6 @@ ReactDOM.render(
   </Router>
   </AuthProvider>,
   document.getElementById('root'))
+  registerServiceWorker();
 
 
