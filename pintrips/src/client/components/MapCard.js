@@ -25,6 +25,7 @@ class MapCard extends Component {
         <Card>
           <Link to={`/SingleBoard/${this.props.id}`}>
             <Image src='http://geoawesomeness.com/wp-content/uploads/2016/02/Paris-map.png' />
+            </Link>
             <Card.Content>
               <Card.Header>
                 {this.props.board.name}
@@ -35,11 +36,10 @@ class MapCard extends Component {
                 </span>
               </Card.Meta>
             </Card.Content>
-          </Link>
           <Card.Content extra>
             <Card.Description>
               <Popup
-                trigger={<Button color='red' floated='right' content='Delete Board' />}
+                trigger={<Button color='red' floated='right' size='mini' content={<Icon name='trash outline' size='large' fitted={true}/>}/>}
                 content={
                   <div>
                     <p>Are you sure?</p>
