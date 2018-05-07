@@ -20,13 +20,25 @@ a {
   color: white;
 }
 
+.navbar {
+  background-color: #636363;
+  border: none;
+  margin-bottom: 0;
+  color: white;
+}
+
 .homepage-container {
   display: flex;
 }
 
-.ui.sub-navbar.menu {
-  margin-top: 0;
+.location-bar {
+  position: absolute;
+  top: 10vh;
+  border: 3px solid green;
 }
+/* .ui.sub-navbar.menu {
+  margin-top: 0;
+} */
 
 .item#create-btn {
   align-self: right;
@@ -74,9 +86,16 @@ a {
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  width: 100%;
+  width: 80%;
   margin-top: 5%;
+  margin-left: 10vw;
+  margin-right: 10vw;
 }
+
+.form-group {
+  padding-top: 2em;
+}
+
 
 .input-container {
   display: flex;
@@ -101,10 +120,17 @@ a {
   height: calc(100vh);
 }
 
+.add-board-form {
+
+}
+
 .search-container {
-  position: absolute;
-  top: 150px;
+  position: fixed;
+  left: 0;
+  bottom: 1%;
   width: 100%;
+  color: white;
+  text-align: center;
 }
 
 .search-coords {
@@ -149,23 +175,23 @@ a {
 }
 
 /*-----OLD CSS GRAVEYARD------*/
-  
+
 /* .navbar {
     margin-top: 0;
     height: 5em;
-      display: flex; 
+      display: flex;
       flex-direction: row;
       align-items: center;
       position: fixed;
       color: white;
       width: calc(100vw);
-      background-color: #d1ecb3; 
+      background-color: #d1ecb3;
       border-radius: 0 0 2em 2em;
       border: solid 1px white;
       transition: all 1s;
       z-index: 2;
   } */
-  
+
   /* .navbar h1 {
     font-size: 3em;
   } */
@@ -225,17 +251,17 @@ a {
   z-index: 2;
 } */
 
-/* 
+/*
 .side-bar {
   margin-top: 20vh;
   display: flex;
-  height: 100%; 
-  width: 160px; 
-  position: fixed; 
+  height: 100%;
+  width: 160px;
+  position: fixed;
   z-index: 1;
-  top: 0; 
+  top: 0;
   left: 0;
   /* background-color: rgb(97, 65, 65); Black */
-  /* overflow-x: hidden; 
+  /* overflow-x: hidden;
   padding-top: 20px;
 } */
