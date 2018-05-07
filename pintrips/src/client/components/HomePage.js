@@ -20,7 +20,7 @@ const HomePage = (props) => {
           Loading={() => 'Loading...'}
           Render={(props) => {
             return (
-              <Link to={`SingleBoard/${props._ref.id}`}><MapCard board={props} /></Link>
+              <MapCard board={props} id={props._ref.id}/>
             )
           }}
           Empty={() => {
@@ -32,6 +32,8 @@ const HomePage = (props) => {
           }}
         />
       </div>
+      <hr />
+      <button className='add-btn' onClick={() => history.push('/AddNewBoard')}>Start a new board!</button>
     </div>
   );
 }

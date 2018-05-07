@@ -21,7 +21,8 @@ class SingleBoard extends Component {
     pins: [],
     newPin: {},
     center: [-74.006376, 40.712368],
-    selectedPin: null
+    selectedPin: null,
+    zoom: [12]
   }
 
   componentWillMount() {
@@ -71,7 +72,8 @@ class SingleBoard extends Component {
   markerClick = (pin) => {
     this.setState({
       selectedPin: pin,
-      center: pin.coords
+      center: pin.coords,
+      zoom: [17]
     })
   }
 
@@ -79,8 +81,8 @@ class SingleBoard extends Component {
     return (
       <div className='board-container'>
         <Map
-          style='mapbox://styles/destinmcmurrry/cjgrf7lo100062so52bmvhjkm'
-          zoom={[12]}
+          style='mapbox://styles/destinmcmurrry/cjgwoclek000a2sr3cwgutpdg'
+          zoom={this.state.zoom}
           containerStyle={{
             height: "100vh",
             width: "100vw"
