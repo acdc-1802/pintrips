@@ -7,7 +7,8 @@ class Routes extends Component {
     return (
       <Switch>
         {/* PUT ALL YA COMPONENTS IN HERE */}
-        <Route path='/SingleBoard' component={SingleBoard} />
+        <Route path='/SingleBoard/:boardId' component={SingleBoard} />
+        <Route exact path='/SingleBoard' component={SingleBoard} />
         <Route path='/AddNewBoard' component={AddNewBoard} />
         <Route path='/LoginPage' component={LoginPage} />
         <Route path='/SignupPage' component={SignupPage} />

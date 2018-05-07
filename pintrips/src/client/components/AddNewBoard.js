@@ -42,38 +42,38 @@ class AddNewBoard extends Component {
     const creator = this.props._user.uid
     if (!creator) {
       alert('must be logged in')
-      window.location.href='/'
+      window.location.href = '/'
     } else {
-      this.setState({creator, owners: [...this.state.owners, creator]})
+      this.setState({ creator, owners: [...this.state.owners, creator] })
     }
 
     const boards = db.collection('boards')
     const users = db.collection('users')
 
     boards.add({
-      coordinates: new firebase.firestore.GeoPoint(this.state.coordinates[0],this.state.coordinates[1]),
+      coordinates: new firebase.firestore.GeoPoint(this.state.coordinates[0], this.state.coordinates[1]),
       creator: creator,
       locked: this.state.locked,
       name: this.state.name,
       owners: [creator]
     })
-    .then(() => {
-      window.location.href = "/Board";
-    })
-    .catch(err => {
-      console.log("Error getting documents: ", err);
-    })
-
     // .then(() => {
     //   boards.where("creator", "==", creator)
     //     .get()
     //     .then(querySnapshot => {
     //       querySnapshot.forEach(doc => {
-    //         let allBoards = [];
-    //         allBoards.push(doc.id);
-    //         return allBoards;
+    //         doc.set({
+    //           id: doc.uid
+    //         })
     //       })
-    //     }
+    //     })
+    // })
+    .then(function(docRef) {
+      window.location.href = `/SingleBoard/${docRef.id}`
+    })
+    .catch(err => {
+      console.log("Error getting documents: ", err);
+    })
 
   }
 
@@ -92,15 +92,15 @@ class AddNewBoard extends Component {
           <div className="login-container">
             <label>
               Board Name:
-                <input type="text" placeholder="Board Name" size="25" value={this.state.name} onChange={this.onTitleChange}/>
-              </label>
-              <div>
-                <LocationSearch updateCoordinates={this.submitCoordinates}/>
-              </div>
-              <button type="submit">ADD NEW BOARD</button>
+                <input type="text" placeholder="Board Name" size="25" value={this.state.name} onChange={this.onTitleChange} />
+            </label>
+            <div>
+              <LocationSearch updateCoordinates={this.submitCoordinates} />
+            </div>
+            <button type="submit">ADD NEW BOARD</button>
           </div>
         </form>
-      </div>
+      </div >
     )
   }
 }

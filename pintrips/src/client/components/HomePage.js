@@ -34,34 +34,20 @@ caches.match('/data.json').then(function(response) {
 }).catch(showErrorMessage).then(stopSpinner);
 console.log('caches')
 const HomePage = (props) => {
+  
   const user = props._user;
   if (!user) return 'You must login';
+
   return (
-    <div>
-    if(networkDataReceived) {
-      <div className='card-group'>
-      <Map from={allBoards.where('creator', '==', `${user.uid}`)}
-      Loading={() => 'Loading...'}
-      Render={(props) => {
-        return (
-          <MapCard board={props} />
-        )
-      }}
-      />
-      </div>
-    }
-    if(!networkDataReceived) {
-      <div className='card-group'>
-      <Map from={allBoards.where('creator', '==', `${user.uid}`)}
-      Loading={() => 'Loading...'}
-      Render={(props) => {
-        return (
-          <MapCard board={props} />
-        )
-      }}
-      />
-      </div>
-    }
+    <div className='card-group'>
+    <Map from={allBoards.where('creator', '==', `${user.uid}`)}
+    Loading={() => 'Loading...'}
+    Render={(props) => {
+      return (
+        <Link to={`SingleBoard/${props._ref.id}`}><MapCard board={props} /></Link>
+      )
+    }}
+    />
     </div>
   );
 }
