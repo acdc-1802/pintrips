@@ -68,8 +68,8 @@ class AddNewBoard extends Component {
     //       })
     //     })
     // })
-    .then(() => {
-      window.location.href = "/Board";
+    .then(function(docRef) {
+      window.location.href = `/SingleBoard/${docRef.id}`
     })
     .catch(err => {
       console.log("Error getting documents: ", err);

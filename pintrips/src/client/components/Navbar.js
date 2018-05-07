@@ -9,8 +9,10 @@ class Navbar extends Component {
      <Menu>
         <Menu.Menu>
           <Menu.Item>
+            <Link to='/HomePage'>
             <img id='logo' src='/attributes/logo.png' className='Navbar-logo'/>
             <h1> Pintrips </h1>
+            </Link>
           </Menu.Item>
         </Menu.Menu>
      </Menu>
