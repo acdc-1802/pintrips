@@ -1,6 +1,4 @@
 body {
-  margin: 0;
-  padding: 0;
   font-family: 'Dosis', sans-serif;
 }
 
@@ -8,55 +6,44 @@ a {
   text-decoration: none;
 }
 
-.App {
-  text-align: center;
-  background-color: #fff;
-  height: 100vh;
-  width: 100vw;
-  background-image: url("https://betanews.com/wp-content/uploads/2015/01/Earth.jpg");
-  background-attachment: fixed;
-  background-size: 50vw;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-.active {
+/* .active {
   transform: translateY(0em);
+} */
+
+.ui.navbar.menu {
+  background-color: #636363;
+  border: none;
+  margin-bottom: 0;
 }
 
-
-
-.App-header {
-  background-color: #AFAAB9;
-  height: 150px;
-  padding: 20px;
+.ui.navbar.menu * {
   color: white;
 }
 
-.App-title {
-  font-size: 1.5em;
+.homepage-container {
+  display: flex;
 }
 
-.App-intro {
-  font-size: large;
+.ui.sub-navbar.menu {
+  margin-top: 0;
 }
+
+.item#create-btn {
+  align-self: right;
+}
+
 .card-group {
   display: flex;
-  margin-left: 200px;
   padding: 15px;
   flex-direction: row;
   flex-wrap: wrap;
-  
-}
-@keyframes Navbar-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  width: fit-content;
 }
 
-.button {
-  padding: 10px;
-  margin-top: 10px;
-}
+/* @keyframes Navbar-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+} */
 
 .ind-card {
   min-width: 25vw;
@@ -65,81 +52,46 @@ a {
   /* flex-wrap: wrap;
   flex-direction: row; */
 }
-.navbar {
-  margin-top: 0;
-  height: 5em;
-    display: flex; 
-    flex-direction: row;
-    align-items: center;
-    position: fixed;
-    color: white;
-    width: calc(100vw);
-    background-color: #d1ecb3; 
-    border-radius: 0 0 2em 2em;
-    border: solid 1px white;
-    transition: all 1s;
-    z-index: 2;
-}
-
-.navbar h1 {
-  font-size: 3em;
-}
-
-#back {
-  font-size: 3em;
-  margin: 0 15px;
-  color: white;
-}
-
-#back a {
-  color: white;
-}
 
 #logo {
-  width: 7em;
-  height: 7em;
-  animation: Navbar-logo-spin infinite 20s linear;
+  width: 5em;
+  height: 5em;
+  padding-left: 0;
+  /* animation: Navbar-logo-spin infinite 20s linear; */
   /* height: 80px; */
-  
+}
+
+#name {
+  padding-left: 0;
+}
+
+#navbar-email {
+  color: #f9f9f9
 }
 
 .login-container {
   display: flex;
   flex-direction: column;
-  background-color: #fff;
-  /* opacity: .7; */
-  padding: 5em;
-  border-radius: 2em;
   justify-content: center;
-  justify-items: center;
   text-align: center;
-  width: 40%;
-  margin-left: 30%;
+  width: 100%;
   margin-top: 5%;
-
- }
-
-
- .form-group {
-   display: flex;
-   flex-direction: column;
-   justify-content: center;
-  justify-items: center;
-  width: 20vw;
-  /* padding: 1em; */
 }
 
-.form-control {
-  padding-left: 2em;
-  padding-top: 1em;
-  justify-content: center;
-  justify-items: center;
+.input-container {
+  display: flex;
+  text-align: center;
+  width: 100%;
 }
-  
-.control-label {
-  justify-content: center;
-  justify-items: center;
-  padding: 1em;
+
+.ui.form .fields {
+  display: flex;
+  flex-direction: column;
+}
+
+.ui.form .fields .field {
+  width: 50%;
+  min-width: 100px;
 }
 
 .board-container {
@@ -173,43 +125,12 @@ a {
   border-radius: 5px;
 }
 
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: calc(100vw);
-  background-color: white;
-  border-radius: 2em 2em 0 0;
-  border: solid 1px lightgrey;
-  z-index: 2;
-}
-
-#expand-up {
-  margin: auto;
-  text-align: center;
-  color: #AFAAB9;
-}
-
-
 .sign-up {
   font-family: sans-serif;
   font-size: 20px;
   justify-content: center;
- justify-items: center;
- padding: 1em;
-}
-
-.side-bar {
-  margin-top: 20vh;
-  display: flex;
-  height: 100%; 
-    width: 160px; 
-    position: fixed; 
-    z-index: 1;
-    top: 0; 
-    left: 0;
-    /* background-color: rgb(97, 65, 65); Black */
-    overflow-x: hidden; 
-    padding-top: 20px;
+  justify-items: center;
+  padding: 1em;
 }
 
 .side-button {
@@ -217,3 +138,104 @@ a {
   flex-direction: column;
   padding: 10px;
 }
+
+.add-btn {
+  font-size: 12px;
+  height: 35px;
+  min-width: 50px;
+  border-radius: 5px;
+  padding: 5px;
+  margin-right: 10px;
+}
+
+/*-----OLD CSS GRAVEYARD------*/
+  
+/* .navbar {
+    margin-top: 0;
+    height: 5em;
+      display: flex; 
+      flex-direction: row;
+      align-items: center;
+      position: fixed;
+      color: white;
+      width: calc(100vw);
+      background-color: #d1ecb3; 
+      border-radius: 0 0 2em 2em;
+      border: solid 1px white;
+      transition: all 1s;
+      z-index: 2;
+  } */
+  
+  /* .navbar h1 {
+    font-size: 3em;
+  } */
+
+  /*
+.App {
+  text-align: center;
+  background-color: #fff;
+  height: 100vh;
+  width: 100vw;
+  background-image: url("https://betanews.com/wp-content/uploads/2015/01/Earth.jpg");
+  background-attachment: fixed;
+  background-size: 50vw;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.App-header {
+  background-color: #AFAAB9;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+
+.button {
+  padding: 10px;
+  margin-top: 10px;
+}
+
+#back {
+  font-size: 3em;
+  margin: 0 15px;
+  color: white;
+}
+
+#back a {
+  color: white;
+}
+
+
+/* .footer {
+  position: absolute;
+  bottom: 0;
+  width: calc(100vw);
+  background-color: white;
+  border-radius: 2em 2em 0 0;
+  border: solid 1px lightgrey;
+  z-index: 2;
+} */
+
+/* 
+.side-bar {
+  margin-top: 20vh;
+  display: flex;
+  height: 100%; 
+  width: 160px; 
+  position: fixed; 
+  z-index: 1;
+  top: 0; 
+  left: 0;
+  /* background-color: rgb(97, 65, 65); Black */
+  /* overflow-x: hidden; 
+  padding-top: 20px;
+} */
