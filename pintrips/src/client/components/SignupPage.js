@@ -56,7 +56,7 @@ class SignupPage extends Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSignup}>
+        <Form onSubmit={this.handleSignup}>
           <div className='login-container'>
             <h3> Create An Account </h3>
             <div className="form-group">
@@ -120,13 +120,13 @@ class SignupPage extends Component {
                 />
               </div>
             </div>
-            <Link to={'/LoginPage'}>
-              <small>Already have an account? Log In!</small>
-            </Link>
-            <Form.Button type="submit">Log In</Form.Button>
-          </div>
-        </form>
 
+              <Form.Button type="submit" className="form-group">Sign Up</Form.Button>
+            </div>
+        </Form>
+        <Link to={'/LoginPage'}>
+              <small>Already have an account? Log In!</small>
+        </Link>
         </div>
 
     )
