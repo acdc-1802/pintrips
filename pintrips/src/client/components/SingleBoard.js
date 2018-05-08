@@ -38,7 +38,10 @@ class SingleBoard extends Component {
           center: [thisBoard.coordinates._long, thisBoard.coordinates._lat]
         })
       })
-      .catch(err => console.error(err));
+      .catch(err => {
+        console.error(err);
+        history.push('/404');
+      });
 
     const pinCoordsArr = [];
     db.collection('boards').doc(boardId).collection('pins').get()
@@ -66,10 +69,11 @@ class SingleBoard extends Component {
         coordinates: new firebase.firestore.GeoPoint(this.state.newPin.coords[0], this.state.newPin.coords[1]),
         visited: firebase.firestore.FieldValue.serverTimestamp()
       })
-        .then(() => {
-          this.setState({ newPin: {} });
-          // window.location.href(`/SingleBoard/${boardId}`);
-        })
+      .then(() => {
+        this.setState({ newPin: {} });
+        console.log('Pin successfully added');
+        // window.location.href(`/SingleBoard/${boardId}`);
+      })
   }
 
   markerClick = pin => {

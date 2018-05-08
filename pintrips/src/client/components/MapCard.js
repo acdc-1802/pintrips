@@ -29,7 +29,6 @@ class MapCard extends Component {
       .catch(err => console.error('Delete unsuccessful: ', err))
   }
   render() {
-    console.log(this.state);
     return (
       <div className='ind-card'>
         <Card>

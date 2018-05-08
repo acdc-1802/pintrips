@@ -9,9 +9,10 @@ import { Map, withAuth } from 'fireview';
 const allBoards = db.collection('boards')
 
 const SharedWithMe = (props) => {
+  
   const user = props._user;
-  if (!user) return 'You must login';
-  console.log('userid', user.uid)
+  if (!user) return 'Please login';
+
   return (
     <div className='homepage-container'>
       <div className='card-group'>

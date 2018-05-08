@@ -4,6 +4,7 @@ import { Form } from 'semantic-ui-react'
 import firebase from 'firebase';
 import db from '../firestore';
 import { withAuth } from 'fireview';
+import history from '../../history';
 require("firebase/firestore");
 
 class AddNewBoard extends Component {
@@ -70,10 +71,11 @@ class AddNewBoard extends Component {
       //     })
       // })
       .then(function (docRef) {
-        window.location.href = `/SingleBoard/${docRef.id}`
+        history.push(`/SingleBoard/${docRef.id}`)
       })
       .catch(err => {
         console.log("Error getting documents: ", err);
+        history.pushState('/404')
       })
 
   }
