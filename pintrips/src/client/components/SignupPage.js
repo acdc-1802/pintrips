@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Form } from 'semantic-ui-react';
 import firebase from 'firebase';
 import db from '../firestore';
+import history from '../../history';
 
 const allUsers = db.collection('users');
 const emailProvider = new firebase.auth.EmailAuthProvider()
@@ -42,10 +43,7 @@ class SignupPage extends Component {
           last: last
         })
       })
-      .then(newUserDoc => {
-        //console.log("what I'm returning after creating user", newUserDoc.id)
-        window.location.href = "/HomePage"
-      })
+      .then(newUserDoc => (history.push("/HomePage")))
       .catch(error => {
         const errorCode = error.code
         const errorMessage = error.Message
