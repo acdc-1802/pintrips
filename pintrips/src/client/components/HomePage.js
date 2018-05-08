@@ -32,7 +32,6 @@ const HomePage = (props) => {
         />
       </div>
       <hr />
-      {/* <button className='add-btn' onClick={() => history.push('/AddNewBoard')}>Start a new board!</button> */}
     </div>
   );
 }
