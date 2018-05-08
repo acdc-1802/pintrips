@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
-import { Menu, Container, Header, Item } from 'semantic-ui-react'
+import { Menu, Container, Header, Item, Icon } from 'semantic-ui-react'
 import { withAuth } from 'fireview'
 import firebase from 'firebase'
 import history from '../../history'
@@ -11,7 +11,7 @@ const Navbar = props => {
   const user = props._user;
   const handleLogout = () => {
     firebase.auth().signOut()
-    .then(() => history.push('/'))
+      .then(() => history.push('/'))
   }
 
   return (
@@ -19,9 +19,9 @@ const Navbar = props => {
       <Header
         as='h3'
         textAlign='center'
-        />
+      />
       <Container>
-      <Menu stackable className='navbar'>
+        <Menu stackable className='navbar'>
           <Menu.Item id='logo'>
             <Link to='/HomePage'>
               <img id='logo' src='/attributes/logo.png' className='Navbar-logo' />
@@ -29,7 +29,7 @@ const Navbar = props => {
           </Menu.Item>
           <Menu.Item id='name'>
             <Link to='/HomePage'>
-             <h2> Pintrips </h2>
+              <h2> Pintrips </h2>
             </Link>
           </Menu.Item>
           {
@@ -48,16 +48,32 @@ const Navbar = props => {
               </Menu.Item>
             )
           }
-      </Menu>
+        </Menu>
       </Container>
-      { 
+      {
         user &&
         (
-        <Menu className='sub-navbar'>
-          <Link to={'/HomePage'}><Menu.Item id='dropdown'>My Boards</Menu.Item></Link>
-          <Link to={'/SharedWithMe'}><Menu.Item id='dropdown'>Shared With Me</Menu.Item></Link>
-          <Link to={'/AddNewBoard'}><Menu.Item id='create-btn'>Create New</Menu.Item></Link>
-        </Menu>
+          <Menu className='sub-navbar'>
+            <Link to={'/HomePage'}>
+              <Menu.Item id='dropdown'>
+                My Boards
+            </Menu.Item>
+            </Link>
+            <Link to={'/SharedWithMe'}>
+              <Menu.Item id='dropdown'>
+                Shared With Me
+            </Menu.Item>
+            </Link>
+            <Link to={'/AddNewBoard'}>
+              <Menu.Item id='create-btn'>
+                Create New</Menu.Item>
+            </Link>
+            <Link to={'/SharedWithMe'}>
+              <Menu.Item id='navbar-notifications'>
+                <Icon name='bell outline' size='medium' />
+              </Menu.Item>
+            </Link>
+          </Menu>
         )
       }
     </div>
