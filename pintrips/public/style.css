@@ -120,8 +120,8 @@ a {
   height: calc(100vh);
 }
 
-.add-board-form {
-
+.autocomplete-dropdown-container {
+  color: black;
 }
 
 .search-container {
