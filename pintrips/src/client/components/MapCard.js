@@ -17,7 +17,8 @@ class MapCard extends Component {
       center: [this.props.board.coordinates._long, this.props.board.coordinates._lat],
       zoom: [12],
       shareWith: '',
-      boardId: this.props.id
+      boardId: this.props.id,
+      sent: false
     }
     this.handleDelete = this.handleDelete.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -36,18 +37,23 @@ class MapCard extends Component {
       shareWith: event.target.value
     })
   }
-  handleSend(){
-    // let recipient;
-    // db.collection('users').where('username', '==', this.state.shareWith).get()
-    // .then(snap => snap.forEach(doc => {
-    //   let id = doc.data().id;
-    //   db.collection('boards').doc(this.state.boardId).set({
-    //     writers[id] = true
-    // }))
-    // // .then(doc => console.log('doc', doc.id))
-    // // db.collection('boards').doc(this.state.boardId).update({
+  handleSend() {
+    db.collection('users').where('username', '==', this.state.shareWith).get()
+      .then(snap => snap.forEach(doc => {
+        let id = doc.data().id;
+        db.collection('boards').doc(this.state.boardId).set(
+          {
+            writers: { [id]: true }
+          },
+          {merge: true}
+        )
+        .catch(error => console.error('Writer could not be added', error))
+      }))
+      .then(() => {this.setState({sent: true})})
+      .then(() => {this.setState({sent: false})})
+      .catch(error => console.error('Unable to send board', error))
 
-    // // })
+    // .then(doc => console.log('doc', doc.id))
   }
   render() {
     return (
