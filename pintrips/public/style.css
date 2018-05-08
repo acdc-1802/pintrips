@@ -120,10 +120,6 @@ a {
   height: calc(100vh);
 }
 
-.add-board-form {
-
-}
-
 .search-container {
   position: fixed;
   left: 0;
@@ -181,6 +177,16 @@ a {
 
 .center-message img {
   max-width: 200px;
+}
+
+#menu {
+  position: absolute;
+  background-color: white;
+  border-radius: 5px;
+  padding: 5px;
+  top: 300px;
+  left: 10px;
+  z-index: 4;
 }
 
 /*-----OLD CSS GRAVEYARD------*/

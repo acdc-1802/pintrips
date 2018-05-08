@@ -10,7 +10,7 @@ const Routes = props => {
       <Switch>
         {/* PUT ALL YA COMPONENTS IN HERE */}
         <Route path='/SingleBoard/:boardId' component={SingleBoard} />
-        <Route exact path='/SingleBoard' component={SingleBoard} />
+        <Route exact path='/SingleBoard' component={CannotFind} />
         <Route path='/AddNewBoard' component={AddNewBoard} />
         <Route path='/LoginPage' component={LoginPage} />
         <Route path='/SignupPage' component={SignupPage} />
