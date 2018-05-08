@@ -18,11 +18,60 @@ class MapCard extends Component {
       zoom: [12],
       shareWith: '',
       boardId: this.props.id,
-      sent: false
+      canWrite: ''
     }
     this.handleDelete = this.handleDelete.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSend = this.handleSend.bind(this);
+    this.acceptBoard = this.acceptBoard.bind(this);
+    this.declineBoard = this.declineBoard.bind(this);
+  }
+  acceptBoard(){
+    this.setState({canWrite: 'accepted'})
+    db.collection('users').doc(this.props.recipient).update(
+      {
+        canWrite: {
+          [this.state.boardId]: this.state.canWrite
+        }
+      }
+    )
+    .catch(error => console.error('Unable to accept board'))
+    db.collection('boards').doc(this.state.boardId).set(
+      {
+        writers: {
+          [this.props.recipient]: true
+        }
+      },
+      { merge: true }
+    )
+    .catch(error => console.log('Unable add user as a writer', error))
+  }
+  declineBoard(){
+    db.collection('users').doc(this.props.recipient).update(
+      {
+        canWrite: {
+          [this.state.boardId]: 'declined'
+        }
+      }
+    )
+    .catch(error => console.error('Unable to decline board'))
+    db.collection('boards').doc(this.state.boardId).update(
+      {
+        readers: {
+          [this.props.recipient]: false
+        }
+      }
+    )
+    .catch(error => console.error('Unable to decline board', error))
+  }
+  componentDidMount() {
+    if (this.props.recipient) {
+      db.collection('users').doc(this.props.recipient).get()
+        .then(doc => {
+          this.setState({ canWrite: doc.data().canWrite[this.state.boardId] })
+        })
+        .catch(error => console.error('Could not find data', error))
+    }
   }
   handleDelete() {
     db.collection('boards').doc(this.state.boardId).delete()
@@ -41,15 +90,27 @@ class MapCard extends Component {
     db.collection('users').where('username', '==', this.state.shareWith).get()
       .then(snap => snap.forEach(doc => {
         let id = doc.data().id;
+        db.collection('users').doc(id).set(
+          {
+            canWrite: {
+              [this.state.boardId]: 'pending'
+            }
+          },
+          { merge: true }
+        )
+          .catch(error => console.error('Unable to add board to user', error))
         db.collection('boards').doc(this.state.boardId).set(
           {
-            writers: { [id]: true }
+            readers: {
+              [id]: true
+            }
           },
-          {merge: true}
+          { merge: true }
         )
-        .then(() => {this.setState({sent: true})})
-        .then(() => {setTimeout(()=>this.setState({sent: false}), 3000)})
-        .catch(error => console.error('Writer could not be added', error))
+          .then(() => { this.setState({ sent: true }) })
+          .then(() => { setTimeout(() => this.setState({ sent: false }), 3000) })
+          .catch(error => console.error('Writer could not be added', error))
+          .catch(error => console.error('Unable to send board', error))
       }))
       .catch(error => console.error('Unable to send board', error))
 
@@ -99,20 +160,30 @@ class MapCard extends Component {
                     trigger={<Button floated='right' size='mini' content={<Icon name='external share' size='large' fitted={true} />} />}
                     content={
                       !this.state.sent ?
-                      (<div>
-                        <p>Who would you like to share this board with?</p>
-                        <Input onChange={this.handleChange} size='mini' icon='search' placeholder='Search...' />
-                        <br />
-                        <Button color='blue' size='mini' content='Share' onClick={this.handleSend} />
-                      </div>)
-                      :
-                      (<p>Board was successfully sent!</p>)
+                        (<div>
+                          <p>Who would you like to share this board with?</p>
+                          <Input onChange={this.handleChange} size='mini' icon='search' placeholder='Search...' />
+                          <br />
+                          <Button color='blue' size='mini' content='Share' onClick={this.handleSend} />
+                        </div>)
+                        :
+                        (<p>Board was successfully sent!</p>)
                     }
                     on='click'
                     position='top right'
                   />
 
                 </div>
+              }
+              {
+                this.state.canWrite === 'pending' &&
+                (
+                  <div>
+                    <p>Pending: </p>
+                    <Button floated='right' color='red' onClick={this.declineBoard}>Decline</Button>
+                    <Button floated='right' color='green' onClick={this.acceptBoard}>Accept</Button>
+                  </div>
+                )
               }
             </Card.Description>
           </Card.Content>
