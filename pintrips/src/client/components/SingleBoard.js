@@ -6,20 +6,23 @@ import firebase from 'firebase';
 import { withAuth } from 'fireview';
 import history from '../../history';
 import { Button, Icon } from 'semantic-ui-react';
+
 require('firebase/firestore');
 
-const Map = ReactMapboxGl({
-  accessToken: 'pk.eyJ1IjoiZGVzdGlubWNtdXJycnkiLCJhIjoiY2plenRxaGw3MGdsNTJ3b2htMGRydWc3aiJ9.ycslnjgv2J9VZGZHT8EoIw'
-});
+const accessToken = 'pk.eyJ1IjoiZGVzdGlubWNtdXJycnkiLCJhIjoiY2plenRxaGw3MGdsNTJ3b2htMGRydWc3aiJ9.ycslnjgv2J9VZGZHT8EoIw';
 
+// creates an image to use as marker
 const image = new Image(100, 100);
 image.src = '/attributes/pin.png';
 const images = ['myImage', image];
 
 // toggling style doesn't actually work because page doesn't re-render so
-
 const basicStyle = 'mapbox://styles/destinmcmurrry/cjgwoclek000a2sr3cwgutpdg';
 const popArtStyle = 'mapbox://styles/destinmcmurrry/cjgwv6qe1000g2rn6sy2ea8qb';
+
+const Map = ReactMapboxGl({
+  accessToken
+});
 
 class SingleBoard extends Component {
 
@@ -33,6 +36,7 @@ class SingleBoard extends Component {
   }
 
   componentWillMount() {
+
     const boardId = this.props.match.params.boardId;
     db.collection('boards').doc(boardId).get()
       .then(doc => {
@@ -50,15 +54,19 @@ class SingleBoard extends Component {
       });
 
     const pinCoordsArr = [];
-    db.collection('boards').doc(boardId).collection('pins').get()
-      .then(thesePins => thesePins.forEach(pin => {
+    db.collection('boards').doc(boardId).collection('pins').orderBy('visited').get()
+      .then(thesePins => thesePins.forEach(pin =>
         pinCoordsArr.push({
-          label: pin.data().label, coords: [pin.data().coordinates._long, pin.data().coordinates._lat], pinId: pin.id
+          label: pin.data().label, coords: [pin.data().coordinates._long, pin.data().coordinates._lat], pinId: pin.id, visited: pin.data().visited
         })
-      }))
-      .then(() => this.setState({
-        pins: pinCoordsArr
-      }));
+      ))
+      .then(() => {
+        console.log(pinCoordsArr);
+        this.setState({
+          pins: pinCoordsArr
+        })
+      });
+      
   }
 
   switchLayer = layer => {
