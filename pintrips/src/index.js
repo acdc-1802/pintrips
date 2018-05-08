@@ -14,3 +14,5 @@ ReactDOM.render(
     </Router>
   </AuthProvider>,
   document.getElementById('root'))
+
+registerServiceWorker();
