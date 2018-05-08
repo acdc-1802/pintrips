@@ -98,12 +98,15 @@ class MapCard extends Component {
                   <Popup
                     trigger={<Button floated='right' size='mini' content={<Icon name='external share' size='large' fitted={true} />} />}
                     content={
-                      <div>
+                      !this.state.sent ?
+                      (<div>
                         <p>Who would you like to share this board with?</p>
                         <Input onChange={this.handleChange} size='mini' icon='search' placeholder='Search...' />
                         <br />
                         <Button color='blue' size='mini' content='Share' onClick={this.handleSend} />
-                      </div>
+                      </div>)
+                      :
+                      (<p>Board was successfully sent!</p>)
                     }
                     on='click'
                     position='top right'
