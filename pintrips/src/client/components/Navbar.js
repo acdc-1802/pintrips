@@ -15,23 +15,27 @@ const Navbar = props => {
   }
 
   return (
-    <div>
+    <div className="navbar-bar">
       <Header
         as='h3'
         textAlign='center'
         />
       <Container>
       <Menu stackable className='navbar'>
-          <Menu.Item id='logo'>
-            <Link to='/HomePage'>
-              <img id='logo' src='/attributes/logo.png' className='Navbar-logo' />
-            </Link>
-          </Menu.Item>
-          <Menu.Item id='name'>
-            <Link to='/HomePage'>
-             <h2> Pintrips </h2>
-            </Link>
-          </Menu.Item>
+          <div className='logo'>
+            <Menu.Item >
+              <Link to='/HomePage'>
+                <img id='logo' src='/attributes/logo.png' className='Navbar-logo' />
+              </Link>
+            </Menu.Item>
+          </div>
+          <div className='title'>
+            <Menu.Item>
+              <Link to='/HomePage'>
+              <h2> Pintrips </h2>
+              </Link>
+            </Menu.Item>
+          </div>
           {
             user &&
             (
@@ -43,9 +47,11 @@ const Navbar = props => {
           {
             user &&
             (
-              <Menu.Item id='navbar-logout'>
-                <a href='#' onClick={handleLogout}>Logout</a>
-              </Menu.Item>
+              <div className='logout-button'>
+                <Menu.Item id='navbar-logout'>
+                  <a href='#' onClick={handleLogout}>Logout</a>
+                </Menu.Item>
+              </div>
             )
           }
       </Menu>
