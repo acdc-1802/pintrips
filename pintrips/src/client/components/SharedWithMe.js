@@ -20,7 +20,7 @@ const SharedWithMe = (props) => {
           Loading={() => 'Loading...'}
           Render={(props) => {
             return (
-              <MapCard board={props} id={props._ref.id}/>
+              <MapCard board={props} id={props._ref.id} owner={false}/>
             )
           }}
           Empty={() => {
