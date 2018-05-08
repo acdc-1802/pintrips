@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import LocationSearch from './LocationSearch';
+import { Form } from 'semantic-ui-react'
 import firebase from 'firebase';
 import db from '../firestore';
 import { withAuth } from 'fireview';
@@ -57,23 +58,23 @@ class AddNewBoard extends Component {
       name: this.state.name,
       owners: [creator]
     })
-    // .then(() => {
-    //   boards.where("creator", "==", creator)
-    //     .get()
-    //     .then(querySnapshot => {
-    //       querySnapshot.forEach(doc => {
-    //         doc.set({
-    //           id: doc.uid
-    //         })
-    //       })
-    //     })
-    // })
-    .then(function(docRef) {
-      window.location.href = `/SingleBoard/${docRef.id}`
-    })
-    .catch(err => {
-      console.log("Error getting documents: ", err);
-    })
+      // .then(() => {
+      //   boards.where("creator", "==", creator)
+      //     .get()
+      //     .then(querySnapshot => {
+      //       querySnapshot.forEach(doc => {
+      //         doc.set({
+      //           id: doc.uid
+      //         })
+      //       })
+      //     })
+      // })
+      .then(function (docRef) {
+        window.location.href = `/SingleBoard/${docRef.id}`
+      })
+      .catch(err => {
+        console.log("Error getting documents: ", err);
+      })
 
   }
 
@@ -88,19 +89,19 @@ class AddNewBoard extends Component {
   render() {
     return (
       <div>
-        <form onSubmit={(e) => this.handleSubmit(e)}>
+        <Form onSubmit={(e) => this.handleSubmit(e)}>
           <div className="login-container">
             <label>
-              Board Name:
+              <h3>Board Name:</h3>
                 <input type="text" placeholder="Board Name" size="25" value={this.state.name} onChange={this.onTitleChange} />
             </label>
-            <div>
+            <div className="form-group">
               <LocationSearch updateCoordinates={this.submitCoordinates} />
             </div>
-            <button type="submit">ADD NEW BOARD</button>
+            <Form.Button type='submit' className="form-group">Add New Board</Form.Button>
           </div>
-        </form>
-      </div >
+        </Form>
+      </div>
     )
   }
 }
