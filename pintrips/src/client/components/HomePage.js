@@ -9,7 +9,9 @@ import { Map, withAuth } from 'fireview';
 const allBoards = db.collection('boards')
 
 const HomePage = (props) => {
+  
   const idb = window.indexedDB
+
   function createIndexDB() {
     if (!('indexDB' in window)) {return null;} 
     return idb.open('dashboard', 1, function(upgradeDb) {

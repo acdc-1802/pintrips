@@ -32,7 +32,7 @@ class SingleBoard extends Component {
     style: basicStyle
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const boardId = this.props.match.params.boardId;
     db.collection('boards').doc(boardId).get()
       .then(doc => {
@@ -49,16 +49,32 @@ class SingleBoard extends Component {
         history.push('/404');
       });
 
-    const pinCoordsArr = [];
-    db.collection('boards').doc(boardId).collection('pins').get()
-      .then(thesePins => thesePins.forEach(pin => {
-        pinCoordsArr.push({
-          label: pin.data().label, coords: [pin.data().coordinates._long, pin.data().coordinates._lat], pinId: pin.id
-        })
-      }))
-      .then(() => this.setState({
-        pins: pinCoordsArr
-      }));
+    // const pinCoordsArr = [];
+
+    db.collection('boards').doc(boardId).collection('pins')
+
+    .onSnapshot((querySnapshot) => {
+      const pinArray = [];
+       querySnapshot.forEach(doc => {
+        const pin = doc.data();
+        pinArray.push({
+        label: pin.label, 
+        coords: [pin.coordinates._long, pin.coordinates._lat], 
+        pinId: pin.id
+      })})
+      this.setState({pins: pinArray})
+    });
+
+
+  //   db.collection('boards').doc(boardId).collection('pins').get()
+  //     .then(thesePins => thesePins.forEach(pin => {
+  //       pinCoordsArr.push({
+  //         label: pin.data().label, coords: [pin.data().coordinates._long, pin.data().coordinates._lat], pinId: pin.id
+  //       })
+  //     }))
+  //     .then(() => this.setState({
+  //       pins: pinCoordsArr
+  //     }));
   }
 
   switchLayer = layer => {
