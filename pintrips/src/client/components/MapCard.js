@@ -15,21 +15,41 @@ class MapCard extends Component {
     super(props)
     this.state = {
       center: [this.props.board.coordinates._long, this.props.board.coordinates._lat],
-      zoom: [12]
+      zoom: [12],
+      shareWith: '',
+      boardId: this.props.id
     }
     this.handleDelete = this.handleDelete.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSend = this.handleSend.bind(this);
   }
   handleDelete() {
-    let boardId = this.props.id;
-    db.collection('boards').doc(boardId).delete()
+    db.collection('boards').doc(this.state.boardId).delete()
       .then(() => {
         console.log('Board successfully deleted')
       })
       .then(() => history.push('/HomePage'))
       .catch(err => console.error('Delete unsuccessful: ', err))
   }
+  handleChange(event) {
+    this.setState({
+      shareWith: event.target.value
+    })
+  }
+  handleSend(){
+    // let recipient;
+    // db.collection('users').where('username', '==', this.state.shareWith).get()
+    // .then(snap => snap.forEach(doc => {
+    //   let id = doc.data().id;
+    //   db.collection('boards').doc(this.state.boardId).set({
+    //     writers[id] = true
+    // }))
+    // // .then(doc => console.log('doc', doc.id))
+    // // db.collection('boards').doc(this.state.boardId).update({
+
+    // // })
+  }
   render() {
-    console.log(this.state);
     return (
       <div className='ind-card'>
         <Card>
@@ -74,7 +94,7 @@ class MapCard extends Component {
                     content={
                       <div>
                         <p>Who would you like to share this board with?</p>
-                        <Input size='mini' icon='search' placeholder='Search...' />
+                        <Input onChange={this.handleChange} size='mini' icon='search' placeholder='Search...' />
                         <br />
                         <Button color='blue' size='mini' content='Share' onClick={this.handleSend} />
                       </div>
