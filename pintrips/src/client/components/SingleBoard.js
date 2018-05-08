@@ -16,6 +16,11 @@ const image = new Image(100, 100);
 image.src = '/attributes/pin.png';
 const images = ['myImage', image];
 
+// toggling style doesn't actually work because page doesn't re-render so
+
+const basicStyle = 'mapbox://styles/destinmcmurrry/cjgwoclek000a2sr3cwgutpdg';
+const popArtStyle = 'mapbox://styles/destinmcmurrry/cjgwv6qe1000g2rn6sy2ea8qb';
+
 class SingleBoard extends Component {
 
   state = {
@@ -23,7 +28,8 @@ class SingleBoard extends Component {
     newPin: {},
     center: [-74.006376, 40.712368],
     selectedPin: null,
-    zoom: [12]
+    zoom: [12],
+    style: basicStyle
   }
 
   componentWillMount() {
@@ -38,7 +44,10 @@ class SingleBoard extends Component {
           center: [thisBoard.coordinates._long, thisBoard.coordinates._lat]
         })
       })
-      .catch(err => console.error(err));
+      .catch(err => {
+        console.error(err);
+        history.push('/404');
+      });
 
     const pinCoordsArr = [];
     db.collection('boards').doc(boardId).collection('pins').get()
@@ -50,6 +59,17 @@ class SingleBoard extends Component {
       .then(() => this.setState({
         pins: pinCoordsArr
       }));
+  }
+
+  switchLayer = layer => {
+    const boardId = this.props.match.params.boardId;
+    this.state === basicStyle
+    ? this.setState({
+      style: popArtStyle
+    })
+    : this.setState({
+      style: basicStyle
+    })
   }
 
   selectLocation = (label, coords) => {
@@ -66,10 +86,11 @@ class SingleBoard extends Component {
         coordinates: new firebase.firestore.GeoPoint(this.state.newPin.coords[0], this.state.newPin.coords[1]),
         visited: firebase.firestore.FieldValue.serverTimestamp()
       })
-        .then(() => {
-          this.setState({ newPin: {} });
-          // window.location.href(`/SingleBoard/${boardId}`);
-        })
+      .then(() => {
+        this.setState({ newPin: {} });
+        console.log('Pin successfully added');
+        // window.location.href(`/SingleBoard/${boardId}`);
+      })
   }
 
   markerClick = pin => {
@@ -95,7 +116,7 @@ class SingleBoard extends Component {
     return (
       <div className='board-container'>
         <Map
-          style='mapbox://styles/destinmcmurrry/cjgwoclek000a2sr3cwgutpdg'
+          style={this.state.style}
           zoom={this.state.zoom}
           containerStyle={{
             height: "100vh",
@@ -135,6 +156,12 @@ class SingleBoard extends Component {
             )
           }
         </Map>
+        <div id='menu'>
+          <input onClick={this.switchLayer} id='basic' type='radio' name='rtoggle' value='basic' checked='checked'/>
+          <label htmlFor='basic'>basic</label>
+          <input onClick={this.switchLayer} id='popArt' type='radio' name='rtoggle' value='popArt'/>
+          <label htmlFor='streets'>pop art</label>
+        </div>
         <div className='search-container'>
           <div className='search-coords'>
             <div>

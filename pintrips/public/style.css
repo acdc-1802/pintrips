@@ -174,6 +174,25 @@ a {
   margin-right: 10px;
 }
 
+.center-message {
+  text-align: center;
+  color: #636363;
+}
+
+.center-message img {
+  max-width: 200px;
+}
+
+#menu {
+  position: absolute;
+  background-color: white;
+  border-radius: 5px;
+  padding: 5px;
+  top: 300px;
+  left: 10px;
+  z-index: 4;
+}
+
 /*-----OLD CSS GRAVEYARD------*/
 
 /* .navbar {
