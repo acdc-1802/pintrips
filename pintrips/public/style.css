@@ -120,6 +120,10 @@ a {
   height: calc(100vh);
 }
 
+.autocomplete-dropdown-container {
+  color: black;
+}
+
 .search-container {
   position: fixed;
   left: 0;
