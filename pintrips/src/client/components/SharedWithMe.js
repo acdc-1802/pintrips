@@ -16,11 +16,11 @@ const SharedWithMe = (props) => {
   return (
     <div className='homepage-container'>
       <div className='card-group'>
-        <Map from={allBoards.where(`writers.${user.uid}`, '==', true)}
+        <Map from={allBoards.where(`readers.${user.uid}`, '==', true)}
           Loading={() => 'Loading...'}
           Render={(props) => {
             return (
-              <MapCard board={props} id={props._ref.id} owner={false}/>
+              <MapCard board={props} id={props._ref.id} owner={false} recipient={user.uid}/>
             )
           }}
           Empty={() => {
