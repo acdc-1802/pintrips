@@ -28,12 +28,13 @@ class MapCard extends Component {
   }
   acceptBoard(){
     this.setState({canWrite: 'accepted'})
-    db.collection('users').doc(this.props.recipient).update(
+    db.collection('users').doc(this.props.recipient).set(
       {
         canWrite: {
-          [this.state.boardId]: this.state.canWrite
+          [this.state.boardId]: 'accepted'
         }
-      }
+      },
+      { merge: true }
     )
     .catch(error => console.error('Unable to accept board'))
     db.collection('boards').doc(this.state.boardId).set(
@@ -47,6 +48,7 @@ class MapCard extends Component {
     .catch(error => console.log('Unable add user as a writer', error))
   }
   declineBoard(){
+    this.setState({canWrite: 'declined'})
     db.collection('users').doc(this.props.recipient).update(
       {
         canWrite: {
