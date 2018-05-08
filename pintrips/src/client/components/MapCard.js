@@ -47,10 +47,10 @@ class MapCard extends Component {
           },
           {merge: true}
         )
+        .then(() => {this.setState({sent: true})})
+        .then(() => {setTimeout(()=>this.setState({sent: false}), 3000)})
         .catch(error => console.error('Writer could not be added', error))
       }))
-      .then(() => {this.setState({sent: true})})
-      .then(() => {this.setState({sent: false})})
       .catch(error => console.error('Unable to send board', error))
 
     // .then(doc => console.log('doc', doc.id))
