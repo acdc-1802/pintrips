@@ -20,17 +20,17 @@ const Navbar = props => {
         as='h3'
         textAlign='center'
         />
-      <Container>
-      <Menu stackable className='navbar'>
+      <Container className= 'nav-container'>
+      <Menu borderless={true} stackable className='navbar'>
           <div className='logo'>
-            <Menu.Item >
+            <Menu.Item  >
               <Link to='/HomePage'>
                 <img id='logo' src='/attributes/logo.png' className='Navbar-logo' />
               </Link>
             </Menu.Item>
           </div>
           <div className='title'>
-            <Menu.Item>
+            <Menu.Item  >
               <Link to='/HomePage'>
               <h2> Pintrips </h2>
               </Link>
@@ -39,9 +39,11 @@ const Navbar = props => {
           {
             user &&
             (
-              <Menu.Item id='navbar-email'>
-                <p id='welcome'>Welcome, {user.email}</p>
-              </Menu.Item>
+              <div className="navbar-email">
+                <Menu.Item>
+                  <p id='welcome'>Welcome, {user.email}</p>
+                </Menu.Item>
+              </div>
             )
           }
           {
@@ -59,7 +61,7 @@ const Navbar = props => {
       { 
         user &&
         (
-        <Menu className='sub-navbar'>
+        <Menu borderless={true} className='sub-navbar'>
           <Link to={'/HomePage'}><Menu.Item id='dropdown'>My Boards</Menu.Item></Link>
           <Link to={'/SharedWithMe'}><Menu.Item id='dropdown'>Shared With Me</Menu.Item></Link>
           <Link to={'/AddNewBoard'}><Menu.Item id='create-btn'>Create New</Menu.Item></Link>
