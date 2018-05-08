@@ -56,11 +56,16 @@ const Navbar = props => {
           }
       </Menu>
       </Container>
-      <Menu className='sub-navbar'>
-        <Link to={'/HomePage'}><Menu.Item id='dropdown'>My Boards</Menu.Item></Link>
-        <Link to={'/SharedWithMe'}><Menu.Item id='dropdown'>Shared With Me</Menu.Item></Link>
-        <Link to={'/AddNewBoard'}><Menu.Item id='create-btn'>Create New</Menu.Item></Link>
-      </Menu>
+      { 
+        user &&
+        (
+        <Menu className='sub-navbar'>
+          <Link to={'/HomePage'}><Menu.Item id='dropdown'>My Boards</Menu.Item></Link>
+          <Link to={'/SharedWithMe'}><Menu.Item id='dropdown'>Shared With Me</Menu.Item></Link>
+          <Link to={'/AddNewBoard'}><Menu.Item id='create-btn'>Create New</Menu.Item></Link>
+        </Menu>
+        )
+      }
     </div>
   );
 }
