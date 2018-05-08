@@ -35,6 +35,7 @@ export default class LoginPage extends Component {
         return firebase.auth().signInWithEmailAndPassword(email, password)
       })
       .then(user => {
+        // needs actual message ' sorry wrong user name and/or password '
         console.log(firebase.auth().currentUser.uid)
         history.push('/HomePage');
       })
@@ -42,6 +43,7 @@ export default class LoginPage extends Component {
         const errorCode = error.code
         const errorMessage = error.Message
         console.log(errorCode, errorMessage)
+        history.push('/404');
       })
 
   }
