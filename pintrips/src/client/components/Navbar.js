@@ -36,7 +36,7 @@ const Navbar = props => {
         (
           <Menu className='sub-navbar' borderless={true}>
             <Link to={'/HomePage'}>
-              <Menu.Item id='dropdown'>
+              <Menu.Item id='myboards'>
                 My Boards
               </Menu.Item>
             </Link>
