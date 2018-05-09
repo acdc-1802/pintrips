@@ -20,7 +20,7 @@ const Navbar = props => {
         as='h3'
         textAlign='center'
       />
-      <Container id="container" borderless={true}>
+      <Container className="container" borderless={true}>
         <Menu borderless={true} stackable className='navbar'>
           <Menu.Item borderless={true} id='logo'>
             <Link to='/HomePage'>
