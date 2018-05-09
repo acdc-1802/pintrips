@@ -74,6 +74,7 @@ export default class LoginPage extends Component {
           </div>
             <Form.Button className="form-group">Log In</Form.Button>
           </Form>
+          <br />
           <Link to={'/SignupPage'}>
               <small>Don't have an account? Sign Up!</small>
           </Link>

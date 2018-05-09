@@ -127,6 +127,7 @@ class SignupPage extends Component {
             <Form.Button type="submit" className="form-group">Sign Up</Form.Button>
           </div>
         </Form>
+        <br />
         <Link to={'/LoginPage'}>
           <small>Already have an account? Log In!</small>
         </Link>
