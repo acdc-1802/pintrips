@@ -8,24 +8,25 @@ import { Map, withAuth } from 'fireview';
 
 const allBoards = db.collection('boards')
 
-const HomePage = (props) => {
+const SharedWithMe = (props) => {
+  
   const user = props._user;
-  if (!user) return 'You must login';
+  if (!user) return 'Please login';
 
   return (
     <div className='homepage-container'>
       <div className='card-group'>
-        <Map from={allBoards.where('creator', '==', `${user.uid}`)}
+        <Map from={allBoards.where(`readers.${user.uid}`, '==', true)}
           Loading={() => 'Loading...'}
           Render={(props) => {
             return (
-              <MapCard board={props} id={props._ref.id} owner={true}/>
+              <MapCard board={props} id={props._ref.id} owner={false} recipient={user.uid}/>
             )
           }}
           Empty={() => {
             return (
               <div>
-                <small>You don't have any boards yet :{`(`}</small>
+                <small>You don't have any boards shared with you yet :{`(`}</small>
               </div>
             )
           }}
@@ -36,7 +37,7 @@ const HomePage = (props) => {
   );
 }
 
-export default withAuth(HomePage);
+export default withAuth(SharedWithMe);
 
 
 

@@ -1,32 +1,31 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { Form } from 'semantic-ui-react';
 import firebase from 'firebase';
 import db from '../firestore';
+import history from '../../history';
 
 const allUsers = db.collection('users');
 const emailProvider = new firebase.auth.EmailAuthProvider()
 
 class SignupPage extends Component {
-  constructor() {
-    super();
-    this.state = {
-      username: '',
-      first: '',
-      last: '',
-      email: '',
-      password: ''
-    };
-    this.handleSignup = this.handleSignup.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-  }
-  handleChange(event) {
+
+  state = {
+    username: '',
+    first: '',
+    last: '',
+    email: '',
+    password: ''
+  };
+
+  handleChange = event => {
     event.preventDefault();
     const updatedState = {};
     updatedState[event.target.name] = event.target.value;
     this.setState(updatedState);
-    console.log('state', this.state);
   }
-  handleSignup(event) {
+
+  handleSignup = event => {
     event.preventDefault();
     const username = event.target.username.value;
     const first = event.target.first.value;
@@ -44,22 +43,20 @@ class SignupPage extends Component {
           last: last
         })
       })
-      .then(newUserDoc => {
-        //console.log("what I'm returning after creating user", newUserDoc.id)
-        window.location.href = "/HomePage"
-      })
+      .then(newUserDoc => (history.push("/HomePage")))
       .catch(error => {
         const errorCode = error.code
         const errorMessage = error.Message
         console.log(error)
       })
   }
+
   render() {
     return (
-      <div >
-        <form onSubmit={this.handleSignup}>
+      <div>
+        <Form onSubmit={this.handleSignup}>
           <div className='login-container'>
-            <h2> Sign Up </h2>
+            <h3> Create An Account </h3>
             <div className="form-group">
               <label className="col-md-2 control-label"> Username </label>
               <div className="col-md-10">
@@ -121,15 +118,13 @@ class SignupPage extends Component {
                 />
               </div>
             </div>
-            <button type='submit'>Signup</button>
-          </div>
-        </form>
-        
-        <div>
-        <h2> Already signed up?! </h2>
-        <Link to={'./LoginPage'}> <button> Log In </button> </Link>
-        
-        </div>
+
+              <Form.Button type="submit" className="form-group">Sign Up</Form.Button>
+            </div>
+        </Form>
+        <Link to={'/LoginPage'}>
+              <small>Already have an account? Log In!</small>
+        </Link>
         </div>
 
     )

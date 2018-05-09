@@ -1,21 +1,83 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
-import { Menu } from 'semantic-ui-react'
+import { Menu, Container, Header, Item, Icon } from 'semantic-ui-react'
+import { withAuth } from 'fireview'
+import firebase from 'firebase'
+import history from '../../history'
 // import '/Users/crysmags/fullDev/pintrips/pintrips/public/style.css'
 
-class Navbar extends Component {
-  render() {
-    return (
-     <Menu>
-        <Menu.Menu>
-          <Menu.Item>
-            <img id='logo' src='/attributes/logo.png' className='Navbar-logo'/>
-            <h1> Pintrips </h1>
-          </Menu.Item>
-        </Menu.Menu>
-     </Menu>
-    );
+const Navbar = props => {
+
+  const user = props._user;
+  const handleLogout = () => {
+    firebase.auth().signOut()
+      .then(() => history.push('/'))
   }
+
+  return (
+    <div>
+      <Header
+        as='h3'
+        textAlign='center'
+      />
+      <Container>
+        <Menu stackable className='navbar'>
+          <Menu.Item id='logo'>
+            <Link to='/HomePage'>
+              <img id='logo' src='/attributes/logo.png' className='Navbar-logo' />
+            </Link>
+          </Menu.Item>
+          <Menu.Item id='name'>
+            <Link to='/HomePage'>
+              <h2> Pintrips </h2>
+            </Link>
+          </Menu.Item>
+          {
+            user &&
+            (
+              <Menu.Item id='navbar-email'>
+                <p id='welcome'>Welcome, {user.email}</p>
+              </Menu.Item>
+            )
+          }
+          {
+            user &&
+            (
+              <Menu.Item id='navbar-logout'>
+                <a href='#' onClick={handleLogout}>Logout</a>
+              </Menu.Item>
+            )
+          }
+        </Menu>
+      </Container>
+      {
+        user &&
+        (
+          <Menu className='sub-navbar'>
+            <Link to={'/HomePage'}>
+              <Menu.Item id='dropdown'>
+                My Boards
+            </Menu.Item>
+            </Link>
+            <Link to={'/SharedWithMe'}>
+              <Menu.Item id='dropdown'>
+                Shared With Me
+            </Menu.Item>
+            </Link>
+            <Link to={'/AddNewBoard'}>
+              <Menu.Item id='create-btn'>
+                Create New</Menu.Item>
+            </Link>
+            <Link to={'/SharedWithMe'}>
+              <Menu.Item id='navbar-notifications'>
+                <Icon name='bell outline' size='medium' />
+              </Menu.Item>
+            </Link>
+          </Menu>
+        )
+      }
+    </div>
+  );
 }
 
-export default Navbar;
+export default withAuth(Navbar);
