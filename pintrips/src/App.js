@@ -6,7 +6,7 @@ import Routes from './client/routes'
 class App extends Component {
   render() {
     return (
-      <div>
+      <div id='full-page'>
         <Navbar />
         {/* BELOW IS WHERE WE'LL SWITCH BETWEEN COMPONENTS BASED ON ROUTES/LINKS */}
         <Routes />

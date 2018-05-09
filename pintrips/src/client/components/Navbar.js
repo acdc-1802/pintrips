@@ -16,65 +16,46 @@ const Navbar = props => {
 
   return (
     <div>
-      <Header
-        as='h3'
-        textAlign='center'
-      />
-      <Container className="container" borderless={true}>
-        <Menu borderless={true} stackable className='navbar'>
-          <Menu.Item borderless={true} id='logo'>
-            <Link to='/HomePage'>
-              <img id='logo' src='/attributes/logo.png' className='Navbar-logo' />
-            </Link>
-          </Menu.Item>
-          <Menu.Item borderless={true} id='name'>
-            <Link to='/HomePage'>
-              <h2> Pintrips </h2>
-            </Link>
-          </Menu.Item>
-          {
-            user &&
-            (
-              <Menu.Item borderless={true} id='navbar-email'>
-                <p id='welcome'>Welcome, {user.email}</p>
-              </Menu.Item>
-            )
-          }
-          {
-            user &&
-            (
-              <Menu.Item borderless={true} id='navbar-logout'>
-                <a href='#' onClick={handleLogout}>Logout</a>
-              </Menu.Item>
-            )
-          }
-        </Menu>
-      </Container>
-      {
+      <div className='navbar'>
+        <Link className='logo' to='/HomePage'>
+          <img id='logo' src='/attributes/logo.png' />
+        </Link>
+        <h1 id='name'>Pintrips</h1>
+        {
         user &&
-        (
-          <Menu borderless={true} className='sub-navbar'>
-            <Link to={'/HomePage'}>
-              <Menu.Item id='dropdown'>
-                My Boards
+          (
+          <div className='user-nav'>
+            <small id='email'>{user.email}</small>
+            <a id='logout' href='#' onClick={handleLogout}>Logout</a>
+          </div>
+          )
+        }
+      </div>
+      {
+      user &&
+      (
+        <Menu className='sub-navbar' borderless={true}>
+          <Link to={'/HomePage'}>
+            <Menu.Item id='dropdown'>
+              My Boards
+          </Menu.Item>
+          </Link>
+          <Link to={'/SharedWithMe'}>
+            <Menu.Item borderless={true} id='dropdown'>
+              Shared With Me
+          </Menu.Item>
+          </Link>
+          <Link to={'/AddNewBoard'}>
+            <Menu.Item id='create-btn'>
+              Create New</Menu.Item>
+          </Link>
+          <Link to={'/SharedWithMe'}>
+            <Menu.Item borderless={true} id='navbar-notifications'>
+              <Icon name='bell outline' size='medium' />
             </Menu.Item>
-            </Link>
-            <Link to={'/SharedWithMe'}>
-              <Menu.Item borderless={true} id='dropdown'>
-                Shared With Me
-            </Menu.Item>
-            </Link>
-            <Link to={'/AddNewBoard'}>
-              <Menu.Item id='create-btn'>
-                Create New</Menu.Item>
-            </Link>
-            <Link to={'/SharedWithMe'}>
-              <Menu.Item borderless={true} id='navbar-notifications'>
-                <Icon name='bell outline' size='medium' />
-              </Menu.Item>
-            </Link>
-          </Menu>
-        )
+          </Link>
+        </Menu>
+      )
       }
     </div>
   );
