@@ -109,15 +109,6 @@ class SingleBoard extends Component {
   }
 
   markerClick = pin => {
-<<<<<<< HEAD
-    this.setState({
-      selectedPin: pin,
-      center: pin.coords,
-      zoom: [17],
-      newLocation: null
-    })
-    console.log('state', this.state)
-=======
     if (this.state.selectedPin) {
       this.setState({
         selectedPin: null,
@@ -131,7 +122,6 @@ class SingleBoard extends Component {
         newLocation: null
       })
     }
->>>>>>> master
   }
   
   _onClickMap(map, evt) {
