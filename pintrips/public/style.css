@@ -1,199 +1,251 @@
 body {
   font-family: 'Dosis', sans-serif;
-}
-
-a {
+ }
+ 
+ a {
   text-decoration: none;
-}
-
-/* .active {
+ }
+ 
+ /* .active {
   transform: translateY(0em);
-} */
-
-.ui.navbar.menu {
-  background-color: #636363;
-  border: none;
-  margin-bottom: 0;
-}
-
-.ui.navbar.menu * {
-  color: white;
-}
-
-.navbar {
-  background-color: #636363;
-  border: none;
-  margin-bottom: 0;
-  color: white;
-}
-
-.homepage-container {
-  display: flex;
-}
-
-.location-bar {
-  position: absolute;
-  top: 10vh;
-  border: 3px solid green;
-}
-/* .ui.sub-navbar.menu {
-  margin-top: 0;
-} */
-
-.item#create-btn {
-  align-self: right;
-}
-
-.card-group {
-  display: flex;
-  padding: 15px;
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: fit-content;
-}
-
-/* @keyframes Navbar-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-} */
-
-.ind-card {
-  min-width: 25vw;
-  display: flex;
-  padding: 25px;
-  /* flex-wrap: wrap;
-  flex-direction: row; */
-}
-
-#logo {
-  width: 5em;
-  height: 5em;
-  padding-left: 0;
-  /* animation: Navbar-logo-spin infinite 20s linear; */
-  /* height: 80px; */
-}
-
-#name {
-  padding-left: 0;
-}
-
-#navbar-email {
-  color: #f9f9f9
-}
-
-.login-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-  width: 80%;
-  margin-top: 5%;
-  margin-left: 10vw;
-  margin-right: 10vw;
-}
-
-.form-group {
-  padding-top: 2em;
-}
-
-
-.input-container {
-  display: flex;
-  text-align: center;
-  width: 100%;
-}
-
-.ui.form .fields {
-  display: flex;
-  flex-direction: column;
-}
-
-.ui.form .fields .field {
-  width: 50%;
-  min-width: 100px;
-}
-
-.board-container {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  height: calc(100vh);
-}
-
-.autocomplete-dropdown-container {
-  color: black;
-}
-
-.search-container {
-  position: fixed;
-  left: 0;
-  bottom: 1%;
-  width: 100%;
-  color: white;
-  text-align: center;
-}
-
-.search-coords {
-  margin: 0 auto;
-  z-index: 5;
-  width: 70%;
-  background-color: white;
-  border: solid 1px lightgray;
-  border-radius: 5px;
-}
-
-.search-coords input {
-  width: 90%;
-  margin: 1em;
-}
-
-.search-coords button {
-  border-radius: 5px;
-}
-
-.sign-up {
-  font-family: sans-serif;
-  font-size: 20px;
-  justify-content: center;
-  justify-items: center;
-  padding: 1em;
-}
-
-.side-button {
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-}
-
-.add-btn {
+ } */
+ 
+ .add-board-form {
+ 
+ }
+ .add-btn {
   font-size: 12px;
   height: 35px;
   min-width: 50px;
   border-radius: 5px;
   padding: 5px;
   margin-right: 10px;
-}
-
-.center-message {
-  text-align: center;
-  color: #636363;
-}
-
-.center-message img {
-  max-width: 200px;
-}
-
-#menu {
-  position: absolute;
+ }
+ 
+ .board-container {
+  /* margin-top: 15vh; */
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
+ }
+ 
+ 
+ .card-group {
+  display: flex;
+  padding: 15px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: fit-content;
+ }
+ 
+ .container {
+   display: flex;
+   flex-direction: row;
+ }
+ .ui.container.container {
+   width: 100vw;
+ }
+ .form-group {
+  padding-top: 2em;
+ }
+ 
+ 
+ .homepage-container {
+  display: flex;
+  /* padding-top: 25vh; */
+  /* margin-top: 20vh; */
+ 
+ }
+ 
+ .item#create-btn {
+  align-self: right;
+ }
+ 
+ .ind-card {
+  min-width: 25vw;
+  display: flex;
+  padding: 25px;
+  /* flex-wrap: wrap;
+  flex-direction: row; */
+ }
+ 
+ .input-container {
+  display: flex;
+  /* text-align: center; */
+  flex-direction: column;
+  width: 100%;
+ }
+
+ .forms {
+   display: flex;
+   flex-direction: column
+ }
+ 
+ .location-bar {
+  position: absolute;
+  top: 10vh;
+  border: 3px solid green;
+ }
+ 
+ .login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  width: 60%;
+  margin-left: 20%;
+  margin-right: 20%;
+  margin-top: 10%;
+  /* margin-top: 30vh;
+  margin-left: 10vw;
+  margin-right: 10vw; */
+ }
+ .logout-button {
+  display: flex;
+  position: fixed;
+  right: 10vw;
+  
+ }
+ 
+ #logo {
+ 
+  width: 5em;
+  height: 5em;
+  /* padding-left: 0; */
+  color: black;
+  /* animation: Navbar-logo-spin infinite 20s linear; */
+  /* height: 80px; */
+ }
+ /* .ui.sub-navbar.menu {
+  margin-top: 0;
+ } */
+ #navbar {
   background-color: white;
+  border: none;
+  display: flex;
+  flex-direction: row;
+  /* color: rgb(209, 59, 59); */
+  width: 100vw;
+ 
+  
+ }
+ 
+ .navbar-bar {
+  /* display: flex; */
+  /* size: relative; */
+  position: fixed;
+  z-index: 2;
+  /* flex-direction: row-wrap; */
+  width: 100vw;
+  
+  /* margin-left: 15px; */
+  /* margin-right: 20px; */
+  
+ 
+ }
+ 
+ .navbar-email {
+   width: 10%;
+  /* display: flex; */
+  /* margin: 10vw; */
+ 
+ }
+ 
+ #name {
+  padding-left: 0;
+ }
+ 
+ #navbar-email {
+  color: #f9f9f9;
+  margin: 20px;
+ }
+ 
+ /* .ui.sub-navbar.menu {
+  margin-top: 0;
+ } */
+ 
+ /* @keyframes Navbar-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+ } */
+ .routes {
+  display: flex;
+ }
+ 
+ .search-container {
+  position: fixed;
+  left: 0;
+  bottom: 1%;
+  width: 100%;
+  color: white;
+  text-align: center;
+ }
+ 
+ .search-coords {
+  margin: 0 auto;
+  z-index: 5;
+  width: 70%;
+  background-color: white;
+  border: solid 1px lightgray;
   border-radius: 5px;
-  padding: 5px;
-  top: 300px;
-  left: 10px;
-  z-index: 4;
-}
+ }
+ 
+ .search-coords input {
+  width: 90%;
+  margin: 1em;
+ }
+ 
+ .search-coords button {
+  border-radius: 5px;
+ }
+ 
+ .sign-up {
+  font-family: sans-serif;
+  font-size: 20px;
+  justify-content: center;
+  justify-items: center;
+  padding: 1em;
+ }
+
+ .signup-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  width: 60%;
+  margin-left: 20%;
+  margin-right: 20%;
+  /* margin-top: 5%; */
+ }
+ 
+ .side-button {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+ }
+ .title {
+  display: flex;
+  position: fixed;
+  /* left: 15vw; */
+  color: black;
+  
+ }
+ .ui.form .fields {
+  display: flex;
+  flex-direction: column;
+ }
+ 
+ .ui.form .fields .field {
+  width: 50%;
+  min-width: 100px;
+ }
+ 
+ 
+ 
+ .ui.navbar.menu * {
+  
+  color: rgb(15, 14, 14);
+ }
 
 /*-----OLD CSS GRAVEYARD------*/
 

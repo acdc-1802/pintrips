@@ -53,7 +53,7 @@ class SignupPage extends Component {
 
   render() {
     return (
-      <div>
+      <div className="signup-container">
         <Form onSubmit={this.handleSignup}>
           <div className='login-container'>
             <h3> Create An Account </h3>
@@ -61,6 +61,7 @@ class SignupPage extends Component {
               <label className="col-md-2 control-label"> Username </label>
               <div className="col-md-10">
                 <input
+                  placeholder='Username'
                   className="form-control"
                   name='username'
                   type='text'
@@ -74,6 +75,7 @@ class SignupPage extends Component {
               <label className="control-label"> First Name   </label>
               <div className="col-md-20">
                 <input
+                  placeholder='First Name'
                   className="form-control"
                   name='first'
                   type='text'
@@ -86,6 +88,7 @@ class SignupPage extends Component {
               <label className="control-label"> Last Name</label>
               <div className="col-md-10">
                 <input
+                  placeholder='Last Name'
                   className="form-control"
                   name='last'
                   type='text'
@@ -98,6 +101,7 @@ class SignupPage extends Component {
               <label className="col-md-2 control-label"> Email </label>
               <div className="col-md-10">
                 <input
+                  placeholder='Email'
                   className="form-control"
                   name='email'
                   type='text'
@@ -110,6 +114,7 @@ class SignupPage extends Component {
               <label className="col-md-2 control-label"> Password </label>
               <div className="col-md-10">
                 <input
+                  placeholder='Password'
                   className="form-control"
                   name='password'
                   type='text'
