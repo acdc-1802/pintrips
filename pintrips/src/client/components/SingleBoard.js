@@ -93,11 +93,18 @@ class SingleBoard extends Component {
   }
 
   markerClick = pin => {
-    this.setState({
-      selectedPin: pin,
-      center: pin.coords,
-      zoom: [17]
-    })
+    if (this.state.selectedPin) {
+      this.setState({
+        selectedPin: null,
+        zoom: [14]
+      })
+    } else {
+      this.setState({
+        selectedPin: pin,
+        center: pin.coords,
+        zoom: [15]
+      })
+    }
   }
 
   handleDelete = pinId => {
