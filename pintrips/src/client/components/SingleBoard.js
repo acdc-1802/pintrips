@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactMapboxGl, { Popup, Layer, Feature, ZoomControl } from "react-mapbox-gl";
+import ReactMapboxGl, { Popup, Layer, Feature, ZoomControl, SymbolLayer } from "react-mapbox-gl";
 import LocationSearch from './LocationSearch';
 import db from '../firestore';
 import firebase from 'firebase';
@@ -109,6 +109,7 @@ class SingleBoard extends Component {
   }
 
   markerClick = pin => {
+<<<<<<< HEAD
     this.setState({
       selectedPin: pin,
       center: pin.coords,
@@ -116,7 +117,23 @@ class SingleBoard extends Component {
       newLocation: null
     })
     console.log('state', this.state)
+=======
+    if (this.state.selectedPin) {
+      this.setState({
+        selectedPin: null,
+        zoom: [14]
+      })
+    } else {
+      this.setState({
+        selectedPin: pin,
+        center: pin.coords,
+        zoom: [14.5],
+        newLocation: null
+      })
+    }
+>>>>>>> master
   }
+  
   _onClickMap(map, evt) {
     console.log(evt.lngLat);
     this.setState({
@@ -198,6 +215,7 @@ class SingleBoard extends Component {
               <Popup
                 key={this.state.selectedPin.label}
                 coordinates={this.state.selectedPin.coords}
+                offset={50}
               >
                 <div>
                   <div>{this.state.selectedPin.label}</div>
