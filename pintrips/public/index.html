@@ -49,16 +49,16 @@
   </script> -->
 
   <script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function () {
-        navigator.serviceWorker.register('/sw.js');
+  // if ('serviceWorker' in navigator) {
+  //   window.addEventListener('load', function () {
+  //       navigator.serviceWorker.register('/sw.js');
 
-        //navigator.serviceWorker.ready always resolve
-        navigator.serviceWorker.ready.then(function (registration) {
-            console.log('Service worker successfully registered on scope', registration.scope);
-        });
-    });
-  }
+  //       //navigator.serviceWorker.ready always resolve
+  //       navigator.serviceWorker.ready.then(function (registration) {
+  //           console.log('Service worker successfully registered on scope', registration.scope);
+  //       });
+  //   });
+  // }
   </script>
 </body>
 

@@ -8,7 +8,7 @@
 // To learn more about the benefits of this model, read https://goo.gl/KwvDNy.
 // This link also includes instructions on opting out of this behavior.
 import idb from 'idb'
-
+// import db from './src/client/firestore';
 
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
@@ -24,9 +24,11 @@ const isLocalhost = Boolean(
 export default function register() {
   if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
     // The URL constructor is available in all browsers that support SW.
+    console.log('working in he')
     const publicUrl = new URL(process.env.PUBLIC_URL, window.location);
     
     if (publicUrl.origin !== window.location.origin) {
+      console.log('working in thee')
       // Our service worker won't work if PUBLIC_URL is on a different origin
       // from what our page is served on. This might happen if a CDN is used to
       // serve assets; see https://github.com/facebookincubator/create-react-app/issues/2374
@@ -34,16 +36,31 @@ export default function register() {
     }
   }
 }
-    window.addEventListener('fetch', function(event) {
-      event.respondWith(
-        caches.open('mysite-dynamic').then(function(cache) {
-          return fetch(event.request).then(function(response) {
-            cache.put(event.request, response.clone());
-            return response;
-          });
-        })
-      );
-    });
+    // window.addEventListener('fetch', function(event) {
+    //   const user = props._user;
+    //   const allBoards = db.collection('boards')
+    //   event.respondWith(
+    //    allBoards.where("creator", "==", `${user.uid}`)
+    //       .onSnapshot({ includeQueryMetadataChanges: true }, function(snapshot) {
+    //         snapshot.docChanges.forEach(function(change) {
+    //           if (change.type === "added") {
+    //             console.log("New city: ", change.doc.data());
+    //           }
+              
+    //           var source = snapshot.metadata.fromCache ? "local cache" : "server";
+    //           console.log("Data came from " + source);
+    //         });
+    //         // console.log('events', boards)
+    //       })
+        
+    //   );
+    // });
+    // caches.open('mysite-dynamic').then(function(cache) {
+    //   return fetch(event.request).then(function(response) {
+    //     cache.put(event.request, response.clone());
+    //     return response;
+    //   });
+    // })
     window.addEventListener('load', () => {
       const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
       console.log('in here')

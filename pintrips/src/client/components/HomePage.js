@@ -9,22 +9,27 @@ import { Map, withAuth } from 'fireview';
 const allBoards = db.collection('boards')
 
 const HomePage = (props) => {
+const user = props._user;
   
-  const idb = window.indexedDB
-
-  function createIndexDB() {
-    if (!('indexDB' in window)) {return null;} 
-    return idb.open('dashboard', 1, function(upgradeDb) {
-      console.log('working in here')
-      if (!upgradeDb.objectStoreNames. contains('events')) {
-        console.log('working in here')
-        const eventsOS = upgradeDb.cr3eateObjectStore('events', {keyPath: 'id'});
-      }
-    });
-  }
-  const dbPromise = createIndexDB();
+// window.addEventListener('fetch', function(event) {
+//   // event.respondWith(
+//    const boards = allBoards.where("creator", "==", `${user.uid}`)
+//       .onSnapshot({ includeQueryMetadataChanges: true }, function(snapshot) {
+//         snapshot.docChanges.forEach(function(change) {
+//           if (change.type === "added") {
+//             console.log("New city: ", change.doc.data());
+//           }
+          
+//           var source = snapshot.metadata.fromCache ? "local cache" : "server";
+//           console.log("Data came from " + source);
+//         });
+//         console.log('oooooo', boards)
+//       })
+    
+//   // );
+// });
   console.log('events', window.indexedDB)
-  const user = props._user;
+  // const user = props._user;
   if (!user) return 'You must login';
   return (
     <div className='homepage-container'>
@@ -143,3 +148,15 @@ export default withAuth(HomePage);
 // // const data = saveEventDataLocally(this.props)
 
 // console.log('events', dbPromise().then)
+// const idb = window.indexedDB
+
+// function createIndexDB() {
+//   if (!('indexDB' in window)) {return null;} 
+//   return idb.open('dashboard', 1, function(upgradeDb) {
+//     console.log('working in here')
+//     if (!upgradeDb.objectStoreNames. contains('events')) {
+//       console.log('working in here')
+//       const eventsOS = upgradeDb.cr3eateObjectStore('events', {keyPath: 'id'});
+//     }
+//   });
+// }
