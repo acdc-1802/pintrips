@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactMapboxGl, { Popup, Layer, Feature, ZoomControl } from "react-mapbox-gl";
+import ReactMapboxGl, { Popup, Layer, Feature, ZoomControl, SymbolLayer } from "react-mapbox-gl";
 import LocationSearch from './LocationSearch';
 import db from '../firestore';
 import firebase from 'firebase';
@@ -13,9 +13,13 @@ const Map = ReactMapboxGl({
   accessToken: 'pk.eyJ1IjoiZGVzdGlubWNtdXJycnkiLCJhIjoiY2plenRxaGw3MGdsNTJ3b2htMGRydWc3aiJ9.ycslnjgv2J9VZGZHT8EoIw'
 });
 
-const image = new Image(100, 100);
-image.src = '/attributes/pin.png';
-const images = ['myImage', image];
+const solid = new Image(100, 100);
+solid.src = '/attributes/pin.png';
+const solidPins = ['solidImage', solid];
+
+const hollow = new Image(100, 100);
+hollow.src = '/attributes/hollow.png';
+const hollowPins = ['hollowImage', hollow];
 
 const pintripsStyle = 'mapbox://styles/destinmcmurrry/cjgy8hinv00192rp4obrfj9qq';
 const moonLightStyle = 'mapbox://styles/destinmcmurrry/cjgycs1rn001d2rp4ss7jizyf';
@@ -25,12 +29,14 @@ const iceCreamStyle = 'mapbox://styles/destinmcmurrry/cjgwy8chg00002spjby3ymrw8'
 
 class SingleBoard extends Component {
   state = {
-    pins: [],
+    markedPins: [],
+    unmarkedPins: [],
     newPin: {},
     center: [-74.006376, 40.712368],
     selectedPin: null,
     zoom: [12],
-    style: pintripsStyle
+    style: pintripsStyle,
+    newLocation: null
   }
 
   componentDidMount() {
@@ -49,20 +55,31 @@ class SingleBoard extends Component {
         console.error(err);
         history.push('/404');
       });
-      {/* NEED TO ORDER BY DATE ---- .orderBy('visited').get() */}
+    {/* NEED TO ORDER BY DATE ---- .orderBy('visited').get() */ }
     db.collection('boards').doc(boardId).collection('pins')
       .onSnapshot((querySnapshot) => {
-        const pinArray = [];
+        const markedPins = [];
+        const unmarkedPins = [];
         querySnapshot.forEach(doc => {
           const pin = doc.data();
-          pinArray.push({
-            label: pin.label, 
-            coords: [pin.coordinates._long, pin.coordinates._lat], 
-            pinId: doc.id
-          })
+          if(pin.visited){
+            markedPins.push({
+              label: pin.label,
+              coords: [pin.coordinates._long, pin.coordinates._lat],
+              pinId: doc.id,
+              visited: pin.visited
+            })
+          } else {
+            unmarkedPins.push({
+              label: pin.label,
+              coords: [pin.coordinates._long, pin.coordinates._lat],
+              pinId: doc.id,
+              visited: pin.visited
+            })
+          }
         })
-        this.setState({ pins: pinArray })
-    });
+        this.setState({ markedPins, unmarkedPins })
+      });
   }
 
   switchStyle = event => {
@@ -83,23 +100,47 @@ class SingleBoard extends Component {
       db.collection('boards').doc(boardId).collection('pins').add({
         label: this.state.newPin.label,
         coordinates: new firebase.firestore.GeoPoint(this.state.newPin.coords[0], this.state.newPin.coords[1]),
-        visited: firebase.firestore.FieldValue.serverTimestamp()
+        visited: null
       })
-      .then(() => {
-        this.setState({ newPin: {} });
-        console.log('Pin successfully added');
-      })
-      .catch((err) => console.error('Add unsuccessful: ', err))
+        .then(() => {
+          this.setState({ newPin: {} });
+          console.log('Pin successfully added');
+        })
+        .catch((err) => console.error('Add unsuccessful: ', err))
   }
 
   markerClick = pin => {
+    if (this.state.selectedPin) {
+      this.setState({
+        selectedPin: null,
+        zoom: [14],
+        newLocation: null
+      })
+    } else {
+      this.setState({
+        selectedPin: pin,
+        center: pin.coords,
+        zoom: [14.5],
+        newLocation: null
+      })
+    }
+  }
+  
+  _onClickMap(map, evt) {
+    console.log(evt.lngLat);
     this.setState({
-      selectedPin: pin,
-      center: pin.coords,
-      zoom: [17]
+      newLocation: [evt.lngLat.lng, evt.lngLat.lat]
     })
   }
-
+  markAsVisited = pinId => {
+    const boardId = this.props.match.params.boardId;
+    db.collection('boards').doc(boardId).collection('pins').doc(pinId).update(
+      {
+        visited: firebase.firestore.FieldValue.serverTimestamp()
+      }
+    )
+    .catch(error => console.error('Unable to mark as visited', error))
+  }
   handleDelete = pinId => {
     const boardId = this.props.match.params.boardId;
     db.collection('boards').doc(boardId).collection('pins').doc(pinId).delete()
@@ -122,15 +163,34 @@ class SingleBoard extends Component {
             height: "100vh",
             width: "100vw"
           }}
+          onClick={this._onClickMap.bind(this)}
           center={this.state.center}>
           <ZoomControl />
           <Layer
             type='symbol'
-            id='pins'
-            layout={{ 'icon-image': 'myImage' }}
-            images={images}>
-            {this.state.pins &&
-              this.state.pins.map(pin => {
+            id='solidPins'
+            layout={{ 'icon-image': 'solidImage' }}
+            images={solidPins}>
+            {this.state.markedPins &&
+              this.state.markedPins.map(pin => {
+                return (
+                  <Feature
+                    key={pin.label}
+                    coordinates={pin.coords}
+                    onClick={this.markerClick.bind(this, pin)}
+                  />
+                )
+              }
+              )
+            }
+          </Layer>
+          <Layer
+            type='symbol'
+            id='hollowPins'
+            layout={{ 'icon-image': 'hollowImage' }}
+            images={hollowPins}>
+            {this.state.unmarkedPins &&
+              this.state.unmarkedPins.map(pin => {
                 return (
                   <Feature
                     key={pin.label}
@@ -147,26 +207,40 @@ class SingleBoard extends Component {
               <Popup
                 key={this.state.selectedPin.label}
                 coordinates={this.state.selectedPin.coords}
+                offset={50}
               >
                 <div>
                   <div>{this.state.selectedPin.label}</div>
-                    <Button color='red' floated='right' size='mini' content={<Icon name='trash outline' size='large' fitted={true} />} onClick={()=> (<Button onClick={this.handleDelete(this.state.selectedPin.pinId)} />)}/>
-                  </div>
+                  <Button color='red' floated='right' size='mini' content={<Icon name='trash outline' size='large' fitted={true} />} onClick={() => (<Button onClick={this.handleDelete(this.state.selectedPin.pinId)} />)} />
+                  {
+                    !this.state.selectedPin.visited &&
+                    <Button color='blue' floated='right' size='mini' content={<Icon name='checkmark' size='large' fitted={true} />} onClick={() => (<Button onClick={this.markAsVisited(this.state.selectedPin.pinId)} />)} />
+                  }
+                </div>
+              </Popup>
+            )
+          }
+          {
+            this.state.newLocation && (
+              <Popup
+                coordinates={this.state.newLocation}
+              >
+                <p>Add new pin?</p>
               </Popup>
             )
           }
         </Map>
         <div id='menu'>
-        {/* DOING A WEIRD THING / RENDERING LAYERS MORE THAN ONCE */}
-          <input onChange={this.switchStyle} id='basic' type='radio' name='rtoggle' value={pintripsStyle}/>
+          {/* DOING A WEIRD THING / RENDERING LAYERS MORE THAN ONCE */}
+          <input onChange={this.switchStyle} id='basic' type='radio' name='rtoggle' value={pintripsStyle} />
           <label htmlFor='pintrips'>pintrips</label>
-          <input onChange={this.switchStyle} id='popArt' type='radio' name='rtoggle' value={moonLightStyle}/>
+          <input onChange={this.switchStyle} id='popArt' type='radio' name='rtoggle' value={moonLightStyle} />
           <label htmlFor='moonlight'>moonlight</label>
-          <input onChange={this.switchStyle} id='basic' type='radio' name='rtoggle' value={popArtStyle}/>
+          <input onChange={this.switchStyle} id='basic' type='radio' name='rtoggle' value={popArtStyle} />
           <label htmlFor='popArt'>pop art</label>
-          <input onChange={this.switchStyle} id='popArt' type='radio' name='rtoggle' value={vintageStyle}/>
+          <input onChange={this.switchStyle} id='popArt' type='radio' name='rtoggle' value={vintageStyle} />
           <label htmlFor='vintage'>vintage</label>
-          <input onChange={this.switchStyle} id='popArt' type='radio' name='rtoggle' value={iceCreamStyle}/>
+          <input onChange={this.switchStyle} id='popArt' type='radio' name='rtoggle' value={iceCreamStyle} />
           <label htmlFor='iceCream'>ice cream</label>
         </div>
         <div className='search-container'>
