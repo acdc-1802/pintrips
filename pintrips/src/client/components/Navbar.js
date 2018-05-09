@@ -20,14 +20,14 @@ const Navbar = props => {
         as='h3'
         textAlign='center'
       />
-      <Container>
-        <Menu stackable className='navbar'>
-          <Menu.Item id='logo'>
+      <Container id="container" borderless={true}>
+        <Menu borderless={true} stackable className='navbar'>
+          <Menu.Item borderless={true} id='logo'>
             <Link to='/HomePage'>
               <img id='logo' src='/attributes/logo.png' className='Navbar-logo' />
             </Link>
           </Menu.Item>
-          <Menu.Item id='name'>
+          <Menu.Item borderless={true} id='name'>
             <Link to='/HomePage'>
               <h2> Pintrips </h2>
             </Link>
@@ -35,7 +35,7 @@ const Navbar = props => {
           {
             user &&
             (
-              <Menu.Item id='navbar-email'>
+              <Menu.Item borderless={true} id='navbar-email'>
                 <p id='welcome'>Welcome, {user.email}</p>
               </Menu.Item>
             )
@@ -43,7 +43,7 @@ const Navbar = props => {
           {
             user &&
             (
-              <Menu.Item id='navbar-logout'>
+              <Menu.Item borderless={true} id='navbar-logout'>
                 <a href='#' onClick={handleLogout}>Logout</a>
               </Menu.Item>
             )
@@ -53,14 +53,14 @@ const Navbar = props => {
       {
         user &&
         (
-          <Menu className='sub-navbar'>
+          <Menu borderless={true} className='sub-navbar'>
             <Link to={'/HomePage'}>
               <Menu.Item id='dropdown'>
                 My Boards
             </Menu.Item>
             </Link>
             <Link to={'/SharedWithMe'}>
-              <Menu.Item id='dropdown'>
+              <Menu.Item borderless={true} id='dropdown'>
                 Shared With Me
             </Menu.Item>
             </Link>
@@ -69,7 +69,7 @@ const Navbar = props => {
                 Create New</Menu.Item>
             </Link>
             <Link to={'/SharedWithMe'}>
-              <Menu.Item id='navbar-notifications'>
+              <Menu.Item borderless={true} id='navbar-notifications'>
                 <Icon name='bell outline' size='medium' />
               </Menu.Item>
             </Link>
