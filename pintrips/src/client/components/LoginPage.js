@@ -50,11 +50,12 @@ export default class LoginPage extends Component {
 
   render() {
     return (
-      <div>
-          <Form className="login-container" onSubmit={this.handleSubmit}>
+      <div className="login-container" >
+          <Form  onSubmit={this.handleSubmit}>
           <h3>Login</h3>
-            <Form.Group className="input-container">
-              <Form.Input fluid label='Email' placeholder='Email'
+          <div className='forms'>
+            <Form.Group stackable className="input-container">
+              <Form.Input stackable fluid label='Email' placeholder='Email'
                 className="form-control"
                 name='email'
                 type='text'
@@ -62,7 +63,7 @@ export default class LoginPage extends Component {
                 onChange={this.handleChange}
               />
 
-              <Form.Input fluid label='Password' placeholder='Password'
+              <Form.Input stackable fluid label='Password'    placeholder='Password'
                 className="form-control"
                 name='password'
                 type='text'
@@ -70,7 +71,7 @@ export default class LoginPage extends Component {
                 onChange={this.handleChange}
               />
             </Form.Group>
-
+          </div>
             <Form.Button className="form-group">Log In</Form.Button>
           </Form>
           <Link to={'/SignupPage'}>
