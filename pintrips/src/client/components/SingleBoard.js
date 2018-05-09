@@ -30,9 +30,9 @@ class SingleBoard extends Component {
     center: [-74.006376, 40.712368],
     selectedPin: null,
     zoom: [12],
-    style: pintripsStyle
+    style: pintripsStyle,
+    newLocation: null
   }
-
   componentDidMount() {
     const boardId = this.props.match.params.boardId;
     db.collection('boards').doc(boardId).get()
@@ -49,20 +49,21 @@ class SingleBoard extends Component {
         console.error(err);
         history.push('/404');
       });
-      {/* NEED TO ORDER BY DATE ---- .orderBy('visited').get() */}
+    {/* NEED TO ORDER BY DATE ---- .orderBy('visited').get() */ }
     db.collection('boards').doc(boardId).collection('pins')
       .onSnapshot((querySnapshot) => {
         const pinArray = [];
         querySnapshot.forEach(doc => {
           const pin = doc.data();
           pinArray.push({
-            label: pin.label, 
-            coords: [pin.coordinates._long, pin.coordinates._lat], 
-            pinId: doc.id
+            label: pin.label,
+            coords: [pin.coordinates._long, pin.coordinates._lat],
+            pinId: doc.id,
+            visited: pin.visited
           })
         })
         this.setState({ pins: pinArray })
-    });
+      });
   }
 
   switchStyle = event => {
@@ -83,13 +84,13 @@ class SingleBoard extends Component {
       db.collection('boards').doc(boardId).collection('pins').add({
         label: this.state.newPin.label,
         coordinates: new firebase.firestore.GeoPoint(this.state.newPin.coords[0], this.state.newPin.coords[1]),
-        visited: firebase.firestore.FieldValue.serverTimestamp()
+        visited: null
       })
-      .then(() => {
-        this.setState({ newPin: {} });
-        console.log('Pin successfully added');
-      })
-      .catch((err) => console.error('Add unsuccessful: ', err))
+        .then(() => {
+          this.setState({ newPin: {} });
+          console.log('Pin successfully added');
+        })
+        .catch((err) => console.error('Add unsuccessful: ', err))
   }
 
   markerClick = pin => {
@@ -102,11 +103,27 @@ class SingleBoard extends Component {
       this.setState({
         selectedPin: pin,
         center: pin.coords,
-        zoom: [14.5]
+        zoom: [14.5],
+        newLocation: null
       })
     }
   }
-
+  
+  _onClickMap(map, evt) {
+    console.log(evt.lngLat);
+    this.setState({
+      newLocation: [evt.lngLat.lng, evt.lngLat.lat]
+    })
+  }
+  markAsVisited = pinId => {
+    const boardId = this.props.match.params.boardId;
+    db.collection('boards').doc(boardId).collection('pins').doc(pinId).update(
+      {
+        visited: firebase.firestore.FieldValue.serverTimestamp()
+      }
+    )
+    .catch(error => console.error('Unable to mark as visited', error))
+  }
   handleDelete = pinId => {
     const boardId = this.props.match.params.boardId;
     db.collection('boards').doc(boardId).collection('pins').doc(pinId).delete()
@@ -129,6 +146,7 @@ class SingleBoard extends Component {
             height: "100vh",
             width: "100vw"
           }}
+          onClick={this._onClickMap.bind(this)}
           center={this.state.center}>
           <ZoomControl />
           <Layer
@@ -156,24 +174,37 @@ class SingleBoard extends Component {
                 offset={50}
               >
                 <div>
-                    <div>{this.state.selectedPin.label}</div>
-                    <Button color='red' floated='right' size='mini' content={<Icon name='trash outline' size='large' fitted={true} />} onClick={()=> (<Button onClick={this.handleDelete(this.state.selectedPin.pinId)} />)}/>
-                  </div>
+                  <div>{this.state.selectedPin.label}</div>
+                  <Button color='red' floated='right' size='mini' content={<Icon name='trash outline' size='large' fitted={true} />} onClick={() => (<Button onClick={this.handleDelete(this.state.selectedPin.pinId)} />)} />
+                  {
+                    !this.state.selectedPin.visited &&
+                    <Button color='blue' floated='right' size='mini' content={<Icon name='checkmark' size='large' fitted={true} />} onClick={() => (<Button onClick={this.markAsVisited(this.state.selectedPin.pinId)} />)} />
+                  }
+                </div>
+              </Popup>
+            )
+          }
+          {
+            this.state.newLocation && (
+              <Popup
+                coordinates={this.state.newLocation}
+              >
+                <p>Add new pin?</p>
               </Popup>
             )
           }
         </Map>
         <div id='menu'>
-        {/* DOING A WEIRD THING / RENDERING LAYERS MORE THAN ONCE */}
-          <input onChange={this.switchStyle} id='basic' type='radio' name='rtoggle' value={pintripsStyle}/>
+          {/* DOING A WEIRD THING / RENDERING LAYERS MORE THAN ONCE */}
+          <input onChange={this.switchStyle} id='basic' type='radio' name='rtoggle' value={pintripsStyle} />
           <label htmlFor='pintrips'>pintrips</label>
-          <input onChange={this.switchStyle} id='popArt' type='radio' name='rtoggle' value={moonLightStyle}/>
+          <input onChange={this.switchStyle} id='popArt' type='radio' name='rtoggle' value={moonLightStyle} />
           <label htmlFor='moonlight'>moonlight</label>
-          <input onChange={this.switchStyle} id='basic' type='radio' name='rtoggle' value={popArtStyle}/>
+          <input onChange={this.switchStyle} id='basic' type='radio' name='rtoggle' value={popArtStyle} />
           <label htmlFor='popArt'>pop art</label>
-          <input onChange={this.switchStyle} id='popArt' type='radio' name='rtoggle' value={vintageStyle}/>
+          <input onChange={this.switchStyle} id='popArt' type='radio' name='rtoggle' value={vintageStyle} />
           <label htmlFor='vintage'>vintage</label>
-          <input onChange={this.switchStyle} id='popArt' type='radio' name='rtoggle' value={iceCreamStyle}/>
+          <input onChange={this.switchStyle} id='popArt' type='radio' name='rtoggle' value={iceCreamStyle} />
           <label htmlFor='iceCream'>ice cream</label>
         </div>
         <div className='search-container'>
