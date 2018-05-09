@@ -83,7 +83,7 @@ class SingleBoard extends Component {
       db.collection('boards').doc(boardId).collection('pins').add({
         label: this.state.newPin.label,
         coordinates: new firebase.firestore.GeoPoint(this.state.newPin.coords[0], this.state.newPin.coords[1]),
-        visited: firebase.firestore.FieldValue.serverTimestamp()
+        visited: null
       })
       .then(() => {
         this.setState({ newPin: {} });
@@ -99,7 +99,15 @@ class SingleBoard extends Component {
       zoom: [17]
     })
   }
-
+  markAsVisited = pinId => {
+    const boardId = this.props.match.params.boardId;
+    db.collection('boards').doc(boardId).collection('pins').doc(pinId).update(
+      {
+        visited:firebase.firestore.FieldValue.serverTimestamp()
+      }
+    )
+    .catch(error => console.error('Unable to mark as visited', error))
+  }
   handleDelete = pinId => {
     const boardId = this.props.match.params.boardId;
     db.collection('boards').doc(boardId).collection('pins').doc(pinId).delete()
@@ -151,6 +159,7 @@ class SingleBoard extends Component {
                 <div>
                   <div>{this.state.selectedPin.label}</div>
                     <Button color='red' floated='right' size='mini' content={<Icon name='trash outline' size='large' fitted={true} />} onClick={()=> (<Button onClick={this.handleDelete(this.state.selectedPin.pinId)} />)}/>
+                    <Button color='blue' floated='right' size='mini' content={<Icon name='checkmark' size='large' fitted={true} />}  onClick={()=> (<Button onClick={this.markAsVisited(this.state.selectedPin.pinId)} />)}/>
                   </div>
               </Popup>
             )
