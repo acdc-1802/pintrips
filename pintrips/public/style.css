@@ -195,6 +195,7 @@ body {
    margin-top: 4.5em;
    z-index: 3;
    width: 100vw;
+   justify-content: space-between;
   }
 
  /* .navbar-bar { */
