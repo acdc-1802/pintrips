@@ -49,6 +49,7 @@ export default function register() {
         registerValidSW(swUrl);
       }
     });
+
   }
 }
 
@@ -115,3 +116,5 @@ export function unregister() {
     });
   }
 }
+
+
