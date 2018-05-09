@@ -38,12 +38,16 @@ body {
   width: fit-content;
  }
  
- .container {
-   display: flex;
-   flex-direction: row;
- }
  .ui.container.container {
    width: 100vw;
+   max-height: 20%;
+ }
+
+ .download-label {
+   display: flex;
+   position: fixed;
+   z-index: 4;
+   bottom: 10px;
  }
  .form-group {
   padding-top: 2em;
@@ -122,8 +126,6 @@ body {
  #navbar {
   background-color: white;
   border: none;
-  display: flex;
-  flex-direction: row;
   /* color: rgb(209, 59, 59); */
   width: 100vw;
  
@@ -134,9 +136,10 @@ body {
   /* display: flex; */
   /* size: relative; */
   position: fixed;
-  z-index: 2;
+  z-index: 3;
   /* flex-direction: row-wrap; */
   width: 100vw;
+  max-height: 20%;
   
   /* margin-left: 15px; */
   /* margin-right: 20px; */
@@ -145,7 +148,6 @@ body {
  }
  
  .navbar-email {
-   width: 10%;
   /* display: flex; */
   /* margin: 10vw; */
  
@@ -208,14 +210,8 @@ body {
  }
 
  .signup-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-  width: 60%;
-  margin-left: 20%;
-  margin-right: 20%;
-  /* margin-top: 5%; */
+   display: flex;
+   justify-content: center;
  }
  
  .side-button {
