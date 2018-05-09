@@ -59,6 +59,8 @@ class SingleBoard extends Component {
       .then(() => this.setState({
         pins: pinCoordsArr
       }));
+
+
   }
 
   switchLayer = layer => {
@@ -113,6 +115,7 @@ class SingleBoard extends Component {
   }
 
   render() {
+
     return (
       <div className='board-container'>
         <Map
