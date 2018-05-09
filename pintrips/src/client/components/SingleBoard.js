@@ -38,6 +38,7 @@ class SingleBoard extends Component {
     style: pintripsStyle,
     newLocation: null
   }
+
   componentDidMount() {
     const boardId = this.props.match.params.boardId;
     db.collection('boards').doc(boardId).get()
@@ -112,7 +113,8 @@ class SingleBoard extends Component {
     if (this.state.selectedPin) {
       this.setState({
         selectedPin: null,
-        zoom: [14]
+        zoom: [14],
+        newLocation: null
       })
     } else {
       this.setState({
