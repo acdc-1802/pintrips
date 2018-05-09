@@ -124,13 +124,14 @@ class SignupPage extends Component {
               </div>
             </div>
 
-              <Form.Button type="submit" className="form-group">Sign Up</Form.Button>
-            </div>
+            <Form.Button type="submit" className="form-group">Sign Up</Form.Button>
+          </div>
         </Form>
         <Link to={'/LoginPage'}>
-              <small>Already have an account? Log In!</small>
+          <small>Already have an account? Log In!</small>
         </Link>
-        </div>
+        <br/>
+      </div>
 
     )
   }

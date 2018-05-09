@@ -28,7 +28,7 @@ class App extends Component {
   render() {
    console.log('standalone', window.navigator.standalone)
     return (
-      <div>
+      <div id='full-page'>
         <Navbar />
         {
           this.state.showInstallMessage && 

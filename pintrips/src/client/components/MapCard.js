@@ -123,7 +123,7 @@ class MapCard extends Component {
       <div className='ind-card'>
         <Card>
           <Map
-            style='mapbox://styles/destinmcmurrry/cjgwoclek000a2sr3cwgutpdg'
+            style='mapbox://styles/destinmcmurrry/cjgy8hinv00192rp4obrfj9qq'
             zoom={this.state.zoom}
             containerStyle={{
               height: "289px",
@@ -131,7 +131,7 @@ class MapCard extends Component {
             }}
             center={this.state.center} />
           <Link to={`/SingleBoard/${this.props.id}`}>
-            <Card.Content>
+            <Card.Content className='card-content'>
               <Card.Header>
                 {this.props.board.name}
               </Card.Header>

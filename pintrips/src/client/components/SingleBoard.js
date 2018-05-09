@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactMapboxGl, { Popup, Layer, Feature, ZoomControl } from "react-mapbox-gl";
+import ReactMapboxGl, { Popup, Layer, Feature, ZoomControl, SymbolLayer } from "react-mapbox-gl";
 import LocationSearch from './LocationSearch';
 import db from '../firestore';
 import firebase from 'firebase';
@@ -13,19 +13,24 @@ const Map = ReactMapboxGl({
   accessToken: 'pk.eyJ1IjoiZGVzdGlubWNtdXJycnkiLCJhIjoiY2plenRxaGw3MGdsNTJ3b2htMGRydWc3aiJ9.ycslnjgv2J9VZGZHT8EoIw'
 });
 
-const image = new Image(100, 100);
-image.src = '/attributes/pin.png';
-const images = ['myImage', image];
+const solid = new Image(100, 100);
+solid.src = '/attributes/pin.png';
+const solidPins = ['solidImage', solid];
+
+const hollow = new Image(100, 100);
+hollow.src = '/attributes/hollow.png';
+const hollowPins = ['hollowImage', hollow];
 
 const pintripsStyle = 'mapbox://styles/destinmcmurrry/cjgy8hinv00192rp4obrfj9qq';
 const moonLightStyle = 'mapbox://styles/destinmcmurrry/cjgycs1rn001d2rp4ss7jizyf';
-const popArtStyle = 'mapbox://styles/destinmcmurrry/cjgwv6qe1000g2rn6sy2ea8qb';
+const popArtStyle = 'mapbox://styles/destinmcmurrry/cjgzhm8r600032ro7punjhhtl';
 const vintageStyle = 'mapbox://styles/destinmcmurrry/cjgwy4k6e000b2rpp80jt98o7';
 const iceCreamStyle = 'mapbox://styles/destinmcmurrry/cjgwy8chg00002spjby3ymrw8';
 
 class SingleBoard extends Component {
   state = {
-    pins: [],
+    markedPins: [],
+    unmarkedPins: [],
     newPin: {},
     center: [-74.006376, 40.712368],
     selectedPin: null,
@@ -33,6 +38,7 @@ class SingleBoard extends Component {
     style: pintripsStyle,
     newLocation: null
   }
+
   componentDidMount() {
     const boardId = this.props.match.params.boardId;
     db.collection('boards').doc(boardId).get()
@@ -52,17 +58,27 @@ class SingleBoard extends Component {
     {/* NEED TO ORDER BY DATE ---- .orderBy('visited').get() */ }
     db.collection('boards').doc(boardId).collection('pins')
       .onSnapshot((querySnapshot) => {
-        const pinArray = [];
+        const markedPins = [];
+        const unmarkedPins = [];
         querySnapshot.forEach(doc => {
           const pin = doc.data();
-          pinArray.push({
-            label: pin.label,
-            coords: [pin.coordinates._long, pin.coordinates._lat],
-            pinId: doc.id,
-            visited: pin.visited
-          })
+          if(pin.visited){
+            markedPins.push({
+              label: pin.label,
+              coords: [pin.coordinates._long, pin.coordinates._lat],
+              pinId: doc.id,
+              visited: pin.visited
+            })
+          } else {
+            unmarkedPins.push({
+              label: pin.label,
+              coords: [pin.coordinates._long, pin.coordinates._lat],
+              pinId: doc.id,
+              visited: pin.visited
+            })
+          }
         })
-        this.setState({ pins: pinArray })
+        this.setState({ markedPins, unmarkedPins })
       });
   }
 
@@ -94,13 +110,22 @@ class SingleBoard extends Component {
   }
 
   markerClick = pin => {
-    this.setState({
-      selectedPin: pin,
-      center: pin.coords,
-      zoom: [17],
-      newLocation: null
-    })
+    if (this.state.selectedPin) {
+      this.setState({
+        selectedPin: null,
+        zoom: [14],
+        newLocation: null
+      })
+    } else {
+      this.setState({
+        selectedPin: pin,
+        center: pin.coords,
+        zoom: [14.5],
+        newLocation: null
+      })
+    }
   }
+  
   _onClickMap(map, evt) {
     console.log(evt.lngLat);
     this.setState({
@@ -143,11 +168,29 @@ class SingleBoard extends Component {
           <ZoomControl />
           <Layer
             type='symbol'
-            id='pins'
-            layout={{ 'icon-image': 'myImage' }}
-            images={images}>
-            {this.state.pins &&
-              this.state.pins.map(pin => {
+            id='solidPins'
+            layout={{ 'icon-image': 'solidImage' }}
+            images={solidPins}>
+            {this.state.markedPins &&
+              this.state.markedPins.map(pin => {
+                return (
+                  <Feature
+                    key={pin.label}
+                    coordinates={pin.coords}
+                    onClick={this.markerClick.bind(this, pin)}
+                  />
+                )
+              }
+              )
+            }
+          </Layer>
+          <Layer
+            type='symbol'
+            id='hollowPins'
+            layout={{ 'icon-image': 'hollowImage' }}
+            images={hollowPins}>
+            {this.state.unmarkedPins &&
+              this.state.unmarkedPins.map(pin => {
                 return (
                   <Feature
                     key={pin.label}
@@ -164,6 +207,7 @@ class SingleBoard extends Component {
               <Popup
                 key={this.state.selectedPin.label}
                 coordinates={this.state.selectedPin.coords}
+                offset={50}
               >
                 <div>
                   <div>{this.state.selectedPin.label}</div>
