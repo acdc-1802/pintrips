@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactMapboxGl, { Popup, Layer, Feature, ZoomControl } from "react-mapbox-gl";
+import ReactMapboxGl, { Popup, Layer, Feature, ZoomControl, SymbolLayer } from "react-mapbox-gl";
 import LocationSearch from './LocationSearch';
 import db from '../firestore';
 import firebase from 'firebase';
@@ -102,7 +102,7 @@ class SingleBoard extends Component {
       this.setState({
         selectedPin: pin,
         center: pin.coords,
-        zoom: [15]
+        zoom: [14.5]
       })
     }
   }
@@ -138,15 +138,14 @@ class SingleBoard extends Component {
             images={images}>
             {this.state.pins &&
               this.state.pins.map(pin => {
-                return (
-                  <Feature
-                    key={pin.label}
-                    coordinates={pin.coords}
-                    onClick={this.markerClick.bind(this, pin)}
-                  />
-                )
-              }
-              )
+                  return (
+                    <Feature
+                      key={pin.label}
+                      coordinates={pin.coords}
+                      onClick={this.markerClick.bind(this, pin)}
+                    />
+                  )
+              })
             }
           </Layer>
           {
@@ -154,9 +153,10 @@ class SingleBoard extends Component {
               <Popup
                 key={this.state.selectedPin.label}
                 coordinates={this.state.selectedPin.coords}
+                offset={50}
               >
                 <div>
-                  <div>{this.state.selectedPin.label}</div>
+                    <div>{this.state.selectedPin.label}</div>
                     <Button color='red' floated='right' size='mini' content={<Icon name='trash outline' size='large' fitted={true} />} onClick={()=> (<Button onClick={this.handleDelete(this.state.selectedPin.pinId)} />)}/>
                   </div>
               </Popup>
