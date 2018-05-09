@@ -9,34 +9,31 @@ import { Button, Icon } from 'semantic-ui-react';
 
 require('firebase/firestore');
 
-const accessToken = 'pk.eyJ1IjoiZGVzdGlubWNtdXJycnkiLCJhIjoiY2plenRxaGw3MGdsNTJ3b2htMGRydWc3aiJ9.ycslnjgv2J9VZGZHT8EoIw';
+const Map = ReactMapboxGl({
+  accessToken: 'pk.eyJ1IjoiZGVzdGlubWNtdXJycnkiLCJhIjoiY2plenRxaGw3MGdsNTJ3b2htMGRydWc3aiJ9.ycslnjgv2J9VZGZHT8EoIw'
+});
 
-// creates an image to use as marker
 const image = new Image(100, 100);
 image.src = '/attributes/pin.png';
 const images = ['myImage', image];
 
-// toggling style doesn't actually work because page doesn't re-render so
-const basicStyle = 'mapbox://styles/destinmcmurrry/cjgwoclek000a2sr3cwgutpdg';
+const pintripsStyle = 'mapbox://styles/destinmcmurrry/cjgy8hinv00192rp4obrfj9qq';
+const moonLightStyle = 'mapbox://styles/destinmcmurrry/cjgycs1rn001d2rp4ss7jizyf';
 const popArtStyle = 'mapbox://styles/destinmcmurrry/cjgwv6qe1000g2rn6sy2ea8qb';
-
-const Map = ReactMapboxGl({
-  accessToken
-});
+const vintageStyle = 'mapbox://styles/destinmcmurrry/cjgwy4k6e000b2rpp80jt98o7';
+const iceCreamStyle = 'mapbox://styles/destinmcmurrry/cjgwy8chg00002spjby3ymrw8';
 
 class SingleBoard extends Component {
-
   state = {
     pins: [],
     newPin: {},
     center: [-74.006376, 40.712368],
     selectedPin: null,
     zoom: [12],
-    style: basicStyle
+    style: pintripsStyle
   }
 
-  componentWillMount() {
-
+  componentDidMount() {
     const boardId = this.props.match.params.boardId;
     db.collection('boards').doc(boardId).get()
       .then(doc => {
@@ -52,32 +49,26 @@ class SingleBoard extends Component {
         console.error(err);
         history.push('/404');
       });
-
-    const pinCoordsArr = [];
-    db.collection('boards').doc(boardId).collection('pins').orderBy('visited').get()
-      .then(thesePins => thesePins.forEach(pin =>
-        pinCoordsArr.push({
-          label: pin.data().label, coords: [pin.data().coordinates._long, pin.data().coordinates._lat], pinId: pin.id, visited: pin.data().visited
+      {/* NEED TO ORDER BY DATE ---- .orderBy('visited').get() */}
+    db.collection('boards').doc(boardId).collection('pins')
+      .onSnapshot((querySnapshot) => {
+        const pinArray = [];
+        querySnapshot.forEach(doc => {
+          const pin = doc.data();
+          pinArray.push({
+            label: pin.label, 
+            coords: [pin.coordinates._long, pin.coordinates._lat], 
+            pinId: doc.id
+          })
         })
-      ))
-      .then(() => {
-        console.log(pinCoordsArr);
-        this.setState({
-          pins: pinCoordsArr
-        })
-      });
-      
+        this.setState({ pins: pinArray })
+    });
   }
 
-  switchLayer = layer => {
-    const boardId = this.props.match.params.boardId;
-    this.state === basicStyle
-    ? this.setState({
-      style: popArtStyle
-    })
-    : this.setState({
-      style: basicStyle
-    })
+  switchStyle = event => {
+    this.setState({
+      style: event.target.value
+    });
   }
 
   selectLocation = (label, coords) => {
@@ -97,8 +88,8 @@ class SingleBoard extends Component {
       .then(() => {
         this.setState({ newPin: {} });
         console.log('Pin successfully added');
-        // window.location.href(`/SingleBoard/${boardId}`);
       })
+      .catch((err) => console.error('Add unsuccessful: ', err))
   }
 
   markerClick = pin => {
@@ -111,12 +102,13 @@ class SingleBoard extends Component {
 
   handleDelete = pinId => {
     const boardId = this.props.match.params.boardId;
-    console.log(`board id: ${boardId} and pin id: ${pinId}`)
     db.collection('boards').doc(boardId).collection('pins').doc(pinId).delete()
       .then(() => {
         console.log('Pin successfully deleted')
       })
-      // .then(() => history.push(`/SingleBoard/${boardId}`))
+      .then(() => {
+        this.setState({ selectedPin: null, zoom: [12] })
+      })
       .catch(err => console.error('Delete unsuccessful: ', err))
   }
 
@@ -165,10 +157,17 @@ class SingleBoard extends Component {
           }
         </Map>
         <div id='menu'>
-          <input onClick={this.switchLayer} id='basic' type='radio' name='rtoggle' value='basic' checked='checked'/>
-          <label htmlFor='basic'>basic</label>
-          <input onClick={this.switchLayer} id='popArt' type='radio' name='rtoggle' value='popArt'/>
-          <label htmlFor='streets'>pop art</label>
+        {/* DOING A WEIRD THING / RENDERING LAYERS MORE THAN ONCE */}
+          <input onChange={this.switchStyle} id='basic' type='radio' name='rtoggle' value={pintripsStyle}/>
+          <label htmlFor='pintrips'>pintrips</label>
+          <input onChange={this.switchStyle} id='popArt' type='radio' name='rtoggle' value={moonLightStyle}/>
+          <label htmlFor='moonlight'>moonlight</label>
+          <input onChange={this.switchStyle} id='basic' type='radio' name='rtoggle' value={popArtStyle}/>
+          <label htmlFor='popArt'>pop art</label>
+          <input onChange={this.switchStyle} id='popArt' type='radio' name='rtoggle' value={vintageStyle}/>
+          <label htmlFor='vintage'>vintage</label>
+          <input onChange={this.switchStyle} id='popArt' type='radio' name='rtoggle' value={iceCreamStyle}/>
+          <label htmlFor='iceCream'>ice cream</label>
         </div>
         <div className='search-container'>
           <div className='search-coords'>
@@ -185,5 +184,4 @@ class SingleBoard extends Component {
     )
   }
 }
-
 export default withAuth(SingleBoard);

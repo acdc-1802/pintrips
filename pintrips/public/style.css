@@ -185,6 +185,8 @@ a {
 
 #menu {
   position: absolute;
+  display: flex;
+  flex-direction: column;
   background-color: white;
   border-radius: 5px;
   padding: 5px;
