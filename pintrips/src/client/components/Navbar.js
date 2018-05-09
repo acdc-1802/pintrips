@@ -25,7 +25,7 @@ const Navbar = props => {
         user &&
           (
           <div className='user-nav'>
-            <small id='email'>Welcome,{user.email}</small>
+            <small id='email'>{user.email}</small>
             <a id='logout' href='#' onClick={handleLogout}>Logout</a>
           </div>
           )

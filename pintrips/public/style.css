@@ -38,8 +38,17 @@ body {
   flex-direction: row;
   flex-wrap: wrap;
   width: fit-content;
+  font-family: 'Special Elite', cursive;
+ }
+
+ .card-group a {
+  color: #515151;
  }
  
+ .card-content {
+  padding: 5px 5px 0 5px;
+ }
+
  .container {
    display: flex;
    flex-direction: row;
@@ -54,7 +63,6 @@ body {
  
  .homepage-container {
   display: flex;
-  position: fixed;
   margin-top: 8em;
  }
  
@@ -65,11 +73,11 @@ body {
  .ind-card {
   min-width: 25vw;
   display: flex;
-  padding: 25px;
+  padding: 15px;
   /* flex-wrap: wrap;
   flex-direction: row; */
  }
- 
+
  .input-container {
   display: flex;
   /* text-align: center; */
@@ -103,34 +111,43 @@ body {
   }
   
   #logo {
-    width: 17%;
-    height: 17%;
+    width: 15%;
+    height: 15%;
     margin: 3% 0 3% 3%;
-    min-width: 6em;
+    min-width: 5em;
   }
 
   .user-nav {
     display: flex;
+    flex-direction: column;
+    height: 4em;
     flex-grow: 1;
     vertical-align: baseline;
     margin-right: 5px;
     justify-content: flex-end;
   }
 
+  .user-nav * {
+    display: flex;
+    align-self: flex-end;
+  }
+
   #email {
+    font-family: 'Special Elite', cursive;
+    height: 2em;
     padding-top: 5px;
-    margin-left: 5px;
   }
 
   #logout {
-    display: flex;
-    align-self: right;
-    margin-left: 5px;
+    font-size: 12px;
+    width: 4em;
     color: #515151;
     border-radius: 5px;
     border: solid 1px #515151;
-    padding: 5px;
+    padding: 0;
+    margin: 0 0 .5em 0;
     background-color: white;
+    justify-content: center;
   }
 
   /* .ui.sub-navbar.menu {
@@ -160,21 +177,23 @@ body {
   align-items: center;
   position: fixed;
   color: #515151;
-  width: calc(100vw);
+  width: 100vw;
   background-color: #f9f9f9;
-  z-index: 2;
+  z-index: 3;
   } 
 
   #name {
     font-family: 'Special Elite', cursive;
-    font-size: 250%;
-    margin-left: 1.3em;
+    font-size: 150%;
+    margin-left: 2em;
   }
 
   .ui.sub-navbar.menu {
    display: flex;
    position: fixed;
-   margin-top: 4em;
+   font-size: 12px;
+   margin-top: 4.5em;
+   z-index: 3;
    width: 100vw;
   }
 
