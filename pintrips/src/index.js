@@ -7,6 +7,7 @@ import history from './history'
 import { AuthProvider } from 'fireview'
 import * as firebase from 'firebase'
 
+
 ReactDOM.render(
   <AuthProvider auth={firebase.auth()}>
     <Router history={history}>

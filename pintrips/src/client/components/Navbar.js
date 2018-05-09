@@ -15,7 +15,7 @@ const Navbar = props => {
   }
 
   return (
-    <div>
+    <div className="navbar-bar">
       <Header
         as='h3'
         textAlign='center'
