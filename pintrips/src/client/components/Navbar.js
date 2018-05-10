@@ -11,7 +11,8 @@ class Navbar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      notifications: null
+      notifications: null,
+      username: null
     }
   }
   componentDidUpdate() {
@@ -26,6 +27,8 @@ class Navbar extends Component {
               sum += 1;
             }
           }
+          let username = doc.data().username;
+          this.setState({ username })
         })
         .then(() => { this.setState({ notifications: sum }) })
         .catch(error => console.error('Could not get notifications', error))
@@ -47,7 +50,7 @@ class Navbar extends Component {
             user &&
             (
               <div className='user-nav'>
-                <small id='email'>{user.email}</small>
+                <small id='email'>Welcome, {this.state.username}</small>
                 <a id='logout' href='#' onClick={handleLogout}>Logout</a>
               </div>
             )
