@@ -11,7 +11,7 @@ class Navbar extends Component {
   constructor(props){
     super(props);
     this.state = {
-      notifications: 0
+      notifications: null
     }
   }
   componentDidUpdate(){
@@ -58,7 +58,7 @@ class Navbar extends Component {
         (
           <Menu className='sub-navbar' borderless={true}>
             <Link to={'/HomePage'}>
-              <Menu.Item id='dropdown'>
+              <Menu.Item id='myboards'>
                 My Boards
             </Menu.Item>
             </Link>

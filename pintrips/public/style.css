@@ -6,14 +6,6 @@ body {
  a {
   text-decoration: none;
  }
- 
- /* .active {
-  transform: translateY(0em);
- } */
- 
- /* .add-board-form {
- 
- } */
 
  .add-btn {
   font-size: 12px;
@@ -25,7 +17,6 @@ body {
  }
  
  .board-container {
-  /* margin-top: 15vh; */
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -56,10 +47,10 @@ body {
  .ui.container.container {
    width: 100vw;
  }
+
  .form-group {
   padding-top: 2em;
  }
- 
  
  .homepage-container {
   display: flex;
@@ -74,13 +65,10 @@ body {
   min-width: 25vw;
   display: flex;
   padding: 15px;
-  /* flex-wrap: wrap;
-  flex-direction: row; */
  }
 
  .input-container {
   display: flex;
-  /* text-align: center; */
   flex-direction: column;
   width: 100%;
  }
@@ -117,56 +105,45 @@ body {
     min-width: 5em;
   }
 
-  .user-nav {
-    display: flex;
-    flex-direction: column;
-    height: 4em;
-    flex-grow: 1;
-    vertical-align: baseline;
-    margin-right: 5px;
-    justify-content: flex-end;
-  }
+.user-nav {
+  display: flex;
+  flex-direction: column;
+  height: 4em;
+  flex-grow: 1;
+  vertical-align: baseline;
+  margin-right: 5px;
+  justify-content: flex-end;
+}
 
-  .user-nav * {
-    display: flex;
-    align-self: flex-end;
-  }
+.user-nav * {
+  display: flex;
+  align-self: flex-end;
+}
 
-  #email {
-    font-family: 'Special Elite', cursive;
-    height: 2em;
-    padding-top: 5px;
-  }
+#email {
+  font-family: 'Special Elite', cursive;
+  height: 2em;
+  padding-top: 5px;
+}
 
-  #logout {
-    font-size: 12px;
-    width: 4em;
-    color: #515151;
-    border-radius: 5px;
-    border: solid 1px #515151;
-    padding: 0;
-    margin: 0 0 .5em 0;
-    background-color: white;
-    justify-content: center;
-  }
+#logout {
+  font-size: 12px;
+  width: 4em;
+  color: #515151;
+  border-radius: 5px;
+  border: solid 1px #515151;
+  padding: 0;
+  margin: 0 0 .5em 0;
+  background-color: white;
+  justify-content: center;
+}
 
-  /* .ui.sub-navbar.menu {
-    margin-top: 0;
-  } */
-  /* #navbar {
-    background-color: white;
-    border: none;
-    display: flex;
-    flex-direction: row;
-    /* color: rgb(209, 59, 59); */
-    /* width: 100vw;
-    
-    /* padding-left: 0; */
-    /* animation: Navbar-logo-spin infinite 20s linear; */
-    /* height: 80px; */
-    
 #full-page {
   display: flex;
+}
+
+#myboards  {
+  margin-left: 10px;
 }
   
 .navbar {
@@ -195,43 +172,9 @@ body {
    margin-top: 4.5em;
    z-index: 3;
    width: 100vw;
+   justify-content: space-between;
   }
 
- /* .navbar-bar { */
-  /* display: flex; */
-  /* size: relative; */
-  /* position: fixed;
-  z-index: 2; */
-  /* flex-direction: row-wrap; */
-  /* width: 100vw; */
-  
-  /* margin-left: 15px; */
-  /* margin-right: 20px; */
-  
- 
- /* } */
- 
- /* .navbar-email { */
-   /* width: 10%; */
-  /* display: flex; */
-  /* margin: 10vw; */
- 
- /* } */
- 
- /* #name {
-  padding-left: 0;
- }
- 
- #navbar-email {
-  color: #f9f9f9;
-  margin: 20px;
- } */
- 
- 
- /* @keyframes Navbar-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
- } */
  .routes {
   display: flex;
  }
@@ -279,7 +222,6 @@ body {
   width: 60%;
   margin-left: 20%;
   margin-right: 20%;
-  /* margin-top: 5%; */
  }
  
  .side-button {
@@ -290,7 +232,6 @@ body {
  .title {
   display: flex;
   position: fixed;
-  /* left: 15vw; */
   color: black;
   
  }
@@ -305,11 +246,6 @@ body {
  }
  
  
- 
- /* .ui.navbar.menu * {
-  
-  color: rgb(15, 14, 14);
- } */
 
 /*-----OLD CSS GRAVEYARD------*/
 
