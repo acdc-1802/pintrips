@@ -81,7 +81,7 @@ export class PostCard extends Component {
     const userEmail = this.props.withAuth.auth.currentUser.email
     return (
       <div className="login-container">
-        <form>
+        <form className = "ui form">
           <div>To: </div>
           <div>From: {userEmail}</div>
           <div>Hello from {this.state.state}!</div>
