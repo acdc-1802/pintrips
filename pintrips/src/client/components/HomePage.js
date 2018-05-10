@@ -1,9 +1,6 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 import MapCard from './MapCard';
-import firebase from 'firebase'
 import db from '../firestore';
-import history from '../../history';
 import { Map, withAuth } from 'fireview';
 
 const allBoards = db.collection('boards')
