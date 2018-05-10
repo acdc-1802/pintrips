@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import { Navbar } from './client/components';
 import Routes from './client/routes';
 import { Button, Icon, Popup, Image, Label } from 'semantic-ui-react';

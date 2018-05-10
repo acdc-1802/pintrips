@@ -5,7 +5,6 @@ import firebase from 'firebase';
 import db from '../firestore';
 import history from '../../history';
 
-const allUsers = db.collection('users');
 const emailProvider = new firebase.auth.EmailAuthProvider()
 
 class SignupPage extends Component {
@@ -45,8 +44,6 @@ class SignupPage extends Component {
       })
       .then(newUserDoc => (history.push("/HomePage")))
       .catch(error => {
-        const errorCode = error.code
-        const errorMessage = error.Message
         console.log(error)
       })
   }

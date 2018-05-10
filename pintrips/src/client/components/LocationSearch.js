@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PlacesAutoComplete from 'react-places-autocomplete';
-import { geocodeByAddress, geocodeByPlaceId, getLatLng } from 'react-places-autocomplete';
-import AddNewBoard from './AddNewBoard';
+import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 
 
 class LocationSearch extends Component {

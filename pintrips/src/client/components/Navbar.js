@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
-import { Menu, Container, Header, Item, Icon } from 'semantic-ui-react'
+import { Menu, Icon } from 'semantic-ui-react'
 import { withAuth } from 'fireview'
 import firebase from 'firebase'
 import history from '../../history'
@@ -11,10 +11,12 @@ class Navbar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      notifications: null
+      notifications: null,
+      username: null
     }
   }
-  componentDidUpdate() {
+  componentDidUpdate({_user}) {
+    if (this.props._user === _user) return
     const user = this.props._user;
     let sum = 0;
     user &&
@@ -26,6 +28,8 @@ class Navbar extends Component {
               sum += 1;
             }
           }
+          let username = doc.data().username;
+          this.setState({ username })
         })
         .then(() => { this.setState({ notifications: sum }) })
         .catch(error => console.error('Could not get notifications', error))
@@ -40,15 +44,15 @@ class Navbar extends Component {
       <div>
         <div className='navbar'>
           <Link className='logo' to='/HomePage'>
-            <img id='logo' src='/attributes/logo.png' />
+            <img id='logo' alt='logo' src='/attributes/logo.png' />
           </Link>
           <h1 id='name'>Pintrips</h1>
           {
             user &&
             (
               <div className='user-nav'>
-                <small id='email'>{user.email}</small>
-                <a id='logout' href='#' onClick={handleLogout}>Logout</a>
+                <small id='email'>Welcome, {this.state.username}</small>
+                <button id='logout' onClick={handleLogout}>Logout</button>
               </div>
             )
           }
@@ -63,7 +67,7 @@ class Navbar extends Component {
             </Menu.Item>
               </Link>
               <Link to={'/SharedWithMe'}>
-                <Menu.Item borderless={true} id='dropdown'>
+                <Menu.Item borderless='true' id='dropdown'>
                   Shared With Me
             </Menu.Item>
               </Link>
@@ -72,8 +76,8 @@ class Navbar extends Component {
                   Create New</Menu.Item>
               </Link>
               <Link to={'/SharedWithMe'}>
-                <Menu.Item borderless={true} id='navbar-notifications'>
-                  <Icon name='bell outline' size='medium' />
+                <Menu.Item borderless='true' id='navbar-notifications'>
+                  <Icon name='bell outline' />
                   {
                     this.state.notifications > 0 &&
                     <p id='notification'>{this.state.notifications}</p>

@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Form } from 'semantic-ui-react';
 import firebase from 'firebase';
-import db from '../firestore';
 import history from '../../history';
 
-const allUsers = db.collection('users');
 const emailProvider = new firebase.auth.EmailAuthProvider()
 
 export default class LoginPage extends Component {
@@ -54,8 +52,8 @@ export default class LoginPage extends Component {
           <Form  onSubmit={this.handleSubmit}>
           <h3>Login</h3>
           <div className='forms'>
-            <Form.Group stackable className="input-container">
-              <Form.Input stackable fluid label='Email' placeholder='Email'
+            <Form.Group stackable='true' className="input-container">
+              <Form.Input stackable='true' fluid label='Email' placeholder='Email'
                 className="form-control"
                 name='email'
                 type='text'
@@ -63,7 +61,7 @@ export default class LoginPage extends Component {
                 onChange={this.handleChange}
               />
 
-              <Form.Input stackable fluid label='Password'    placeholder='Password'
+              <Form.Input stackable='true' fluid label='Password'    placeholder='Password'
                 className="form-control"
                 name='password'
                 type='text'

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Button, Card, Image, Icon, Popup, Input } from 'semantic-ui-react';
+import { Button, Card, Icon, Popup, Input } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import firebase from 'firebase'
 import db from '../firestore';
 import history from '../../history';
 import ReactMapboxGl from "react-mapbox-gl";
@@ -125,16 +124,18 @@ class MapCard extends Component {
       }))
       .catch(error => console.error('Unable to send board', error))
 
-    // .then(doc => console.log('doc', doc.id))
   }
   render() {
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 9e5196d8886f5d2f0f3baca7852c49829d5dfe3f
     return (
       <div className='ind-card'>
         <Card>
           <Map
-            style='mapbox://styles/destinmcmurrry/cjgy8hinv00192rp4obrfj9qq'
+            style={'mapbox://styles/destinmcmurrry/cjgy8hinv00192rp4obrfj9qq'}
             zoom={this.state.zoom}
             containerStyle={{
               height: "289px",
