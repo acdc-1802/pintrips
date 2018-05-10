@@ -34,47 +34,30 @@ export class PostCard extends Component {
       state: '',
       country: '',
       date: new Date().toLocaleDateString(),
-      sentPostcard: false,
-      addStamp: false
+      sentPostcard: false
     }
   }
 
-  componentDidMount() {
-    const userId = this.props.withAuth.auth.currentUser.uid
-    const user = db.collection("users").doc(userId)
-    let self = this;
-    navigator.geolocation.getCurrentPosition(function(position) {
-      user.set({
-        currentCoordinates: new firebase.firestore.GeoPoint(position.coords.latitude, position.coords.longitude)
-        }, { merge: true })
-      self.setState({
-        currentCoordinates: [position.coords.latitude, position.coords.longitude]
-      });
-    },
-      (err) => alert(err.message)
-    );
-  }
 
-  addStamp() {
-    const latitude = this.state.currentCoordinates[0];
-    const longitude = this.state.currentCoordinates[1]
+
+  addStamp(latitude,longitude){
+
+
+
     const url = new URL(`https://api.mapbox.com/geocoding/v5/mapbox.places/${longitude},${latitude}.json?limit=1&access_token=pk.eyJ1IjoiY2lsYXZlcnkiLCJhIjoiY2pmMW1paDd0MTQ0bzJwb2Rtemdna2g0MCJ9.64yg764mTUOrL3p77lXGSQ`)
-
 
     fetch(url)
       .then(res => res.json())
       .then(myJson => {
         this.setState({
+          currentCoordinates: [latitude, longitude],
           city: myJson.features[0].context[1].text,
           state: myJson.features[0].context[4].text,
           country: myJson.features[0].context[5].text,
           sentPostcard: true
         })
-
       })
       .catch(err => console.log('error', err))
-
-      this.setState({ addStamp: true })
   }
 
   render() {
@@ -94,10 +77,10 @@ export class PostCard extends Component {
             <label>Message: </label>
             <input type="text" name="postcardBody" placeholder="Hello!" size="400"id="message-box"/>
           </div>
-          <button className="ui button" onClick={this.addStamp.bind(this)}>Add a stamp and Send!</button>
+          <button className="ui button">Send!</button>
         </form>
         {
-          this.state.addStamp
+          this.state.city
           ? <div className="stamp">
               <div>{this.state.city}</div>
               <div>{this.state.state}</div>

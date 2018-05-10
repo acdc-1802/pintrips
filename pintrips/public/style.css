@@ -105,6 +105,10 @@ body {
     min-width: 5em;
   }
 
+#message-box {
+  height: 15%vh;
+}
+
 .user-nav {
   display: flex;
   flex-direction: column;
