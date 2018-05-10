@@ -14,7 +14,7 @@ const HomePage = (props) => {
   .onSnapshot({ includeQueryMetadataChanges: true }, function(snapshot) {
     snapshot.docChanges.forEach(function(change) {
         if (change.type === "added") {
-            console.log("New Board: ", change.doc.data());
+            // console.log("New Board: ", change.doc.data());
         }
 
         var source = snapshot.metadata.fromCache ? "local cache" : "server";

@@ -19,13 +19,22 @@ class App extends Component {
     // Detects if device is in standalone mode
     const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);
     
+    const isInStandalone = () => (window.matchMedia('(display-mode: standalone)').matches)
     // Checks if should display install popup notification:
     if (isIos() && !isInStandaloneMode()) {
       this.setState({ showInstallMessage: true });
     }
+    window.addEventListener('beforeinstallprompt', (event) => {
+      event.prompt();
+
+      console.log('event', event.prompt())
+
+      console.log('beforeinstallprompt fired index'); // It doesn't show at all
+    });
+    
   }
+  
   render() {
-   console.log('standalone', window.navigator.standalone)
     return (
       <div id='full-page'>
         <Navbar />
