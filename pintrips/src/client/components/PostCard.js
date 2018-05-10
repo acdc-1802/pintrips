@@ -82,22 +82,30 @@ export class PostCard extends Component {
     return (
       <div className="login-container">
         <form className = "ui form">
-          <div>To: </div>
-          <div>From: {userEmail}</div>
-          <div>Hello from {this.state.state}!</div>
-          <div className="stamp">
-          <div>{this.state.city}</div>
-          <div>{this.state.state}</div>
-          <div>{this.state.country}</div>
-          <div>{this.state.date}</div>
+          <div className="field">
+            <label>To: </label>
+            <input type="text" name="sendEmail" placeholder="email" />
           </div>
-          {
-            this.state.currentCoordinates.length
-            ? <button onClick={this.addStamp.bind(this)}>Add Stamp and Send!</button>
-            : null
-          }
+          <div className="field">
+            <label>From: </label>
+            <input type="text" name="fromEmail" placeholder={userEmail} />
+          </div>
+          <div className="field">
+            <label>Message: </label>
+            <input type="text" name="postcardBody" placeholder="Hello!" size="400"id="message-box"/>
+          </div>
+          <button className="ui button" onClick={this.addStamp.bind(this)}>Add a stamp and Send!</button>
         </form>
-
+        {
+          this.state.addStamp
+          ? <div className="stamp">
+              <div>{this.state.city}</div>
+              <div>{this.state.state}</div>
+              <div>{this.state.country}</div>
+              <div>{this.state.date}</div>
+            </div>
+          : null
+        }
       </div>
     )
   }

@@ -34,7 +34,6 @@ class AddNewBoard extends Component {
     }
 
     const boards = db.collection('boards')
-    const users = db.collection('users')
     this.state.coordinates &&
     boards.add({
       coordinates: new firebase.firestore.GeoPoint(this.state.coordinates[0], this.state.coordinates[1]),
