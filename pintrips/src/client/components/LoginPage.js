@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Form } from 'semantic-ui-react';
 import firebase from 'firebase';
-import db from '../firestore';
 import history from '../../history';
 
-const allUsers = db.collection('users');
 const emailProvider = new firebase.auth.EmailAuthProvider()
 
 export default class LoginPage extends Component {

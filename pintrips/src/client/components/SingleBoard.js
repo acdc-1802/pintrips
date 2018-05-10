@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactMapboxGl, { Popup, Layer, Feature, ZoomControl, SymbolLayer } from "react-mapbox-gl";
+import ReactMapboxGl, { Popup, Layer, Feature, ZoomControl } from "react-mapbox-gl";
 import LocationSearch from './LocationSearch';
 import db from '../firestore';
 import firebase from 'firebase';
@@ -55,7 +55,6 @@ class SingleBoard extends Component {
         console.error(err);
         history.push('/404');
       });
-    {/* NEED TO ORDER BY DATE ---- .orderBy('visited').get() */ }
     db.collection('boards').doc(boardId).collection('pins')
       .onSnapshot((querySnapshot) => {
         const markedPins = [];

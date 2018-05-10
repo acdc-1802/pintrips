@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { withRouter, Route, Switch } from 'react-router-dom';
-import { SingleBoard, LoginPage, SignupPage, HomePage, Navbar, AddNewBoard, SharedWithMe, CannotFind } from './components';
-import App from '../App'
+import { SingleBoard, LoginPage, SignupPage, HomePage, AddNewBoard, SharedWithMe, CannotFind } from './components';
 import { withAuth } from 'fireview';
 
 const Routes = props => {
