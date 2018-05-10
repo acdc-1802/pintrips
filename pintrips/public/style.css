@@ -245,7 +245,13 @@ body {
   min-width: 100px;
  }
  
- 
+ #notification {
+   background-color: #a3151e;
+   color: white;
+   border-radius: 50%;
+   width: 1.5em;
+   text-align: center;
+ }
 
 /*-----OLD CSS GRAVEYARD------*/
 
