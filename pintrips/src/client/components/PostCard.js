@@ -24,52 +24,44 @@ const popArtStyle = 'mapbox://styles/destinmcmurrry/cjgwv6qe1000g2rn6sy2ea8qb';
 const vintageStyle = 'mapbox://styles/destinmcmurrry/cjgwy4k6e000b2rpp80jt98o7';
 const iceCreamStyle = 'mapbox://styles/destinmcmurrry/cjgwy8chg00002spjby3ymrw8';
 
+
 export class PostCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentCoordinates: [],
-      hello: true
+      currentCoordinates: []
     }
   }
 
-   componentDidMount() {
-    let latitude;
-    let longitude;
+  componentDidMount() {
     const userId = this.props.withAuth.auth.currentUser.uid
-    const user = db.collection("users").where( "id", "==", userId )
+    const user = db.collection("users").doc(userId)
+    let self = this;
+    navigator.geolocation.getCurrentPosition(function(position) {
+      self.setState({
+        currentCoordinates: [position.coords.latitude, position.coords.longitude]
+      });
+    },
+      (err) => alert(err.message)
+    );
 
-    if ("geolocation" in navigator) {
-      function success(position) {
-        latitude  = position.coords.latitude;
-        longitude = position.coords.longitude;
-        console.log('SUCCESS', latitude, longitude)
-      }
-      function error() {
-        console.log("Unable to retrieve your location");
-      }
-      navigator.geolocation.getCurrentPosition(success, error);
-    }
-    this.setState({
-      currentCoordinates: [latitude, longitude]
+    this.state.currentCoordinates.length &&
+    user.set({
+      currentCoordinates: new firebase.firestore.GeoPoint(this.state.currentCoordinates[0], this.state.currentCoordinates[1])
+      }, { merge: true })
+      .then(() => {
+        console.log("User's current location updated")
+      })
+      .catch((err) => {
+        console.error("Error updating the current location: ", err)
     })
-    console.log('STATE', this.state.currentCoordinates)
-    // this.state.currentCoordinates && user.update({
-    //   currentCoordinates: new firebase.firestore.GeoPoint(this.state.currentCoordinates[0], this.state.currentCoordinates[1])
-    // })
-    // .then(() => {
-    //   console.log("User's current location updated")
-    // })
-    // .catch((error) => {
-    //   console.error("Error updating the current location: ", error)
-    // })
+  }
 
-    // console.log('hello', this.state.currentCoordinates)
+  shouldComponentUpdate(nextProps, nextState) {
+    return this.state.currentCoordinates !== nextState.currentCoordinates
   }
 
   render() {
-    const current = this.state.currentCoordinates && this.state.hello
-    console.log('yo', current, this.state.currentCoordinates)
     return (
       // <SingleBoard />
       <h1>here.</h1>
