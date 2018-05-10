@@ -47,7 +47,6 @@ class SignupPage extends Component {
         console.log(error)
       })
   }
-
   render() {
     return (
       <div className="signup-container">
@@ -114,7 +113,7 @@ class SignupPage extends Component {
                   placeholder='Password'
                   className="form-control"
                   name='password'
-                  type='text'
+                  type='password'
                   defaultValue={this.state.password}
                   onChange={this.handleChange}
                 />
@@ -128,7 +127,7 @@ class SignupPage extends Component {
         <Link to={'/LoginPage'}>
           <small>Already have an account? Log In!</small>
         </Link>
-        <br/>
+        <br />
       </div>
 
     )

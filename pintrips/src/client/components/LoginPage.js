@@ -64,7 +64,7 @@ export default class LoginPage extends Component {
               <Form.Input stackable='true' fluid label='Password'    placeholder='Password'
                 className="form-control"
                 name='password'
-                type='text'
+                type='password'
                 defaultValue={this.state.username}
                 onChange={this.handleChange}
               />
