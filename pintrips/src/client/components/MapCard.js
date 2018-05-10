@@ -5,6 +5,7 @@ import firebase from 'firebase'
 import db from '../firestore';
 import history from '../../history';
 import ReactMapboxGl from "react-mapbox-gl";
+import { withAuth } from 'fireview';
 
 const Map = ReactMapboxGl({
   accessToken: 'pk.eyJ1IjoiZGVzdGlubWNtdXJycnkiLCJhIjoiY2plenRxaGw3MGdsNTJ3b2htMGRydWc3aiJ9.ycslnjgv2J9VZGZHT8EoIw'
@@ -67,6 +68,7 @@ class MapCard extends Component {
     )
       .catch(error => console.error('Unable to decline board', error))
   }
+
   componentDidMount() {
     if (this.props.recipient) {
       db.collection('users').doc(this.props.recipient).get()
@@ -81,6 +83,7 @@ class MapCard extends Component {
         .catch(error => console.error('could not get sender'))
     }
   }
+
   handleDelete() {
     db.collection('boards').doc(this.state.boardId).delete()
       .then(() => {
@@ -125,7 +128,8 @@ class MapCard extends Component {
     // .then(doc => console.log('doc', doc.id))
   }
   render() {
-    console.log('creator', this.state.sender)
+
+
     return (
       <div className='ind-card'>
         <Card>
@@ -208,4 +212,4 @@ class MapCard extends Component {
   }
 }
 
-export default MapCard;
+export default withAuth(MapCard);

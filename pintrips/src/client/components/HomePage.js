@@ -12,6 +12,19 @@ const HomePage = (props) => {
   const user = props._user;
   if (!user) return 'You must login';
 
+  //offline caching
+  db.collection('boards')
+  .onSnapshot({ includeQueryMetadataChanges: true }, function(snapshot) {
+    snapshot.docChanges.forEach(function(change) {
+        if (change.type === "added") {
+            console.log("New Board: ", change.doc.data());
+        }
+
+        var source = snapshot.metadata.fromCache ? "local cache" : "server";
+        console.log("Data came from " + source);
+    });
+  });
+
   return (
     <div className='homepage-container'>
       <div className='card-group'>

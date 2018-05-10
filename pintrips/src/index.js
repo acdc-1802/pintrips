@@ -17,5 +17,5 @@ ReactDOM.render(
   </AuthProvider>,
   document.getElementById('root'))
 
-
-  registerServiceWorker();
+//don't turn on until deployment
+registerServiceWorker();

@@ -154,6 +154,7 @@ class SingleBoard extends Component {
   }
 
   render() {
+
     return (
       <div className='board-container'>
         <Map
