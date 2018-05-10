@@ -5,60 +5,84 @@ import { withAuth } from 'fireview'
 import firebase from 'firebase'
 import history from '../../history'
 // import '/Users/crysmags/fullDev/pintrips/pintrips/public/style.css'
+import db from '../firestore';
 
-const Navbar = props => {
-
-  const user = props._user;
-  const handleLogout = () => {
-    firebase.auth().signOut()
-      .then(() => history.push('/'))
+class Navbar extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      notifications: 0
+    }
   }
-
-  return (
-    <div>
-      <div className='navbar'>
-        <Link className='logo' to='/HomePage'>
-          <img id='logo' src='/attributes/logo.png' />
-        </Link>
-        <h1 id='name'>Pintrips</h1>
+  componentDidUpdate(){
+    const user = this.props._user;
+    let sum = 0;
+    user &&
+    db.collection('users').doc(user.uid).get()
+      .then(doc => {
+        let boards = doc.data().canWrite;
+        for (let i in boards){
+          if (boards[i]==='pending'){
+            sum+=1;
+          }
+        }
+      })
+      .then(() => {this.setState({notifications: sum})})
+      .catch(error => console.error('Could not get notifications', error))
+  }
+  render(){
+    const user = this.props._user;
+    const handleLogout = () => {
+      firebase.auth().signOut()
+        .then(() => history.push('/'))
+    }
+    return (
+      <div>
+        <div className='navbar'>
+          <Link className='logo' to='/HomePage'>
+            <img id='logo' src='/attributes/logo.png' />
+          </Link>
+          <h1 id='name'>Pintrips</h1>
+          {
+          user &&
+            (
+            <div className='user-nav'>
+              <small id='email'>{user.email}</small>
+              <a id='logout' href='#' onClick={handleLogout}>Logout</a>
+            </div>
+            )
+          }
+        </div>
         {
         user &&
-          (
-          <div className='user-nav'>
-            <small id='email'>{user.email}</small>
-            <a id='logout' href='#' onClick={handleLogout}>Logout</a>
-          </div>
-          )
+        (
+          <Menu className='sub-navbar' borderless={true}>
+            <Link to={'/HomePage'}>
+              <Menu.Item id='dropdown'>
+                My Boards
+            </Menu.Item>
+            </Link>
+            <Link to={'/SharedWithMe'}>
+              <Menu.Item borderless={true} id='dropdown'>
+                Shared With Me
+            </Menu.Item>
+            </Link>
+            <Link to={'/AddNewBoard'}>
+              <Menu.Item id='create-btn'>
+                Create New</Menu.Item>
+            </Link>
+            <Link to={'/SharedWithMe'}>
+              <Menu.Item borderless={true} id='navbar-notifications'>
+              <Icon name='bell outline' size='medium' />
+              <p>{this.state.notifications}</p>
+              </Menu.Item>
+            </Link>
+          </Menu>
+        )
         }
       </div>
-      {
-      user &&
-      (
-        <Menu className='sub-navbar' borderless={true}>
-          <Link to={'/HomePage'}>
-            <Menu.Item id='dropdown'>
-              My Boards
-          </Menu.Item>
-          </Link>
-          <Link to={'/SharedWithMe'}>
-            <Menu.Item borderless={true} id='dropdown'>
-              Shared With Me
-          </Menu.Item>
-          </Link>
-          <Link to={'/AddNewBoard'}>
-            <Menu.Item id='create-btn'>
-              Create New</Menu.Item>
-          </Link>
-          <Link to={'/SharedWithMe'}>
-            <Menu.Item borderless={true} id='navbar-notifications'>
-              <Icon name='bell outline' size='medium' />
-            </Menu.Item>
-          </Link>
-        </Menu>
-      )
-      }
-    </div>
-  );
+    );
+  }
 }
 
 export default withAuth(Navbar);
