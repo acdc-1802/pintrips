@@ -126,11 +126,6 @@ class MapCard extends Component {
 
   }
   render() {
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 9e5196d8886f5d2f0f3baca7852c49829d5dfe3f
     return (
       <div className='ind-card'>
         <Card>
