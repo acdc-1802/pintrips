@@ -18,7 +18,8 @@ class MapCard extends Component {
       zoom: [12],
       shareWith: '',
       boardId: this.props.id,
-      canWrite: ''
+      canWrite: '',
+      sender: null
     }
     this.handleDelete = this.handleDelete.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -26,8 +27,8 @@ class MapCard extends Component {
     this.acceptBoard = this.acceptBoard.bind(this);
     this.declineBoard = this.declineBoard.bind(this);
   }
-  acceptBoard(){
-    this.setState({canWrite: 'accepted'})
+  acceptBoard() {
+    this.setState({ canWrite: 'accepted' })
     db.collection('users').doc(this.props.recipient).set(
       {
         canWrite: {
@@ -36,7 +37,7 @@ class MapCard extends Component {
       },
       { merge: true }
     )
-    .catch(error => console.error('Unable to accept board'))
+      .catch(error => console.error('Unable to accept board'))
     db.collection('boards').doc(this.state.boardId).set(
       {
         writers: {
@@ -45,10 +46,10 @@ class MapCard extends Component {
       },
       { merge: true }
     )
-    .catch(error => console.log('Unable add user as a writer', error))
+      .catch(error => console.log('Unable add user as a writer', error))
   }
-  declineBoard(){
-    this.setState({canWrite: 'declined'})
+  declineBoard() {
+    this.setState({ canWrite: 'declined' })
     db.collection('users').doc(this.props.recipient).update(
       {
         canWrite: {
@@ -56,7 +57,7 @@ class MapCard extends Component {
         }
       }
     )
-    .catch(error => console.error('Unable to decline board'))
+      .catch(error => console.error('Unable to decline board'))
     db.collection('boards').doc(this.state.boardId).update(
       {
         readers: {
@@ -64,7 +65,7 @@ class MapCard extends Component {
         }
       }
     )
-    .catch(error => console.error('Unable to decline board', error))
+      .catch(error => console.error('Unable to decline board', error))
   }
   componentDidMount() {
     if (this.props.recipient) {
@@ -73,6 +74,11 @@ class MapCard extends Component {
           this.setState({ canWrite: doc.data().canWrite[this.state.boardId] })
         })
         .catch(error => console.error('Could not find data', error))
+      db.collection('users').doc(this.props.board.creator).get()
+        .then(doc => {
+          this.setState({ sender: doc.data().username })
+        })
+        .catch(error => console.error('could not get sender'))
     }
   }
   handleDelete() {
@@ -119,6 +125,7 @@ class MapCard extends Component {
     // .then(doc => console.log('doc', doc.id))
   }
   render() {
+    console.log('creator', this.state.sender)
     return (
       <div className='ind-card'>
         <Card>
@@ -175,6 +182,12 @@ class MapCard extends Component {
                     position='top right'
                   />
 
+                </div>
+              }
+              {
+                this.state.sender &&
+                <div>
+                  <p>Created by: {this.state.sender}</p>
                 </div>
               }
               {
