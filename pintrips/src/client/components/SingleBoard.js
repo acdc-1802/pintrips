@@ -21,15 +21,19 @@ const hollow = new Image(100, 100);
 hollow.src = '/attributes/hollow.png';
 const hollowPins = ['hollowImage', hollow];
 
+const linePaint = {
+  'line-color': '#a11823',
+  'line-width': 3
+};
+
 const pintripsStyle = 'mapbox://styles/destinmcmurrry/cjgy8hinv00192rp4obrfj9qq';
 const moonLightStyle = 'mapbox://styles/destinmcmurrry/cjgycs1rn001d2rp4ss7jizyf';
-const popArtStyle = 'mapbox://styles/destinmcmurrry/cjgzhm8r600032ro7punjhhtl';
 const vintageStyle = 'mapbox://styles/destinmcmurrry/cjgwy4k6e000b2rpp80jt98o7';
-const iceCreamStyle = 'mapbox://styles/destinmcmurrry/cjgwy8chg00002spjby3ymrw8';
 
 class SingleBoard extends Component {
   state = {
     markedPins: [],
+    yarnCoords: [],
     unmarkedPins: [],
     newPin: {},
     center: [-74.006376, 40.712368],
@@ -55,7 +59,7 @@ class SingleBoard extends Component {
         console.error(err);
         history.push('/404');
       });
-    db.collection('boards').doc(boardId).collection('pins')
+    db.collection('boards').doc(boardId).collection('pins').orderBy('visited')
       .onSnapshot((querySnapshot) => {
         const markedPins = [];
         const unmarkedPins = [];
@@ -77,7 +81,11 @@ class SingleBoard extends Component {
             })
           }
         })
-        this.setState({ markedPins, unmarkedPins })
+        this.setState({
+          markedPins,
+          unmarkedPins,
+          yarnCoords: markedPins.map(pin => pin.coords)
+        })
       });
   }
 
@@ -124,7 +132,7 @@ class SingleBoard extends Component {
       })
     }
   }
-  
+
   _onClickMap(map, evt) {
     console.log(evt.lngLat);
     this.setState({
@@ -164,11 +172,11 @@ class SingleBoard extends Component {
           }}
           onClick={this._onClickMap.bind(this)}
           center={this.state.center}>
-          <ZoomControl />
+          <ZoomControl position='bottom-right'/>
           <Layer
             type='symbol'
             id='solidPins'
-            layout={{ 'icon-image': 'solidImage' }}
+            layout={{ 'icon-image': 'solidImage', 'icon-allow-overlap': true }}
             images={solidPins}>
             {this.state.markedPins &&
               this.state.markedPins.map(pin => {
@@ -183,6 +191,18 @@ class SingleBoard extends Component {
               )
             }
           </Layer>
+          {
+          this.state.yarnCoords.length>1 &&
+          <Layer
+            type='line'
+            id='yarn'
+            paint={linePaint}>
+              <Feature
+                coordinates={this.state.yarnCoords}
+                offset={25}
+              />
+          </Layer>
+          }
           <Layer
             type='symbol'
             id='hollowPins'
@@ -231,23 +251,18 @@ class SingleBoard extends Component {
         </Map>
         <div id='menu'>
           {/* DOING A WEIRD THING / RENDERING LAYERS MORE THAN ONCE */}
+          <p>style: </p>
           <input onChange={this.switchStyle} id='basic' type='radio' name='rtoggle' value={pintripsStyle} />
           <label htmlFor='pintrips'>pintrips</label>
           <input onChange={this.switchStyle} id='popArt' type='radio' name='rtoggle' value={moonLightStyle} />
           <label htmlFor='moonlight'>moonlight</label>
-          <input onChange={this.switchStyle} id='basic' type='radio' name='rtoggle' value={popArtStyle} />
-          <label htmlFor='popArt'>pop art</label>
           <input onChange={this.switchStyle} id='popArt' type='radio' name='rtoggle' value={vintageStyle} />
           <label htmlFor='vintage'>vintage</label>
-          <input onChange={this.switchStyle} id='popArt' type='radio' name='rtoggle' value={iceCreamStyle} />
-          <label htmlFor='iceCream'>ice cream</label>
         </div>
         <div className='search-container'>
           <div className='search-coords'>
-            <div>
-              <LocationSearch forAddPin={true} updateBoardPins={this.selectLocation} />
-            </div>
-            <button onClick={this.submitPin} type="submit">ADD NEW PIN</button>
+            <LocationSearch forAddPin={true} updateBoardPins={this.selectLocation} />
+            <button onClick={this.submitPin} type="submit">+</button>
           </div>
         </div>
         <div className='footer'>

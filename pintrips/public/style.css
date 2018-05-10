@@ -47,10 +47,17 @@ body {
  .ui.container.container {
    width: 100vw;
  }
-
+ #mapcard {
+   width: auto;
+ }
  .form-group {
   padding-top: 2em;
  }
+.card-description {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
 
  .homepage-container {
   display: flex;
@@ -62,7 +69,7 @@ body {
  }
 
  .ind-card {
-  min-width: 25vw;
+  min-width: 30vw;
   display: flex;
   padding: 15px;
  }
