@@ -142,6 +142,23 @@ body {
   display: flex;
 }
 
+#menu {
+  display: flex;
+  z-index: 3;
+  height: 2em;
+  position: absolute;
+  bottom: 0;
+  background-color: rgb(255, 255, 255, .9);
+  margin: 0 auto;
+  align-self: center;
+  border: solid 2px #dededf;
+  padding: 4px 0;
+  border-radius: 5px;
+}
+#menu * {
+  padding: 0 .5em;
+}
+
 #myboards  {
   margin-left: 10px;
 }
@@ -161,8 +178,8 @@ body {
 
   #name {
     font-family: 'Special Elite', cursive;
-    font-size: 150%;
-    margin-left: 2em;
+    font-size: 175%;
+    margin-left: 1.75em;
   }
 
   .ui.sub-navbar.menu {
@@ -181,29 +198,39 @@ body {
  
  .search-container {
   position: fixed;
-  left: 0;
-  bottom: 1%;
+  top: 8em;
   width: 100%;
   color: white;
-  text-align: center;
  }
- 
+
+ .autocomplete-dropdown-container {
+   color: black;
+ }
+
  .search-coords {
+  display: flex;
+  flex-direction: row;
+  vertical-align: baseline;
   margin: 0 auto;
   z-index: 5;
-  width: 70%;
-  background-color: white;
-  border: solid 1px lightgray;
+  justify-content: center;
   border-radius: 5px;
  }
  
  .search-coords input {
-  width: 90%;
-  margin: 1em;
+  display: flex;
+  padding: .3em;
+  width: 20em;
+  border-radius: 1px;
  }
  
  .search-coords button {
-  border-radius: 5px;
+  display: flex;
+  height: 1.7em;
+  width: 1.7em;
+  background-color: white;
+  text-align: center;
+  border-radius: 50%;
  }
  
  .sign-up {
@@ -229,6 +256,7 @@ body {
   flex-direction: column;
   padding: 10px;
  }
+
  .title {
   display: flex;
   position: fixed;

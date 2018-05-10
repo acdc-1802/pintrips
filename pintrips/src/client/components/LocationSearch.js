@@ -47,7 +47,7 @@ class LocationSearch extends Component {
           <div className='location-search'>
             <input
               {...getInputProps({
-                placeholder: 'Search Places ...',
+                placeholder: '🔍 Search Places ...',
                 className: 'location-search-input'
               })}
             />
