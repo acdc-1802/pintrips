@@ -63,9 +63,9 @@ class AddNewBoard extends Component {
 
   render() {
     return (
-      <div>
+      <div className="login-container">
         <Form onSubmit={(e) => this.handleSubmit(e)}>
-          <div className="login-container">
+          <div>
             <label>
               <h3>Board Name:</h3>
                 <input type="text" placeholder="Board Name" size="25" value={this.state.name} onChange={this.onTitleChange} />

@@ -1,18 +1,12 @@
 body {
-  font-family: 'Dosis', sans-serif;
+  font-family: sans-serif;
+  background-color: #f9f9f9;
  }
  
  a {
   text-decoration: none;
  }
- 
- /* .active {
-  transform: translateY(0em);
- } */
- 
- .add-board-form {
- 
- }
+
  .add-btn {
   font-size: 12px;
   height: 35px;
@@ -23,7 +17,6 @@ body {
  }
  
  .board-container {
-  /* margin-top: 15vh; */
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -36,8 +29,17 @@ body {
   flex-direction: row;
   flex-wrap: wrap;
   width: fit-content;
+  font-family: 'Special Elite', cursive;
+ }
+
+ .card-group a {
+  color: #515151;
  }
  
+ .card-content {
+  padding: 5px 5px 0 5px;
+ }
+
  .container {
    display: flex;
    flex-direction: row;
@@ -45,16 +47,14 @@ body {
  .ui.container.container {
    width: 100vw;
  }
+
  .form-group {
   padding-top: 2em;
  }
  
- 
  .homepage-container {
   display: flex;
-  /* padding-top: 25vh; */
-  /* margin-top: 20vh; */
- 
+  margin-top: 8em;
  }
  
  .item#create-btn {
@@ -64,14 +64,11 @@ body {
  .ind-card {
   min-width: 25vw;
   display: flex;
-  padding: 25px;
-  /* flex-wrap: wrap;
-  flex-direction: row; */
+  padding: 15px;
  }
- 
+
  .input-container {
   display: flex;
-  /* text-align: center; */
   flex-direction: column;
   width: 100%;
  }
@@ -82,92 +79,102 @@ body {
  }
  
  .location-bar {
-  position: absolute;
-  top: 10vh;
-  border: 3px solid green;
- }
- 
- .login-container {
+   position: absolute;
+   top: 10vh;
+   border: 3px solid green;
+  }
+  
+  .login-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    width: 60%;
+    margin: 10em auto auto;
+  }
+
+  .logo{
+    display: flex;
+    width: 2em;
+  }
+  
+  #logo {
+    width: 15%;
+    height: 15%;
+    margin: 3% 0 3% 3%;
+    min-width: 5em;
+  }
+
+.user-nav {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  text-align: center;
-  width: 60%;
-  margin-left: 20%;
-  margin-right: 20%;
-  margin-top: 10%;
-  /* margin-top: 30vh;
-  margin-left: 10vw;
-  margin-right: 10vw; */
- }
- .logout-button {
+  height: 4em;
+  flex-grow: 1;
+  vertical-align: baseline;
+  margin-right: 5px;
+  justify-content: flex-end;
+}
+
+.user-nav * {
   display: flex;
-  position: fixed;
-  right: 10vw;
-  
- }
- 
- #logo {
- 
-  width: 5em;
-  height: 5em;
-  /* padding-left: 0; */
-  color: black;
-  /* animation: Navbar-logo-spin infinite 20s linear; */
-  /* height: 80px; */
- }
- /* .ui.sub-navbar.menu {
-  margin-top: 0;
- } */
- #navbar {
+  align-self: flex-end;
+}
+
+#email {
+  font-family: 'Special Elite', cursive;
+  height: 2em;
+  padding-top: 5px;
+}
+
+#logout {
+  font-size: 12px;
+  width: 4em;
+  color: #515151;
+  border-radius: 5px;
+  border: solid 1px #515151;
+  padding: 0;
+  margin: 0 0 .5em 0;
   background-color: white;
-  border: none;
+  justify-content: center;
+}
+
+#full-page {
   display: flex;
-  flex-direction: row;
-  /* color: rgb(209, 59, 59); */
-  width: 100vw;
- 
+}
+
+#myboards  {
+  margin-left: 10px;
+}
   
- }
- 
- .navbar-bar {
-  /* display: flex; */
-  /* size: relative; */
-  position: fixed;
-  z-index: 2;
-  /* flex-direction: row-wrap; */
-  width: 100vw;
-  
-  /* margin-left: 15px; */
-  /* margin-right: 20px; */
-  
- 
- }
- 
- .navbar-email {
-   width: 10%;
-  /* display: flex; */
-  /* margin: 10vw; */
- 
- }
- 
- #name {
-  padding-left: 0;
- }
- 
- #navbar-email {
-  color: #f9f9f9;
-  margin: 20px;
- }
- 
- /* .ui.sub-navbar.menu {
+.navbar {
+  display: flex;
   margin-top: 0;
- } */
- 
- /* @keyframes Navbar-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
- } */
+  height: 4em;
+  flex-direction: row;
+  align-items: center;
+  position: fixed;
+  color: #515151;
+  width: 100vw;
+  background-color: #f9f9f9;
+  z-index: 3;
+  } 
+
+  #name {
+    font-family: 'Special Elite', cursive;
+    font-size: 150%;
+    margin-left: 2em;
+  }
+
+  .ui.sub-navbar.menu {
+   display: flex;
+   position: fixed;
+   font-size: 12px;
+   margin-top: 4.5em;
+   z-index: 3;
+   width: 100vw;
+   justify-content: space-between;
+  }
+
  .routes {
   display: flex;
  }
@@ -215,7 +222,6 @@ body {
   width: 60%;
   margin-left: 20%;
   margin-right: 20%;
-  /* margin-top: 5%; */
  }
  
  .side-button {
@@ -226,7 +232,6 @@ body {
  .title {
   display: flex;
   position: fixed;
-  /* left: 15vw; */
   color: black;
   
  }
@@ -241,33 +246,9 @@ body {
  }
  
  
- 
- .ui.navbar.menu * {
-  
-  color: rgb(15, 14, 14);
- }
 
 /*-----OLD CSS GRAVEYARD------*/
 
-/* .navbar {
-    margin-top: 0;
-    height: 5em;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      position: fixed;
-      color: white;
-      width: calc(100vw);
-      background-color: #d1ecb3;
-      border-radius: 0 0 2em 2em;
-      border: solid 1px white;
-      transition: all 1s;
-      z-index: 2;
-  } */
-
-  /* .navbar h1 {
-    font-size: 3em;
-  } */
 
   /*
 .App {
