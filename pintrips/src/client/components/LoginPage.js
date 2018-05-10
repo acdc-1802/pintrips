@@ -52,8 +52,8 @@ export default class LoginPage extends Component {
           <Form  onSubmit={this.handleSubmit}>
           <h3>Login</h3>
           <div className='forms'>
-            <Form.Group stackable className="input-container">
-              <Form.Input stackable fluid label='Email' placeholder='Email'
+            <Form.Group stackable='true' className="input-container">
+              <Form.Input stackable='true' fluid label='Email' placeholder='Email'
                 className="form-control"
                 name='email'
                 type='text'
@@ -61,7 +61,7 @@ export default class LoginPage extends Component {
                 onChange={this.handleChange}
               />
 
-              <Form.Input stackable fluid label='Password'    placeholder='Password'
+              <Form.Input stackable='true' fluid label='Password'    placeholder='Password'
                 className="form-control"
                 name='password'
                 type='text'

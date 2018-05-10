@@ -16,7 +16,8 @@ class Navbar extends Component {
       postcard: null
     }
   }
-  componentDidUpdate() {
+  componentDidUpdate({_user}) {
+    if (this.props._user === _user) return
     const user = this.props._user;
     let sum = 0;
     user &&
