@@ -2,7 +2,7 @@ body {
   font-family: sans-serif;
   background-color: #f9f9f9;
  }
- 
+
  a {
   text-decoration: none;
  }
@@ -15,14 +15,14 @@ body {
   padding: 5px;
   margin-right: 10px;
  }
- 
+
  .board-container {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
  }
- 
- 
+
+
  .card-group {
   display: flex;
   padding: 15px;
@@ -35,7 +35,7 @@ body {
  .card-group a {
   color: #515151;
  }
- 
+
  .card-content {
   padding: 5px 5px 0 5px;
  }
@@ -51,16 +51,16 @@ body {
  .form-group {
   padding-top: 2em;
  }
- 
+
  .homepage-container {
   display: flex;
   margin-top: 8em;
  }
- 
+
  .item#create-btn {
   align-self: right;
  }
- 
+
  .ind-card {
   min-width: 25vw;
   display: flex;
@@ -77,13 +77,13 @@ body {
    display: flex;
    flex-direction: column
  }
- 
+
  .location-bar {
    position: absolute;
    top: 10vh;
    border: 3px solid green;
   }
-  
+
   .login-container {
     display: flex;
     flex-direction: column;
@@ -97,7 +97,7 @@ body {
     display: flex;
     width: 2em;
   }
-  
+
   #logo {
     width: 15%;
     height: 15%;
@@ -145,7 +145,7 @@ body {
 #myboards  {
   margin-left: 10px;
 }
-  
+
 .navbar {
   display: flex;
   margin-top: 0;
@@ -157,7 +157,7 @@ body {
   width: 100vw;
   background-color: #f9f9f9;
   z-index: 3;
-  } 
+  }
 
   #name {
     font-family: 'Special Elite', cursive;
@@ -178,7 +178,7 @@ body {
  .routes {
   display: flex;
  }
- 
+
  .search-container {
   position: fixed;
   left: 0;
@@ -187,7 +187,7 @@ body {
   color: white;
   text-align: center;
  }
- 
+
  .search-coords {
   margin: 0 auto;
   z-index: 5;
@@ -196,16 +196,16 @@ body {
   border: solid 1px lightgray;
   border-radius: 5px;
  }
- 
+
  .search-coords input {
   width: 90%;
   margin: 1em;
  }
- 
+
  .search-coords button {
   border-radius: 5px;
  }
- 
+
  .sign-up {
   font-family: sans-serif;
   font-size: 20px;
@@ -223,28 +223,34 @@ body {
   margin-left: 20%;
   margin-right: 20%;
  }
- 
+
  .side-button {
   display: flex;
   flex-direction: column;
   padding: 10px;
  }
+
+ .stamp {
+   border: 1px solid red;
+   padding: 0;
+ }
+
  .title {
   display: flex;
   position: fixed;
   color: black;
-  
+
  }
  .ui.form .fields {
   display: flex;
   flex-direction: column;
  }
- 
+
  .ui.form .fields .field {
   width: 50%;
   min-width: 100px;
  }
- 
+
  #notification {
    background-color: #a3151e;
    color: white;
