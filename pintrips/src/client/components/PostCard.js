@@ -34,7 +34,8 @@ export class PostCard extends Component {
       state: '',
       country: '',
       date: new Date().toLocaleDateString(),
-      sentPostcard: false
+      sentPostcard: false,
+      addStamp: false
     }
   }
 
@@ -54,7 +55,7 @@ export class PostCard extends Component {
     );
   }
 
-  createCard() {
+  addStamp() {
     const latitude = this.state.currentCoordinates[0];
     const longitude = this.state.currentCoordinates[1]
     const url = new URL(`https://api.mapbox.com/geocoding/v5/mapbox.places/${longitude},${latitude}.json?limit=1&access_token=pk.eyJ1IjoiY2lsYXZlcnkiLCJhIjoiY2pmMW1paDd0MTQ0bzJwb2Rtemdna2g0MCJ9.64yg764mTUOrL3p77lXGSQ`)
@@ -72,34 +73,31 @@ export class PostCard extends Component {
 
       })
       .catch(err => console.log('error', err))
+
+      this.setState({ addStamp: true })
   }
 
   render() {
     const userEmail = this.props.withAuth.auth.currentUser.email
     return (
       <div className="login-container">
-      {
-        this.state.currentCoordinates.length
-        ? <button onClick={this.createCard.bind(this)}>Send a postcard!</button>
-        : null
-      }
-      {
-        this.state.sentPostcard
-        ? <div>
-            <h2>Postcard</h2>
-
-            <div>To: </div>
-            <div>From: {userEmail}</div>
-             <div>Hello from {this.state.state}!</div>
-             <div className="stamp">
-              <div>{this.state.city}</div>
-              <div>{this.state.state}</div>
-              <div>{this.state.country}</div>
-              <div>{this.state.date}</div>
-            </div>
+        <form>
+          <div>To: </div>
+          <div>From: {userEmail}</div>
+          <div>Hello from {this.state.state}!</div>
+          <div className="stamp">
+          <div>{this.state.city}</div>
+          <div>{this.state.state}</div>
+          <div>{this.state.country}</div>
+          <div>{this.state.date}</div>
           </div>
-       : null
-      }
+          {
+            this.state.currentCoordinates.length
+            ? <button onClick={this.addStamp.bind(this)}>Add Stamp and Send!</button>
+            : null
+          }
+        </form>
+
       </div>
     )
   }

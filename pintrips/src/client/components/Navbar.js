@@ -12,7 +12,8 @@ class Navbar extends Component {
     super(props);
     this.state = {
       notifications: null,
-      username: null
+      username: null,
+      postcard: null
     }
   }
   componentDidUpdate() {
@@ -74,6 +75,12 @@ class Navbar extends Component {
                 <Menu.Item id='create-btn'>
                   Create New</Menu.Item>
               </Link>
+              <Link to={'/PostCard'}>
+                <Menu.Item borderless={true} id='navbar-notifications'>
+                  Send a Postcard!
+                </Menu.Item>
+              </Link>
+
               <Link to={'/SharedWithMe'}>
                 <Menu.Item borderless={true} id='navbar-notifications'>
                   <Icon name='bell outline' size='medium' />
@@ -83,7 +90,7 @@ class Navbar extends Component {
                   }
                 </Menu.Item>
               </Link>
-            </Menu>
+              </Menu>
           )
         }
       </div>
