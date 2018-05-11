@@ -22,7 +22,6 @@ body {
   flex-wrap: wrap;
  }
 
-
  .card-group {
   display: flex;
   padding: 15px;
@@ -193,6 +192,45 @@ body {
     margin-left: 1.75em;
   }
 
+  .postcard-logo {
+    position: absolute;
+    top: -35px;
+    right: -525px;
+  }
+
+  .postcard-container {
+    position: relative;
+    top: 25%;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border-radius: 2%;
+    width: 80vw;
+    height: 75vh;
+    box-shadow: 10px 10px 8px #888888;
+    background-color:rgb(255,245,238);
+    z-index: -1;
+  }
+
+  .postcard-label {
+    text-align: left;
+  }
+
+  .postcard-message {
+    flex: 1;
+  }
+
+  .postcard-message-body {
+    width: 60%;
+    height: 40%;
+    margin: 13em 4em 8em 4em;
+  }
+
+  .postcard-map {
+    flex: 1;
+  }
+
   .ui.sub-navbar.menu {
    display: flex;
    position: fixed;
@@ -268,10 +306,72 @@ body {
   padding: 10px;
  }
 
- .stamp {
-   border: 1px solid red;
-   padding: 0;
- }
+ /* .stamp{
+    height:100px;
+    width:100px;
+    left:200px;
+    top:20px;
+    border-radius:5px;
+    position:relative;
+    background-color:gray;
+    border: 2px dashed white;
+    color: white;
+    margin: -75px auto 0px auto;
+    z-index: -1;
+    -webkit-animation-name: pulse;
+    animation-name: pulse;
+    animation-delay:2.5s;
+    -webkit-animation-delay:2.5s;
+    -webkit-animation-duration: 0.5s;
+    animation-duration: 0.5s;
+    opacity: 0;
+    -webkit-animation-fill-mode:forwards;
+    animation-fill-mode:forwards;
+
+} */
+
+.stamp {
+  position: absolute;
+  top: 10%;
+  right: 125px;
+  width: 20vw;
+  /* height: 21vh; */
+  z-index:1;
+  font-family: Arial,sans-serif;
+  -webkit-transform: rotate(15deg); /* Safari */
+  -moz-transform: rotate(15deg); /* Firefox */
+  -ms-transform: rotate(15deg); /* IE */
+  -o-transform: rotate(15deg); /* Opera */
+  transform: rotate(15deg);
+  font-size:1.2em;
+  color:#c00;
+  background:#fff;
+  border:solid 4px #c00;
+  padding:5px;
+  border-radius:50%;
+  zoom:1;
+  filter:alpha(opacity=20);
+  opacity:0.2;
+  -webkit-text-shadow: 0 0 2px #c00;
+  text-shadow: 0 0 2px #c00;
+  box-shadow: 0 0 2px #c00;
+}
+
+/* @-webkit-keyframes pulse {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity:.50;
+    transform-origin: 50% 50%;
+    transform: rotate(-7deg) scale(5);
+    transition: all .3s cubic-bezier(0.6, 0.04, 0.98, 0.335);
+  }
+  100% {
+    opacity:1;
+    transform: rotate(55deg) scale(1);
+  };
+} */
 
  .title {
   display: flex;

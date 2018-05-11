@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import firebase from 'firebase'
 import db from '../firestore';
 import { Map, withAuth } from 'fireview';
-import { Button, Icon } from 'semantic-ui-react';
+import { Image, Button, Icon } from 'semantic-ui-react';
+import PostCardMessage from './PostCardMessage';
 
 require('firebase/firestore');
 
@@ -37,13 +38,26 @@ export class PostCard extends Component {
   }
 
   render() {
-    console.log('state in form', this.state)
+    console.log('props in front', this.props)
     const userEmail = this.props.withAuth.auth.currentUser.email
     return (
       <div className="login-container">
-        <h2>Hello from {`${this.state.city}, ${this.state.state}`}! </h2>
-        <div>{this.state.country}</div>
-        <div>{this.state.date}</div>
+      <div className="postcard-container">
+        <div  className='postcard-logo'>
+          <img id='logo' alt='logo' src='/attributes/logo.png' />
+        </div>
+        <div className="stamp">
+          <div className="stamp-line">{this.state.city}</div>
+          <div className="stamp-line">{this.state.state}</div>
+          <div className="stamp-line">{this.state.country}</div>
+          <div className="stamp-line">{this.state.date}</div>
+        </div>
+          <Image className ="postcard-map" alt='static Mapbox map of users current location' src={`https://api.mapbox.com/styles/v1/mapbox/cj3kbeqzo00022smj7akz3o1e/static/${this.props.currentCoord[1]},${this.props.currentCoord[0]},12,0,0/200x500?access_token=pk.eyJ1IjoiY2lsYXZlcnkiLCJhIjoiY2pmMW1paDd0MTQ0bzJwb2Rtemdna2g0MCJ9.64yg764mTUOrL3p77lXGSQ`} rounded/>
+
+          <div classname="postcard-message">
+            <PostCardMessage />
+          </div>
+        </div>
       </div>
     )
   }

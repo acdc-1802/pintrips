@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import firebase from 'firebase'
 import db from '../firestore';
 import { Map, withAuth } from 'fireview';
-import { Button, Icon } from 'semantic-ui-react';
+import { Form, TextArea, Button, Icon } from 'semantic-ui-react';
 
 require('firebase/firestore');
 
@@ -20,29 +20,25 @@ export class PostCard extends Component {
   }
 
   render() {
-    console.log('state in form', this.state)
     const userEmail = this.props.withAuth.auth.currentUser.email
     return (
-      <div className="login-container">
+      <form className="postcard-message-body">
         <form className = "ui form">
           <div className="field">
-            <label>To: </label>
+            <label className="postcard-label">To: </label>
             <input type="text" name="sendEmail" placeholder="email" />
           </div>
           <div className="field">
-            <label>From: </label>
+            <label className="postcard-label">From: </label>
             <input type="text" name="fromEmail" placeholder={userEmail} />
           </div>
           <div className="field">
-            <label>Message: </label>
-            <input type="text" name="postcardBody" placeholder="Hello!" size="400"id="message-box"/>
+            <label className="postcard-label">Message: </label>
+            <TextArea type="text" name="postcardBody" placeholder="Hello!" size="400"id="message-box" style={{ minHeight: 100 }}/>
           </div>
-          {
-            this.state.currentCoordinates.length &&
             <button className="ui button">Send!</button>
-          }
         </form>
-      </div>
+      </form>
     )
   }
 
