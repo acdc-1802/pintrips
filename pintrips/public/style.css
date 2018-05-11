@@ -22,7 +22,6 @@ body {
   flex-wrap: wrap;
  }
  
- 
  .card-group {
   display: flex;
   padding: 15px;
@@ -230,7 +229,16 @@ body {
   border-radius: 5px;
   border: none;
  }
-
+ .options-container {
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   justify-content: space-between;
+   margin: 3px;
+ }
+ .options-container * {
+   padding: 4px;
+ }
  #pin-options img {
   height: 45px;
   width: 45px;

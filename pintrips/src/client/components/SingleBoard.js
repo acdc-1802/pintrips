@@ -118,7 +118,7 @@ class SingleBoard extends Component {
       this.setState({
         needsTimestamp: true
       })
-    } 
+    }
     this.setState({
       showLabel: true
     })
@@ -140,11 +140,11 @@ class SingleBoard extends Component {
         coordinates: new firebase.firestore.GeoPoint(this.state.newLocation[1], this.state.newLocation[0]),
         visited: visitedValue
       })
-      .then(() => {
-        this.setState({ newLocation: null, newLabel: '', showLabel: null, needsTimestamp: false });
-        console.log('Pin successfully added');
-      })
-      .catch((err) => console.error('Add unsuccessful: ', err))
+        .then(() => {
+          this.setState({ newLocation: null, newLabel: '', showLabel: null, needsTimestamp: false });
+          console.log('Pin successfully added');
+        })
+        .catch((err) => console.error('Add unsuccessful: ', err))
   }
 
   handlePinClick = pin => {
@@ -171,7 +171,7 @@ class SingleBoard extends Component {
         visited: firebase.firestore.FieldValue.serverTimestamp()
       }
     )
-    .catch(error => console.error('Unable to mark as visited', error))
+      .catch(error => console.error('Unable to mark as visited', error))
   }
 
   handlePinDelete = pinId => {
@@ -256,11 +256,28 @@ class SingleBoard extends Component {
               >
                 <div>
                   <div>{this.state.selectedPin.label}</div>
-                  <Button color='red' floated='right' size='mini' content={<Icon name='trash outline' size='large' fitted={true} />} onClick={() => (<Button onClick={this.handlePinDelete(this.state.selectedPin.pinId)} />)} />
-                  {
-                    !this.state.selectedPin.visited &&
-                    <Button color='blue' floated='right' size='mini' content={<Icon name='checkmark' size='large' fitted={true} />} onClick={() => (<Button onClick={this.markAsVisited(this.state.selectedPin.pinId)} />)} />
+                  <div className='options-container'>
+                    {/*<Popup
+                  trigger={<Icon name='trash outline' color='red' size='huge' fitted={true} />}
+                  content={
+                    <div>
+                      <p>Are you sure?</p>
+                      <Button color='red' content='Delete' onClick={()=>this.handlePinDelete(this.state.selectedPin.pinId)} />
+                    </div>
                   }
+                  on='click'
+                />
+                */}
+                    {
+                      !this.state.selectedPin.visited &&
+                      <Icon name='checkmark box' color='grey' size='big' fitted={true} onClick={() => (<Button onClick={this.markAsVisited(this.state.selectedPin.pinId)} />)} />
+
+                    }
+
+                    <Icon name='trash outline' color='red' size='big' fitted={true} onClick={() => this.handlePinDelete(this.state.selectedPin.pinId)} />
+
+
+                  </div>
                 </div>
               </Popup>
             )
@@ -272,8 +289,8 @@ class SingleBoard extends Component {
               >
                 <p>Add new pin?</p>
                 <div id='pin-options'>
-                  <button onClick={()=>this.handleShowLabel(false)}><img src='/attributes/hollowPinOption.png' /></button>
-                  <button onClick={()=>this.handleShowLabel(true)}><img src='/attributes/pinOption.png' /></button>
+                  <button onClick={() => this.handleShowLabel(false)}><img src='/attributes/hollowPinOption.png' /></button>
+                  <button onClick={() => this.handleShowLabel(true)}><img src='/attributes/pinOption.png' /></button>
                 </div>
               </Popup>
             )
@@ -284,7 +301,7 @@ class SingleBoard extends Component {
                 coordinates={this.state.newLocation}
               >
                 <div>
-                  <button onClick={()=>this.setState({ showLabel: null })}>back</button>
+                  <button onClick={() => this.setState({ showLabel: null })}>back</button>
                   <p> </p>
                   <label>
                     <p>Label:</p>
