@@ -218,6 +218,20 @@ body {
    color: black;
  }
 
+ .mapboxgl-popup-content {
+   text-align: center;
+ }
+
+ #pin-options button {
+  border-radius: 5px;
+  border: none;
+ }
+
+ #pin-options img {
+  height: 45px;
+  width: 45px;
+ }
+
  .search-coords {
   display: flex;
   flex-direction: row;
