@@ -189,6 +189,10 @@ body {
     margin-left: 1.75em;
   }
 
+  .navbar a {
+    color: #515151;
+  }
+
   .ui.sub-navbar.menu {
    display: flex;
    position: fixed;

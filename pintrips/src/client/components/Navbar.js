@@ -62,7 +62,9 @@ class Navbar extends Component {
           <Link className='logo' to='/HomePage'>
             <img id='logo' alt='logo' src='/attributes/logo.png' />
           </Link>
-          <h1 id='name'>Pintrips</h1>
+          <Link className='logo' to='/HomePage'>
+            <h1 id='name'>Pintrips</h1>
+          </Link>
           {
             user &&
             (
