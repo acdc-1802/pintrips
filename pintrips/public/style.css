@@ -193,6 +193,10 @@ body {
     margin-left: 1.75em;
   }
 
+  .navbar a {
+    color: #515151;
+  }
+
   .ui.sub-navbar.menu {
    display: flex;
    position: fixed;
@@ -216,6 +220,20 @@ body {
 
  .autocomplete-dropdown-container {
    color: black;
+ }
+
+ .mapboxgl-popup-content {
+   text-align: center;
+ }
+
+ #pin-options button {
+  border-radius: 5px;
+  border: none;
+ }
+
+ #pin-options img {
+  height: 45px;
+  width: 45px;
  }
 
  .search-coords {
