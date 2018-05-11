@@ -50,6 +50,10 @@ body {
  #mapcard {
    width: auto;
  }
+ #mapcard-closed {
+   width: auto;
+   opacity: .45;
+ }
  .form-group {
   padding-top: 2em;
  }
