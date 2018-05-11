@@ -18,7 +18,6 @@ const Routes = props => {
             <Route path='/SharedWithMe' component={SharedWithMe} />
             <Route path='/404' component={CannotFind} />
             <Route exact path='/' component={HomePage} />
-            
           </Switch>
         )
         : 

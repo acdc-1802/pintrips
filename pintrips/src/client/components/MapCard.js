@@ -19,7 +19,9 @@ class MapCard extends Component {
       shareWith: '',
       boardId: this.props.id,
       canWrite: '',
-      sender: null
+      sender: null,
+      status: this.props.board.locked,
+      starred: false
     }
     this.handleDelete = this.handleDelete.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -28,6 +30,7 @@ class MapCard extends Component {
     this.declineBoard = this.declineBoard.bind(this);
     this.changeStatus = this.changeStatus.bind(this);
     this.checkStatus = this.checkStatus.bind(this);
+    this.favoriteBoard = this.favoriteBoard.bind(this);
   }
   acceptBoard() {
     this.setState({ canWrite: 'accepted' })
@@ -96,11 +99,13 @@ class MapCard extends Component {
       db.collection('boards').doc(this.state.boardId).update({
         locked: 'closed'
       })
+        .then(() => this.setState({ status: 'closed' }))
         .catch(error => console.error('Could not close board', error))
     } else {
       db.collection('boards').doc(this.state.boardId).update({
         locked: 'open'
       })
+        .then(() => this.setState({ status: 'open' }))
         .catch(error => console.error('Could not open board', error))
     }
   }
@@ -146,13 +151,16 @@ class MapCard extends Component {
       .catch(error => console.error('Unable to send board', error))
 
   }
+  favoriteBoard() {
+    this.setState({starred: !this.state.starred})
+  }
   render() {
     return (
       <div className='ind-card'>
-        <Card id='mapcard'>
+        <Card id={this.props.board.locked==='open'? 'mapcard':'mapcard-closed'}>
           <Segment raised>
             {
-              <Label as='a' color='white' size='large' corner='right' icon='empty star' />
+              <Label as='a' color="white" size='large' corner='right' onClick={this.favoriteBoard} icon={this.state.starred ? 'star':'empty star'} />
             }
             <Map
               style={'mapbox://styles/destinmcmurrry/cjgy8hinv00192rp4obrfj9qq'}

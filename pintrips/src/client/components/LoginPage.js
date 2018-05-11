@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Form } from 'semantic-ui-react';
+import { Form, Message } from 'semantic-ui-react';
 import firebase from 'firebase';
 import history from '../../history';
 
@@ -11,7 +11,8 @@ export default class LoginPage extends Component {
   state = {
     displayName: 'Login',
     email: '',
-    password: ''
+    password: '',
+    error: false
   }
 
   handleChange = event => {
@@ -38,10 +39,8 @@ export default class LoginPage extends Component {
         history.push('/HomePage');
       })
       .catch(error => {
-        const errorCode = error.code
-        const errorMessage = error.Message
-        console.log(errorCode, errorMessage)
-        history.push('/404');
+        this.setState({ error: true })
+        //history.push('/404');
       })
 
   }
@@ -49,7 +48,7 @@ export default class LoginPage extends Component {
   render() {
     return (
       <div className="login-container" >
-          <Form  onSubmit={this.handleSubmit}>
+        <Form onSubmit={this.handleSubmit} error>
           <h3>Login</h3>
           <div className='forms'>
             <Form.Group stackable='true' className="input-container">
@@ -61,21 +60,29 @@ export default class LoginPage extends Component {
                 onChange={this.handleChange}
               />
 
-              <Form.Input stackable='true' fluid label='Password'    placeholder='Password'
+              <Form.Input stackable='true' fluid label='Password' placeholder='Password'
                 className="form-control"
                 name='password'
-                type='text'
+                type='password'
                 defaultValue={this.state.username}
                 onChange={this.handleChange}
               />
             </Form.Group>
+            {
+              this.state.error &&
+              <Message
+                error
+                header='Login Unsuccessful!'
+                content='email/password incorrect'
+              />
+            }
           </div>
-            <Form.Button className="form-group">Log In</Form.Button>
-          </Form>
-          <br />
-          <Link to={'/SignupPage'}>
-              <small>Don't have an account? Sign Up!</small>
-          </Link>
+          <Form.Button className="form-group">Log In</Form.Button>
+        </Form>
+        <br />
+        <Link to={'/SignupPage'}>
+          <small>Don't have an account? Sign Up!</small>
+        </Link>
       </div>
     )
   }

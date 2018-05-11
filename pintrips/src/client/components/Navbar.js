@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
-import { Menu, Icon, Popup, Input, Button, List, Label } from 'semantic-ui-react'
+import  { Dropdown, Menu, Icon, Popup, Input, Button, List, Label, Sidebar } from 'semantic-ui-react'
 import { withAuth } from 'fireview'
 import firebase from 'firebase'
 import history from '../../history'
 // import '/Users/crysmags/fullDev/pintrips/pintrips/public/style.css'
 import db from '../firestore';
+
 
 class Navbar extends Component {
   constructor(props) {
@@ -13,14 +14,21 @@ class Navbar extends Component {
     this.state = {
       notifications: null,
       username: null,
-      pendingBoards: []
+      pendingBoards: [],
+      currentPage: 'HomePage'
     }
+    this.toggleVisibility = this.toggleVisibility.bind(this);
   }
+  toggleVisibility = () => {
+    this.setState({ visible: !this.state.visible })
+    console.log('visible', this.state.visible);
+  }
+
   componentDidUpdate({ _user }) {
     if (this.props._user === _user) return
     const user = this.props._user;
     let sum = 0;
-    
+
     user &&
       db.collection('users').doc(user.uid).get()
         .then(doc => {
@@ -51,6 +59,7 @@ class Navbar extends Component {
         .catch(error => console.error('Could not get notifications', error))
   }
   render() {
+    console.log('noties', this.state.notifications)
     const user = this.props._user;
     const handleLogout = () => {
       firebase.auth().signOut()
@@ -62,7 +71,9 @@ class Navbar extends Component {
           <Link className='logo' to='/HomePage'>
             <img id='logo' alt='logo' src='/attributes/logo.png' />
           </Link>
-          <h1 id='name'>Pintrips</h1>
+          <Link className='logo' to='/HomePage'>
+            <h1 id='name'>Pintrips</h1>
+          </Link>
           {
             user &&
             (
@@ -77,47 +88,74 @@ class Navbar extends Component {
           user &&
           (
             <Menu className='sub-navbar' borderless={true}>
-              <Link to={'/HomePage'}>
-                <Menu.Item id='myboards'>
-                  My Boards
-            </Menu.Item>
-              </Link>
-              <Link to={'/SharedWithMe'}>
-                <Menu.Item borderless='true' id='dropdown'>
-                  Shared With Me
-            </Menu.Item>
-              </Link>
+            <Dropdown id='dropdown' icon="bars" floating> 
+              <Dropdown.Menu>
+                <Dropdown.Item>
+                  <Link to={'/HomePage'}>
+                    <Menu.Item id='myboards'>
+                    My Boards
+                    </Menu.Item>
+                  </Link>
+                </Dropdown.Item>
+                <Dropdown.Item>
+                  <Link to={'/SharedWithMe'}>
+                    <Menu.Item borderless='true' >
+                      Shared With Me
+                    </Menu.Item>
+                  </Link>
+                </Dropdown.Item>
+                <Dropdown.Item>
+                  <Link to={'/HomePage'}>
+                    <Menu.Item id='myboards'>
+                    Starred
+                    </Menu.Item>
+                  </Link>
+                </Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
               <Link to={'/AddNewBoard'}>
                 <Menu.Item id='create-btn'>
-                  Create New</Menu.Item>
+                  <Icon name='plus square outline' size={'large'} />
+                </Menu.Item>
               </Link>
+              
               {/* <Link to={'/SharedWithMe'}> */}
-              <Menu.Item borderless='true' id='navbar-notifications'>
-                <Popup
-                  trigger={<div><Icon name='bell outline' size={'medium'} /><Label color='red' size={'mini'} floating>{this.state.notifications}</Label></div>}
+              { this.state.notifications===0 
+                ?
+                  <Menu.Item borderless='true' id='navbar-notifications'>
+                  <Popup
+                  trigger={<div><Icon name='bell outline' size={"medium"}/></div>}
+                  content={"You don't have any notifications."}/>
+                  </Menu.Item>
+                :
+                  <Menu.Item borderless='true' id='navbar-notifications'>
+                  <Popup
+                  trigger={<div><Icon name='bell outline' size={"medium"} /><Label color="red" size={'mini'} circular>{this.state.notifications}</Label></div>}
                   content={
                     <List>
-                      {
-                        this.state.pendingBoards &&
-                        this.state.pendingBoards.map(sentBoard => {
-                          return (
-                            <Link to={`/SingleBoard/${sentBoard.board}`}>
-                            <List.Item icon='mail' content={`${sentBoard.sender} sent you a board!`} />
-                            </Link>
-                          )
-                        })
-                      }
+                    {
+                      this.state.pendingBoards &&
+                      this.state.pendingBoards.map(sentBoard => {
+                        return (
+                          <Link to={`/SingleBoard/${sentBoard.board}`}>
+                          <List.Item icon='mail' content={`${sentBoard.sender} sent you a board!`} />
+                          </Link>
+                        )
+                      })
+                    }
                     </List>
-                  }
-                  on='click'
-                  position='bottom center'
+                }
+                on='click'
+                position='bottom center'
                 />
                 {/*
                   this.state.notifications > 0 &&
                   <p id='notification'>{this.state.notifications}</p>
                 */}
-              </Menu.Item>
+                </Menu.Item>
+              }
               {/*</Link>*/}
+              
             </Menu>
           )
         }

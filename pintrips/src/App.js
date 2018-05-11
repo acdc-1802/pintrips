@@ -38,21 +38,9 @@ class App extends Component {
     return (
       <div id='full-page'>
         <Navbar />
-        {
-          this.state.showInstallMessage && 
-            <Label className="download-label"
-              active={true}
-              
-              content={'To install this webapp, click the share button and then Add to HomeScreen'}
-            />
-
-          
-        }
-        {/* BELOW IS WHERE WE'LL SWITCH BETWEEN COMPONENTS BASED ON ROUTES/LINKS */}
-        <div className="screen">
         <Routes />
         </div>
-     </div>
+     
     );
   }
 }
