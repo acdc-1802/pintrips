@@ -15,7 +15,9 @@ body {
   padding: 5px;
   margin-right: 10px;
  }
- 
+ .autocomplete-dropdown-container {
+  color: black;
+}
  .board-container {
   display: flex;
   flex-direction: column;
@@ -39,7 +41,11 @@ body {
  .card-content {
   padding: 5px 5px 0 5px;
  }
-
+ .card-description {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
  .container {
    display: flex;
    flex-direction: row;
@@ -47,94 +53,76 @@ body {
  .ui.container.container {
    width: 100vw;
  }
- #mapcard {
-   width: auto;
- }
- #mapcard-closed {
-   width: auto;
-   opacity: .45;
- }
- .form-group {
-  padding-top: 2em;
- }
-.card-description {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+
+.dropdown {
+  padding: 12px;
+  margin-left: 20px;
 }
-
- .homepage-container {
-  display: flex;
-  margin-top: 8em;
- }
- 
- .item#create-btn {
-  align-self: right;
- }
- 
- .ind-card {
-  min-width: 30vw;
-  display: flex;
-  padding: 15px;
- }
-
- .input-container {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
- }
-
- .forms {
-   display: flex;
-   flex-direction: column
- }
- 
- .location-bar {
-   position: absolute;
-   top: 10vh;
-   border: 3px solid green;
-  }
-  
-  .login-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    width: 60%;
-    margin: 10em auto auto;
-  }
-
-  .logo{
-    display: flex;
-    width: 2em;
-  }
-  
-  #logo {
-    width: 15%;
-    height: 15%;
-    margin: 3% 0 3% 3%;
-    min-width: 5em;
-  }
-
-.user-nav {
-  display: flex;
-  flex-direction: column;
-  height: 4em;
-  flex-grow: 1;
-  vertical-align: baseline;
-  margin-right: 5px;
-  justify-content: flex-end;
-}
-
-.user-nav * {
-  display: flex;
-  align-self: flex-end;
-}
-
-#email {
+ #email {
   font-family: 'Special Elite', cursive;
   height: 2em;
   padding-top: 5px;
+}
+.forms {
+  display: flex;
+  flex-direction: column
+}
+.form-group {
+  padding-top: 2em;
+}
+
+#full-page {
+  display: flex;
+}
+
+.homepage-container {
+  display: flex;
+  margin-top: 8em;
+}
+ 
+.item#create-btn {
+  align-self: right;
+}
+ 
+.ind-card {
+  min-width: 30vw;
+  display: flex;
+  padding: 15px;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+ 
+ 
+.location-bar {
+  position: absolute;
+  top: 10vh;
+  border: 3px solid green;
+}
+  
+.login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  width: 60%;
+  margin: 10em auto auto;
+}
+
+.logo{
+  display: flex;
+  width: 2em;
+}
+  
+#logo {
+  width: 15%;
+  height: 15%;
+  margin: 3% 0 3% 3%;
+  min-width: 5em;
 }
 
 #logout {
@@ -148,11 +136,17 @@ body {
   background-color: white;
   justify-content: center;
 }
-
-#full-page {
-  display: flex;
-}
-
+  #mapcard {
+    width: auto;
+  }
+  #mapcard-closed {
+    width: auto;
+    opacity: .45;
+  }
+  .mapboxgl-popup-content {
+    text-align: center;
+  }
+ 
 #menu {
   display: flex;
   z-index: 3;
@@ -169,9 +163,29 @@ body {
 #menu * {
   padding: 0 .5em;
 }
-
+  
 #myboards  {
   margin-left: 10px;
+}
+.user-nav {
+  display: flex;
+  flex-direction: column;
+  height: 4em;
+  flex-grow: 1;
+  vertical-align: baseline;
+  margin-right: 5px;
+  justify-content: flex-end;
+}
+
+.user-nav * {
+  display: flex;
+  align-self: flex-end;
+}
+
+#name {
+  font-family: 'Special Elite', cursive;
+  font-size: 175%;
+  margin-left: 1.75em;
 }
   
 .navbar {
@@ -187,17 +201,11 @@ body {
   z-index: 3;
   } 
 
-  #name {
-    font-family: 'Special Elite', cursive;
-    font-size: 175%;
-    margin-left: 1.75em;
-  }
+.navbar a {
+  color: #515151;
+}
 
-  .navbar a {
-    color: #515151;
-  }
-
-  .ui.sub-navbar.menu {
+.ui.sub-navbar.menu {
    display: flex;
    position: fixed;
    font-size: 12px;
@@ -205,8 +213,23 @@ body {
    z-index: 3;
    width: 100vw;
    justify-content: space-between;
-  }
-
+}
+#notification {
+  background-color: #a3151e;
+  color: white;
+  border-radius: 50%;
+  width: 1.5em;
+  text-align: center;
+}
+  #pin-options button {
+    border-radius: 5px;
+    border: none;
+   }
+  
+   #pin-options img {
+    height: 45px;
+    width: 45px;
+   }
  .routes {
   display: flex;
  }
@@ -217,26 +240,7 @@ body {
   width: 100%;
   color: white;
  }
-
- .autocomplete-dropdown-container {
-   color: black;
- }
-
- .mapboxgl-popup-content {
-   text-align: center;
- }
-
- #pin-options button {
-  border-radius: 5px;
-  border: none;
- }
-
- #pin-options img {
-  height: 45px;
-  width: 45px;
- }
-
- .search-coords {
+.search-coords {
   display: flex;
   flex-direction: row;
   vertical-align: baseline;
@@ -302,13 +306,7 @@ body {
   min-width: 100px;
  }
  
- #notification {
-   background-color: #a3151e;
-   color: white;
-   border-radius: 50%;
-   width: 1.5em;
-   text-align: center;
- }
+
 
 /*-----OLD CSS GRAVEYARD------*/
 
