@@ -128,7 +128,13 @@ class Navbar extends Component {
               </Dropdown>
               <Link to={'/AddNewBoard'}>
                 <Menu.Item id='create-btn'>
-                  <Icon name='plus square outline' size={'large'} />
+                  <Popup
+                    trigger={
+                      <div>
+                      <Icon name='plus square outline' size={'large'} />
+                      </div>
+                    }
+                    content={'Add a new board'} />
                 </Menu.Item>
               </Link>
 

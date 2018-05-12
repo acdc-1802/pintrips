@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Card, Icon, Popup, Input, Checkbox, Segment, Label } from 'semantic-ui-react';
+import { Button, Card, Icon, Popup, Input, Checkbox, Segment, Label, Dropdown } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import db from '../firestore';
 import history from '../../history';
@@ -15,12 +15,17 @@ class MapCard extends Component {
     this.state = {
       center: [this.props.board.coordinates._long, this.props.board.coordinates._lat],
       zoom: [12],
-      shareWith: '',
+      shareWith: [],
       boardId: this.props.id,
       canWrite: '',
       sender: null,
       status: this.props.board.locked,
-      starred: false
+      starred: false,
+      isFetching: false,
+      multiple: true,
+      search: true,
+      searchQuery: '',
+      users: []
     }
     this.handleDelete = this.handleDelete.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -30,7 +35,11 @@ class MapCard extends Component {
     this.changeStatus = this.changeStatus.bind(this);
     this.checkStatus = this.checkStatus.bind(this);
     this.favoriteBoard = this.favoriteBoard.bind(this);
+    this.handleSearchChange = this.handleSearchChange.bind(this);
   }
+
+  handleChange = (e, { searchQuery, value }) => this.setState({ searchQuery, shareWith: value })
+  handleSearchChange = (e, { searchQuery }) => this.setState({ searchQuery })
   acceptBoard() {
     this.setState({ canWrite: 'accepted' })
     db.collection('users').doc(this.props.recipient).set(
@@ -84,6 +93,12 @@ class MapCard extends Component {
         })
         .catch(error => console.error('could not get sender'))
     }
+    db.collection('users').get()
+      .then(snapshot => snapshot.forEach(doc => {
+        this.state.users.push({ key: doc.data().username, value: doc.data().username, text: doc.data().username })
+      }))
+      .then(() => console.log('users on state', this.state.users))
+      .catch(error => console.error('Unable to get users', error))
   }
   checkStatus(boardStatus) {
     if (boardStatus === 'open') {
@@ -119,58 +134,55 @@ class MapCard extends Component {
         db.collection('users').doc(doc.data().id).update(
           {
             canWrite: {
-              [this.state.boardId]:'deleted'
+              [this.state.boardId]: 'deleted'
             }
           }
         )
-        .catch(error => console.error('unable to delete board from user'))
+          .catch(error => console.error('unable to delete board from user'))
       }))
-      .catch(error => console.error('Board unable to delete from user boards',error))
-  }
-  handleChange(event) {
-    this.setState({
-      shareWith: event.target.value
-    })
+      .catch(error => console.error('Board unable to delete from user boards', error))
   }
   handleSend() {
-    db.collection('users').where('username', '==', this.state.shareWith).get()
-      .then(snap => snap.forEach(doc => {
-        let id = doc.data().id;
-        db.collection('users').doc(id).set(
-          {
-            canWrite: {
-              [this.state.boardId]: 'pending'
-            }
-          },
-          { merge: true }
-        )
-          .catch(error => console.error('Unable to add board to user', error))
-        db.collection('boards').doc(this.state.boardId).set(
-          {
-            readers: {
-              [id]: true
-            }
-          },
-          { merge: true }
-        )
-          .then(() => { this.setState({ sent: true }) })
-          .then(() => { setTimeout(() => this.setState({ sent: false }), 3000) })
-          .catch(error => console.error('Writer could not be added', error))
-          .catch(error => console.error('Unable to send board', error))
-      }))
-      .catch(error => console.error('Unable to send board', error))
+    this.state.shareWith.forEach(user => {
+      db.collection('users').where('username', '==', user).get()
+        .then(snap => snap.forEach(doc => {
+          let id = doc.data().id;
+          db.collection('users').doc(id).set(
+            {
+              canWrite: {
+                [this.state.boardId]: 'pending'
+              }
+            },
+            { merge: true }
+          )
+            .catch(error => console.error('Unable to add board to user', error))
+          db.collection('boards').doc(this.state.boardId).set(
+            {
+              readers: {
+                [id]: true
+              }
+            },
+            { merge: true }
+          )
+            .then(() => { this.setState({ sent: true }) })
+            .then(() => { setTimeout(() => this.setState({ sent: false }), 3000) })
+            .catch(error => console.error('Writer could not be added', error))
+            .catch(error => console.error('Unable to send board', error))
+        }))
+        .catch(error => console.error('Unable to send board', error))
+    })
 
   }
   favoriteBoard() {
-    this.setState({starred: !this.state.starred})
+    this.setState({ starred: !this.state.starred })
   }
   render() {
     return (
       <div className='ind-card'>
-        <Card id={this.props.board.locked==='open'? 'mapcard':'mapcard-closed'}>
+        <Card id={this.props.board.locked === 'open' ? 'mapcard' : 'mapcard-closed'}>
           <Segment raised>
             {
-              <Label as='a' color="white" size='large' corner='right' onClick={this.favoriteBoard} icon={this.state.starred ? 'star':'empty star'} />
+              <Label as='a' color="white" size='large' corner='right' onClick={this.favoriteBoard} icon={this.state.starred ? 'star' : 'empty star'} />
             }
             <Map
               style={'mapbox://styles/destinmcmurrry/cjgy8hinv00192rp4obrfj9qq'}
@@ -203,7 +215,18 @@ class MapCard extends Component {
                     !this.state.sent ?
                       (<div>
                         <p>Who would you like to share this board with?</p>
-                        <Input onChange={this.handleChange} size='mini' icon='search' placeholder='Search...' />
+                        <Dropdown
+                          fluid
+                          multiple
+                          search
+                          searchQuery={this.state.searchQuery}
+                          options={this.state.users}
+                          value={this.state.shareWith}
+                          placeholder='Search by username'
+                          onChange={this.handleChange}
+                          onSearchChange={this.handleSearchChange}
+                          selection
+                        />
                         <br />
                         <Button color='blue' size='mini' content='Share' onClick={this.handleSend} />
                       </div>)
