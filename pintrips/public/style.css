@@ -1,6 +1,7 @@
 body {
   font-family: sans-serif;
   background-color: #f9f9f9;
+  height: auto;
  }
 
  a {
@@ -222,7 +223,9 @@ body {
   outline: none;
   line-height: 1.3em;
  }
-
+  .postcard-front {
+    margin: auto;
+  }
 
   .postcard-label {
     text-align: left;
@@ -265,7 +268,7 @@ body {
 /* The typing effect */
 @keyframes typing {
   from { width: 0 }
-  to { width: 60% }
+  to { width: 40% }
 }
 
 /* The typewriter cursor effect */
