@@ -18,7 +18,7 @@ const Routes = props => {
             <Route path='/SharedWithMe' component={SharedWithMe} />
             <Route path='/PostCard' component={PostCard} />
             <Route path='/404' component={CannotFind} />
-            <Route path='/' component={HomePage} />
+            <Route exact path='/' component={HomePage} />
           </Switch>
         )
         :
@@ -26,7 +26,7 @@ const Routes = props => {
           <Switch>
             <Route path='/LoginPage' component={LoginPage} />
             <Route path='/SignupPage' component={SignupPage} />
-            <Route path='/' component={LoginPage} />
+            <Route exact path='/' component={LoginPage} />
           </Switch>
         )
   )

@@ -18,7 +18,7 @@ solid.src = '/attributes/pin.png';
 const solidPins = ['solidImage', solid];
 
 const hollow = new Image(100, 100);
-hollow.src = '/attributes/hollow.png';
+hollow.src = '/attributes/hollowPin.png';
 const hollowPins = ['hollowImage', hollow];
 
 const linePaint = {
@@ -32,19 +32,22 @@ const vintageStyle = 'mapbox://styles/destinmcmurrry/cjgwy4k6e000b2rpp80jt98o7';
 
 class SingleBoard extends Component {
   state = {
-    markedPins: [],
-    yarnCoords: [],
-    unmarkedPins: [],
-    newPin: {},
     center: [-74.006376, 40.712368],
-    selectedPin: null,
     zoom: [12],
-    style: pintripsStyle,
-    newLocation: null
+    style: pintripsStyle, // will later be grabbed from user preference on db
+    visitedPins: [],
+    unvisitedPins: [],
+    yarnCoords: [],
+    selectedPin: null,
+    newLocation: null,
+    needsTimestamp: false,
+    showLabel: null,
+    newLabel: ''
   }
 
   componentDidMount() {
     const boardId = this.props.match.params.boardId;
+    // get center of board
     db.collection('boards').doc(boardId).get()
       .then(doc => {
         let board = doc.data()
@@ -59,21 +62,22 @@ class SingleBoard extends Component {
         console.error(err);
         history.push('/404');
       });
+    // get all pins from board, organize by visited/unvisited
     db.collection('boards').doc(boardId).collection('pins').orderBy('visited')
       .onSnapshot((querySnapshot) => {
-        const markedPins = [];
-        const unmarkedPins = [];
+        const visitedPins = [];
+        const unvisitedPins = [];
         querySnapshot.forEach(doc => {
           const pin = doc.data();
-          if(pin.visited){
-            markedPins.push({
+          if (pin.visited) {
+            visitedPins.push({
               label: pin.label,
               coords: [pin.coordinates._long, pin.coordinates._lat],
               pinId: doc.id,
               visited: pin.visited
             })
           } else {
-            unmarkedPins.push({
+            unvisitedPins.push({
               label: pin.label,
               coords: [pin.coordinates._long, pin.coordinates._lat],
               pinId: doc.id,
@@ -82,9 +86,9 @@ class SingleBoard extends Component {
           }
         })
         this.setState({
-          markedPins,
-          unmarkedPins,
-          yarnCoords: markedPins.map(pin => pin.coords)
+          visitedPins,
+          unvisitedPins,
+          yarnCoords: visitedPins.map(pin => pin.coords)
         })
       });
   }
@@ -95,28 +99,55 @@ class SingleBoard extends Component {
     });
   }
 
-  selectLocation = (label, coords) => {
+  selectPlaceFromSearchBar = (label, coords) => {
     this.setState({
-      newPin: { label, coords }
+      newLabel: label,
+      newLocation: [coords[1], coords[0]]
     })
   }
 
-  submitPin = () => {
-    const boardId = this.props.match.params.boardId;
-    this.state.newPin && this.state.newPin.coords &&
-      db.collection('boards').doc(boardId).collection('pins').add({
-        label: this.state.newPin.label,
-        coordinates: new firebase.firestore.GeoPoint(this.state.newPin.coords[0], this.state.newPin.coords[1]),
-        visited: null
-      })
-        .then(() => {
-          this.setState({ newPin: {} });
-          console.log('Pin successfully added');
-        })
-        .catch((err) => console.error('Add unsuccessful: ', err))
+  _onClickMap(map, evt) {
+    this.setState({
+      newLocation: [evt.lngLat.lng, evt.lngLat.lat],
+      selectedPin: null
+    })
   }
 
-  markerClick = pin => {
+  handleShowLabel = visited => {
+    if (visited) {
+      this.setState({
+        needsTimestamp: true
+      })
+    }
+    this.setState({
+      showLabel: true
+    })
+  }
+
+  handleLabelChange = event => {
+    this.setState({
+      newLabel: event.target.value
+    })
+  }
+
+  handlePinAdd = () => {
+    let visitedValue = null;
+    if (this.state.needsTimestamp) visitedValue = firebase.firestore.FieldValue.serverTimestamp();
+    const boardId = this.props.match.params.boardId;
+    this.state.newLabel && this.state.newLocation &&
+      db.collection('boards').doc(boardId).collection('pins').add({
+        label: this.state.newLabel,
+        coordinates: new firebase.firestore.GeoPoint(this.state.newLocation[1], this.state.newLocation[0]),
+        visited: visitedValue
+      })
+      .then(() => {
+        this.setState({ newLocation: null, newLabel: '', showLabel: null, needsTimestamp: false });
+        console.log('Pin successfully added');
+      })
+      .catch((err) => console.error('Add unsuccessful: ', err))
+  }
+
+  handlePinClick = pin => {
     if (this.state.selectedPin) {
       this.setState({
         selectedPin: null,
@@ -133,12 +164,6 @@ class SingleBoard extends Component {
     }
   }
 
-  _onClickMap(map, evt) {
-    console.log(evt.lngLat);
-    this.setState({
-      newLocation: [evt.lngLat.lng, evt.lngLat.lat]
-    })
-  }
   markAsVisited = pinId => {
     const boardId = this.props.match.params.boardId;
     db.collection('boards').doc(boardId).collection('pins').doc(pinId).update(
@@ -148,7 +173,8 @@ class SingleBoard extends Component {
     )
     .catch(error => console.error('Unable to mark as visited', error))
   }
-  handleDelete = pinId => {
+
+  handlePinDelete = pinId => {
     const boardId = this.props.match.params.boardId;
     db.collection('boards').doc(boardId).collection('pins').doc(pinId).delete()
       .then(() => {
@@ -172,19 +198,19 @@ class SingleBoard extends Component {
           }}
           onClick={this._onClickMap.bind(this)}
           center={this.state.center}>
-          <ZoomControl position='bottom-right'/>
+          <ZoomControl position='bottom-right' />
           <Layer
             type='symbol'
             id='solidPins'
             layout={{ 'icon-image': 'solidImage', 'icon-allow-overlap': true }}
             images={solidPins}>
-            {this.state.markedPins &&
-              this.state.markedPins.map(pin => {
+            {this.state.visitedPins &&
+              this.state.visitedPins.map(pin => {
                 return (
                   <Feature
                     key={pin.label}
                     coordinates={pin.coords}
-                    onClick={this.markerClick.bind(this, pin)}
+                    onClick={this.handlePinClick.bind(this, pin)}
                   />
                 )
               }
@@ -192,29 +218,29 @@ class SingleBoard extends Component {
             }
           </Layer>
           {
-          this.state.yarnCoords.length>1 &&
-          <Layer
-            type='line'
-            id='yarn'
-            paint={linePaint}>
+            this.state.yarnCoords.length > 1 &&
+            <Layer
+              type='line'
+              id='yarn'
+              paint={linePaint}>
               <Feature
                 coordinates={this.state.yarnCoords}
                 offset={25}
               />
-          </Layer>
+            </Layer>
           }
           <Layer
             type='symbol'
             id='hollowPins'
             layout={{ 'icon-image': 'hollowImage' }}
             images={hollowPins}>
-            {this.state.unmarkedPins &&
-              this.state.unmarkedPins.map(pin => {
+            {this.state.unvisitedPins &&
+              this.state.unvisitedPins.map(pin => {
                 return (
                   <Feature
                     key={pin.label}
                     coordinates={pin.coords}
-                    onClick={this.markerClick.bind(this, pin)}
+                    onClick={this.handlePinClick.bind(this, pin)}
                   />
                 )
               }
@@ -230,7 +256,7 @@ class SingleBoard extends Component {
               >
                 <div>
                   <div>{this.state.selectedPin.label}</div>
-                  <Button color='red' floated='right' size='mini' content={<Icon name='trash outline' size='large' fitted={true} />} onClick={() => (<Button onClick={this.handleDelete(this.state.selectedPin.pinId)} />)} />
+                  <Button color='red' floated='right' size='mini' content={<Icon name='trash outline' size='large' fitted={true} />} onClick={() => (<Button onClick={this.handlePinDelete(this.state.selectedPin.pinId)} />)} />
                   {
                     !this.state.selectedPin.visited &&
                     <Button color='blue' floated='right' size='mini' content={<Icon name='checkmark' size='large' fitted={true} />} onClick={() => (<Button onClick={this.markAsVisited(this.state.selectedPin.pinId)} />)} />
@@ -245,12 +271,32 @@ class SingleBoard extends Component {
                 coordinates={this.state.newLocation}
               >
                 <p>Add new pin?</p>
+                <div id='pin-options'>
+                  <button onClick={()=>this.handleShowLabel(false)}><img src='/attributes/hollowPinOption.png' /></button>
+                  <button onClick={()=>this.handleShowLabel(true)}><img src='/attributes/pinOption.png' /></button>
+                </div>
+              </Popup>
+            )
+          }
+          {
+            this.state.showLabel && (
+              <Popup
+                coordinates={this.state.newLocation}
+              >
+                <div>
+                  <button onClick={()=>this.setState({ showLabel: null })}>back</button>
+                  <p> </p>
+                  <label>
+                    <p>Label:</p>
+                    <input type="text" name='newLabel' placeholder="ex: Best Ice Cream!" value={this.state.newLabel} onChange={this.handleLabelChange} />
+                    <button onClick={this.handlePinAdd}>add pin</button>
+                  </label>
+                </div>
               </Popup>
             )
           }
         </Map>
         <div id='menu'>
-          {/* DOING A WEIRD THING / RENDERING LAYERS MORE THAN ONCE */}
           <p>style: </p>
           <input onChange={this.switchStyle} id='basic' type='radio' name='rtoggle' value={pintripsStyle} />
           <label htmlFor='pintrips'>pintrips</label>
@@ -261,12 +307,8 @@ class SingleBoard extends Component {
         </div>
         <div className='search-container'>
           <div className='search-coords'>
-            <LocationSearch forAddPin={true} updateBoardPins={this.selectLocation} />
-            <button onClick={this.submitPin} type="submit">+</button>
+            <LocationSearch forAddPin={true} updateBoardPins={this.selectPlaceFromSearchBar} />
           </div>
-        </div>
-        <div className='footer'>
-          <p id='expand-up'>—</p>
         </div>
       </div>
     )

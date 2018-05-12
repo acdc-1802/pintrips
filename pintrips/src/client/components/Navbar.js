@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
-import { Menu, Icon, Popup, Input, Button, List, Label } from 'semantic-ui-react'
+import { Menu, Icon, Popup, Input, Button, List, Label, Sidebar } from 'semantic-ui-react'
 import { withAuth } from 'fireview'
 import firebase from 'firebase'
 import history from '../../history'
 // import '/Users/crysmags/fullDev/pintrips/pintrips/public/style.css'
 import db from '../firestore';
+
 
 class Navbar extends Component {
   constructor(props) {
@@ -13,9 +14,16 @@ class Navbar extends Component {
     this.state = {
       notifications: null,
       username: null,
-      pendingBoards: []
+      pendingBoards: [],
+      currentPage: 'HomePage'
     }
+    this.toggleVisibility = this.toggleVisibility.bind(this);
   }
+  toggleVisibility = () => {
+    this.setState({ visible: !this.state.visible })
+    console.log('visible', this.state.visible);
+  }
+
   componentDidUpdate({ _user }) {
     if (this.props._user === _user) return
     const user = this.props._user;
@@ -62,7 +70,9 @@ class Navbar extends Component {
           <Link className='logo' to='/HomePage'>
             <img id='logo' alt='logo' src='/attributes/logo.png' />
           </Link>
-          <h1 id='name'>Pintrips</h1>
+          <Link className='logo' to='/HomePage'>
+            <h1 id='name'>Pintrips</h1>
+          </Link>
           {
             user &&
             (
@@ -80,16 +90,17 @@ class Navbar extends Component {
               <Link to={'/HomePage'}>
                 <Menu.Item id='myboards'>
                   My Boards
-            </Menu.Item>
+                </Menu.Item>
               </Link>
               <Link to={'/SharedWithMe'}>
                 <Menu.Item borderless='true' id='dropdown'>
                   Shared With Me
-            </Menu.Item>
+              </Menu.Item>
               </Link>
               <Link to={'/AddNewBoard'}>
                 <Menu.Item id='create-btn'>
-                  Create New</Menu.Item>
+                  <Icon name='plus square outline' size={'large'} />
+                </Menu.Item>
               </Link>
               <Link to={'/PostCard'}>
                 <Menu.Item id='create-btn'>
@@ -97,7 +108,7 @@ class Navbar extends Component {
               </Link>
               <Menu.Item borderless='true' id='navbar-notifications'>
                 <Popup
-                  trigger={<div><Icon name='bell outline' size={'medium'} /><Label color='red' size={'mini'} floating>{this.state.notifications}</Label></div>}
+                  trigger={<div><Icon name='bell outline' size={'medium'} /><Label color='red' size={'mini'} circular>{this.state.notifications}</Label></div>}
                   content={
                     <List>
                       {
@@ -105,7 +116,7 @@ class Navbar extends Component {
                         this.state.pendingBoards.map(sentBoard => {
                           return (
                             <Link to={`/SingleBoard/${sentBoard.board}`}>
-                            <List.Item icon='mail' content={`${sentBoard.sender} sent you a board!`} />
+                              <List.Item icon='mail' content={`${sentBoard.sender} sent you a board!`} />
                             </Link>
                           )
                         })
@@ -121,6 +132,7 @@ class Navbar extends Component {
                 */}
               </Menu.Item>
               {/*</Link>*/}
+
             </Menu>
           )
         }

@@ -22,23 +22,21 @@ export class PostCard extends Component {
   render() {
     const userEmail = this.props.withAuth.auth.currentUser.email
     return (
-      <form className="postcard-message-body">
-        <form className = "ui form">
+      <div className="postcard-message-body">
+        <form className = "postcard-form">
           <div className="field">
             <label className="postcard-label">To: </label>
-            <input type="text" name="sendEmail" placeholder="email" />
+            <input type="text" name="sendEmail" placeholder="email" className="postcard-form-style"/>
           </div>
           <div className="field">
-            <label className="postcard-label">From: </label>
-            <input type="text" name="fromEmail" placeholder={userEmail} />
+            <label className="postcard-label">From: </label><input type="text" name="fromEmail" placeholder={userEmail} className="postcard-form-style"/>
           </div>
           <div className="field">
-            <label className="postcard-label">Message: </label>
-            <TextArea type="text" name="postcardBody" placeholder="Hello!" size="400"id="message-box" style={{ minHeight: 100 }}/>
+            <label className="postcard-label">Message: </label><input type="text" name="postcardBody" placeholder="Hello!" size="400"id="message-box" className="postcard-form-style"/>
           </div>
             <button className="ui button">Send!</button>
         </form>
-      </form>
+      </div>
     )
   }
 

@@ -3,7 +3,8 @@ import firebase from 'firebase'
 import db from '../firestore';
 import { withAuth } from 'fireview';
 import { Button, Icon } from 'semantic-ui-react';
-import PostCardFront from './PostCardFront';
+import PostCardStamp from './PostCardStamp';
+import PostCardMap from './PostCardMap';
 
 require('firebase/firestore');
 
@@ -34,12 +35,13 @@ export class PostCard extends Component {
 
   render() {
     return (
-      <div className='board-container'>
+      <div className='postcard-container'>
       {
         this.state.currentCoordinates.length
-        ? <PostCardFront currentCoord={this.state.currentCoordinates}/>
+        ? <PostCardStamp currentCoord={this.state.currentCoordinates}/>
         : null
       }
+      <PostCardMap />
       </div>
     )
   }

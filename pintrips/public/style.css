@@ -49,6 +49,10 @@ body {
  #mapcard {
    width: auto;
  }
+ #mapcard-closed {
+   width: auto;
+   opacity: .45;
+ }
  .form-group {
   padding-top: 2em;
  }
@@ -192,43 +196,51 @@ body {
     margin-left: 1.75em;
   }
 
-  .postcard-logo {
-    position: absolute;
-    top: -35px;
-    right: -525px;
-  }
-
   .postcard-container {
-    position: relative;
-    top: 25%;
     border: 1px solid black;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
     border-radius: 2%;
     width: 80vw;
     height: 75vh;
     box-shadow: 10px 10px 8px #888888;
     background-color:rgb(255,245,238);
     z-index: -1;
+    position: absolute;
+    left: 50%;
+    top: 60%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    text-align: center;
   }
+
+ .postcard-form-style {
+  background: transparent;
+  border: none;
+  font-size: 1em;
+  outline: none;
+  line-height: 1.3em;
+ }
+
 
   .postcard-label {
     text-align: left;
   }
 
-  .postcard-message {
-    flex: 1;
+  .postcard-map-message {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
   }
 
   .postcard-message-body {
-    width: 60%;
-    height: 40%;
-    margin: 13em 4em 8em 4em;
+    width: 20vw;
+    height: 40vh;
+    margin: 20em 4em 8em 1em;
+    text-align: left;
+    font-size: 1em;
   }
 
-  .postcard-map {
-    flex: 1;
+  .navbar a {
+    color: #515151;
   }
 
   .ui.sub-navbar.menu {
@@ -254,6 +266,20 @@ body {
 
  .autocomplete-dropdown-container {
    color: black;
+ }
+
+ .mapboxgl-popup-content {
+   text-align: center;
+ }
+
+ #pin-options button {
+  border-radius: 5px;
+  border: none;
+ }
+
+ #pin-options img {
+  height: 45px;
+  width: 45px;
  }
 
  .search-coords {
