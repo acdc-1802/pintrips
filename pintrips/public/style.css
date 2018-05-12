@@ -80,10 +80,15 @@ body {
   margin-top: 8em;
 }
  
+.in-footer {
+  display: flex;
+justify-content: center;
+}
 .item#create-btn {
   align-self: right;
 }
  
+
 .ind-card {
   min-width: 30vw;
   display: flex;
@@ -149,19 +154,25 @@ body {
  
 #menu {
   display: flex;
+  /* justify-content: center; */
+  width: 100vw;
   z-index: 3;
-  height: 2em;
+  height: 4em;
   position: absolute;
-  bottom: 0;
+  bottom: 2em;
   background-color: rgb(255, 255, 255, .9);
-  margin: 0 auto;
+  margin: 0;
   align-self: center;
   border: solid 2px #dededf;
-  padding: 4px 0;
+  padding: 10px;
   border-radius: 5px;
+
 }
 #menu * {
-  padding: 0 .5em;
+  /* padding: .5em .5em .5em .5em; */
+  margin: .5em
+  
+
 }
   
 #myboards  {
@@ -235,10 +246,11 @@ body {
  }
  
  .search-container {
-  position: fixed;
-  top: 8em;
+  /* position: fixed; */
+  /* top: 8em; */
   width: 100%;
   color: white;
+  padding: 10px;
  }
 .search-coords {
   display: flex;
@@ -289,6 +301,10 @@ body {
   flex-direction: column;
   padding: 10px;
  }
+ .sticky {
+  position: absolute;
+  bottom: 0;
+}
 
  .title {
   display: flex;

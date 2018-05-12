@@ -5,7 +5,7 @@ import db from '../firestore';
 import firebase from 'firebase';
 import { withAuth } from 'fireview';
 import history from '../../history';
-import { Button, Icon } from 'semantic-ui-react';
+import { Button, Card, Icon, Input, Checkbox, Segment, Label, Menu } from 'semantic-ui-react';
 
 require('firebase/firestore');
 
@@ -296,20 +296,26 @@ class SingleBoard extends Component {
             )
           }
         </Map>
-        <div id='menu'>
-          <p>style: </p>
-          <input onChange={this.switchStyle} id='basic' type='radio' name='rtoggle' value={pintripsStyle} />
-          <label htmlFor='pintrips'>pintrips</label>
-          <input onChange={this.switchStyle} id='popArt' type='radio' name='rtoggle' value={moonLightStyle} />
-          <label htmlFor='moonlight'>moonlight</label>
-          <input onChange={this.switchStyle} id='popArt' type='radio' name='rtoggle' value={vintageStyle} />
-          <label htmlFor='vintage'>vintage</label>
-        </div>
-        <div className='search-container'>
-          <div className='search-coords'>
-            <LocationSearch forAddPin={true} updateBoardPins={this.selectPlaceFromSearchBar} />
-          </div>
-        </div>
+        <Menu id='menu'>
+          <Menu.Item className="in-footer">
+          <p className="text"> Style: </p>
+            <div >
+              <input onChange={this.switchStyle} id='basic' type='radio' name='rtoggle' value={pintripsStyle} />
+              <label htmlFor='pintrips'>pintrips</label>
+              <input onChange={this.switchStyle} id='popArt' type='radio' name='rtoggle' value={moonLightStyle} />
+              <label htmlFor='moonlight'>moonlight</label>
+              <input onChange={this.switchStyle} id='popArt' type='radio' name='rtoggle' value={vintageStyle} />
+              <label htmlFor='vintage'>vintage</label>
+            </div>
+            </Menu.Item>
+            <Menu.Item>
+              <div className='search-container'>
+                <div className='search-coords'>
+                  <LocationSearch forAddPin={true} updateBoardPins={this.selectPlaceFromSearchBar} />
+                </div>
+              </div>
+          </Menu.Item>
+        </Menu>
       </div>
     )
   }
