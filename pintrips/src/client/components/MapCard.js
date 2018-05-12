@@ -114,6 +114,18 @@ class MapCard extends Component {
       })
       .then(() => history.push('/HomePage'))
       .catch(err => console.error('Delete unsuccessful: ', err))
+    db.collection('users').get()
+      .then(snapshot => snapshot.forEach(doc => {
+        db.collection('users').doc(doc.data().id).update(
+          {
+            canWrite: {
+              [this.state.boardId]:'deleted'
+            }
+          }
+        )
+        .catch(error => console.error('unable to delete board from user'))
+      }))
+      .catch(error => console.error('Board unable to delete from user boards',error))
   }
   handleChange(event) {
     this.setState({
