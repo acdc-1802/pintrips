@@ -23,34 +23,6 @@ class AddNewBoard extends Component {
     this.submitCoordinates = this.submitCoordinates.bind(this);
   }
 
-  componentDidMount() {
-    db.collection('boards')
-    .onSnapshot({ includeQueryMetadataChanges: true }, function(snapshot) {
-      snapshot.docChanges.forEach(function(change) {
-          if (change.type === "added") {
-              console.log("New Board: ", change.doc.data());
-          }
-
-          var source = snapshot.metadata.fromCache ? "local cache" : "server";
-          console.log("Data came from " + source);
-      });
-    });
-  }
-  //   if ("geolocation" in navigator) {
-  //     function success(position) {
-  //       let latitude  = position.coords.latitude;
-  //       let longitude = position.coords.longitude;
-  //       console.log('SUCCESS', latitude, longitude)
-  //       return [latitude, longtitude]
-  //     }
-  //     function error() {
-  //       console.log("Unable to retrieve your location");
-  //     }
-  //     navigator.geolocation.getCurrentPosition(success, error);
-  //   }
-  // }
-
-
   handleSubmit(e) {
     e.preventDefault();
     const creator = this.props._user.uid

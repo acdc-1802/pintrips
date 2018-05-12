@@ -42,7 +42,9 @@ class SingleBoard extends Component {
     newLocation: null,
     needsTimestamp: false,
     showLabel: null,
-    newLabel: ''
+    newLabel: '',
+    openStatus: '',
+    editLabel: false
   }
 
   componentDidMount() {
@@ -55,7 +57,8 @@ class SingleBoard extends Component {
       })
       .then(thisBoard => {
         this.setState({
-          center: [thisBoard.coordinates._long, thisBoard.coordinates._lat]
+          center: [thisBoard.coordinates._long, thisBoard.coordinates._lat],
+          openStatus: thisBoard.locked
         })
       })
       .catch(err => {
@@ -146,7 +149,20 @@ class SingleBoard extends Component {
         })
         .catch((err) => console.error('Add unsuccessful: ', err))
   }
-
+  toggleEditLabel = () => {
+    this.setState({ editLabel: !this.state.editLabel });
+  }
+  changeLabel = pinId => {
+    const boardId = this.props.match.params.boardId;
+    db.collection('boards').doc(boardId).collection('pins').doc(pinId).update(
+      {
+        label: this.state.newLabel
+      }
+    )
+    .then(() => this.setState({ editLabel: false}))
+    .catch(err => console.error('Unable to change label', err))
+    
+  }
   handlePinClick = pin => {
     if (this.state.selectedPin) {
       this.setState({
@@ -172,6 +188,15 @@ class SingleBoard extends Component {
       }
     )
       .catch(error => console.error('Unable to mark as visited', error))
+  }
+  markAsUnvisited = pinId => {
+    const boardId = this.props.match.params.boardId;
+    db.collection('boards').doc(boardId).collection('pins').doc(pinId).update(
+      {
+        visited: null
+      }
+    )
+      .catch(error => console.error('Unable to unmark pin', error))
   }
 
   handlePinDelete = pinId => {
@@ -256,7 +281,25 @@ class SingleBoard extends Component {
                 offset={50}
               >
                 <div>
-                  <div>{this.state.selectedPin.label}</div>
+                  <div>
+                    {
+                      this.state.editLabel ?
+                        (
+                          <div>
+                            <Icon name='arrow left' color='black' size='large' fitted={true} onClick={() => (<Button onClick={this.toggleEditLabel()} />)} />
+                            <input type="text" name='newLabel' placeholder={this.state.selectedPin.label} value={this.state.newLabel} onChange={this.handleLabelChange} />
+                            <Icon name='checkmark' color='green' size='large' fitted={true} onClick={() => (<Button onClick={this.changeLabel(this.state.selectedPin.pinId)}/>)} />
+                          </div>
+                        )
+                        :
+                        (this.state.selectedPin.label + ' ')
+                    }
+
+                    {
+                      !this.state.editLabel &&
+                      <Icon name='write' color='black' size='large' fitted={true} onClick={() => (<Button onClick={this.toggleEditLabel()} />)} />
+                    }
+                  </div>
                   <div className='options-container'>
                     {/*<Popup
                   trigger={<Icon name='trash outline' color='red' size='huge' fitted={true} />}
@@ -270,12 +313,18 @@ class SingleBoard extends Component {
                 />
                 */}
                     {
-                      !this.state.selectedPin.visited &&
+                      !this.state.selectedPin.visited && this.state.openStatus === 'open' &&
                       <Icon name='checkmark box' color='grey' size='big' fitted={true} onClick={() => (<Button onClick={this.markAsVisited(this.state.selectedPin.pinId)} />)} />
 
                     }
-
-                    <Icon name='trash outline' color='red' size='big' fitted={true} onClick={() => this.handlePinDelete(this.state.selectedPin.pinId)} />
+                    {
+                      this.state.selectedPin.visited &&
+                      <Icon name='remove' color='grey' size='big' fitted={true} onClick={() => (<Button onClick={this.markAsUnvisited(this.state.selectedPin.pinId)} />)} />
+                    }
+                    {
+                      this.state.openStatus === 'open' &&
+                      <Icon name='trash outline' color='red' size='big' fitted={true} onClick={() => this.handlePinDelete(this.state.selectedPin.pinId)} />
+                    }
 
 
                   </div>
@@ -284,7 +333,7 @@ class SingleBoard extends Component {
             )
           }
           {
-            this.state.newLocation && (
+            this.state.newLocation && this.state.openStatus === 'open' && (
               <Popup
                 coordinates={this.state.newLocation}
               >
