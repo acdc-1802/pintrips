@@ -362,9 +362,9 @@ class SingleBoard extends Component {
             )
           }
         </Map>
-        <Menu id='menu'>
-          <Menu.Item className="in-footer">
-          <p className="text"> Style: </p>
+        <div id='menu'>
+          <div >
+          <p> Style: </p>
             <div >
               <input onChange={this.switchStyle} id='basic' type='radio' name='rtoggle' value={pintripsStyle} />
               <label htmlFor='pintrips'>pintrips</label>
@@ -373,15 +373,15 @@ class SingleBoard extends Component {
               <input onChange={this.switchStyle} id='popArt' type='radio' name='rtoggle' value={vintageStyle} />
               <label htmlFor='vintage'>vintage</label>
             </div>
-            </Menu.Item>
-            <Menu.Item>
-              <div className='search-container'>
+            </div>
+            
+              <div>
                 <div className='search-coords'>
                   <LocationSearch forAddPin={true} updateBoardPins={this.selectPlaceFromSearchBar} />
                 </div>
               </div>
-          </Menu.Item>
-        </Menu>
+          
+        </div>
       </div>
     )
   }

@@ -80,7 +80,7 @@ body {
 }
  
 .in-footer {
-  display: flex;
+  /* display: flex; */
 justify-content: center;
 }
 .item#create-btn {
@@ -131,19 +131,8 @@ justify-content: center;
     margin: 3% 0 3% 3%;
     min-width: 5em;
   }
-#message-box {
-  height: 9em;
-}
 
-.user-nav {
-  display: flex;
-  flex-direction: column;
-  height: 4em;
-  flex-grow: 1;
-  vertical-align: baseline;
-  margin-right: 5px;
-  justify-content: flex-end;
-}
+
 
 .location-bar {
   position: absolute;
@@ -196,11 +185,12 @@ justify-content: center;
 
 #menu {
   display: flex;
+  /* flex-direction: row; */
   /* justify-content: center; */
   width: 100vw;
   z-index: 3;
-  height: 4em;
-  position: absolute;
+  height: 5em;
+  position: fixed;
   bottom: 2em;
   background-color: rgb(255, 255, 255, .9);
   margin: 0;
@@ -215,6 +205,10 @@ justify-content: center;
   margin: .5em
   
 
+}
+
+#message-box {
+  height: 9em;
 }
 
 #myboards  {
@@ -389,9 +383,9 @@ justify-content: center;
  .search-container {
   /* position: fixed; */
   /* top: 8em; */
-  width: 100%;
+  /* width: 100%; */
   color: white;
-  padding: 10px;
+  /* padding: 10px; */
  }
 
  .autocomplete-dropdown-container {
@@ -433,7 +427,7 @@ justify-content: center;
 
  .search-coords input {
   display: flex;
-  padding: .3em;
+  /* padding: .3em; */
   width: 20em;
   border-radius: 1px;
  }
