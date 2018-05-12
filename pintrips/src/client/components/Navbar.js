@@ -88,9 +88,8 @@ class Navbar extends Component {
           user &&
           (
             <Menu className='sub-navbar' borderless={true}>
-            <Dropdown id='dropdown' icon="bars" floating>
+            <Dropdown id='dropdown' icon="bars" floating> 
               <Dropdown.Menu>
-
                 <Dropdown.Item>
                   <Link to={'/HomePage'}>
                     <Menu.Item id='myboards'>
@@ -98,15 +97,13 @@ class Navbar extends Component {
                     </Menu.Item>
                   </Link>
                 </Dropdown.Item>
-
                 <Dropdown.Item>
                   <Link to={'/SharedWithMe'}>
                     <Menu.Item borderless='true' >
-                    Shared With Me
+                      Shared With Me
                     </Menu.Item>
                   </Link>
                 </Dropdown.Item>
-
                 <Dropdown.Item>
                   <Link to={'/HomePage'}>
                     <Menu.Item id='myboards'>
@@ -114,25 +111,16 @@ class Navbar extends Component {
                     </Menu.Item>
                   </Link>
                 </Dropdown.Item>
-
-                <Dropdown.Item>
-                  <Link to={'/PostCard'}>
-                    <Menu.Item id='myboards'>
-                      Send a Postcard
-                    </Menu.Item>
-                  </Link>
-                </Dropdown.Item>
-
               </Dropdown.Menu>
-
             </Dropdown>
               <Link to={'/AddNewBoard'}>
                 <Menu.Item id='create-btn'>
                   <Icon name='plus square outline' size={'large'} />
                 </Menu.Item>
               </Link>
-
-              { this.state.notifications===0
+              
+              {/* <Link to={'/SharedWithMe'}> */}
+              { this.state.notifications===0 
                 ?
                   <Menu.Item borderless='true' id='navbar-notifications'>
                   <Popup
@@ -150,7 +138,7 @@ class Navbar extends Component {
                       this.state.pendingBoards.map(sentBoard => {
                         return (
                           <Link to={`/SingleBoard/${sentBoard.board}`}>
-                            <List.Item icon='mail' content={`${sentBoard.sender} sent you a board!`} />
+                          <List.Item icon='mail' content={`${sentBoard.sender} sent you a board!`} />
                           </Link>
                         )
                       })
@@ -167,7 +155,7 @@ class Navbar extends Component {
                 </Menu.Item>
               }
               {/*</Link>*/}
-
+              
             </Menu>
           )
         }

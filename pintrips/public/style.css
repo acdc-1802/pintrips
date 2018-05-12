@@ -251,6 +251,13 @@ body {
   z-index: 3;
   }
 
+.nav-fixed {
+  table-layout: fixed;
+  position: relative;
+}
+/* $('.ui.sticky')
+  .sticky('refresh')
+; */
   #name {
     font-family: 'Special Elite', cursive;
     font-size: 175%;
