@@ -35,15 +35,15 @@ export class PostCardStamp extends Component {
   render() {
     const userEmail = this.props.withAuth.auth.currentUser.email
     return (
-      <div>
-        <div  className='postcard-logo'>
-          <img id='logo' alt='logo' src='/attributes/logo.png' />
-        </div>
-        <div className="stamp">
+      <div className="stamp-logo">
+      <div className="stamp">
           <div className="stamp-line">{this.state.city}</div>
           <div className="stamp-line">{this.state.state}</div>
           <div className="stamp-line">{this.state.country}</div>
           <div className="stamp-line">{this.state.date}</div>
+        </div>
+        <div className="postcard-logo-div">
+          <img className='postcard-logo' alt='logo' src='/attributes/logo.png' />
         </div>
       </div>
     )
