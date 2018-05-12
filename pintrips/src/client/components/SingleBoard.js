@@ -295,7 +295,7 @@ class SingleBoard extends Component {
                     }
 
                     {
-                      !this.state.editLabel &&
+                      !this.state.editLabel && this.state.openStatus === 'open' &&
                       <Icon name='write' color='black' size='large' fitted={true} onClick={() => (<Button onClick={this.toggleEditLabel()} />)} />
                     }
                   </div>
@@ -317,7 +317,7 @@ class SingleBoard extends Component {
 
                     }
                     {
-                      this.state.selectedPin.visited &&
+                      this.state.selectedPin.visited && this.state.openStatus === 'open' &&
                       <Icon name='remove' color='grey' size='big' fitted={true} onClick={() => (<Button onClick={this.markAsUnvisited(this.state.selectedPin.pinId)} />)} />
                     }
                     {
