@@ -5,6 +5,7 @@ import { withAuth } from 'fireview';
 import { Button, Icon } from 'semantic-ui-react';
 import PostCardStamp from './PostCardStamp';
 import PostCardMap from './PostCardMap';
+import PostCardTypeText from './PostCardTypeText';
 
 require('firebase/firestore');
 
@@ -38,10 +39,13 @@ export class PostCard extends Component {
       <div className='postcard-container'>
       {
         this.state.currentCoordinates.length
-        ? <PostCardStamp currentCoord={this.state.currentCoordinates}/>
+        ? <div>
+            {/* <PostCardStamp currentCoord={this.state.currentCoordinates}/> */}
+            <PostCardMap currentCoord={this.state.currentCoordinates}/>
+            <PostCardTypeText currentCoord={this.state.currentCoordinates}/>
+          </div>
         : null
       }
-      <PostCardMap />
       </div>
     )
   }

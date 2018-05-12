@@ -2,15 +2,13 @@ import React, { Component } from 'react';
 import { Map, withAuth } from 'fireview';
 import { Image, Button, Icon } from 'semantic-ui-react';
 
-export class PostCardStamp extends Component {
+export class PostCardTypeText extends Component {
   constructor(props) {
     super(props);
     this.state = {
       city: '',
       state: '',
-      country: '',
-      date: new Date().toLocaleDateString(),
-      sentPostcard: false
+      country: ''
     }
   }
 
@@ -25,30 +23,20 @@ export class PostCardStamp extends Component {
         this.setState({
           city: myJson.features[0].context[1].text,
           state: myJson.features[0].context[4].text,
-          country: myJson.features[0].context[5].text,
-          sentPostcard: true
+          country: myJson.features[0].context[5].text
         })
       })
       .catch(err => console.log('error', err))
   }
 
   render() {
-    const userEmail = this.props.withAuth.auth.currentUser.email
     return (
-      <div>
-        <div  className='postcard-logo'>
-          <img id='logo' alt='logo' src='/attributes/logo.png' />
-        </div>
-        <div className="stamp">
-          <div className="stamp-line">{this.state.city}</div>
-          <div className="stamp-line">{this.state.state}</div>
-          <div className="stamp-line">{this.state.country}</div>
-          <div className="stamp-line">{this.state.date}</div>
-        </div>
+      <div className="postcard-typewriter-text">
+        Greetings from {this.state.city}, {this.state.state}!
       </div>
     )
   }
 
 }
 
-export default withAuth(PostCardStamp)
+export default withAuth(PostCardTypeText)

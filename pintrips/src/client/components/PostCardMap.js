@@ -5,15 +5,12 @@ import { Map, withAuth } from 'fireview';
 import { Image, Button, Icon } from 'semantic-ui-react';
 
 export class PostCardMap extends Component {
-  componentDidMount () {
-
-    // https://api.mapbox.com/v4/mapbox.satellite/-76.9,38.9,5/1000x1000.jpg?access_token={your_access_token}
-
-  }
 
   render () {
+    console.log('PROPS IN MAP', this.props)
     return (
-      <h1>PostCardMap</h1>
+      <Image src={`https://api.mapbox.com/styles/v1/mapbox/cj3kbeqzo00022smj7akz3o1e/static/${this.props.currentCoord[1]},${this.props.currentCoord[0]},13,0,60/700x400?access_token=pk.eyJ1IjoiY2lsYXZlcnkiLCJhIjoiY2pmMW1paDd0MTQ0bzJwb2Rtemdna2g0MCJ9.64yg764mTUOrL3p77lXGSQ`} className ="postcard-map" rounded/>
+
     )
   }
 }
