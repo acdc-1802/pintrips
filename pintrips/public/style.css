@@ -1,8 +1,9 @@
 body {
   font-family: sans-serif;
   background-color: #f9f9f9;
+  height: auto;
  }
- 
+
  a {
   text-decoration: none;
  }
@@ -23,7 +24,6 @@ body {
   flex-direction: column;
   flex-wrap: wrap;
  }
- 
  .card-group {
   display: flex;
   padding: 15px;
@@ -36,7 +36,7 @@ body {
  .card-group a {
   color: #515151;
  }
- 
+
  .card-content {
   padding: 5px 5px 0 5px;
  }
@@ -78,11 +78,11 @@ body {
   display: flex;
   margin-top: 8em;
 }
- 
+
 .item#create-btn {
   align-self: right;
 }
- 
+
 .ind-card {
   min-width: 30vw;
   display: flex;
@@ -95,14 +95,58 @@ body {
   width: 100%;
 }
 
- 
- 
+ .forms {
+   display: flex;
+   flex-direction: column
+ }
+
+ .location-bar {
+   position: absolute;
+   top: 10vh;
+   border: 3px solid green;
+  }
+
+  .login-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    width: 60%;
+    margin: 10em auto auto;
+  }
+
+  .logo{
+    display: flex;
+    width: 2em;
+  }
+
+  #logo {
+    width: 15%;
+    height: 15%;
+    margin: 3% 0 3% 3%;
+    min-width: 5em;
+  }
+
+#message-box {
+  height: 15%vh;
+}
+
+.user-nav {
+  display: flex;
+  flex-direction: column;
+  height: 4em;
+  flex-grow: 1;
+  vertical-align: baseline;
+  margin-right: 5px;
+  justify-content: flex-end;
+}
+
 .location-bar {
   position: absolute;
   top: 10vh;
   border: 3px solid green;
 }
-  
+
 .login-container {
   display: flex;
   flex-direction: column;
@@ -116,7 +160,7 @@ body {
   display: flex;
   width: 2em;
 }
-  
+
 #logo {
   width: 15%;
   height: 15%;
@@ -145,7 +189,7 @@ body {
   .mapboxgl-popup-content {
     text-align: center;
   }
- 
+
 #menu {
   display: flex;
   z-index: 3;
@@ -162,7 +206,7 @@ body {
 #menu * {
   padding: 0 .5em;
 }
-  
+
 #myboards  {
   margin-left: 10px;
 }
@@ -186,7 +230,7 @@ body {
   font-size: 175%;
   margin-left: 1.75em;
 }
-  
+
 .navbar {
   display: flex;
   margin-top: 0;
@@ -198,8 +242,97 @@ body {
   width: 100vw;
   background-color: #f9f9f9;
   z-index: 3;
-  } 
+  }
 
+  #name {
+    font-family: 'Special Elite', cursive;
+    font-size: 175%;
+    margin-left: 1.75em;
+  }
+
+  .postcard-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    border: 1px solid rbg(188,143,143);
+    border-radius: 2%;
+    width: 80vw;
+    height: 75vh;
+    box-shadow: 10px 10px 8px #888888;
+    background-color:rgb(255,245,238);
+    z-index: -1;
+    position: absolute;
+    left: 50%;
+    top: 60%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    text-align: center;
+  }
+
+ .postcard-form-style {
+  background: transparent;
+  border: none;
+  font-size: 1em;
+  outline: none;
+  line-height: 1.3em;
+ }
+  .postcard-front {
+    margin: auto;
+  }
+
+  .postcard-label {
+    text-align: left;
+  }
+
+  .postcard-map {
+    border: 1px solid rbg(188,143,143);
+    margin-bottom: 2em;
+  }
+
+  .postcard-map-message {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .postcard-message-body {
+    width: 20vw;
+    height: 40vh;
+    margin: 20em 4em 8em 1em;
+    text-align: left;
+    font-size: 1em;
+  }
+
+.postcard-typewriter-text {
+  margin: 3em;
+  color: rgb(31, 29, 29);
+  font-size: 1.2em;
+  font-family: monospace;
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  border-right: .10em solid #EBEBEB; /* typewriter cursor */
+  white-space: nowrap; /* Keeps the content on a single line */
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  letter-spacing: .15em; /* Adjust as needed */
+  animation:
+    typing 3.5s steps(30, end),
+    blink-caret .5s step-end infinite;
+}
+
+/* The typing effect */
+@keyframes typing {
+  from { width: 0 }
+  to { width: 40% }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: rgb(36, 25, 6) }
+}
+
+  .navbar a {
+    color: #515151;
+  }
 .navbar a {
   color: #515151;
 }
@@ -224,7 +357,7 @@ body {
     border-radius: 5px;
     border: none;
    }
-  
+
    #pin-options img {
     height: 45px;
     width: 45px;
@@ -232,7 +365,7 @@ body {
  .routes {
   display: flex;
  }
- 
+
  .search-container {
   position: fixed;
   top: 8em;
@@ -276,14 +409,14 @@ body {
   justify-content: center;
   border-radius: 5px;
  }
- 
+
  .search-coords input {
   display: flex;
   padding: .3em;
   width: 20em;
   border-radius: 1px;
  }
- 
+
  .search-coords button {
   display: flex;
   height: 1.7em;
@@ -292,7 +425,7 @@ body {
   text-align: center;
   border-radius: 50%;
  }
- 
+
  .sign-up {
   font-family: sans-serif;
   font-size: 20px;
@@ -310,29 +443,96 @@ body {
   margin-left: 20%;
   margin-right: 20%;
  }
- 
+
  .side-button {
   display: flex;
   flex-direction: column;
   padding: 10px;
  }
 
+ /* .stamp{
+    height:100px;
+    width:100px;
+    left:200px;
+    top:20px;
+    border-radius:5px;
+    position:relative;
+    background-color:gray;
+    border: 2px dashed white;
+    color: white;
+    margin: -75px auto 0px auto;
+    z-index: -1;
+    -webkit-animation-name: pulse;
+    animation-name: pulse;
+    animation-delay:2.5s;
+    -webkit-animation-delay:2.5s;
+    -webkit-animation-duration: 0.5s;
+    animation-duration: 0.5s;
+    opacity: 0;
+    -webkit-animation-fill-mode:forwards;
+    animation-fill-mode:forwards;
+
+} */
+
+.stamp {
+  position: absolute;
+  top: 10%;
+  right: 125px;
+  width: 20vw;
+  /* height: 21vh; */
+  z-index:1;
+  font-family: Arial,sans-serif;
+  -webkit-transform: rotate(15deg); /* Safari */
+  -moz-transform: rotate(15deg); /* Firefox */
+  -ms-transform: rotate(15deg); /* IE */
+  -o-transform: rotate(15deg); /* Opera */
+  transform: rotate(15deg);
+  font-size:1.2em;
+  color:#c00;
+  background:#fff;
+  border:solid 4px #c00;
+  padding:5px;
+  border-radius:50%;
+  zoom:1;
+  filter:alpha(opacity=20);
+  opacity:0.2;
+  -webkit-text-shadow: 0 0 2px #c00;
+  text-shadow: 0 0 2px #c00;
+  box-shadow: 0 0 2px #c00;
+}
+
+/* @-webkit-keyframes pulse {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity:.50;
+    transform-origin: 50% 50%;
+    transform: rotate(-7deg) scale(5);
+    transition: all .3s cubic-bezier(0.6, 0.04, 0.98, 0.335);
+  }
+  100% {
+    opacity:1;
+    transform: rotate(55deg) scale(1);
+  };
+} */
+
  .title {
   display: flex;
   position: fixed;
   color: black;
-  
+
  }
  .ui.form .fields {
   display: flex;
   flex-direction: column;
  }
- 
+
  .ui.form .fields .field {
   width: 50%;
   min-width: 100px;
  }
- 
+
 
 
 /*-----OLD CSS GRAVEYARD------*/
