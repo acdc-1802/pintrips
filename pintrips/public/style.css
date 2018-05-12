@@ -126,9 +126,8 @@ body {
     margin: 3% 0 3% 3%;
     min-width: 5em;
   }
-
 #message-box {
-  height: 15%vh;
+  height: 9em;
 }
 
 .user-nav {
@@ -284,16 +283,7 @@ body {
     text-align: left;
   }
 
-  .postcard-logo-div {
-    display: relative;
-    width: 10em;
-    float: right;
-  }
 
-  .postcard-logo {
-    width: 14vw;
-    z-index:1
-  }
 
   .postcard-map {
     border: 1px solid rbg(188,143,143);
@@ -308,15 +298,21 @@ body {
 
   .postcard-message-container {
     display: flex;
-    flex-direction: column
+    flex-direction: column;
+    height: 70vh;
+    justify-content: center;
   }
 
   .postcard-message-body {
-    width: 20vw;
-    height: 40vh;
-    margin: 20em 4em 8em 1em;
+    align-content: center;
+    font-size: 1.5em;
+    line-height: 1.7em;
+  }
+  .postcard-message-form {
     text-align: left;
-    font-size: 1em;
+    clear: bloth;
+    float: left;
+    margin-left: 4em;
   }
 
 .postcard-typewriter-text {
@@ -337,7 +333,7 @@ body {
 /* The typing effect */
 @keyframes typing {
   from { width: 0 }
-  to { width: 40% }
+  to { width: 60% }
 }
 
 /* The typewriter cursor effect */
@@ -346,9 +342,6 @@ body {
   50% { border-color: rgb(36, 25, 6) }
 }
 
-  .navbar a {
-    color: #515151;
-  }
 .navbar a {
   color: #515151;
 }
@@ -466,12 +459,23 @@ body {
   padding: 10px;
  }
 
-.stamp {
-  display: inline-block;
+
+.postcard-logo {
+  width: 14vw;
+  z-index:1
+}
+
+ .stamp-logo {
   position: relative;
-  top: 2em;
-  right: -15em;
-  width: 20vw;
+  top: -7em;
+  right: -28em;
+  width: 40vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  }
+
+.stamp {
   z-index:1;
   font-family: Arial,sans-serif;
   -webkit-transform: rotate(20deg);
@@ -479,10 +483,10 @@ body {
   -ms-transform: rotate(20deg);
   -o-transform: rotate(20deg);
   transform: rotate(20deg);
-  font-size:1.2em;
+  font-size:1.6em;
   color: #F7BAB7;
   border:solid 4px #F7BAB7;
-  padding:5px;
+  padding:2em;
   border-radius:50%;
   zoom:1;
   filter:alpha(opacity=20);
