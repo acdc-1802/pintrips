@@ -37,7 +37,7 @@ export class PostCard extends Component {
           <div>
             <PostCardStamp currentCoord={this.state.currentCoordinates}/>
           </div>
-          <form className = "postcard-form">
+          <form className = "postcard-message-body">
             <div className="field">
               <label className="postcard-label">To: </label>
               <input type="text" name="sendEmail" placeholder="email" className="postcard-form-style"/>
