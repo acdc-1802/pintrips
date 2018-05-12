@@ -158,7 +158,7 @@ class MapCard extends Component {
         <Card id={this.props.board.locked==='open'? 'mapcard':'mapcard-closed'}>
           <Segment raised>
             {
-              <Label as='a' color='white' size='large' corner='right' onClick={this.favoriteBoard} icon={this.state.starred ? 'star':'empty star'} />
+              <Label as='a' color="white" size='large' corner='right' onClick={this.favoriteBoard} icon={this.state.starred ? 'star':'empty star'} />
             }
             <Map
               style={'mapbox://styles/destinmcmurrry/cjgy8hinv00192rp4obrfj9qq'}
