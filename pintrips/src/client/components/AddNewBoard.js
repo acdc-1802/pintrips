@@ -23,22 +23,6 @@ class AddNewBoard extends Component {
     this.submitCoordinates = this.submitCoordinates.bind(this);
   }
 
-  // componentDidMount() {
-  //   if ("geolocation" in navigator) {
-  //     function success(position) {
-  //       let latitude  = position.coords.latitude;
-  //       let longitude = position.coords.longitude;
-  //       console.log('SUCCESS', latitude, longitude)
-  //       return [latitude, longtitude]
-  //     }
-  //     function error() {
-  //       console.log("Unable to retrieve your location");
-  //     }
-  //     navigator.geolocation.getCurrentPosition(success, error);
-  //   }
-  // }
-
-
   handleSubmit(e) {
     e.preventDefault();
     const creator = this.props._user.uid
