@@ -36,8 +36,8 @@ export class PostCardStamp extends Component {
     const userEmail = this.props.withAuth.auth.currentUser.email
     return (
       <div>
-        <div  className='postcard-logo'>
-          <img id='logo' alt='logo' src='/attributes/logo.png' />
+        <div className="postcard-logo-div">
+          <img className='postcard-logo' alt='logo' src='/attributes/logo.png' />
         </div>
         <div className="stamp">
           <div className="stamp-line">{this.state.city}</div>

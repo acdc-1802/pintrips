@@ -30,7 +30,7 @@ export class PostCard extends Component {
   render() {
     const userEmail = this.props.withAuth.auth.currentUser.email
     return (
-      <div>
+      <div className="postcard-message-container">
       {
         this.state.currentCoordinates.length
         ? <div>
