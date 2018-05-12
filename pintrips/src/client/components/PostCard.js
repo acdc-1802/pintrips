@@ -50,12 +50,12 @@ export class PostCard extends Component {
   }
 
   rotate() {
-      if (this.state.cardIsFront) {
+      // if (this.state.cardIsFront) {
       this.rotateToBack();
-    } else {
-      this.rotateToFront();
-    }
-    this.setState({ cardIsFront: !this.state.cardIsFront })
+    // } else {
+    //   this.rotateToFront();
+    // }
+    this.setState({ cardIsFront: false })
   }
 
   rotateToBack() {
