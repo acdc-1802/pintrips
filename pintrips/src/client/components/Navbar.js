@@ -179,7 +179,7 @@ class Navbar extends Component {
                     trigger={
                       <div>
                       
-                      <Button icon basic color="black" onClick={handleLogout}>  <Icon name= "log out"/></Button>
+                        <Icon name= "log out" onClick={handleLogout} size={"large"}/>
                       </div>
                     }
                     content={'Logout'} />
