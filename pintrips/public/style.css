@@ -75,7 +75,17 @@ body {
 
 .footer .dropdown {
   display: flex;
-  margin: 0 1em;
+  margin: .1em 1em 0 1em
+}
+
+#close-popup {
+  display: flex;
+  border: none;
+  margin: auto auto 4px 0;
+}
+
+#want-to-go {
+  margin-right: 17px;
 }
 
 .autocomplete-dropdown-container {
@@ -94,6 +104,10 @@ body {
   font-family: 'Special Elite', cursive;
   height: 2em;
   padding-top: 5px 1px 1px 0;
+}
+
+#checkmark {
+  border: none;
 }
 
 .footer {
@@ -416,6 +430,7 @@ body {
     height: 45px;
     width: 45px;
    }
+
  .routes {
   display: flex;
  }
@@ -444,6 +459,7 @@ body {
  #pin-options button {
   border-radius: 5px;
   border: none;
+  background-color: white;
  }
  .options-container {
    display: flex;
