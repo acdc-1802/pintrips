@@ -218,13 +218,15 @@ body {
   border: solid 2px #dededf;
   padding: 10px;
   border-radius: 5px;
-
 }
+
 #menu * {
   /* padding: .5em .5em .5em .5em; */
   margin: .5em
-  
+}
 
+.ui.menu:after {
+  content: none;
 }
 
 #message-box {
