@@ -69,9 +69,8 @@ body {
 } */
 
 #dropdown {
-  padding: 12px;
-  margin-left: 20px;
-  margin-top: 9px;
+  margin-left: 15px;
+  margin-top: 7px;
 }
 
 .footer .dropdown {
@@ -94,7 +93,7 @@ body {
  #email {
   font-family: 'Special Elite', cursive;
   height: 2em;
-  padding-top: 5px;
+  padding-top: 5px 1px 1px 0;
 }
 
 .footer {
@@ -135,8 +134,7 @@ body {
 }
 
 .item#create-btn {
-  align-self: right;
-  margin-top: 10px;
+  padding-top: 9px;
 }
 
 .ind-card {
@@ -206,15 +204,7 @@ body {
 }
 
 #logout {
-  font-size: 12px;
-  width: 4em;
-  color: #515151;
-  border-radius: 5px;
-  border: solid 1px #515151;
-  padding: 0;
-  margin: 0 0 .5em 0;
-  background-color: white;
-  justify-content: center;
+  padding-top: 1px;
 }
   #mapcard {
     width: auto;
@@ -251,7 +241,7 @@ body {
 
 .mapboxgl-map {
   position: fixed;
-  top: 9em;
+  top: 7.5em;
 }
 
 .ui.menu:after {
@@ -282,7 +272,7 @@ body {
 
 #name {
   font-family: 'Special Elite', cursive;
-  font-size: 175%;
+  font-size: 250%;
   margin-left: 1.75em;
 }
 
@@ -407,6 +397,7 @@ body {
    margin-top: 4.5em;
    z-index: 3;
    width: 100vw;
+   height: 3em;
    justify-content: space-between;
 }
 #notification {
