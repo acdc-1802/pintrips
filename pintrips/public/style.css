@@ -239,7 +239,7 @@ body {
   margin: .5em
 }
 
-.mapboxgl-map #single-board {
+.board-container .mapboxgl-map {
   position: fixed;
   top: 7.5em;
 }
