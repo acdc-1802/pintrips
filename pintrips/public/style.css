@@ -57,14 +57,33 @@ body {
   padding: 12px;
   margin-left: 20px;
 }
+#dropup {
+  position: center;
+  padding: 15px;
+  margin-top: 1em;
+  margin-left: 2em;
+}
  #email {
   font-family: 'Special Elite', cursive;
   height: 2em;
   padding-top: 5px;
 }
-.forms {
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  background-color: white;
   display: flex;
-  flex-direction: column
+  padding: .7em;
+  z-index: 4;
+  
+}
+.forms {
+  margin-left: 25%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%
 }
 .form-group {
   padding-top: 2em;
@@ -78,10 +97,17 @@ body {
   display: flex;
   margin-top: 8em;
 }
-
+ 
+.in-footer {
+  /* display: flex; */
+  justify-content: center;
+  margin-left: 2em;
+  margin-top: .5em;
+}
 .item#create-btn {
   align-self: right;
 }
+ 
 
 .ind-card {
   min-width: 30vw;
@@ -95,10 +121,7 @@ body {
   width: 100%;
 }
 
- .forms {
-   display: flex;
-   flex-direction: column
- }
+ 
 
  .location-bar {
    position: absolute;
@@ -111,7 +134,7 @@ body {
     flex-direction: column;
     justify-content: center;
     text-align: center;
-    width: 60%;
+    width: 100%;
     margin: 10em auto auto;
   }
 
@@ -126,19 +149,8 @@ body {
     margin: 3% 0 3% 3%;
     min-width: 5em;
   }
-#message-box {
-  height: 9em;
-}
 
-.user-nav {
-  display: flex;
-  flex-direction: column;
-  height: 4em;
-  flex-grow: 1;
-  vertical-align: baseline;
-  margin-right: 5px;
-  justify-content: flex-end;
-}
+
 
 .location-bar {
   position: absolute;
@@ -191,19 +203,30 @@ body {
 
 #menu {
   display: flex;
+  /* flex-direction: row; */
+  /* justify-content: center; */
+  width: 100vw;
   z-index: 3;
-  height: 2em;
-  position: absolute;
-  bottom: 0;
+  height: 5em;
+  position: fixed;
+  bottom: 2em;
   background-color: rgb(255, 255, 255, .9);
-  margin: 0 auto;
+  margin: 0;
   align-self: center;
   border: solid 2px #dededf;
-  padding: 4px 0;
+  padding: 10px;
   border-radius: 5px;
+
 }
 #menu * {
-  padding: 0 .5em;
+  /* padding: .5em .5em .5em .5em; */
+  margin: .5em
+  
+
+}
+
+#message-box {
+  height: 9em;
 }
 
 #myboards  {
@@ -376,10 +399,11 @@ body {
  }
 
  .search-container {
-  position: fixed;
-  top: 8em;
-  width: 100%;
+  /* position: fixed; */
+  /* top: 8em; */
+  /* width: 100%; */
   color: white;
+  /* padding: 10px; */
  }
 
  .autocomplete-dropdown-container {
@@ -408,6 +432,10 @@ body {
   height: 45px;
   width: 45px;
  }
+ .postcard-logo {
+  width: 14vw;
+  z-index:1
+}
 
  .search-coords {
   display: flex;
@@ -421,7 +449,7 @@ body {
 
  .search-coords input {
   display: flex;
-  padding: .3em;
+  /* padding: .3em; */
   width: 20em;
   border-radius: 1px;
  }
@@ -458,12 +486,13 @@ body {
   flex-direction: column;
   padding: 10px;
  }
-
-
-.postcard-logo {
-  width: 14vw;
-  z-index:1
+ .sticky {
+  position: absolute;
+  bottom: 0;
 }
+
+
+
 
  .stamp-logo {
   position: relative;
