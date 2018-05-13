@@ -15,6 +15,7 @@ class SignupPage extends Component {
     last: '',
     email: '',
     password: '',
+    profileImg: 'https://fsmedia.imgix.net/66/36/85/56/af88/443a/a581/8952697f0fb1/morty-just-cant-hang-with-all-that-truth-tortoise-shit-stuck-in-his-head.jpeg',
     error: false
   };
 
@@ -32,6 +33,8 @@ class SignupPage extends Component {
     const last = event.target.last.value;
     const email = event.target.email.value;
     const password = event.target.password.value;
+    const profileImg = this.state.profileImg;
+
     firebase.auth().createUserWithEmailAndPassword(email, password)
       .then(newUser => {
         console.log("Firetore auth created a new user with an id of: ", newUser.uid)
@@ -40,7 +43,8 @@ class SignupPage extends Component {
           username: username,
           id: newUser.uid,
           first: first,
-          last: last
+          last: last,
+          profileImg: profileImg
         })
       })
       .then(newUserDoc => (history.push("/HomePage")))
