@@ -5,7 +5,7 @@ import db from '../firestore';
 import firebase from 'firebase';
 import { withAuth } from 'fireview';
 import history from '../../history';
-import { Button, Icon } from 'semantic-ui-react';
+import { Button, Card, Dropdown, Icon, Input, Checkbox, Segment, Label, Menu, Search } from 'semantic-ui-react';
 
 require('firebase/firestore');
 
@@ -362,20 +362,36 @@ class SingleBoard extends Component {
             )
           }
         </Map>
-        <div id='menu'>
-          <p>style: </p>
-          <input onChange={this.switchStyle} id='basic' type='radio' name='rtoggle' value={pintripsStyle} />
-          <label htmlFor='pintrips'>pintrips</label>
-          <input onChange={this.switchStyle} id='popArt' type='radio' name='rtoggle' value={moonLightStyle} />
-          <label htmlFor='moonlight'>moonlight</label>
-          <input onChange={this.switchStyle} id='popArt' type='radio' name='rtoggle' value={vintageStyle} />
-          <label htmlFor='vintage'>vintage</label>
+        
+        <div className="footer">
+        <Dropdown icon="settings" floating upward="true">
+       
+          <Dropdown.Menu> 
+            <Button.Group basic vertical>
+              <Dropdown.Item> 
+                  <Button basic content= "Pintrips Style" onClick={this.switchStyle} id='basic' type='radio' name='rtoggle' value={pintripsStyle} />
+                </Dropdown.Item>
+              <Dropdown.Item> 
+                  <Button basic content=" Moonlight" onClick={this.switchStyle} id='popArt' type='radio' name='rtoggle' value={moonLightStyle} />
+                </Dropdown.Item>
+              <Dropdown.Item> 
+                  <Button basic content="Vintage" onClick={this.switchStyle} id='popArt' type='radio' name='rtoggle' value={vintageStyle} />
+                </Dropdown.Item>
+              </Button.Group>
+          </Dropdown.Menu> 
+        </Dropdown>
+        
+        
+        
+      
+        <div className="in-footer">
+              <LocationSearch forAddPin={true} updateBoardPins={this.selectPlaceFromSearchBar}/>
+            </div> 
+          
         </div>
-        <div className='search-container'>
-          <div className='search-coords'>
-            <LocationSearch forAddPin={true} updateBoardPins={this.selectPlaceFromSearchBar} />
-          </div>
-        </div>
+        
+          
+        
       </div>
     )
   }
