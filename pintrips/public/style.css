@@ -254,7 +254,7 @@ body {
 }
 
 .board-container .mapboxgl-map {
-  position: fixed;
+  position: absolute;
   top: 7.5em;
 }
 
