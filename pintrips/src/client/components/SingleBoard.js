@@ -161,23 +161,15 @@ class SingleBoard extends Component {
     )
     .then(() => this.setState({ editLabel: false}))
     .catch(err => console.error('Unable to change label', err))
-    
   }
+
   handlePinClick = pin => {
-    if (this.state.selectedPin) {
-      this.setState({
-        selectedPin: null,
-        zoom: [14],
-        newLocation: null
-      })
-    } else {
       this.setState({
         selectedPin: pin,
         center: pin.coords,
-        zoom: [14.5],
+        zoom: [13.5],
         newLocation: null
       })
-    }
   }
 
   markAsVisited = pinId => {
@@ -189,6 +181,7 @@ class SingleBoard extends Component {
     )
       .catch(error => console.error('Unable to mark as visited', error))
   }
+
   markAsUnvisited = pinId => {
     const boardId = this.props.match.params.boardId;
     db.collection('boards').doc(boardId).collection('pins').doc(pinId).update(
@@ -223,7 +216,7 @@ class SingleBoard extends Component {
           }}
           onClick={this._onClickMap.bind(this)}
           center={this.state.center}>
-          <ZoomControl position='bottom-right' />
+          <ZoomControl id='zoom-btn' position='top-right' />
           <Layer
             type='symbol'
             id='solidPins'
@@ -280,6 +273,7 @@ class SingleBoard extends Component {
                 offset={50}
               >
                 <div>
+                  <button onClick={()=> this.setState({ selectedPin: null, zoom: [13], newLocation: null }) } id='close-popup'><i class="window close outline icon" size='medium'></i></button>
                   <div>
                     {
                       this.state.editLabel ?
@@ -333,29 +327,32 @@ class SingleBoard extends Component {
           }
           {
             this.state.newLocation && this.state.openStatus === 'open' && (
-              <Popup
-                coordinates={this.state.newLocation}
-              >
-                <p>Add new pin?</p>
-                <div id='pin-options'>
-                  <button onClick={() => this.handleShowLabel(false)}><img src='/attributes/hollowPinOption.png' /></button>
-                  <button onClick={() => this.handleShowLabel(true)}><img src='/attributes/pinOption.png' /></button>
-                </div>
-              </Popup>
-            )
-          }
-          {
-            this.state.showLabel && (
+              !this.state.showLabel
+              ? 
+                <Popup
+                  coordinates={this.state.newLocation}
+                >
+                  <button id='close-popup' onClick={()=> this.setState({ newLocation: null }) } id='close-popup'><i class="window close outline icon" size='medium'></i></button>
+                  <p>Add new pin?</p>
+                  <div id='pin-options'>
+                    <button onClick={() => this.handleShowLabel(false)}><img src='/attributes/hollowPinOption.png' /></button>
+                    <button onClick={() => this.handleShowLabel(true)}><img src='/attributes/pinOption.png' /></button>
+                    <div>
+                      <small id='want-to-go'>want to go</small>
+                      <small id='here-now'>here now</small>
+                    </div>
+                  </div>
+                </Popup>
+              :
               <Popup
                 coordinates={this.state.newLocation}
               >
                 <div>
-                  <button onClick={() => this.setState({ showLabel: null })}>back</button>
-                  <p> </p>
+                  <button id='close-popup' onClick={() => this.setState({ showLabel: null })}><i class="chevron left icon"></i></button>
                   <label>
                     <p>Label:</p>
                     <input type="text" name='newLabel' placeholder="ex: Best Ice Cream!" value={this.state.newLabel} onChange={this.handleLabelChange} />
-                    <button onClick={this.handlePinAdd}>add pin</button>
+                    <button id='checkmark' onClick={this.handlePinAdd}><i class="check icon"></i></button>
                   </label>
                 </div>
               </Popup>
