@@ -53,9 +53,8 @@ class Navbar extends Component {
             }
           }
           let username = doc.data().username;
-          return [username, pendingBoards]
+          this.setState({notifications: sum, username, pendingBoards})
         })
-        .then(info => { this.setState({ notifications: sum, username: info[0], pendingBoards: info[1] }) })
         .catch(error => console.error('Could not get notifications', error))
   }
   render() {
@@ -136,7 +135,7 @@ class Navbar extends Component {
                     content={'Add a new board'} />
                 </Menu.Item>
               </Link>
-
+              {/*}
               {!this.state.notifications &&
                 <Menu.Item borderless='true' id='navbar-notifications'>
                   <Popup
@@ -146,12 +145,13 @@ class Navbar extends Component {
               }
               {
                 this.state.notifications > 0 &&
+              */}
                 <Menu.Item borderless='true' id='navbar-notifications'>
                   <Popup
                     trigger={
                       <div>
                         <Icon name='bell outline' size={"medium"} />
-                        {this.state.notifications && <Label color="red" size={'mini'} circular>{this.state.notifications}
+                        {this.state.notifications>0 && <Label color="red" size={'mini'} circular>{this.state.notifications}
                         </Label>}
                       </div>
                     }
@@ -173,6 +173,7 @@ class Navbar extends Component {
                     position='bottom center'
                   />
                 </Menu.Item>
+<<<<<<< HEAD
               }
                 <Menu.Item >
                 <Popup
@@ -185,6 +186,9 @@ class Navbar extends Component {
                     content={'Logout'} />
                
                 </Menu.Item>
+=======
+              
+>>>>>>> 31658b4a082feb7293d6725a83a037868a4142c6
               {/*</Link>*/}
 
             </Menu>

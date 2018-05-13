@@ -97,7 +97,6 @@ class MapCard extends Component {
       .then(snapshot => snapshot.forEach(doc => {
         this.state.users.push({ key: doc.data().username, value: doc.data().username, text: doc.data().username })
       }))
-      .then(() => console.log('users on state', this.state.users))
       .catch(error => console.error('Unable to get users', error))
   }
   checkStatus(boardStatus) {

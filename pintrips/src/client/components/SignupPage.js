@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Form } from 'semantic-ui-react';
+import { Form, Message } from 'semantic-ui-react';
 import firebase from 'firebase';
 import db from '../firestore';
 import history from '../../history';
@@ -14,7 +14,8 @@ class SignupPage extends Component {
     first: '',
     last: '',
     email: '',
-    password: ''
+    password: '',
+    error: false
   };
 
   handleChange = event => {
@@ -44,13 +45,14 @@ class SignupPage extends Component {
       })
       .then(newUserDoc => (history.push("/HomePage")))
       .catch(error => {
+        this.setState({error: true})
         console.log(error)
       })
   }
   render() {
     return (
       <div className="signup-container">
-        <Form onSubmit={this.handleSignup}>
+        <Form onSubmit={this.handleSignup} error>
           <div className='login-container'>
             <h3> Create An Account </h3>
             <div className="form-group">
@@ -119,8 +121,20 @@ class SignupPage extends Component {
                 />
               </div>
             </div>
+            {
+              this.state.error &&
+              <Message
+                  error
+                  header='Uh-oh Signup Unsuccessful!'
+                />
+            }
+            {
+              this.state.password < 6 ?
+              <Form.Button disabled type="submit" className="form-group">Sign Up</Form.Button>
+              :
+              <Form.Button active type="submit" className="form-group">Sign Up</Form.Button>
 
-            <Form.Button type="submit" className="form-group">Sign Up</Form.Button>
+            }
           </div>
         </Form>
         <br />
