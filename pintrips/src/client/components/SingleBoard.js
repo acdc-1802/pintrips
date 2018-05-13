@@ -213,7 +213,7 @@ class SingleBoard extends Component {
 
   render() {
     return (
-      <div className='board-container'>
+      <div className='board-container' id='single-board'>
         <Map
           style={this.state.style}
           zoom={this.state.zoom}
