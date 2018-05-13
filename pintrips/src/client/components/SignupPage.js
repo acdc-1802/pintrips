@@ -112,7 +112,7 @@ class SignupPage extends Component {
               <label className="col-md-2 control-label"> Password </label>
               <div className="col-md-10">
                 <input
-                  placeholder='Password'
+                  placeholder='Minimum 6 Characters'
                   className="form-control"
                   name='password'
                   type='password'
