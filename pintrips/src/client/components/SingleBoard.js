@@ -223,7 +223,7 @@ class SingleBoard extends Component {
           }}
           onClick={this._onClickMap.bind(this)}
           center={this.state.center}>
-          <ZoomControl position='bottom-right' />
+          <ZoomControl id='zoom-btn' position='top-right' />
           <Layer
             type='symbol'
             id='solidPins'

@@ -16,14 +16,17 @@ body {
   padding: 5px;
   margin-right: 10px;
  }
+ 
  .autocomplete-dropdown-container {
   color: black;
-}
+  }
+
  .board-container {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
  }
+
  .card-group {
   display: flex;
   padding: 15px;
@@ -40,35 +43,60 @@ body {
  .card-content {
   padding: 5px 5px 0 5px;
  }
+
  .card-description {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
+
  .container {
    display: flex;
    flex-direction: row;
  }
+
  .ui.container.container {
    width: 100vw;
  }
 
-.dropdown {
+ input.location-search-input {
+   width: 100%;
+ }
+
+/* 
+ input.location-search-input {
+  width: 100%;
+} */
+
+#dropdown {
   padding: 12px;
   margin-left: 20px;
   margin-top: 9px;
 }
+
+.footer .dropdown {
+  display: flex;
+  margin: 0 1em;
+}
+
+.autocomplete-dropdown-container {
+  position: absolute;
+  bottom: 3em;
+}
+
 #dropup {
   position: center;
   padding: 15px;
   margin-top: 1em;
   margin-left: 2em;
 }
+
  #email {
   font-family: 'Special Elite', cursive;
   height: 2em;
   padding-top: 5px;
 }
+
 .footer {
   position: fixed;
   bottom: 0;
@@ -77,8 +105,8 @@ body {
   display: flex;
   padding: .7em;
   z-index: 4;
-  
 }
+
 .forms {
   margin-left: 25%;
   display: flex;
@@ -86,6 +114,7 @@ body {
   justify-content: center;
   width: 100%
 }
+
 .form-group {
   padding-top: 2em;
 }
@@ -100,16 +129,15 @@ body {
 }
  
 .in-footer {
-  /* display: flex; */
-  justify-content: center;
-  margin-left: 2em;
-  margin-top: .5em;
+  display: flex;
+  width: 75vw;
+  margin: auto;
 }
+
 .item#create-btn {
   align-self: right;
   margin-top: 10px;
 }
- 
 
 .ind-card {
   min-width: 30vw;
@@ -122,8 +150,6 @@ body {
   flex-direction: column;
   width: 100%;
 }
-
- 
 
  .location-bar {
    position: absolute;
@@ -151,8 +177,6 @@ body {
     margin: 3% 0 3% 3%;
     min-width: 5em;
   }
-
-
 
 .location-bar {
   position: absolute;
@@ -223,6 +247,11 @@ body {
 #menu * {
   /* padding: .5em .5em .5em .5em; */
   margin: .5em
+}
+
+.mapboxgl-map {
+  position: fixed;
+  top: 9em;
 }
 
 .ui.menu:after {
@@ -309,8 +338,6 @@ body {
   .postcard-label {
     text-align: left;
   }
-
-
 
   .postcard-map {
     border: 1px solid rbg(188,143,143);
@@ -402,6 +429,11 @@ body {
   display: flex;
  }
 
+ .location-search {
+   display: flex;
+   width: 100%;
+ }
+
  .search-container {
   /* position: fixed; */
   /* top: 8em; */
@@ -429,17 +461,20 @@ body {
    justify-content: space-between;
    margin: 3px;
  }
+
  .options-container * {
    padding: 4px;
  }
+
  #pin-options img {
   height: 45px;
   width: 45px;
  }
+
  .postcard-logo {
   width: 14vw;
   z-index:1
-}
+  } 
 
  .search-coords {
   display: flex;
@@ -490,13 +525,11 @@ body {
   flex-direction: column;
   padding: 10px;
  }
+
  .sticky {
   position: absolute;
   bottom: 0;
 }
-
-
-
 
  .stamp-logo {
   position: relative;
@@ -570,78 +603,3 @@ body {
   width: 50%;
   min-width: 100px;
  }
-
-
-
-/*-----OLD CSS GRAVEYARD------*/
-
-
-  /*
-.App {
-  text-align: center;
-  background-color: #fff;
-  height: 100vh;
-  width: 100vw;
-  background-image: url("https://betanews.com/wp-content/uploads/2015/01/Earth.jpg");
-  background-attachment: fixed;
-  background-size: 50vw;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-.App-header {
-  background-color: #AFAAB9;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-
-.button {
-  padding: 10px;
-  margin-top: 10px;
-}
-
-#back {
-  font-size: 3em;
-  margin: 0 15px;
-  color: white;
-}
-
-#back a {
-  color: white;
-}
-
-
-/* .footer {
-  position: absolute;
-  bottom: 0;
-  width: calc(100vw);
-  background-color: white;
-  border-radius: 2em 2em 0 0;
-  border: solid 1px lightgrey;
-  z-index: 2;
-} */
-
-/*
-.side-bar {
-  margin-top: 20vh;
-  display: flex;
-  height: 100%;
-  width: 160px;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  /* background-color: rgb(97, 65, 65); Black */
-  /* overflow-x: hidden;
-  padding-top: 20px;
-} */
