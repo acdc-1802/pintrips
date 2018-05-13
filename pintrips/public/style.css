@@ -57,14 +57,33 @@ body {
   padding: 12px;
   margin-left: 20px;
 }
+#dropup {
+  position: center;
+  padding: 15px;
+  margin-top: 1em;
+  margin-left: 2em;
+}
  #email {
   font-family: 'Special Elite', cursive;
   height: 2em;
   padding-top: 5px;
 }
-.forms {
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  background-color: white;
   display: flex;
-  flex-direction: column
+  padding: .7em;
+  z-index: 4;
+  
+}
+.forms {
+  margin-left: 25%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%
 }
 .form-group {
   padding-top: 2em;
@@ -81,7 +100,9 @@ body {
  
 .in-footer {
   /* display: flex; */
-justify-content: center;
+  justify-content: center;
+  margin-left: 2em;
+  margin-top: .5em;
 }
 .item#create-btn {
   align-self: right;
@@ -100,10 +121,7 @@ justify-content: center;
   width: 100%;
 }
 
- .forms {
-   display: flex;
-   flex-direction: column
- }
+ 
 
  .location-bar {
    position: absolute;
@@ -116,7 +134,7 @@ justify-content: center;
     flex-direction: column;
     justify-content: center;
     text-align: center;
-    width: 60%;
+    width: 100%;
     margin: 10em auto auto;
   }
 
@@ -414,6 +432,10 @@ justify-content: center;
   height: 45px;
   width: 45px;
  }
+ .postcard-logo {
+  width: 14vw;
+  z-index:1
+}
 
  .search-coords {
   display: flex;
@@ -470,10 +492,7 @@ justify-content: center;
 }
 
 
-.postcard-logo {
-  width: 14vw;
-  z-index:1
-}
+
 
  .stamp-logo {
   position: relative;

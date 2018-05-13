@@ -5,7 +5,7 @@ import db from '../firestore';
 import firebase from 'firebase';
 import { withAuth } from 'fireview';
 import history from '../../history';
-import { Button, Card, Icon, Input, Checkbox, Segment, Label, Menu } from 'semantic-ui-react';
+import { Button, Card, Dropdown, Icon, Input, Checkbox, Segment, Label, Menu, Search } from 'semantic-ui-react';
 
 require('firebase/firestore');
 
@@ -295,7 +295,7 @@ class SingleBoard extends Component {
                     }
 
                     {
-                      !this.state.editLabel &&
+                      !this.state.editLabel && this.state.openStatus === 'open' &&
                       <Icon name='write' color='black' size='large' fitted={true} onClick={() => (<Button onClick={this.toggleEditLabel()} />)} />
                     }
                   </div>
@@ -317,7 +317,7 @@ class SingleBoard extends Component {
 
                     }
                     {
-                      this.state.selectedPin.visited &&
+                      this.state.selectedPin.visited && this.state.openStatus === 'open' &&
                       <Icon name='remove' color='grey' size='big' fitted={true} onClick={() => (<Button onClick={this.markAsUnvisited(this.state.selectedPin.pinId)} />)} />
                     }
                     {
@@ -362,26 +362,36 @@ class SingleBoard extends Component {
             )
           }
         </Map>
-        <div id='menu'>
-          <div >
-          <p> Style: </p>
-            <div >
-              <input onChange={this.switchStyle} id='basic' type='radio' name='rtoggle' value={pintripsStyle} />
-              <label htmlFor='pintrips'>pintrips</label>
-              <input onChange={this.switchStyle} id='popArt' type='radio' name='rtoggle' value={moonLightStyle} />
-              <label htmlFor='moonlight'>moonlight</label>
-              <input onChange={this.switchStyle} id='popArt' type='radio' name='rtoggle' value={vintageStyle} />
-              <label htmlFor='vintage'>vintage</label>
-            </div>
-            </div>
-            
-              <div>
-                <div className='search-coords'>
-                  <LocationSearch forAddPin={true} updateBoardPins={this.selectPlaceFromSearchBar} />
-                </div>
-              </div>
+        
+        <div className="footer">
+        <Dropdown icon="settings" floating upward="true">
+       
+          <Dropdown.Menu> 
+            <Button.Group basic vertical>
+              <Dropdown.Item> 
+                  <Button basic content= "Pintrips Style" onClick={this.switchStyle} id='basic' type='radio' name='rtoggle' value={pintripsStyle} />
+                </Dropdown.Item>
+              <Dropdown.Item> 
+                  <Button basic content=" Moonlight" onClick={this.switchStyle} id='popArt' type='radio' name='rtoggle' value={moonLightStyle} />
+                </Dropdown.Item>
+              <Dropdown.Item> 
+                  <Button basic content="Vintage" onClick={this.switchStyle} id='popArt' type='radio' name='rtoggle' value={vintageStyle} />
+                </Dropdown.Item>
+              </Button.Group>
+          </Dropdown.Menu> 
+        </Dropdown>
+        
+        
+        
+      
+        <div className="in-footer">
+              <LocationSearch forAddPin={true} updateBoardPins={this.selectPlaceFromSearchBar}/>
+            </div> 
           
         </div>
+        
+          
+        
       </div>
     )
   }
