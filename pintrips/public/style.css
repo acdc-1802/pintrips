@@ -69,6 +69,11 @@ body {
   height: 2em;
   padding-top: 5px;
 }
+.profile-img{
+  width: 225px;
+  height: 200px;
+  border-radius: 60%;
+}
 .footer {
   position: fixed;
   bottom: 0;

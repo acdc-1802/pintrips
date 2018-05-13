@@ -53,7 +53,7 @@ class Navbar extends Component {
             }
           }
           let username = doc.data().username;
-          this.setState({notifications: sum, username, pendingBoards})
+          this.setState({ notifications: sum, username, pendingBoards })
         })
         .catch(error => console.error('Could not get notifications', error))
   }
@@ -129,7 +129,7 @@ class Navbar extends Component {
                   <Popup
                     trigger={
                       <div>
-                      <Icon name='plus square outline' size={'large'} />
+                        <Icon name='plus square outline' size={'large'} />
                       </div>
                     }
                     content={'Add a new board'} />
@@ -146,45 +146,50 @@ class Navbar extends Component {
               {
                 this.state.notifications > 0 &&
               */}
-                <Menu.Item borderless='true' id='navbar-notifications'>
-                  <Popup
-                    trigger={
-                      <div>
-                        <Icon name='bell outline' size={"medium"} />
-                        {this.state.notifications>0 && <Label color="red" size={'mini'} circular>{this.state.notifications}
-                        </Label>}
-                      </div>
-                    }
-                    content={
-                      <List>
-                        {
-                          this.state.pendingBoards &&
-                          this.state.pendingBoards.map(sentBoard => {
-                            return (
-                              <Link to={`/SingleBoard/${sentBoard.board}`}>
-                                <List.Item icon='mail' content={`${sentBoard.sender} sent you a board!`} />
-                              </Link>
-                            )
-                          })
-                        }
-                      </List>
-                    }
-                    on='click'
-                    position='bottom center'
-                  />
-                </Menu.Item>
-              
-                <Menu.Item >
+              <Menu.Item borderless='true' id='navbar-notifications'>
                 <Popup
-                    trigger={
-                      <div>
-                      
-                        <Icon name= "log out" onClick={handleLogout} size={"large"}/>
-                      </div>
-                    }
-                    content={'Logout'} />
-               
-                </Menu.Item>
+                  trigger={
+                    <div>
+                      <Icon name='bell outline' size={"medium"} />
+                      {this.state.notifications > 0 && <Label color="red" size={'mini'} circular>{this.state.notifications}
+                      </Label>}
+                    </div>
+                  }
+                  content={
+                    <List>
+                      {
+                        this.state.pendingBoards &&
+                        this.state.pendingBoards.map(sentBoard => {
+                          return (
+                            <Link to={`/SingleBoard/${sentBoard.board}`}>
+                              <List.Item icon='mail' content={`${sentBoard.sender} sent you a board!`} />
+                            </Link>
+                          )
+                        })
+                      }
+                    </List>
+                  }
+                  on='click'
+                  position='bottom center'
+                />
+              </Menu.Item>
+
+              <Menu.Item >
+                <Popup
+                  trigger={
+                    <div>
+                      <Icon name="log out" onClick={handleLogout} size={"large"} />
+                    </div>
+                  }
+                  content={'Logout'} />
+
+              </Menu.Item>
+              <Menu.Item>
+                <Link to='/Profile'>
+                  <Icon name='user outline' size='large' />
+                </Link>
+
+              </Menu.Item>
               {/*</Link>*/}
 
             </Menu>
