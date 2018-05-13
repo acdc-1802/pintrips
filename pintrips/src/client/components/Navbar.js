@@ -173,7 +173,6 @@ class Navbar extends Component {
                     position='bottom center'
                   />
                 </Menu.Item>
-<<<<<<< HEAD
               }
                 <Menu.Item >
                 <Popup
@@ -186,9 +185,6 @@ class Navbar extends Component {
                     content={'Logout'} />
                
                 </Menu.Item>
-=======
-              
->>>>>>> 31658b4a082feb7293d6725a83a037868a4142c6
               {/*</Link>*/}
 
             </Menu>
