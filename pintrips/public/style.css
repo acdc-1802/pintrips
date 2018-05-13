@@ -56,6 +56,7 @@ body {
 .dropdown {
   padding: 12px;
   margin-left: 20px;
+  margin-top: 9px;
 }
 #dropup {
   position: center;
@@ -106,6 +107,7 @@ body {
 }
 .item#create-btn {
   align-self: right;
+  margin-top: 10px;
 }
  
 
