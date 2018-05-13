@@ -173,13 +173,13 @@ class Navbar extends Component {
                     position='bottom center'
                   />
                 </Menu.Item>
-              }
+              
                 <Menu.Item >
                 <Popup
                     trigger={
                       <div>
                       
-                      <Button icon basic color="black" onClick={handleLogout}>  <Icon name= "log out"/></Button>
+                        <Icon name= "log out" onClick={handleLogout} size={"large"}/>
                       </div>
                     }
                     content={'Logout'} />
