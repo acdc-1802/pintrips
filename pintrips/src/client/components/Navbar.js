@@ -78,7 +78,6 @@ class Navbar extends Component {
             (
               <div className='user-nav'>
                 <small id='email'>Welcome, {this.state.username}</small>
-                <button id='logout' onClick={handleLogout}>Logout</button>
               </div>
             )
           }
@@ -174,7 +173,22 @@ class Navbar extends Component {
                     position='bottom center'
                   />
                 </Menu.Item>
+<<<<<<< HEAD
+              }
+                <Menu.Item >
+                <Popup
+                    trigger={
+                      <div>
+                      
+                      <Button icon basic color="black" onClick={handleLogout}>  <Icon name= "log out"/></Button>
+                      </div>
+                    }
+                    content={'Logout'} />
+               
+                </Menu.Item>
+=======
               
+>>>>>>> 31658b4a082feb7293d6725a83a037868a4142c6
               {/*</Link>*/}
 
             </Menu>
