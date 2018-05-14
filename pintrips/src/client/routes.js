@@ -18,7 +18,7 @@ const Routes = props => {
             <Route path='/SharedWithMe' component={SharedWithMe} />
             <Route path='/PostCard' component={PostCard} />
             <Route path={'/postcard_sent'} component={PostcardSent} />
-            <Route path={'/postcard_received'} component={PostcardReceived} />
+            <Route path={'/postcard_received/:postcardId'} component={PostcardReceived} />
             <Route path='/404' component={CannotFind} />
             <Route path='/Profile' component={Profile} />
             <Route path='/Friends/:id' component={Friends} />

@@ -9,7 +9,7 @@ import PostCardStamp from './PostCardStamp';
 import PostCardMap from './PostCardMap';
 import PostCardTypeText from './PostCardTypeText';
 import { TweenLite, Back, Bounce } from "gsap";
-import PostCardMessage from './PostCardMessage';
+
 
 class PostCardReceived extends Component {
   constructor(props) {
@@ -33,37 +33,35 @@ class PostCardReceived extends Component {
   componentDidMount() {
     const user = this.props._auth.currentUser.email;
     const self = this;
-
-    user && db.collection('postcards').where('receiver', "==", user).limit(1)
+    const postcardId = this.props.match.params.postcardId;
+    const postcard = db.collection('postcards')
+    user && postcard.doc(postcardId)
     .get()
-    .then((querySnapshot) => {
-      querySnapshot.forEach(function(doc) {
-          self.setState({
-            currentCoordinates: doc.data().messageCoordinates,
-            receiver: doc.data().receiver,
-            sender: doc.data().sender,
-            message: doc.data().message,
-            date: doc.data().dateSent
-          })
-        })
+    .then((doc) => {
+      self.setState({
+        currentCoordinates: [doc.data().messageCoordinates._lat, doc.data().messageCoordinates._long],
+        receiver: doc.data().receiver,
+        sender: doc.data().sender,
+        message: doc.data().message,
+        date: doc.data().dateSent
+      })
     })
     .catch(function(error) {
         console.log("Error getting documents: ", error);
     });
 
-    this.postcardAnimation();
   }
 
   componentDidUpdate(prevProps, prevState) {
     TweenLite.set(".postcard-container", {transformStyle:"preserve-3d"})
     TweenLite.set(".postcard-back", {rotationY:-180})
     TweenLite.set([".postcard-back", ".postcard-front"], {backfaceVisibility:"hidden"})
-    console.log('state in componentDidUpdate', this.state.currentCoordinates)
   }
 
-  postcardAnimation() {
-    TweenLite.fromTo(".postcard-container", 3, {width:0, height:0}, {width:"80vw", height:"75vh",  ease: Bounce.easeOut});
-  }
+  // componentWillUnmount() {
+  //   db.collection('postcards').where()
+  // }
+
 
   rotate() {
     if (this.state.cardIsFront) {
@@ -83,27 +81,37 @@ class PostCardReceived extends Component {
   }
 
   render() {
-    // if (!this.state.currentCoordinates.length)
-    //   return <div className="login-container">loading...</div>
-      console.log('yup', this.state.currentCoordinates)
-      console.log('state', this.state)
-    const sendCoordToProps = [this.state.currentCoordinates._lat, this.state.currentCoordinates._long]
+    if (!this.state.currentCoordinates.length)
+      return <div className="login-container">loading...</div>
+    console.log('send coord to props', this.state.currentCoordinates)
     return (
-      <div className="login-container">
-        <div className='postcard-container'>
-          <div className="postcard-front"
-            style={{ display: this.state.cardIsFront ? 'block' : 'none'}}>
-            <PostCardMap currentCoord={sendCoordToProps}/>
-            <PostCardTypeText currentCoord={sendCoordToProps}/>
+        <div className="login-container">
+          <div className='postcard-container'>
+            <div className="postcard-front"
+              style={{ display: this.state.cardIsFront ? 'block' : 'none'}}>
+              <PostCardMap currentCoord={this.state.currentCoordinates}/>
+              <PostCardTypeText currentCoord={this.state.currentCoordinates}/>
+            </div>
+
+            <div className="postcard-back"
+                  style={{ display: this.state.cardIsFront ? 'none' : 'block'}}>
+              <PostCardStamp currentCoord={this.state.currentCoordinates} dateSent={this.state.date}/>
+              <div className="postcard-message-body" id="postcard-received">
+              <div>
+                To: {this.state.receiver}
+              </div>
+              <div>
+                From: {this.state.sender}
+              </div>
+              <div>
+                {this.state.message}
+              </div>
+              </div>
+            </div>
           </div>
-          <div className="postcard-back"
-                style={{ display: this.state.cardIsFront ? 'none' : 'block'}}>
-            <PostCardMessage currentCoord={sendCoordToProps}/>
+          <div className="postcard-flip-button">
+            <Button onClick={this.rotate} compact basic color='orange' size="mini">Flip</Button>
           </div>
-        </div>
-        <div className="postcard-flip-button">
-          <Button onClick={this.rotate} compact basic color='orange' size="mini">Flip</Button>
-        </div>
         </div>
     )
   }

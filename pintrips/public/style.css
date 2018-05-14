@@ -522,6 +522,10 @@ body {
     line-height: 1.7em;
     white-space: nowrap;
   }
+  #postcard-received {
+    text-align: left;
+  }
+
   .postcard-message-form {
     text-align: left;
     clear: bloth;
@@ -804,7 +808,7 @@ body {
   }
   .postcard-message-form {
     text-align: left;
-    clear: bloth;
+    clear: both;
     float: left;
     margin-left: 1em;
     width: 55vw;
