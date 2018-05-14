@@ -186,7 +186,7 @@ class MapCard extends Component {
               <Label as='a' color="white" size='large' corner='right' onClick={this.favoriteBoard} icon={this.state.starred ? 'star' : 'empty star'} />
             }
             <Map
-              style={'mapbox://styles/destinmcmurrry/cjgy8hinv00192rp4obrfj9qq'}
+              style={this.props.board.style}
               zoom={this.state.zoom}
               containerStyle={{
                 height: "289px",
