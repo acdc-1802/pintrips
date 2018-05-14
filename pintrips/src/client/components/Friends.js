@@ -13,8 +13,10 @@ const Friends = (props) => {
           <Icon name='users' id='users-icon' />
           <Header.Content id='profile-username'>
             Friends
-          </Header.Content>
+            </Header.Content>
+            <Icon name='add user' id='add-user-icon' />
         </Header>
+
       </div>
       {
         user &&

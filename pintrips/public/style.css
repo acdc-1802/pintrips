@@ -206,10 +206,19 @@ body {
   #users-icon {
     margin-bottom: 5px;
   }
+  #add-user-icon {
+    margin-bottom: 5px;
+    position: fixed;
+    right: 12px;
+    top: 109px;
+  }
   .header-container {
-    margin-left: 10%;
     margin-top: 10px;
     margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
   }
   .logo{
     display: flex;
@@ -350,6 +359,9 @@ body {
   font-family: 'Special Elite', cursive;
   font-size: 65%;
   margin-left: 5px;
+}
+.no-friends-msg {
+  margin: 20px;
 }
 .friends-box-container{
   display: flex;

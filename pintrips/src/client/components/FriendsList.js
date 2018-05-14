@@ -37,6 +37,12 @@ class FriendsList extends Component {
       <div >
         <Grid stackable columns={3} className='friendsList-container'>
           {
+            !this.state.friends &&
+            <div className='no-friends-msg'>
+              <h1 id='profile-email'>You have no friends :(</h1>
+            </div>
+          }
+          {
             this.state.friendsInfo.map(friend => {
               return (
                 <Grid.Column className='friends-box-container'>
