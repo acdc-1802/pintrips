@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withAuth } from 'fireview';
 import db from '../firestore';
+import { Icon } from 'semantic-ui-react';
 
 class Profile extends Component {
   constructor(props) {
@@ -9,8 +10,9 @@ class Profile extends Component {
       userId: '',
       profileImg: '',
       first: '',
-      last: '', 
-      username: ''
+      last: '',
+      username: '',
+      bannerImg: ''
     }
   }
   componentDidUpdate({ _user }) {
@@ -19,21 +21,22 @@ class Profile extends Component {
 
     user &&
       db.collection('users').doc(user.uid).get()
-        .then(user => this.setState({ userId: user.data().id, profileImg: user.data().profileImg, first: user.data().first, last: user.data().last, email: user.data().email,  }))
+        .then(user => this.setState({ userId: user.data().id, profileImg: user.data().profileImg, first: user.data().first, last: user.data().last, email: user.data().email, username: user.data().username, bannerImg: user.data().bannerImg }))
         .then(() => console.log('state', this.state))
         .catch(error => console.error('unable to get user info', error))
   }
   render() {
     return (
-      <div className='homepage-container'>
-        <div className='card-group'>
-          <div className='signup-container'>
-            <h1>Profile</h1>
-            <div>
-              <img className='profile-img' src={this.state.profileImg} />
-            </div>
+      <div className='profile-container'>
+          <div className='profile-picture'>
+            <img className='profile-img' src={this.state.profileImg} />
+            <Icon id='add-img-icon' name='camera retro' size='big' />
           </div>
-        </div>
+          <div>
+            <h2 id='profile-name'>{this.state.first} {this.state.last}</h2>
+            <h2 id='profile-username'>Username: {this.state.username}</h2>
+            <small id='profile-email'>Email: {this.state.email}</small>
+          </div>
       </div>
     )
   }

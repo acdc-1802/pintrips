@@ -28,7 +28,6 @@ class Navbar extends Component {
     if (this.props._user === _user) return
     const user = this.props._user;
     let sum = 0;
-
     user &&
       db.collection('users').doc(user.uid).get()
         .then(doc => {
@@ -77,6 +76,9 @@ class Navbar extends Component {
             user &&
             (
               <div className='user-nav'>
+                <Link to='/Profile'>
+                  <Icon name='user outline' size='large' />
+                </Link>
                 <small id='email'>Welcome, {this.state.username}</small>
               </div>
             )
@@ -99,7 +101,7 @@ class Navbar extends Component {
 
                   <Dropdown.Item>
                     <Link to={'/SharedWithMe'}>
-                      <Menu.Item borderless='true' >
+                      <Menu.Item borderless='true' id='myboards' >
                         Shared With Me
                     </Menu.Item>
                     </Link>
@@ -117,6 +119,14 @@ class Navbar extends Component {
                     <Link to={'/PostCard'}>
                       <Menu.Item id='myboards'>
                         Send a Postcard
+                    </Menu.Item>
+                    </Link>
+                  </Dropdown.Item>
+
+                  <Dropdown.Item>
+                    <Link to={`/Friends/${this.props._user.uid}`}>
+                      <Menu.Item id='myboards'>
+                        Friends
                     </Menu.Item>
                     </Link>
                   </Dropdown.Item>
@@ -182,12 +192,6 @@ class Navbar extends Component {
                     </div>
                   }
                   content={'Logout'} />
-
-              </Menu.Item>
-              <Menu.Item>
-                <Link to='/Profile'>
-                  <Icon name='user outline' size='large' />
-                </Link>
 
               </Menu.Item>
               {/*</Link>*/}

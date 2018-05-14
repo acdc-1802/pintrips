@@ -109,15 +109,15 @@ body {
 #checkmark {
   border: none;
 }
-<<<<<<< HEAD
 .profile-img{
-  width: 225px;
-  height: 200px;
-  border-radius: 60%;
+  width: 175px;
+  height: 175px;
+  border-radius: 50%;
 }
-=======
-
->>>>>>> master
+.friend-img {
+  width: 75px;
+  height: 75px;
+}
 .footer {
   position: fixed;
   bottom: 0;
@@ -185,7 +185,32 @@ body {
     width: 100%;
     margin: 10em auto auto;
   }
-
+  .welcome-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+  .friends-container {
+    display: flex;
+    padding-top: 100px;
+    flex-direction: column;
+    margin-left: 20px;
+    margin-right: 20px;
+    width: 100vw;
+  }
+  .friendsList-container {
+    display: flex;
+    justify-content: center;
+  }
+  #users-icon {
+    margin-bottom: 5px;
+  }
+  .header-container {
+    margin-left: 10%;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
   .logo{
     display: flex;
     width: 2em;
@@ -255,7 +280,16 @@ body {
   padding: 10px;
   border-radius: 5px;
 }
-
+#add-img-icon {
+  z-index: 10;
+  position: fixed;
+  margin-top: 150px;
+  margin-left: 50px;
+}
+.profile-picture {
+  display: flex;
+  justify-content: center;
+}
 #menu * {
   /* padding: .5em .5em .5em .5em; */
   margin: .5em
@@ -297,7 +331,43 @@ body {
   font-size: 250%;
   margin-left: 1.75em;
 }
-
+#profile-name {
+  font-family: 'Special Elite', cursive;
+  font-size: 225%;
+  margin-top: 5%;
+}
+#profile-username {
+  font-family: 'Special Elite', cursive;
+  font-size: 180%;
+  margin: auto;
+}
+#friend-name {
+  font-family: 'Special Elite', cursive;
+  font-size: 75%;
+  margin-left: 5px;
+}
+#friend-username {
+  font-family: 'Special Elite', cursive;
+  font-size: 65%;
+  margin-left: 5px;
+}
+.friends-box-container{
+  display: flex;
+  width: 400px;
+}
+.friend-box {
+  display: flex;
+  flex-direction: row;
+}
+.friend-sub-box {
+  display: flex;
+  flex-direction: column;
+}
+#profile-email {
+  font-family: 'Special Elite', cursive;
+  font-size: 140%;
+  margin: auto;
+}
 .navbar {
   display: flex;
   margin-top: 0;
@@ -534,7 +604,23 @@ body {
   margin-left: 20%;
   margin-right: 20%;
  }
-
+ .profile-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  width: 60%;
+  margin-left: 20%;
+  margin-right: 20%;
+  padding-top: 150px;
+ }
+ #banner-img {
+   display: flex;
+   z-index: -5;
+   position: fixed;
+   width: 100%;
+   height: 40%;
+ }
  .side-button {
   display: flex;
   flex-direction: column;

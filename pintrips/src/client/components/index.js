@@ -10,4 +10,5 @@ export { default as SharedWithMe } from './SharedWithMe';
 export { default as CannotFind } from './CannotFind';
 export { default as PostCard } from './PostCard';
 export { default as Profile } from './Profile';
-
+export { default as Friends } from './Friends';
+export { default as WelcomePage } from './WelcomePage';
