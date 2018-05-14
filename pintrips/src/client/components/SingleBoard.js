@@ -6,7 +6,7 @@ import firebase from 'firebase';
 import { withAuth } from 'fireview';
 import history from '../../history';
 import { Button, Card, Dropdown, Icon, Input, Checkbox, Segment, Label, Menu, Search } from 'semantic-ui-react';
-
+import { Link } from 'react-router-dom';
 require('firebase/firestore');
 
 const Map = ReactMapboxGl({
@@ -217,6 +217,7 @@ class SingleBoard extends Component {
   }
 
   render() {
+    
     return (
       <div className='board-container'>
         <Map
@@ -373,7 +374,10 @@ class SingleBoard extends Component {
         </Map>
         
         <div className="footer">
-        <Dropdown icon="settings" floating upward="true">
+        
+        <Icon name= "angle double left" size="large" onClick={history.goBack}/>
+          
+        <Dropdown className="settings" icon="settings" >
        
           <Dropdown.Menu> 
             <Button.Group basic vertical>
@@ -394,7 +398,11 @@ class SingleBoard extends Component {
         
       
         <div className="in-footer">
-              <LocationSearch forAddPin={true} updateBoardPins={this.selectPlaceFromSearchBar}/>
+        
+              <LocationSearch 
+              className="search-bar" forAddPin={true} updateBoardPins={this.selectPlaceFromSearchBar}>
+              <input placeholder="Search for places in  "/>
+              </LocationSearch>
             </div> 
           
         </div>
