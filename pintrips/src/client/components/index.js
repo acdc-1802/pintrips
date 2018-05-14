@@ -9,4 +9,5 @@ export { default as AddNewBoard } from './AddNewBoard';
 export { default as SharedWithMe } from './SharedWithMe';
 export { default as CannotFind } from './CannotFind';
 export { default as PostCard } from './PostCard';
+export { default as PostcardSent } from './PostcardSent';
 

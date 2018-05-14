@@ -16,7 +16,7 @@ body {
   padding: 5px;
   margin-right: 10px;
  }
- 
+
  .autocomplete-dropdown-container {
   color: black;
   }
@@ -63,7 +63,7 @@ body {
    width: 100%;
  }
 
-/* 
+/*
  input.location-search-input {
   width: 100%;
 } */
@@ -140,7 +140,7 @@ body {
   display: flex;
   margin-top: 8em;
 }
- 
+
 .in-footer {
   display: flex;
   width: 75vw;
@@ -263,7 +263,7 @@ body {
 }
 
 #message-box {
-  height: 9em;
+  height: 6em;
 }
 
 #myboards  {
@@ -326,6 +326,8 @@ body {
     transform: translate(-50%, -50%);
     padding: 20px;
     text-align: center;
+    margin-bottom: 5em;
+
   }
 
  .postcard-form-style {
@@ -334,13 +336,22 @@ body {
   font-size: 1em;
   outline: none;
   line-height: 1.3em;
+  width: 55vw;
+  display: inline;
  }
+
+ #textarea {
+   vertical-align: top;
+   height: 15vh;
+ }
+
   .postcard-front {
     margin: auto;
   }
 
   .postcard-label {
     text-align: left;
+    display: inline;
   }
 
   .postcard-map {
@@ -365,12 +376,14 @@ body {
     align-content: center;
     font-size: 1.5em;
     line-height: 1.7em;
+    white-space: nowrap;
   }
   .postcard-message-form {
     text-align: left;
     clear: bloth;
     float: left;
     margin-left: 4em;
+    width: 55vw;
   }
 
 .postcard-typewriter-text {
@@ -481,7 +494,7 @@ body {
  .postcard-logo {
   width: 14vw;
   z-index:1
-  } 
+  }
 
  .search-coords {
   display: flex;
@@ -540,8 +553,8 @@ body {
 
  .stamp-logo {
   position: relative;
-  top: -7em;
-  right: -28em;
+  top: -5em;
+  right: -29em;
   width: 40vw;
   display: flex;
   flex-direction: row;
@@ -559,7 +572,7 @@ body {
   font-size:1.6em;
   color: #F7BAB7;
   border:solid 4px #F7BAB7;
-  padding:2em;
+  padding:1.4em;
   border-radius:50%;
   zoom:1;
   filter:alpha(opacity=20);

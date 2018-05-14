@@ -99,7 +99,7 @@ class Navbar extends Component {
 
                   <Dropdown.Item>
                     <Link to={'/SharedWithMe'}>
-                      <Menu.Item borderless='true' >
+                      <Menu.Item id='myboards' >
                         Shared With Me
                     </Menu.Item>
                     </Link>
@@ -173,7 +173,7 @@ class Navbar extends Component {
                     position='bottom center'
                   />
                 </Menu.Item>
-              
+
                 <Menu.Item >
                 <Popup
                     trigger={
