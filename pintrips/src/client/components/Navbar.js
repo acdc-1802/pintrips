@@ -146,7 +146,7 @@ class Navbar extends Component {
                         <Icon name='plus square outline' size={'large'} />
                       </div>
                     }
-                    content={'Add a new board'} />
+                    content={'Add a new board'} /> 
                 </Menu.Item>
               </Link>
               <Menu.Item borderless='true' id='navbar-notifications'>
