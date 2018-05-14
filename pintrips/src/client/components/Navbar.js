@@ -53,9 +53,8 @@ class Navbar extends Component {
             }
           }
           let username = doc.data().username;
-          return [username, pendingBoards]
+          this.setState({notifications: sum, username, pendingBoards})
         })
-        .then(info => { this.setState({ notifications: sum, username: info[0], pendingBoards: info[1] }) })
         .catch(error => console.error('Could not get notifications', error))
   }
   render() {
@@ -79,7 +78,6 @@ class Navbar extends Component {
             (
               <div className='user-nav'>
                 <small id='email'>Welcome, {this.state.username}</small>
-                <button id='logout' onClick={handleLogout}>Logout</button>
               </div>
             )
           }
@@ -137,7 +135,7 @@ class Navbar extends Component {
                     content={'Add a new board'} />
                 </Menu.Item>
               </Link>
-
+              {/*}
               {!this.state.notifications &&
                 <Menu.Item borderless='true' id='navbar-notifications'>
                   <Popup
@@ -147,12 +145,13 @@ class Navbar extends Component {
               }
               {
                 this.state.notifications > 0 &&
+              */}
                 <Menu.Item borderless='true' id='navbar-notifications'>
                   <Popup
                     trigger={
                       <div>
                         <Icon name='bell outline' size={"medium"} />
-                        {this.state.notifications && <Label color="red" size={'mini'} circular>{this.state.notifications}
+                        {this.state.notifications>0 && <Label color="red" size={'mini'} circular>{this.state.notifications}
                         </Label>}
                       </div>
                     }
@@ -174,7 +173,16 @@ class Navbar extends Component {
                     position='bottom center'
                   />
                 </Menu.Item>
-              }
+              
+                <Menu.Item >
+                <Popup
+                    trigger={
+                      <div>
+                        <Icon id='logout' name= "log out" onClick={handleLogout} size={"large"}/>
+                      </div>
+                    }
+                    content={'Logout'} />
+                </Menu.Item>
               {/*</Link>*/}
 
             </Menu>

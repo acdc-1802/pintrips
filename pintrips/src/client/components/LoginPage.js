@@ -12,7 +12,8 @@ export default class LoginPage extends Component {
     displayName: 'Login',
     email: '',
     password: '',
-    error: false
+    error: false,
+    active: false
   }
 
   handleChange = event => {
@@ -33,6 +34,8 @@ export default class LoginPage extends Component {
       .then(() => {
         return firebase.auth().signInWithEmailAndPassword(email, password)
       })
+      .then(() => { this.setState({ success: true }) })
+      .then(() => { setTimeout(() => this.setState({ success: false }), 3000) })
       .then(user => {
         // needs actual message ' sorry wrong user name and/or password '
         console.log(firebase.auth().currentUser.uid)
@@ -60,7 +63,7 @@ export default class LoginPage extends Component {
                 onChange={this.handleChange}
               />
 
-              <Form.Input stackable='true' fluid label='Password' placeholder='Password'
+              <Form.Input stackable='true' fluid label='Password' placeholder='Minimum 6 Characters'
                 className="form-control"
                 name='password'
                 type='password'
@@ -76,8 +79,13 @@ export default class LoginPage extends Component {
                 content='email/password incorrect'
               />
             }
+
           </div>
-          <Form.Button className="form-group">Log In</Form.Button>
+          {this.state.password.length < 6 ?
+            <Form.Button disabled className="form-group">Log In</Form.Button>
+            :
+            <Form.Button active className="form-group">Log In</Form.Button>
+          }
         </Form>
         <br />
         <Link to={'/SignupPage'}>
