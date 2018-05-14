@@ -148,6 +148,10 @@ class SingleBoard extends Component {
           console.log('Pin successfully added');
         })
         .catch((err) => console.error('Add unsuccessful: ', err))
+      db.collection('boards').doc(boardId).update({
+        coordinates: new firebase.firestore.GeoPoint(this.state.newLocation[1], this.state.newLocation[0])
+      })
+      .catch(error => console.error('Unable to update center of board', error))
   }
   toggleEditLabel = () => {
     this.setState({ editLabel: !this.state.editLabel });
