@@ -43,25 +43,7 @@ class Profile extends Component {
         <div className='map-container'>
           {
             this.props._user &&
-            <Map from={db.collection('boards').where('creator', '==', `${this.props._user.uid}`)}
-              Loading={() => 'Loading...'}
-              Render={(props) => {
-                if (props.name == 'world') {
-                  return (
-                    <WorldMap board={props} userId={props.creator} id={props._ref.id} owner={true} />
-                  )
-                } else {
-                  return ('')
-                }
-              }}
-              Empty={() => {
-                return (
-                  <div>
-                    <small>You don't have any boards yet :{`(`}</small>
-                  </div>
-                )
-              }}
-            />
+            <WorldMap userId={this.props._user.uid} owner={true} />
           }
         </div>
       </div>

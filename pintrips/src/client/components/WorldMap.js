@@ -22,14 +22,12 @@ class WorldMap extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      center: [this.props.board.coordinates._long, this.props.board.coordinates._lat],
+      center: [-74.009464, 40.705089],
       zoom: [0],
-      boardId: this.props.id,
       pins: [],
       selectedPin: null,
       yarnCoords: []
     }
-    this.handleSend = this.handleSend.bind(this);
   }
 
 
@@ -58,37 +56,6 @@ class WorldMap extends Component {
       center: pin.coords,
       zoom: [5]
     })
-  }
-  handleSend() {
-    this.state.shareWith.forEach(user => {
-      db.collection('users').where('username', '==', user).get()
-        .then(snap => snap.forEach(doc => {
-          let id = doc.data().id;
-          db.collection('users').doc(id).set(
-            {
-              canWrite: {
-                [this.state.boardId]: 'pending'
-              }
-            },
-            { merge: true }
-          )
-            .catch(error => console.error('Unable to add board to user', error))
-          db.collection('boards').doc(this.state.boardId).set(
-            {
-              readers: {
-                [id]: true
-              }
-            },
-            { merge: true }
-          )
-            .then(() => { this.setState({ sent: true }) })
-            .then(() => { setTimeout(() => this.setState({ sent: false }), 3000) })
-            .catch(error => console.error('Writer could not be added', error))
-            .catch(error => console.error('Unable to send board', error))
-        }))
-        .catch(error => console.error('Unable to send board', error))
-    })
-
   }
 
   render() {
