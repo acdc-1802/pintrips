@@ -406,7 +406,7 @@ body {
     border: 1px solid rbg(188,143,143);
     border-radius: 2%;
     width: 80vw;
-    height: 75vh;
+    height: 65vh;
     box-shadow: 10px 10px 8px #888888;
     background-color:rgb(255,245,238);
     z-index: -1;
@@ -419,6 +419,7 @@ body {
     margin-bottom: 5em;
 
   }
+
 
  .postcard-form-style {
   background: transparent;
@@ -435,7 +436,16 @@ body {
    height: 15vh;
  }
 
+  .postcard-flip-button {
+    position: relative;
+    top: 1em;
+  }
+
   .postcard-front {
+    margin: auto;
+  }
+
+  .postcard-back {
     margin: auto;
   }
 
@@ -472,24 +482,9 @@ body {
     text-align: left;
     clear: bloth;
     float: left;
-    margin-left: 4em;
+    margin-left: -4em;
     width: 55vw;
   }
-
-.postcard-typewriter-text {
-  margin: 3em;
-  color: rgb(31, 29, 29);
-  font-size: 1.2em;
-  font-family: monospace;
-  overflow: hidden; /* Ensures the content is not revealed until the animation */
-  border-right: .10em solid #EBEBEB; /* typewriter cursor */
-  white-space: nowrap; /* Keeps the content on a single line */
-  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
-  letter-spacing: .15em; /* Adjust as needed */
-  animation:
-    typing 3.5s steps(30, end),
-    blink-caret .5s step-end infinite;
-}
 
 /* The typing effect */
 @keyframes typing {
@@ -657,15 +652,33 @@ body {
   bottom: 0;
 }
 
+
+ .title {
+  display: flex;
+  position: fixed;
+  color: black;
+
+ }
+ .ui.form .fields {
+  display: flex;
+  flex-direction: column;
+ }
+
+ .ui.form .fields .field {
+  width: 50%;
+  min-width: 100px;
+ }
+
  .stamp-logo {
   position: relative;
-  top: -5em;
-  right: -29em;
+  top: -9em;
+  right: -17em;
   width: 40vw;
   display: flex;
   flex-direction: row;
   justify-content: right;
   }
+
 
 .stamp {
   z-index:1;
@@ -698,6 +711,125 @@ body {
   animation-fill-mode:forwards;
 }
 
+
+ @media only screen and (max-width: 600px) {
+  .postcard-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    border: 1px solid rbg(188,143,143);
+    border-radius: 2%;
+    width: 80vw;
+    height: 48vh;
+    box-shadow: 10px 10px 8px #888888;
+    background-color:rgb(255,245,238);
+    z-index: -1;
+    position: absolute;
+    left: 50%;
+    top: 47%;
+    /* transform: translate(-50%, -50%); */
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 5em;
+  }
+  .postcard-map {
+    margin-bottom: 2em;
+    width: 72vw;
+    height: 32vh;
+  }
+  .postcard-typewriter-text {
+    margin: 1em;
+    color: rgb(31, 29, 29);
+    font-size: 1.2em;
+    font-family: monospace;
+    overflow: hidden;
+    border-right: .10em solid #EBEBEB;
+  }
+  .postcard-message-container {
+    display: flex;
+    flex-direction: column;
+    height: 46vh;
+    justify-content: center;
+  }
+
+  .postcard-message-body {
+    align-content: center;
+    font-size: 1.1em;
+    line-height: 1.7em;
+    white-space: nowrap;
+  }
+  .postcard-message-form {
+    text-align: left;
+    clear: bloth;
+    float: left;
+    margin-left: 1em;
+    width: 55vw;
+  }
+  .stamp-logo {
+    position: relative;
+    top: -4em;
+    right: -7em;
+    width: -11vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+  }
+  .postcard-logo {
+    width: 24vw;
+    z-index:1
+    }
+
+.stamp {
+  z-index:1;
+  font-family: Arial,sans-serif;
+  -webkit-transform: rotate(20deg);
+  -moz-transform: rotate(20deg);
+  -ms-transform: rotate(20deg);
+  -o-transform: rotate(20deg);
+  transform: rotate(20deg);
+  font-size:.9em;
+  color: #F7BAB7;
+  border:solid 2px #F7BAB7;
+  padding:1.2em;
+  border-radius:50%;
+  zoom:1;
+  filter:alpha(opacity=20);
+  opacity:0.2;
+  -webkit-text-shadow: 0 0 2px #F7BAB7;
+  text-shadow: 0 0 2px #F7BAB7;
+  box-shadow: 0 0 2px #F7BAB7;
+
+  -webkit-animation-name: pulse;
+  animation-name: pulse;
+  animation-delay:2s;
+  -webkit-animation-delay:2s;
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+  opacity: 0;
+  -webkit-animation-fill-mode:forwards;
+  animation-fill-mode:forwards;
+}
+}
+
+@media screen and (min-width: 600px) {
+  .postcard-typewriter-text {
+    margin: 3em;
+    color: rgb(31, 29, 29);
+    font-size: 1.2em;
+    font-family: monospace;
+    overflow: hidden; /* Ensures the content is not revealed until the animation */
+    border-right: .10em solid #EBEBEB; /* typewriter cursor */
+    white-space: nowrap; /* Keeps the content on a single line */
+    margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+    letter-spacing: .15em; /* Adjust as needed */
+    animation:
+      typing 3.5s steps(30, end),
+      blink-caret .5s step-end infinite;
+  }
+}
+
+
+
 @-webkit-keyframes pulse {
   0% {
     opacity: 0;
@@ -713,19 +845,3 @@ body {
     transform: rotate(55deg) scale(1);
   };
 }
-
- .title {
-  display: flex;
-  position: fixed;
-  color: black;
-
- }
- .ui.form .fields {
-  display: flex;
-  flex-direction: column;
- }
-
- .ui.form .fields .field {
-  width: 50%;
-  min-width: 100px;
- }

@@ -50,12 +50,12 @@ export class PostCard extends Component {
   }
 
   rotate() {
-      // if (this.state.cardIsFront) {
+      if (this.state.cardIsFront) {
       this.rotateToBack();
-    // } else {
-    //   this.rotateToFront();
-    // }
-    this.setState({ cardIsFront: false })
+    } else {
+      this.rotateToFront();
+    }
+    this.setState({ cardIsFront: !this.state.cardIsFront })
   }
 
   rotateToBack() {
@@ -70,7 +70,8 @@ export class PostCard extends Component {
     if (!this.state.currentCoordinates.length)
       return <div className="login-container">loading...</div>
     return (
-        <div className='postcard-container' onClick={this.rotate}>
+      <div className="login-container">
+        <div className='postcard-container'>
           <div className="postcard-front"
             style={{ display: this.state.cardIsFront ? 'block' : 'none'}}>
             <PostCardMap currentCoord={this.state.currentCoordinates}/>
@@ -80,6 +81,10 @@ export class PostCard extends Component {
                 style={{ display: this.state.cardIsFront ? 'none' : 'block'}}>
             <PostCardMessage currentCoord={this.state.currentCoordinates}/>
           </div>
+        </div>
+        <div className="postcard-flip-button">
+          <Button onClick={this.rotate} compact basic color='orange' size="mini">Flip</Button>
+        </div>
         </div>
     )
   }

@@ -164,18 +164,6 @@ class Navbar extends Component {
                               sum > 0 &&
                               <Label color='red' size={'mini'} circular>{sum}</Label>
                             )
-<<<<<<< HEAD
-                          })
-                        }
-                      </List>
-                    }
-                    on='click'
-                    position='bottom center'
-                  />
-                </Menu.Item>
-
-                <Menu.Item >
-=======
                           }}
                         />
                       }
@@ -239,7 +227,6 @@ class Navbar extends Component {
               </Menu.Item>
 
               <Menu.Item >
->>>>>>> master
                 <Popup
                   trigger={
                     <div>
