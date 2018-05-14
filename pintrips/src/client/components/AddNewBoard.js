@@ -40,7 +40,8 @@ class AddNewBoard extends Component {
       creator: creator,
       locked: this.state.locked,
       name: this.state.name,
-      owners: [creator]
+      owners: [creator],
+      style: 'mapbox://styles/destinmcmurrry/cjgy8hinv00192rp4obrfj9qq'
     })
       .then(function (docRef) {
         history.push(`/SingleBoard/${docRef.id}`)
