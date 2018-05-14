@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { withAuth } from 'fireview';
+import { Map, withAuth } from 'fireview';
 import db from '../firestore';
 import { Icon } from 'semantic-ui-react';
+import WorldMap from './WorldMap';
 
 class Profile extends Component {
   constructor(props) {
@@ -27,7 +28,8 @@ class Profile extends Component {
   }
   render() {
     return (
-      <div className='profile-container'>
+      <div className='profile-page'>
+        <div className='profile-container'>
           <div className='profile-picture'>
             <img className='profile-img' src={this.state.profileImg} />
             {/*<Icon id='add-img-icon' name='camera retro' size='big' />*/}
@@ -37,6 +39,31 @@ class Profile extends Component {
             <h2 id='profile-username'>Username: {this.state.username}</h2>
             <small id='profile-email'>Email: {this.state.email}</small>
           </div>
+        </div>
+        <div className='map-container'>
+          {
+            this.props._user &&
+            <Map from={db.collection('boards').where('creator', '==', `${this.props._user.uid}`)}
+              Loading={() => 'Loading...'}
+              Render={(props) => {
+                if (props.name == 'world') {
+                  return (
+                    <WorldMap board={props} userId={props.creator} id={props._ref.id} owner={true} />
+                  )
+                } else {
+                  return ('')
+                }
+              }}
+              Empty={() => {
+                return (
+                  <div>
+                    <small>You don't have any boards yet :{`(`}</small>
+                  </div>
+                )
+              }}
+            />
+          }
+        </div>
       </div>
     )
   }
