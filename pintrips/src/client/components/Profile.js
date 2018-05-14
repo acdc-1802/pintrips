@@ -30,9 +30,9 @@ class Profile extends Component {
       <div className='profile-container'>
           <div className='profile-picture'>
             <img className='profile-img' src={this.state.profileImg} />
-            <Icon id='add-img-icon' name='camera retro' size='big' />
+            {/*<Icon id='add-img-icon' name='camera retro' size='big' />*/}
           </div>
-          <div>
+          <div className='profile-info'>
             <h2 id='profile-name'>{this.state.first} {this.state.last}</h2>
             <h2 id='profile-username'>Username: {this.state.username}</h2>
             <small id='profile-email'>Email: {this.state.email}</small>
