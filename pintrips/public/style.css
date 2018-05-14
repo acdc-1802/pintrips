@@ -16,18 +16,6 @@ body {
   padding: 5px;
   margin-right: 10px;
  }
- #add-user-icon {
-  margin-bottom: 5px;
-  position: fixed;
-  right: 12px;
-  top: 109px;
-} 
-#add-img-icon {
-  z-index: 10;
-  position: fixed;
-  margin-top: 150px;
-  margin-left: 50px;
-}
  .autocomplete-dropdown-container {
   color: black;
   position: absolute;
@@ -78,20 +66,26 @@ i.angle.double.left.large.icon.back-icon {
   flex-direction: row;
   justify-content: space-between;
 }
-
-#checkmark {
-  border: none;
-}
-
-#close-popup {
-  display: flex;
-  border: none;
-  margin: auto auto 4px 0;
+#login-signup-options {
+  width: 300px;
 }
  .container {
    display: flex;
    flex-direction: row;
  }
+
+ .ui.container.container {
+   width: 100vw;
+ }
+
+ input.location-search-input {
+   width: 100%;
+ }
+
+/*
+ input.location-search-input {
+  width: 100%;
+} */
 
 #dropdown {
   margin-left: 15px;
@@ -101,8 +95,27 @@ i.angle.double.left.large.icon.back-icon {
 /* .footer .dropdown {
   display: flex;
   margin: .1em 1em 0 1em
-} */
+}
 
+#close-popup {
+  display: flex;
+  border: none;
+  margin: auto auto 4px 0;
+}
+
+#want-to-go {
+  margin-right: 17px;
+}
+
+.autocomplete-dropdown-container {
+  position: absolute;
+  bottom: 3em;
+}
+.map-container {
+    position: fixed;
+    width: 100vw;
+    height: 90vh;
+}
 #dropup {
   position: center;
   padding: 15px;
@@ -115,7 +128,40 @@ i.angle.double.left.large.icon.back-icon {
   height: 2em;
   padding-top: 5px 1px 1px 0;
 }
+<<<<<<< HEAD
 
+=======
+#username {
+  font-family: 'Special Elite', cursive;
+  height: 2em;
+  padding-top: 5px 1px 1px 0;
+  margin: auto;
+}
+.user-profile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  margin-right: 10px;
+}
+.navbar-link {
+  margin: auto;
+}
+#checkmark {
+  border: none;
+}
+.profile-img{
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  border: solid 2px #bcbcbc;
+}
+.profile-info {
+  text-align: left;
+  margin-left: 10px;
+  color: #515151;
+}
+>>>>>>> 2a847b6febf19c4e80f36eda29b1f1010820d3e0
 .friend-img {
   width: 75px;
   height: 75px;
@@ -192,7 +238,7 @@ i.angle.double.left.large.icon.back-icon {
   display: flex;
   margin-top: 8em;
 }
- 
+
 .in-footer {
   display: flex;
   width: 75vw;
@@ -207,6 +253,9 @@ i.angle.double.left.large.icon.back-icon {
   min-width: 30vw;
   display: flex;
   padding: 15px;
+}
+#profile-board {
+  height: 76vh;
 }
 
 .input-container {
@@ -243,8 +292,62 @@ input.location-search-input {
     text-align: center;
     width: 100%;
     margin: 10em auto auto;
+<<<<<<< HEAD
 }
 
+=======
+  }
+  .welcome-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding-top: 150px;
+    width: 100%;
+    align-items: center;
+  }
+  .friends-container {
+    display: flex;
+    padding-top: 100px;
+    flex-direction: column;
+    margin-left: 20px;
+    margin-right: 20px;
+    width: 100vw;
+  }
+  .friendsList-container {
+    display: flex;
+    justify-content: center;
+  }
+  #users-icon {
+    margin-bottom: 5px;
+  }
+  #add-user-icon {
+    margin-bottom: 5px;
+    position: fixed;
+    right: 12px;
+    top: 109px;
+  }
+  #navbar-pic {
+    display: flex;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: solid 1px #bcbcbc;
+    margin: auto;
+  }
+  .header-container {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .logo{
+    display: flex;
+    width: 2em;
+  }
+>>>>>>> 2a847b6febf19c4e80f36eda29b1f1010820d3e0
 
 
 .location-bar {
@@ -280,8 +383,24 @@ input.location-search-input {
 #logout {
   padding-top: 1px;
 }
+<<<<<<< HEAD
 #mapcard {
   width: auto;
+=======
+  #mapcard {
+    width: auto;
+  }
+  #mapcard-world {
+    width: 100vw;
+    padding:5px;
+  }
+  #mapcard-closed {
+    width: auto;
+    opacity: .45;
+  }
+  .mapboxgl-popup-content {
+    text-align: center;
+>>>>>>> 2a847b6febf19c4e80f36eda29b1f1010820d3e0
   }
 #mapcard-closed {
   width: auto;
@@ -318,7 +437,7 @@ input.location-search-input {
 }
 
 #message-box {
-  height: 9em;
+  height: 6em;
 }
 
 #myboards  {
@@ -330,7 +449,49 @@ input.location-search-input {
   font-size: 250%;
   margin-left: 1.75em;
 }
+<<<<<<< HEAD
 
+=======
+#profile-name {
+  font-size: 150%;
+  margin-top: 2%;
+  margin-bottom: auto;
+}
+#profile-username {
+  font-size: 100%;
+  margin: auto;
+}
+#friend-name {
+  font-family: 'Special Elite', cursive;
+  font-size: 75%;
+  margin-left: 5px;
+}
+#friend-username {
+  font-family: 'Special Elite', cursive;
+  font-size: 65%;
+  margin-left: 5px;
+}
+.no-friends-msg {
+  margin: 20px;
+}
+.friends-box-container{
+  display: flex;
+  width: 400px;
+}
+.friend-box {
+  display: flex;
+  flex-direction: row;
+}
+.friend-sub-box {
+  display: flex;
+  flex-direction: column;
+}
+#profile-email {
+  font-size: 100%;
+  margin: auto;
+  color: #515151;
+}
+>>>>>>> 2a847b6febf19c4e80f36eda29b1f1010820d3e0
 .navbar {
   display: flex;
   margin-top: 0;
@@ -379,33 +540,27 @@ input.location-search-input {
   background-color: white;
  }
 
- #pin-options img {
-  height: 45px;
-  width: 45px;
- }
+  .postcard-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    border: 1px solid rbg(188,143,143);
+    border-radius: 2%;
+    width: 80vw;
+    height: 65vh;
+    box-shadow: 10px 10px 8px #888888;
+    background-color:rgb(255,245,238);
+    z-index: -1;
+    position: absolute;
+    left: 50%;
+    top: 60%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 5em;
 
-.postcard-logo {
-  width: 14vw;
-  z-index:1
-} 
-.postcard-container {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  border: 1px solid rbg(188,143,143);
-  border-radius: 2%;
-  width: 80vw;
-  height: 75vh;
-  box-shadow: 10px 10px 8px #888888;
-  background-color:rgb(255,245,238);
-  z-index: -1;
-  position: absolute;
-  left: 50%;
-  top: 60%;
-  transform: translate(-50%, -50%);
-  padding: 20px;
-  text-align: center;
-}
+  }
+
 
  .postcard-form-style {
   background: transparent;
@@ -413,13 +568,31 @@ input.location-search-input {
   font-size: 1em;
   outline: none;
   line-height: 1.3em;
+  width: 55vw;
+  display: inline;
  }
+
+ #textarea {
+   vertical-align: top;
+   height: 15vh;
+ }
+
+  .postcard-flip-button {
+    position: relative;
+    top: 1em;
+  }
+
   .postcard-front {
+    margin: auto;
+  }
+
+  .postcard-back {
     margin: auto;
   }
 
   .postcard-label {
     text-align: left;
+    display: inline;
   }
 
   .postcard-map {
@@ -444,32 +617,20 @@ input.location-search-input {
     align-content: center;
     font-size: 1.5em;
     line-height: 1.7em;
+    white-space: nowrap;
   }
   .postcard-message-form {
     text-align: left;
     clear: bloth;
     float: left;
-    margin-left: 4em;
+    margin-left: -4em;
+    width: 55vw;
   }
 
-.postcard-typewriter-text {
-  margin: 3em;
-  color: rgb(31, 29, 29);
-  font-size: 1.2em;
-  font-family: monospace;
-  overflow: hidden; /* Ensures the content is not revealed until the animation */
-  border-right: .10em solid #EBEBEB; /* typewriter cursor */
-  white-space: nowrap; /* Keeps the content on a single line */
-  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
-  letter-spacing: .15em; /* Adjust as needed */
-  animation:
-  typing 3.5s steps(30, end),
-  blink-caret .5s step-end infinite;
-}
-#profile-name {
-  font-family: 'Special Elite', cursive;
-  font-size: 225%;
-  margin-top: 5%;
+/* The typing effect */
+@keyframes typing {
+  from { width: 0 }
+  to { width: 60% }
 }
 #profile-username {
   font-family: 'Special Elite', cursive;
@@ -515,7 +676,43 @@ input.location-search-input {
   /* width: 100%; */
   color: white;
   /* padding: 10px; */
-}
+ }
+
+ .autocomplete-dropdown-container {
+   color: black;
+ }
+
+ .mapboxgl-popup-content {
+   text-align: center;
+ }
+
+ #pin-options button {
+  border-radius: 5px;
+  border: none;
+  background-color: white;
+ }
+ .options-container {
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   justify-content: space-between;
+   margin: 3px;
+ }
+
+ .options-container * {
+   padding: 4px;
+ }
+
+ #pin-options img {
+  height: 45px;
+  width: 45px;
+ }
+
+ .postcard-logo {
+  width: 14vw;
+  z-index:1
+  }
+
  .search-coords {
   display: flex;
   flex-direction: row;
@@ -562,8 +759,23 @@ input.location-search-input {
   margin-left: 20%;
   margin-right: 20%;
  }
-
-
+ .profile-container {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  padding-left: 20px;
+  padding-top: 110px;
+ }
+ .profile-page {
+   width: 100vw;
+ }
+ #banner-img {
+   display: flex;
+   z-index: -5;
+   position: fixed;
+   width: 100%;
+   height: 40%;
+ }
  .side-button {
   display: flex;
   flex-direction: column;
@@ -575,15 +787,33 @@ input.location-search-input {
   bottom: 0;
 }
 
+
+ .title {
+  display: flex;
+  position: fixed;
+  color: black;
+
+ }
+ .ui.form .fields {
+  display: flex;
+  flex-direction: column;
+ }
+
+ .ui.form .fields .field {
+  width: 50%;
+  min-width: 100px;
+ }
+
  .stamp-logo {
   position: relative;
-  top: -7em;
-  right: -28em;
+  top: -9em;
+  right: -17em;
   width: 40vw;
   display: flex;
   flex-direction: row;
   justify-content: right;
   }
+
 
 .stamp {
   z-index:1;
@@ -596,7 +826,7 @@ input.location-search-input {
   font-size:1.6em;
   color: #F7BAB7;
   border:solid 4px #F7BAB7;
-  padding:2em;
+  padding:1.4em;
   border-radius:50%;
   zoom:1;
   filter:alpha(opacity=20);
@@ -617,58 +847,124 @@ input.location-search-input {
 }
 
 
- .title {
-  display: flex;
-  position: fixed;
-  color: black;
+ @media only screen and (max-width: 600px) {
+  .postcard-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    border: 1px solid rbg(188,143,143);
+    border-radius: 2%;
+    width: 80vw;
+    height: 48vh;
+    box-shadow: 10px 10px 8px #888888;
+    background-color:rgb(255,245,238);
+    z-index: -1;
+    position: absolute;
+    left: 50%;
+    top: 47%;
+    /* transform: translate(-50%, -50%); */
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 5em;
+  }
+  .postcard-map {
+    margin-bottom: 2em;
+    width: 72vw;
+    height: 32vh;
+  }
+  .postcard-typewriter-text {
+    margin: 1em;
+    color: rgb(31, 29, 29);
+    font-size: 1.2em;
+    font-family: monospace;
+    overflow: hidden;
+    border-right: .10em solid #EBEBEB;
+  }
+  .postcard-message-container {
+    display: flex;
+    flex-direction: column;
+    height: 46vh;
+    justify-content: center;
+  }
 
- }
- .ui.container.container {
-  width: 100vw;
-}
- .ui.form .fields {
-  display: flex;
-  flex-direction: column;
- }
+  .postcard-message-body {
+    align-content: center;
+    font-size: 1.1em;
+    line-height: 1.7em;
+    white-space: nowrap;
+  }
+  .postcard-message-form {
+    text-align: left;
+    clear: bloth;
+    float: left;
+    margin-left: 1em;
+    width: 55vw;
+  }
+  .stamp-logo {
+    position: relative;
+    top: -4em;
+    right: -7em;
+    width: -11vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+  }
+  .postcard-logo {
+    width: 24vw;
+    z-index:1
+    }
 
- .ui.form .fields .field {
-  width: 50%;
-  min-width: 100px;
- }
- .ui.menu:after {
-  content: none;
+.stamp {
+  z-index:1;
+  font-family: Arial,sans-serif;
+  -webkit-transform: rotate(20deg);
+  -moz-transform: rotate(20deg);
+  -ms-transform: rotate(20deg);
+  -o-transform: rotate(20deg);
+  transform: rotate(20deg);
+  font-size:.9em;
+  color: #F7BAB7;
+  border:solid 2px #F7BAB7;
+  padding:1.2em;
+  border-radius:50%;
+  zoom:1;
+  filter:alpha(opacity=20);
+  opacity:0.2;
+  -webkit-text-shadow: 0 0 2px #F7BAB7;
+  text-shadow: 0 0 2px #F7BAB7;
+  box-shadow: 0 0 2px #F7BAB7;
+
+  -webkit-animation-name: pulse;
+  animation-name: pulse;
+  animation-delay:2s;
+  -webkit-animation-delay:2s;
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+  opacity: 0;
+  -webkit-animation-fill-mode:forwards;
+  animation-fill-mode:forwards;
 }
-.ui.sub-navbar.menu {
-  display: flex;
-  position: fixed;
-  font-size: 12px;
-  margin-top: 4.5em;
-  z-index: 3;
-  width: 100vw;
-  height: 3em;
-  justify-content: space-between;
-}
- #users-icon {
-  margin-bottom: 5px;
-}
-.user-nav {
-  display: flex;
-  flex-direction: column;
-  height: 4em;
-  flex-grow: 1;
-  vertical-align: baseline;
-  margin-right: 5px;
-  justify-content: flex-end;
 }
 
-.user-nav * {
-  display: flex;
-  align-self: flex-end;
+@media screen and (min-width: 600px) {
+  .postcard-typewriter-text {
+    margin: 3em;
+    color: rgb(31, 29, 29);
+    font-size: 1.2em;
+    font-family: monospace;
+    overflow: hidden; /* Ensures the content is not revealed until the animation */
+    border-right: .10em solid #EBEBEB; /* typewriter cursor */
+    white-space: nowrap; /* Keeps the content on a single line */
+    margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+    letter-spacing: .15em; /* Adjust as needed */
+    animation:
+      typing 3.5s steps(30, end),
+      blink-caret .5s step-end infinite;
+  }
 }
 
- #want-to-go {
-  margin-right: 17px;
-}
+
+
 @-webkit-keyframes pulse {
   0% {
     opacity: 0;
@@ -683,10 +979,4 @@ input.location-search-input {
     opacity:1;
     transform: rotate(55deg) scale(1);
   };
-}
-.welcome-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
 }
