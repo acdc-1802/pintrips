@@ -1,60 +1,55 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
+// import { Dropdown, Menu, Icon, Popup, Input, Button, List, Label, Sidebar } from 'semantic-ui-react'
+import { withAuth } from 'fireview'
 import firebase from 'firebase'
+import history from '../../history'
 import db from '../firestore';
-import { withAuth } from 'fireview';
-import { Button, Icon } from 'semantic-ui-react';
 import PostCardStamp from './PostCardStamp';
 import PostCardMap from './PostCardMap';
 import PostCardTypeText from './PostCardTypeText';
 import { TweenLite, Back, Bounce } from "gsap";
 import PostCardMessage from './PostCardMessage';
 
-require('firebase/firestore');
-
-export class PostCard extends Component {
+class PostCardReceived extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentCoordinates: [],
-      cardIsFront: true
+      currentCoordinates: []
     }
     this.rotate = this.rotate.bind(this)
   }
 
+  //can be a toggle button for 'postcards' page
+  //create component for received postcards
+  //create component for sent postcards
+  //set up noti for postcard
+
   componentDidMount() {
-    const userId = this.props.withAuth.auth.currentUser.uid
-    const user = db.collection("users").doc(userId)
-    let self = this;
-    if(navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function(position) {
-        user.set({
-          currentCoordinates: new firebase.firestore.GeoPoint(position.coords.latitude, position.coords.longitude)
-          }, { merge: true })
-        self.setState({
-          currentCoordinates: [position.coords.latitude,position.coords.longitude]
-        })
-      }),
-      (err) => console.log('error', err.message)
+    console.log('props in postcard noti', this.props._auth.currentUser.email)
+    const user = this.props._auth.currentUser.email;
+
+    user && db.collection('postcards').where('receiver', "==", user)
+    .get()
+    .then((querySnapshot) => {
+      querySnapshot.forEach(function(doc) {
+          console.log(doc.data());
+          // this.setState({
+          //   currentCoordinates: [...this.state.currentCoordinates, [doc.messageCoordinates]]
+          // })
+      });
+    })
+    .catch(function(error) {
+        console.log("Error getting documents: ", error);
+    });
     }
-
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    TweenLite.set(".postcard-container", {transformStyle:"preserve-3d"})
-    TweenLite.set(".postcard-back", {rotationY:-180})
-    TweenLite.set([".postcard-back", ".postcard-front"], {backfaceVisibility:"hidden"})
-  }
 
   postcardAnimation() {
     TweenLite.fromTo(".postcard-container", 3, {width:0, height:0}, {width:"80vw", height:"75vh",  ease: Bounce.easeOut});
   }
 
   rotate() {
-      // if (this.state.cardIsFront) {
-      this.rotateToBack();
-    // } else {
-    //   this.rotateToFront();
-    // }
+    this.rotateToBack();
     this.setState({ cardIsFront: false })
   }
 
@@ -83,6 +78,17 @@ export class PostCard extends Component {
         </div>
     )
   }
+
+    // render() {
+    //   if (!this.state.currentCoordinates.length)
+    //   return <div className="login-container">loading...</div>
+    //   return (
+    //     <div className="login-container">
+    //       <h2>PostCardReceived Component in here</h2>
+    //     </div>
+    //   )
+    // }
+
 }
 
-export default withAuth(PostCard)
+export default withAuth(PostCardReceived)

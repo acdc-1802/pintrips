@@ -74,19 +74,19 @@ export class PostCard extends Component {
             <div>
               <PostCardStamp currentCoord={this.state.currentCoordinates}/>
             </div>
-          <div className="postcard-message-body">
-            <form className="postcard-message-form" onSubmit={this.handleSubmit}>
-              <div className="field">
-                <label className="postcard-label">To: </label><input type="text" name="receiverEmail" value={this.state.receiverEmail} onChange={this.handleChange} placeholder="email" className="postcard-form-style"/>
-              </div>
-              <div className="field">
-                <label className="postcard-label">From: </label><input type="text" name="senderEmail" readOnly={userEmail} placeholder={userEmail} className="postcard-form-style"/>
-              </div>
-              <div className="field" id="message-box">
-                <label className="postcard-label">Message: </label><textarea type="text" name="postCardBody" value={this.state.postCardBody} onChange={this.handleChange} placeholder="Hello!" className="postcard-form-style" id="textarea"></textarea>
-              </div>
-                <Button type="submit" color='teal' compact disabled={!isEnabled}>Send!</Button>
-            </form>
+            <div className="postcard-message-body">
+              <form className="postcard-message-form" onSubmit={this.handleSubmit}>
+                <div className="field">
+                  <label className="postcard-label">To: </label><input type="text" name="receiverEmail" value={this.state.receiverEmail} onChange={this.handleChange} placeholder="email" className="postcard-form-style"/>
+                </div>
+                <div className="field">
+                  <label className="postcard-label">From: </label><input type="text" name="senderEmail" readOnly={userEmail} placeholder={userEmail} className="postcard-form-style"/>
+                </div>
+                <div className="field" id="message-box">
+                  <label className="postcard-label">Message: </label><textarea type="text" name="postCardBody" value={this.state.postCardBody} onChange={this.handleChange} placeholder="Hello!" className="postcard-form-style" id="textarea"></textarea>
+                </div>
+                  <Button type="submit" color='teal' compact disabled={!isEnabled}>Send!</Button>
+              </form>
             </div>
           </div>
       : null

@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouter, Route, Switch } from 'react-router-dom';
-import { SingleBoard, LoginPage, SignupPage, HomePage, AddNewBoard, SharedWithMe, CannotFind, SendPostCard, PostCard, PostcardSent } from './components';
+import { SingleBoard, LoginPage, SignupPage, HomePage, AddNewBoard, SharedWithMe, CannotFind, SendPostCard, PostCard, PostcardSent, PostcardReceived } from './components';
 import { withAuth } from 'fireview';
 
 const Routes = props => {
@@ -18,6 +18,7 @@ const Routes = props => {
             <Route path='/SharedWithMe' component={SharedWithMe} />
             <Route path='/PostCard' component={PostCard} />
             <Route path={'/postcard_sent'} component={PostcardSent} />
+            <Route path={'/postcard_received'} component={PostcardReceived} />
             <Route path='/404' component={CannotFind} />
             <Route exact path='/' component={HomePage} />
           </Switch>
