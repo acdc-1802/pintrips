@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
-import  { Dropdown, Menu, Icon, Popup, Input, Button, List, Label, Sidebar } from 'semantic-ui-react'
+import { Dropdown, Menu, Icon, Popup, Input, Button, List, Label, Sidebar } from 'semantic-ui-react'
 import { withAuth } from 'fireview'
 import firebase from 'firebase'
 import history from '../../history'
@@ -53,9 +53,8 @@ class Navbar extends Component {
             }
           }
           let username = doc.data().username;
-          return [username, pendingBoards]
+          this.setState({notifications: sum, username, pendingBoards})
         })
-        .then(info => { this.setState({ notifications: sum, username: info[0], pendingBoards: info[1] }) })
         .catch(error => console.error('Could not get notifications', error))
   }
   render() {
@@ -79,7 +78,6 @@ class Navbar extends Component {
             (
               <div className='user-nav'>
                 <small id='email'>Welcome, {this.state.username}</small>
-                <button id='logout' onClick={handleLogout}>Logout</button>
               </div>
             )
           }
@@ -88,72 +86,103 @@ class Navbar extends Component {
           user &&
           (
             <Menu className='sub-navbar' borderless={true}>
-            <Dropdown id='dropdown' icon="bars" floating> 
-              <Dropdown.Menu>
-                <Dropdown.Item>
-                  <Link to={'/HomePage'}>
-                    <Menu.Item id='myboards'>
-                    My Boards
+              <Dropdown id='dropdown' icon="bars" floating>
+                <Dropdown.Menu>
+
+                  <Dropdown.Item>
+                    <Link to={'/HomePage'}>
+                      <Menu.Item id='myboards'>
+                        My Boards
                     </Menu.Item>
-                  </Link>
-                </Dropdown.Item>
-                <Dropdown.Item>
-                  <Link to={'/SharedWithMe'}>
-                    <Menu.Item borderless='true' >
-                      Shared With Me
+                    </Link>
+                  </Dropdown.Item>
+
+                  <Dropdown.Item>
+                    <Link to={'/SharedWithMe'}>
+                      <Menu.Item borderless='true' >
+                        Shared With Me
                     </Menu.Item>
-                  </Link>
-                </Dropdown.Item>
-                <Dropdown.Item>
-                  <Link to={'/HomePage'}>
-                    <Menu.Item id='myboards'>
-                    Starred
+                    </Link>
+                  </Dropdown.Item>
+
+                  <Dropdown.Item>
+                    <Link to={'/HomePage'}>
+                      <Menu.Item id='myboards'>
+                        Starred
                     </Menu.Item>
-                  </Link>
-                </Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
+                    </Link>
+                  </Dropdown.Item>
+
+                  <Dropdown.Item>
+                    <Link to={'/PostCard'}>
+                      <Menu.Item id='myboards'>
+                        Send a Postcard
+                    </Menu.Item>
+                    </Link>
+                  </Dropdown.Item>
+
+                </Dropdown.Menu>
+
+              </Dropdown>
               <Link to={'/AddNewBoard'}>
                 <Menu.Item id='create-btn'>
-                  <Icon name='plus square outline' size={'large'} />
+                  <Popup
+                    trigger={
+                      <div>
+                      <Icon name='plus square outline' size={'large'} />
+                      </div>
+                    }
+                    content={'Add a new board'} />
                 </Menu.Item>
               </Link>
-              
-              {/* <Link to={'/SharedWithMe'}> */}
-              { this.state.notifications===0 
-                ?
-                  <Menu.Item borderless='true' id='navbar-notifications'>
+              {/*}
+              {!this.state.notifications &&
+                <Menu.Item borderless='true' id='navbar-notifications'>
                   <Popup
-                  trigger={<div><Icon name='bell outline' size={"medium"}/></div>}
-                  content={"You don't have any notifications."}/>
-                  </Menu.Item>
-                :
-                  <Menu.Item borderless='true' id='navbar-notifications'>
-                  <Popup
-                  trigger={<div><Icon name='bell outline' size={"medium"} /><Label color="red" size={'mini'} circular>{this.state.notifications}</Label></div>}
-                  content={
-                    <List>
-                    {
-                      this.state.pendingBoards &&
-                      this.state.pendingBoards.map(sentBoard => {
-                        return (
-                          <Link to={`/SingleBoard/${sentBoard.board}`}>
-                          <List.Item icon='mail' content={`${sentBoard.sender} sent you a board!`} />
-                          </Link>
-                        )
-                      })
-                    }
-                    </List>
-                }
-                on='click'
-                position='bottom center'
-                />
-                {/*
-                  this.state.notifications > 0 &&
-                  <p id='notification'>{this.state.notifications}</p>
-                */}
+                    trigger={<div><Icon name='bell outline' size={"medium"} /></div>}
+                    content={"You don't have any notifications."} />
                 </Menu.Item>
               }
+              {
+                this.state.notifications > 0 &&
+              */}
+                <Menu.Item borderless='true' id='navbar-notifications'>
+                  <Popup
+                    trigger={
+                      <div>
+                        <Icon name='bell outline' size={"medium"} />
+                        {this.state.notifications>0 && <Label color="red" size={'mini'} circular>{this.state.notifications}
+                        </Label>}
+                      </div>
+                    }
+                    content={
+                      <List>
+                        {
+                          this.state.pendingBoards &&
+                          this.state.pendingBoards.map(sentBoard => {
+                            return (
+                              <Link to={`/SingleBoard/${sentBoard.board}`}>
+                                <List.Item icon='mail' content={`${sentBoard.sender} sent you a board!`} />
+                              </Link>
+                            )
+                          })
+                        }
+                      </List>
+                    }
+                    on='click'
+                    position='bottom center'
+                  />
+                </Menu.Item>
+              
+                <Menu.Item >
+                <Popup
+                    trigger={
+                      <div>
+                        <Icon id='logout' name= "log out" onClick={handleLogout} size={"large"}/>
+                      </div>
+                    }
+                    content={'Logout'} />
+                </Menu.Item>
               {/*</Link>*/}
               
             </Menu>
