@@ -304,6 +304,9 @@ body {
   padding-top: 1px;
 }
   #mapcard {
+    width: auto;
+  }
+  #mapcard-world {
     width: 100vw;
     padding:5px;
   }
