@@ -94,7 +94,11 @@ body {
   position: absolute;
   bottom: 3em;
 }
-
+.map-container {
+    position: fixed;
+    width: 100vw;
+    height: 90vh;
+}
 #dropup {
   position: center;
   padding: 15px;
@@ -186,6 +190,9 @@ body {
   min-width: 30vw;
   display: flex;
   padding: 15px;
+}
+#profile-board {
+  height: 76vh;
 }
 
 .input-container {
@@ -297,7 +304,8 @@ body {
   padding-top: 1px;
 }
   #mapcard {
-    width: auto;
+    width: 100vw;
+    padding:5px;
   }
   #mapcard-closed {
     width: auto;
@@ -660,11 +668,12 @@ body {
  .profile-container {
   display: flex;
   flex-direction: row;
-  justify-content: center;
   text-align: center;
-  margin-left: 10%;
-  margin-right: 10%;
+  padding-left: 20px;
   padding-top: 110px;
+ }
+ .profile-page {
+   width: 100vw;
  }
  #banner-img {
    display: flex;
