@@ -58,6 +58,7 @@ class PostCardReceived extends Component {
     TweenLite.set(".postcard-container", {transformStyle:"preserve-3d"})
     TweenLite.set(".postcard-back", {rotationY:-180})
     TweenLite.set([".postcard-back", ".postcard-front"], {backfaceVisibility:"hidden"})
+    console.log('state in componentDidUpdate', this.state.currentCoordinates)
   }
 
   postcardAnimation() {
@@ -84,6 +85,8 @@ class PostCardReceived extends Component {
   render() {
     // if (!this.state.currentCoordinates.length)
     //   return <div className="login-container">loading...</div>
+      console.log('yup', this.state.currentCoordinates)
+      console.log('state', this.state)
     const sendCoordToProps = [this.state.currentCoordinates._lat, this.state.currentCoordinates._long]
     return (
       <div className="login-container">
