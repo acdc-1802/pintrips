@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
-import { Dropdown, Menu, Icon, Popup, Input, Button, List, Label, Sidebar } from 'semantic-ui-react'
+import { Dropdown, Menu, Icon, Popup, Input, Button, List, Label, Sidebar, Image } from 'semantic-ui-react'
 import { withAuth, Map } from 'fireview'
 import firebase from 'firebase'
 import history from '../../history'
@@ -15,7 +15,8 @@ class Navbar extends Component {
       notifications: null,
       username: null,
       pendingBoards: [],
-      currentPage: 'HomePage'
+      currentPage: 'HomePage',
+      profileImg: ''
     }
     this.toggleVisibility = this.toggleVisibility.bind(this);
   }
@@ -52,7 +53,8 @@ class Navbar extends Component {
             }
           }
           let username = doc.data().username;
-          this.setState({ notifications: sum, username, pendingBoards })
+          let profileImg = doc.data().profileImg;
+          this.setState({ notifications: sum, username, pendingBoards, profileImg })
         })
         .catch(error => console.error('Could not get notifications', error))
   }
@@ -76,10 +78,12 @@ class Navbar extends Component {
             user &&
             (
               <div className='user-nav'>
-                <Link to='/Profile'>
-                  <Icon name='user outline' size='large' />
-                </Link>
-                <small id='email'>Welcome, {this.state.username}</small>
+                <div className='user-profile'>
+                  <Link id='navbar-link' to='/Profile' >
+                    <Image id='navbar-pic' src={this.state.profileImg} />
+                  </Link>
+                  <small id='username'>{this.state.username}</small>
+                </div>
               </div>
             )
           }

@@ -5,6 +5,7 @@ import { Header, Icon, Grid, Segment, Image } from 'semantic-ui-react';
 import FriendsList from './FriendsList';
 
 const Friends = (props) => {
+
   const user = props._user;
   return (
     <div className='friends-container'>

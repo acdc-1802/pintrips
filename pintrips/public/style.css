@@ -49,7 +49,9 @@ body {
   flex-direction: row;
   justify-content: space-between;
 }
-
+#login-signup-options {
+  width: 300px;
+}
  .container {
    display: flex;
    flex-direction: row;
@@ -105,14 +107,35 @@ body {
   height: 2em;
   padding-top: 5px 1px 1px 0;
 }
-
+#username {
+  font-family: 'Special Elite', cursive;
+  height: 2em;
+  padding-top: 5px 1px 1px 0;
+  margin: auto;
+}
+.user-profile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  margin-right: 10px;
+}
+.navbar-link {
+  margin: auto;
+}
 #checkmark {
   border: none;
 }
 .profile-img{
-  width: 175px;
-  height: 175px;
+  width: 75px;
+  height: 75px;
   border-radius: 50%;
+  border: solid 2px #bcbcbc;
+}
+.profile-info {
+  text-align: left;
+  margin-left: 10px;
+  color: #515151;
 }
 .friend-img {
   width: 75px;
@@ -190,6 +213,9 @@ body {
     flex-direction: column;
     justify-content: center;
     text-align: center;
+    padding-top: 150px;
+    width: 100%;
+    align-items: center;
   }
   .friends-container {
     display: flex;
@@ -211,6 +237,14 @@ body {
     position: fixed;
     right: 12px;
     top: 109px;
+  }
+  #navbar-pic {
+    display: flex;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: solid 1px #bcbcbc;
+    margin: auto;
   }
   .header-container {
     margin-top: 10px;
@@ -341,13 +375,12 @@ body {
   margin-left: 1.75em;
 }
 #profile-name {
-  font-family: 'Special Elite', cursive;
-  font-size: 225%;
-  margin-top: 5%;
+  font-size: 150%;
+  margin-top: 2%;
+  margin-bottom: auto;
 }
 #profile-username {
-  font-family: 'Special Elite', cursive;
-  font-size: 180%;
+  font-size: 100%;
   margin: auto;
 }
 #friend-name {
@@ -376,9 +409,9 @@ body {
   flex-direction: column;
 }
 #profile-email {
-  font-family: 'Special Elite', cursive;
-  font-size: 140%;
+  font-size: 100%;
   margin: auto;
+  color: #515151;
 }
 .navbar {
   display: flex;
@@ -626,13 +659,12 @@ body {
  }
  .profile-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   text-align: center;
-  width: 60%;
-  margin-left: 20%;
-  margin-right: 20%;
-  padding-top: 150px;
+  margin-left: 10%;
+  margin-right: 10%;
+  padding-top: 110px;
  }
  #banner-img {
    display: flex;
