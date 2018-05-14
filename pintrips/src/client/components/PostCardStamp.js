@@ -9,8 +9,16 @@ export class PostCardStamp extends Component {
       city: '',
       state: '',
       country: '',
-      date: new Date().toLocaleDateString(),
+      date: null,
       sentPostcard: false
+    }
+  }
+
+  componentWillMount() {
+    if (this.props.dateSent) {
+      this.setState({ date: this.props.dateSent.toString().slice(0,16)})
+    } else {
+      this.setState({ date: new Date().toLocaleString().slice(0,9)})
     }
   }
 

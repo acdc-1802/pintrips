@@ -15,7 +15,8 @@ export class PostCard extends Component {
       currentCoordinates: [],
       receiverEmail: '',
       postCardBody: '',
-      senderEmail: ''
+      senderEmail: '',
+      postcardId: null
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -48,6 +49,9 @@ export class PostCard extends Component {
       opened: false,
       receiver: this.state.receiverEmail,
       sender: this.state.senderEmail
+    })
+    .then(created => {
+      this.setState({ postcardId: created.id})
     })
     .then(function() {
       history.push('/postcard_sent')
