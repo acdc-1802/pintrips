@@ -15,7 +15,7 @@ class SignupPage extends Component {
     last: '',
     email: '',
     password: '',
-    profileImg: 'https://fsmedia.imgix.net/66/36/85/56/af88/443a/a581/8952697f0fb1/morty-just-cant-hang-with-all-that-truth-tortoise-shit-stuck-in-his-head.jpeg',
+    profileImg: 'https://static1.squarespace.com/static/586c76466b8f5b6deb3d6942/58a33603f7e0abdf636c3434/58a33619cd0f68039a5f5d6f/1525807659422/grace.png?format=750w',
     error: false
   };
 
