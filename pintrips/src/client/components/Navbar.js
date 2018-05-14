@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import { Dropdown, Menu, Icon, Popup, Input, Button, List, Label, Sidebar } from 'semantic-ui-react'
-import { withAuth } from 'fireview'
+import { withAuth, Map } from 'fireview'
 import firebase from 'firebase'
 import history from '../../history'
 // import '/Users/crysmags/fullDev/pintrips/pintrips/public/style.css'
@@ -145,37 +145,79 @@ class Navbar extends Component {
                     content={'Add a new board'} />
                 </Menu.Item>
               </Link>
-              {/*}
-              {!this.state.notifications &&
-                <Menu.Item borderless='true' id='navbar-notifications'>
-                  <Popup
-                    trigger={<div><Icon name='bell outline' size={"medium"} /></div>}
-                    content={"You don't have any notifications."} />
-                </Menu.Item>
-              }
-              {
-                this.state.notifications > 0 &&
-              */}
               <Menu.Item borderless='true' id='navbar-notifications'>
                 <Popup
                   trigger={
                     <div>
                       <Icon name='bell outline' size={"medium"} />
-                      {this.state.notifications > 0 && <Label color="red" size={'mini'} circular>{this.state.notifications}
-                      </Label>}
+                      {
+                        this.props._user &&
+                        <Map
+                          from={db.collection('users').doc(this.props._user.uid)}
+                          Render={(props) => {
+                            let pending = props.canWrite;
+                            let sum = 0;
+                            for (let i in pending) {
+                              pending[i] === 'pending' && sum++
+                            }
+                            return (
+                              sum > 0 &&
+                              <Label color='red' size={'mini'} circular>{sum}</Label>
+                            )
+                          }}
+                        />
+                      }
                     </div>
                   }
                   content={
                     <List>
                       {
-                        this.state.pendingBoards &&
-                        this.state.pendingBoards.map(sentBoard => {
-                          return (
-                            <Link to={`/SingleBoard/${sentBoard.board}`}>
-                              <List.Item icon='mail' content={`${sentBoard.sender} sent you a board!`} />
-                            </Link>
-                          )
-                        })
+                        this.props._user &&
+                        <Map
+                          from={db.collection('users').doc(this.props._user.uid)}
+                          Loading={() => 'Loading...'}
+                          Render={(props) => {
+                            for (let i in props.canWrite) {
+                              let sender = '';
+                              props.canWrite[i] === 'pending' &&
+                                db.collection('boards').doc(i).get()
+                                  .then(board => {
+                                    let senderId = board.data().creator;
+                                    return senderId;
+                                  })
+                                  .then(sender => {
+                                    db.collection('users').doc(sender).get()
+                                      .then(boardCreator => {
+                                        sender = boardCreator.data().username;
+                                      })
+                                      .then(() => console.log('sender', sender))
+                                      .then(() => {
+                                      })
+                                      .catch(error => console.error('could not get sender username', error))
+                                  })
+                              if (sender){
+                                return (
+                                  <Link to={`/SingleBoard/${i}`}>
+                                    <List.Item icon='mail' content={`${sender} sent you a board!`} />
+                                  </Link>
+                                )
+                              }
+                            }
+                          }}
+                        />
+
+
+
+
+
+                        //     this.state.pendingBoards &&
+                        //   this.state.pendingBoards.map(sentBoard => {
+                        //     return (
+                        //       <Link to={`/SingleBoard/${sentBoard.board}`}>
+                        //   <List.Item icon='mail' content={`${sentBoard.sender} sent you a board!`} />
+                        // </Link>
+                        // )
+                        // })
                       }
                     </List>
                   }
