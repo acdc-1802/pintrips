@@ -15,9 +15,13 @@ const HomePage = (props) => {
         <Map from={allBoards.where('creator', '==', `${user.uid}`)}
           Loading={() => 'Loading...'}
           Render={(props) => {
-            return (
-              <MapCard board={props} id={props._ref.id} owner={true}/>
-            )
+            if(props.name !== 'world'){
+              return (
+                <MapCard board={props} id={props._ref.id} owner={true}/>
+              )
+            } else {
+              return ('')
+            }
           }}
           Empty={() => {
             return (

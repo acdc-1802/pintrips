@@ -58,7 +58,8 @@ class SingleBoard extends Component {
       .then(thisBoard => {
         this.setState({
           center: [thisBoard.coordinates._long, thisBoard.coordinates._lat],
-          openStatus: thisBoard.locked
+          openStatus: thisBoard.locked,
+          style: thisBoard.style
         })
       })
       .catch(err => {
@@ -97,9 +98,16 @@ class SingleBoard extends Component {
   }
 
   switchStyle = event => {
+    const boardId = this.props.match.params.boardId;
     this.setState({
       style: event.target.value
     });
+    db.collection('boards').doc(boardId).update(
+      {
+        style: event.target.value
+      }
+    )
+    .catch(error => console.error('Unable to update board style', error))
   }
 
   selectPlaceFromSearchBar = (label, coords) => {
@@ -148,6 +156,10 @@ class SingleBoard extends Component {
           console.log('Pin successfully added');
         })
         .catch((err) => console.error('Add unsuccessful: ', err))
+      db.collection('boards').doc(boardId).update({
+        coordinates: new firebase.firestore.GeoPoint(this.state.newLocation[1], this.state.newLocation[0])
+      })
+      .catch(error => console.error('Unable to update center of board', error))
   }
   toggleEditLabel = () => {
     this.setState({ editLabel: !this.state.editLabel });
