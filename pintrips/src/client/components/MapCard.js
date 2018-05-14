@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Card, Icon, Popup, Input, Checkbox, Segment, Label, Dropdown } from 'semantic-ui-react';
+import { Button, Card, Icon, Popup, Checkbox, Segment, Label, Dropdown } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import db from '../firestore';
 import history from '../../history';
