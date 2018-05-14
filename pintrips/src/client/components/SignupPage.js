@@ -55,7 +55,7 @@ class SignupPage extends Component {
   }
   render() {
     return (
-      <div className="login-container">
+      <div className="signup-container">
         <Form onSubmit={this.handleSignup} error>
           <h3> Create An Account </h3>
           <div className='forms'>
