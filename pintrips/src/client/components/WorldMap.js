@@ -61,7 +61,7 @@ class WorldMap extends Component {
   render() {
     return (
       <div className='ind-card' id='profile-board'>
-        <Card id='mapcard'>
+        <Card id='mapcard-world'>
           <Map
             style={'mapbox://styles/destinmcmurrry/cjgy8hinv00192rp4obrfj9qq'}
             zoom={this.state.zoom}
