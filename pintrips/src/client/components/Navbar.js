@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import { Dropdown, Menu, Icon, Popup, Input, Button, List, Label, Sidebar } from 'semantic-ui-react'
-import { withAuth } from 'fireview'
+import { withAuth, Map } from 'fireview'
 import firebase from 'firebase'
 import history from '../../history'
 // import '/Users/crysmags/fullDev/pintrips/pintrips/public/style.css'
@@ -28,7 +28,6 @@ class Navbar extends Component {
     if (this.props._user === _user) return
     const user = this.props._user;
     let sum = 0;
-
     user &&
       db.collection('users').doc(user.uid).get()
         .then(doc => {
@@ -53,7 +52,7 @@ class Navbar extends Component {
             }
           }
           let username = doc.data().username;
-          this.setState({notifications: sum, username, pendingBoards})
+          this.setState({ notifications: sum, username, pendingBoards })
         })
         .catch(error => console.error('Could not get notifications', error))
   }
@@ -77,6 +76,9 @@ class Navbar extends Component {
             user &&
             (
               <div className='user-nav'>
+                <Link to='/Profile'>
+                  <Icon name='user outline' size='large' />
+                </Link>
                 <small id='email'>Welcome, {this.state.username}</small>
               </div>
             )
@@ -99,7 +101,7 @@ class Navbar extends Component {
 
                   <Dropdown.Item>
                     <Link to={'/SharedWithMe'}>
-                      <Menu.Item borderless='true' >
+                      <Menu.Item borderless='true' id='myboards' >
                         Shared With Me
                     </Menu.Item>
                     </Link>
@@ -121,6 +123,14 @@ class Navbar extends Component {
                     </Link>
                   </Dropdown.Item>
 
+                  <Dropdown.Item>
+                    <Link to={`/Friends/${this.props._user.uid}`}>
+                      <Menu.Item id='myboards'>
+                        Friends
+                    </Menu.Item>
+                    </Link>
+                  </Dropdown.Item>
+
                 </Dropdown.Menu>
 
               </Dropdown>
@@ -129,60 +139,103 @@ class Navbar extends Component {
                   <Popup
                     trigger={
                       <div>
-                      <Icon name='plus square outline' size={'large'} />
+                        <Icon name='plus square outline' size={'large'} />
                       </div>
                     }
                     content={'Add a new board'} />
                 </Menu.Item>
               </Link>
-              {/*}
-              {!this.state.notifications &&
-                <Menu.Item borderless='true' id='navbar-notifications'>
-                  <Popup
-                    trigger={<div><Icon name='bell outline' size={"medium"} /></div>}
-                    content={"You don't have any notifications."} />
-                </Menu.Item>
-              }
-              {
-                this.state.notifications > 0 &&
-              */}
-                <Menu.Item borderless='true' id='navbar-notifications'>
-                  <Popup
-                    trigger={
-                      <div>
-                        <Icon name='bell outline' size={"medium"} />
-                        {this.state.notifications>0 && <Label color="red" size={'mini'} circular>{this.state.notifications}
-                        </Label>}
-                      </div>
-                    }
-                    content={
-                      <List>
-                        {
-                          this.state.pendingBoards &&
-                          this.state.pendingBoards.map(sentBoard => {
-                            return (
-                              <Link to={`/SingleBoard/${sentBoard.board}`}>
-                                <List.Item icon='mail' content={`${sentBoard.sender} sent you a board!`} />
-                              </Link>
-                            )
-                          })
-                        }
-                      </List>
-                    }
-                    on='click'
-                    position='bottom center'
-                  />
-                </Menu.Item>
-              
-                <Menu.Item >
+              <Menu.Item borderless='true' id='navbar-notifications'>
                 <Popup
-                    trigger={
-                      <div>
-                        <Icon id='logout' name= "log out" onClick={handleLogout} size={"large"}/>
-                      </div>
-                    }
-                    content={'Logout'} />
-                </Menu.Item>
+                  trigger={
+                    <div>
+                      <Icon name='bell outline' size={"medium"} />
+                      {
+                        this.props._user &&
+                        <Map
+                          from={db.collection('users').doc(this.props._user.uid)}
+                          Render={(props) => {
+                            let pending = props.canWrite;
+                            let sum = 0;
+                            for (let i in pending) {
+                              pending[i] === 'pending' && sum++
+                            }
+                            return (
+                              sum > 0 &&
+                              <Label color='red' size={'mini'} circular>{sum}</Label>
+                            )
+                          }}
+                        />
+                      }
+                    </div>
+                  }
+                  content={
+                    <List>
+
+                      {/*
+                        this.props._user &&
+                        <Map
+                          from={db.collection('users').doc(this.props._user.uid)}
+                          Loading={() => 'Loading...'}
+                          Render={(props) => {
+                            let senders = []
+                            for (let i in props.canWrite) {
+                              props.canWrite[i] === 'pending' &&
+                                db.collection('boards').doc(i).get()
+                                  .then(board => {
+                                    let senderId = board.data().creator;
+                                    return senderId;
+                                  })
+                                  .then(sender => {
+                                    db.collection('users').doc(sender).get()
+                                      .then(boardCreator => {
+                                        senders.push({username: boardCreator.data().username, boardId: i});
+                                      })
+                                      .catch(error => console.error('could not get sender username', error))
+                                  })
+                            }
+                            senders &&
+                            senders.map(user => {
+                              return (
+                                <Link to={`/SingleBoard/${user.boardId}`}>
+                                  <List.Item icon='mail' content={`${user.username} sent you a board!`} />
+                                </Link>
+                              )
+                            })
+                          }
+                          }
+                        />
+*/}
+                      {
+                        this.state.pendingBoards &&
+                        this.state.pendingBoards.map(sentBoard => {
+                          return (
+                            <Link to={`/SingleBoard/${sentBoard.board}`}>
+                              <List.Item icon='mail' content={`${sentBoard.sender} sent you a board!`} />
+                            </Link>
+
+                          )
+                        })
+                      }
+
+                      
+                    </List>
+                  }
+                  on='click'
+                  position='bottom center'
+                />
+              </Menu.Item>
+
+              <Menu.Item >
+                <Popup
+                  trigger={
+                    <div>
+                      <Icon name="log out" onClick={handleLogout} size={"large"} />
+                    </div>
+                  }
+                  content={'Logout'} />
+
+              </Menu.Item>
               {/*</Link>*/}
 
             </Menu>
