@@ -171,14 +171,15 @@ class Navbar extends Component {
                   }
                   content={
                     <List>
-                      {
+
+                      {/*
                         this.props._user &&
                         <Map
                           from={db.collection('users').doc(this.props._user.uid)}
                           Loading={() => 'Loading...'}
                           Render={(props) => {
+                            let senders = []
                             for (let i in props.canWrite) {
-                              let sender = '';
                               props.canWrite[i] === 'pending' &&
                                 db.collection('boards').doc(i).get()
                                   .then(board => {
@@ -188,37 +189,36 @@ class Navbar extends Component {
                                   .then(sender => {
                                     db.collection('users').doc(sender).get()
                                       .then(boardCreator => {
-                                        sender = boardCreator.data().username;
-                                      })
-                                      .then(() => console.log('sender', sender))
-                                      .then(() => {
+                                        senders.push({username: boardCreator.data().username, boardId: i});
                                       })
                                       .catch(error => console.error('could not get sender username', error))
                                   })
-                              if (sender){
-                                return (
-                                  <Link to={`/SingleBoard/${i}`}>
-                                    <List.Item icon='mail' content={`${sender} sent you a board!`} />
-                                  </Link>
-                                )
-                              }
                             }
-                          }}
+                            senders &&
+                            senders.map(user => {
+                              return (
+                                <Link to={`/SingleBoard/${user.boardId}`}>
+                                  <List.Item icon='mail' content={`${user.username} sent you a board!`} />
+                                </Link>
+                              )
+                            })
+                          }
+                          }
                         />
+*/}
+                      {
+                        this.state.pendingBoards &&
+                        this.state.pendingBoards.map(sentBoard => {
+                          return (
+                            <Link to={`/SingleBoard/${sentBoard.board}`}>
+                              <List.Item icon='mail' content={`${sentBoard.sender} sent you a board!`} />
+                            </Link>
 
-
-
-
-
-                        //     this.state.pendingBoards &&
-                        //   this.state.pendingBoards.map(sentBoard => {
-                        //     return (
-                        //       <Link to={`/SingleBoard/${sentBoard.board}`}>
-                        //   <List.Item icon='mail' content={`${sentBoard.sender} sent you a board!`} />
-                        // </Link>
-                        // )
-                        // })
+                          )
+                        })
                       }
+
+                      
                     </List>
                   }
                   on='click'
