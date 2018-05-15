@@ -13,6 +13,7 @@ export class PostCardStamp extends Component {
 
   componentWillMount() {
     if (this.props.dateSent) {
+      console.log(this.props.dateSent)
       this.setState({ date: this.props.dateSent.toString().slice(0,16)})
     } else {
       this.setState({ date: new Date().toLocaleString().slice(0,9)})
@@ -32,7 +33,7 @@ export class PostCardStamp extends Component {
           array.push(place.text)
         })
         this.setState({
-          place: array.slice(2)
+          place: array.slice(0,3)
         })
       })
       .catch(err => console.log('error', err))
