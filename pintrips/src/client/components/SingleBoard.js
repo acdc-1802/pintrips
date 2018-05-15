@@ -34,6 +34,7 @@ class SingleBoard extends Component {
     center: [-74.006376, 40.712368],
     zoom: [12],
     style: pintripsStyle, // will later be grabbed from user preference on db
+    title: '',
     visitedPins: [],
     unvisitedPins: [],
     yarnCoords: [],
@@ -59,7 +60,8 @@ class SingleBoard extends Component {
         this.setState({
           center: [thisBoard.coordinates._long, thisBoard.coordinates._lat],
           openStatus: thisBoard.locked,
-          style: thisBoard.style
+          style: thisBoard.style,
+          title: thisBoard.name
         })
       })
       .catch(err => {
@@ -420,7 +422,10 @@ class SingleBoard extends Component {
         <div className="in-footer">
         
               <LocationSearch 
-              className="search-bar" forAddPin={true} updateBoardPins={this.selectPlaceFromSearchBar}>
+                value={this.state.title}
+                className="search-bar" 
+                forAddPin={true} 
+                updateBoardPins={this.selectPlaceFromSearchBar}>
               <input placeholder="Search for places in  "/>
               </LocationSearch>
             </div> 
