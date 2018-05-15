@@ -16,12 +16,14 @@ body {
   padding: 5px;
   margin-right: 10px;
  }
+
  #add-user-icon {
   margin-bottom: 5px;
   position: fixed;
   right: 12px;
   top: 109px;
 }
+
 #add-img-icon {
   z-index: 10;
   position: fixed;
@@ -37,9 +39,8 @@ body {
 
 i.angle.double.left.large.icon.back-icon {
   margin-left: 12px;
-
-
 }
+
   #banner-img {
     display: flex;
     z-index: -5;
@@ -47,11 +48,13 @@ i.angle.double.left.large.icon.back-icon {
     width: 100%;
     height: 40%;
   }
+
  .board-container {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
  }
+
 .board-container .mapboxgl-map {
   position: absolute;
   top: 7.5em;
@@ -89,37 +92,79 @@ i.angle.double.left.large.icon.back-icon {
   border: none;
   margin: auto auto 4px 0;
 }
+
 #login-signup-options {
   width: 300px;
 }
+
  .container {
    display: flex;
    flex-direction: row;
  }
+
 #dropdown {
   margin-left: 15px;
   margin-top: 7px;
 }
+
 #dropdown-item {
   margin-left: 0px;
   text-align: left;
 }
+
 .footer .dropdown {
   display: flex;
   margin: .1em 1em 0 1em
 }
+
+.x-btn {
+  font-size: 25px;
+}
+
+#close-popup {
+  font-size: 20px;
+  display: flex;
+  border: none;
+  margin: auto auto 1px 0;
+  color: #515151; 
+  font-family: 'Special Elite', cursive;
+}
+
+#close-popup-add-pin {
+  font-size: 25px;
+  display: flex;
+  border: none;
+  margin: 3px auto 3px 0;
+  color: #515151; 
+  font-family: 'Special Elite', cursive;
+}
+
+#chevron {
+  display: flex;
+  margin: 3px auto 3px 0;
+}
+
+#label {
+  font-family: 'Special Elite', cursive;
+  color: #515151;
+  padding: 1px;
+  margin-bottom: 0;
+}
+
 #want-to-go {
-  margin-right: 17px;
+  margin-left: 13px;
+  margin-right: 23px;
 }
 
 .autocomplete-dropdown-container {
   position: absolute;
   bottom: 3em;
 }
+
 .map-container {
-    position: fixed;
-    width: 100vw;
-    height: 90vh;
+  position: fixed;
+  width: 100vw;
+  height: 90vh;
 }
 
 #dropup {
@@ -134,12 +179,14 @@ i.angle.double.left.large.icon.back-icon {
   height: 2em;
   padding-top: 5px 1px 1px 0;
 }
+
 #username {
   font-family: 'Special Elite', cursive;
   height: 2em;
   padding-top: 5px 1px 1px 0;
   margin: auto;
 }
+
 .user-profile {
   display: flex;
   flex-direction: column;
@@ -147,27 +194,33 @@ i.angle.double.left.large.icon.back-icon {
   align-content: center;
   margin-right: 10px;
 }
+
 .navbar-link {
   margin: auto;
 }
+
 #checkmark {
   border: none;
 }
+
 .profile-img{
   width: 75px;
   height: 75px;
   border-radius: 50%;
   border: solid 2px #bcbcbc;
 }
+
 .profile-info {
   text-align: left;
   margin-left: 10px;
   color: #515151;
 }
+
 .friend-img {
   width: 75px;
   height: 75px;
 }
+
 .footer {
   position: fixed;
   bottom: 0;
@@ -197,14 +250,17 @@ i.angle.double.left.large.icon.back-icon {
   display: flex;
   width: 400px;
 }
+
 .friend-box {
   display: flex;
   flex-direction: row;
 }
+
 .friend-sub-box {
   display: flex;
   flex-direction: column;
 }
+
 .friends-container {
   display: flex;
   padding-top: 100px;
@@ -213,32 +269,28 @@ i.angle.double.left.large.icon.back-icon {
   margin-right: 20px;
   width: 100vw;
 }
+
 .friendsList-container {
   display: flex;
   justify-content: center;
 }
+
 #friend-name {
   font-family: 'Special Elite', cursive;
   font-size: 75%;
   margin-left: 5px;
 }
+
 #friend-username {
   font-family: 'Special Elite', cursive;
   font-size: 65%;
   margin-left: 5px;
 }
+
 #full-page {
   display: flex;
 }
 
-.header-container {
-  margin-top: 10px;
-  margin-bottom: 20px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
 .homepage-container {
   display: flex;
   margin-top: 8em;
@@ -259,6 +311,7 @@ i.angle.double.left.large.icon.back-icon {
   display: flex;
   padding: 15px;
 }
+
 #profile-board {
   height: 76vh;
 }
@@ -268,11 +321,12 @@ i.angle.double.left.large.icon.back-icon {
   flex-direction: column;
   width: 100%;
 }
+
 input.location-search-input {
   width: 100%;
   border-radius: 1em 1em;
-
 }
+
 @keyframes typing {
   from { width: 0 }
   to { width: 60% }
@@ -284,45 +338,37 @@ input.location-search-input {
   50% { border-color: rgb(36, 25, 6) }
 }
 
-.location-bar {
-   position: absolute;
-   top: 10vh;
-   border: 3px solid green;
-}
+  #add-pin {
+    display: flex;
+    margin: 0 0 auto auto;
+    border-radius: 5px;
+    border: none;
+    color: #5b5e5e;
+  }
 
-.login-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    width: 100%;
-    margin: 10em auto auto;
-}
-#login-signup-options {
-  width: 300px;
-}
+  #add-pin {
+    font-size: 20px;
+  }
 
-  .friends-container {
-    display: flex;
-    padding-top: 100px;
-    flex-direction: column;
-    margin-left: 20px;
-    margin-right: 20px;
-    width: 100vw;
+  #add-pin-options {
+    margin-top: 13px;
   }
-  .friendsList-container {
-    display: flex;
-    justify-content: center;
+
+  #add-pin-options * {
+    border-radius: 3px;
+    margin: 1px;
   }
-  #users-icon {
-    margin-bottom: 5px;
+
+  #edit-pin-options * {
+    border-radius: 3px;
+    margin: 1px;
   }
-  #add-user-icon {
-    margin-bottom: 5px;
-    position: fixed;
-    right: 12px;
-    top: 109px;
+
+  #notes-input {
+    height: 4em;
+    border: solid 1px gray;
   }
+
   #navbar-pic {
     display: flex;
     width: 25px;
@@ -331,6 +377,7 @@ input.location-search-input {
     border: solid 1px #bcbcbc;
     margin: auto;
   }
+
   .header-container {
     margin-top: 10px;
     margin-bottom: 20px;
@@ -339,21 +386,23 @@ input.location-search-input {
     justify-content: space-between;
     align-items: center;
   }
+  
   .logo{
     display: flex;
     width: 2em;
   }
-
 
 .location-bar {
   position: absolute;
   top: 10vh;
   border: 3px solid green;
 }
+
 .location-search {
   display: flex;
   width: 100%;
 }
+
 .login-container {
   display: flex;
   flex-direction: column;
@@ -378,25 +427,37 @@ input.location-search-input {
 #logout {
   padding-top: 1px;
 }
+
 #mapcard {
   width: auto;
-  }
-  #mapcard-world {
-    width: 100vw;
-    padding:5px;
-  }
+}
+
+.mapboxgl-popup-content {
+  text-align: center;
+  background-color: #bcbcbc;
+  opacity: .9;
+  font-family: 'Special Elite', cursive;
+  width: 170px;
+  height: 190px;
+}
+
+.mapboxgl-popup-tip {
+  background-color: #bcbcbc;
+  opacity: .9;
+}
+
+#mapcard-world {
+  width: 100vw;
+  padding:5px;
+}
+
 #mapcard-closed {
   width: auto;
   opacity: .45;
 }
-.mapboxgl-popup-content {
-  text-align: center;
-}
 
 #menu {
   display: flex;
-  /* flex-direction: row; */
-  /* justify-content: center; */
   width: 100vw;
   z-index: 3;
   height: 5em;
@@ -410,13 +471,17 @@ input.location-search-input {
   border-radius: 5px;
 }
 
-
-.mapboxgl-popup-content {
-  text-align: center;
-}
 #menu * {
-  /* padding: .5em .5em .5em .5em; */
   margin: .5em
+}
+
+.board-container .mapboxgl-map {
+  position: fixed;
+  top: 7.5em;
+}
+
+.ui.menu:after {
+  content: none;
 }
 
 #message-box {
@@ -427,51 +492,55 @@ input.location-search-input {
   margin-left: 10px;
 }
 
-#name {
-  font-family: 'Special Elite', cursive;
-  font-size: 250%;
-  margin-left: 1.75em;
-}
 #profile-name {
   font-family: 'Special Elite', cursive;
   font-size: 150%;
   margin-top: 2%;
   margin-bottom: auto;
 }
+
 #profile-username {
   font-size: 100%;
   margin: auto;
 }
+
 #friend-name {
   font-family: 'Special Elite', cursive;
   font-size: 75%;
   margin-left: 5px;
 }
+
 #friend-username {
   font-family: 'Special Elite', cursive;
   font-size: 65%;
   margin-left: 5px;
 }
+
 .no-friends-msg {
   margin: 20px;
 }
+
 .friends-box-container{
   display: flex;
   width: 400px;
 }
+
 .friend-box {
   display: flex;
   flex-direction: row;
 }
+
 .friend-sub-box {
   display: flex;
   flex-direction: column;
 }
+
 #profile-email {
   font-size: 100%;
   margin: auto;
   color: #515151;
 }
+
 .navbar {
   display: flex;
   margin-top: 0;
@@ -484,6 +553,7 @@ input.location-search-input {
   background-color: #f9f9f9;
   z-index: 3;
   }
+
 .navbar a {
   color: #515151;
 }
@@ -493,9 +563,11 @@ input.location-search-input {
   font-size: 175%;
   margin-left: 1.75em;
 }
+
 .no-friends-msg {
   margin: 20px;
 }
+
 #notification {
   background-color: #a3151e;
   color: white;
@@ -503,6 +575,7 @@ input.location-search-input {
   width: 1.5em;
   text-align: center;
 }
+
 .options-container {
   display: flex;
   flex-direction: row;
@@ -514,21 +587,23 @@ input.location-search-input {
 .options-container * {
   padding: 4px;
 }
-#pin-options button {
-  border-radius: 5px;
-  border: none;
-  background-color: white;
- }
 
- #pin-options img {
-  height: 45px;
-  width: 45px;
- }
+.options-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.options-container * {
+  padding: 4px;
+  font-family: 'Special Elite', cursive;
+}
 
 .postcard-logo {
   width: 14vw;
   z-index:1
 }
+
 .postcard-container {
   display: flex;
   flex-direction: column;
@@ -547,13 +622,11 @@ input.location-search-input {
   padding: 20px;
   text-align: center;
   margin-bottom: 5em;
-
 }
 
 #postcard-icon {
   padding-right: 1em;
 }
-
 
  .postcard-form-style {
   background: transparent;
@@ -612,6 +685,7 @@ input.location-search-input {
     line-height: 1.7em;
     white-space: nowrap;
   }
+
   #postcard-received {
     text-align: left;
   }
@@ -638,16 +712,19 @@ input.location-search-input {
   typing 3.5s steps(30, end),
   blink-caret .5s step-end infinite;
 }
+
 #profile-name {
   font-family: 'Special Elite', cursive;
   font-size: 150%;
   margin-top: 5%;
 }
+
 /* The typing effect */
 @keyframes typing {
   from { width: 0 }
   to { width: 60% }
 }
+
 #profile-username {
   font-size: 100%;
   margin: auto;
@@ -657,6 +734,7 @@ input.location-search-input {
   font-size: 100%;
   margin: auto;
 }
+
 .profile-container {
   display: flex;
   flex-direction: row;
@@ -665,33 +743,61 @@ input.location-search-input {
   padding-top: 110px;
   color: #515151;
 }
+
 .profile-picture {
   display: flex;
   justify-content: center;
 }
+
 .profile-img{
   width: 75px;
   height: 75px;
   border-radius: 50%;
   border: solid 2px #bcbcbc;
 }
-/* The typing effect */
+
+  #pin-options {
+    margin-top: 13px;
+    color: #515151;
+  }
+
+  #pin-options * {
+    font-family: 'Special Elite', cursive;
+  }
+
+  #pin-trash-btns * {
+    padding: 0 20px;
+  }
+
+  #pin-options img {
+    height: 45px;
+    width: 45px;
+  }
 
  .routes {
   display: flex;
  }
+
+ #edit-btn {
+   display: flex;
+   margin: 0 0 auto auto;
+ }
+
+.popup-label {
+  height: 75px;
+  width: 150px;
+}
+
 .search-bar {
   border-radius: 1em 1em 1em 1em;
 }
+
 .search-container {
-  /* position: fixed; */
-  /* top: 8em; */
-  /* width: 100%; */
   color: white;
-  /* padding: 10px; */
-}
- .mapboxgl-popup-content {
-   text-align: center;
+ }
+
+ .autocomplete-dropdown-container {
+   color: black;
  }
 
  #pin-options button {
@@ -699,23 +805,6 @@ input.location-search-input {
   border: none;
   background-color: white;
  }
- #pin-options img {
-  height: 45px;
-  width: 45px;
- }
-
- .options-container {
-   display: flex;
-   flex-direction: row;
-   align-items: center;
-   justify-content: space-between;
-   margin: 3px;
- }
-
- .options-container * {
-   padding: 4px;
- }
-
 
  .postcard-logo {
   width: 14vw;
@@ -747,10 +836,12 @@ input.location-search-input {
   text-align: center;
   border-radius: 50%;
  }
+
 .settings {
   margin-top: 3px;
   margin-left: 2px;
 }
+
  .sign-up {
   font-family: sans-serif;
   font-size: 20px;
@@ -758,9 +849,11 @@ input.location-search-input {
   justify-items: center;
   padding: 1em;
  }
+
  #signup-button{
    margin-top:10px;
  }
+
  .signup-container {
     display: flex;
     flex-direction: column;
@@ -774,10 +867,10 @@ input.location-search-input {
    margin-bottom: 0;
  }
 
-
  .profile-page {
    width: 100vw;
  }
+
  #banner-img {
    display: flex;
    z-index: -5;
@@ -785,6 +878,7 @@ input.location-search-input {
    width: 100%;
    height: 40%;
  }
+
  .side-button {
   display: flex;
   flex-direction: column;
@@ -796,13 +890,12 @@ input.location-search-input {
   bottom: 0;
 }
 
-
  .title {
   display: flex;
   position: fixed;
   color: black;
-
  }
+
  .ui.form .fields {
   display: flex;
   flex-direction: column;
@@ -823,7 +916,6 @@ input.location-search-input {
   justify-content: right;
   }
 
-
 .stamp {
   z-index:1;
   font-family: Arial,sans-serif;
@@ -843,7 +935,6 @@ input.location-search-input {
   -webkit-text-shadow: 0 0 2px #F7BAB7;
   text-shadow: 0 0 2px #F7BAB7;
   box-shadow: 0 0 2px #F7BAB7;
-
   -webkit-animation-name: pulse;
   animation-name: pulse;
   animation-delay:2s;
@@ -855,16 +946,16 @@ input.location-search-input {
   animation-fill-mode:forwards;
 }
 
-
  .title {
   display: flex;
   position: fixed;
   color: black;
-
  }
+
  .ui.container.container {
   width: 100vw;
 }
+
  .ui.form .fields {
   display: flex;
   flex-direction: column;
@@ -874,9 +965,11 @@ input.location-search-input {
   width: 50%;
   min-width: 100px;
  }
+
  .ui.menu:after {
   content: none;
 }
+
 .ui.sub-navbar.menu {
   display: flex;
   position: fixed;
@@ -887,9 +980,11 @@ input.location-search-input {
   height: 3em;
   justify-content: space-between;
 }
+
  #users-icon {
   margin-bottom: 5px;
 }
+
 .user-nav {
   display: flex;
   flex-direction: column;
@@ -904,11 +999,6 @@ input.location-search-input {
   display: flex;
   align-self: flex-end;
 }
-
- #want-to-go {
-  margin-right: 17px;
-}
-
 
  @media only screen and (max-width: 600px) {
   .postcard-container {
@@ -930,11 +1020,13 @@ input.location-search-input {
     text-align: center;
     margin-bottom: 5em;
   }
+
   .postcard-map {
     margin-bottom: 2em;
     width: 72vw;
     height: 32vh;
   }
+
   .postcard-typewriter-text {
     margin: 1em;
     color: rgb(31, 29, 29);
@@ -942,6 +1034,7 @@ input.location-search-input {
     font-family: monospace;
     white-space: normal;
   }
+
   .postcard-message-container {
     display: flex;
     flex-direction: column;
@@ -955,6 +1048,7 @@ input.location-search-input {
     line-height: 1.7em;
     white-space: nowrap;
   }
+
   .postcard-message-form {
     text-align: left;
     clear: both;
@@ -962,6 +1056,7 @@ input.location-search-input {
     margin-left: 1em;
     width: 55vw;
   }
+
   .stamp-logo {
     position: relative;
     top: -4em;
@@ -971,10 +1066,11 @@ input.location-search-input {
     flex-direction: row;
     justify-content: right;
   }
+
   .postcard-logo {
     width: 24vw;
     z-index:1
-    }
+  }
 
   .stamp {
     z-index:1;
@@ -995,7 +1091,6 @@ input.location-search-input {
     -webkit-text-shadow: 0 0 2px #F7BAB7;
     text-shadow: 0 0 2px #F7BAB7;
     box-shadow: 0 0 2px #F7BAB7;
-
     -webkit-animation-name: pulse;
     animation-name: pulse;
     animation-delay:2s;
@@ -1040,7 +1135,6 @@ input.location-search-input {
     transform: rotate(55deg) scale(1);
   };
 }
-
 
 .welcome-container {
   display: flex;
