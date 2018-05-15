@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
-import { Dropdown, Menu, Icon, Popup, Input, Button, List, Label, Sidebar, Image } from 'semantic-ui-react'
+import { Dropdown, Menu, Icon, Popup, List, Label, Image, Loader } from 'semantic-ui-react'
 import { withAuth, Map } from 'fireview'
 import firebase from 'firebase'
 import history from '../../history'
@@ -16,7 +16,8 @@ class Navbar extends Component {
       username: null,
       pendingBoards: [],
       currentPage: 'HomePage',
-      profileImg: ''
+      profileImg: '',
+      loading: true
     }
     this.toggleVisibility = this.toggleVisibility.bind(this);
   }
@@ -35,7 +36,6 @@ class Navbar extends Component {
           let boards = doc.data().canWrite;
           let pendingBoards = [];
           for (let i in boards) {
-            let sender = '';
             if (boards[i] === 'pending') {
               sum += 1;
               db.collection('boards').doc(i).get()
@@ -54,7 +54,7 @@ class Navbar extends Component {
           }
           let username = doc.data().username;
           let profileImg = doc.data().profileImg;
-          this.setState({ notifications: sum, username, pendingBoards, profileImg })
+          this.setState({ notifications: sum, username, pendingBoards, profileImg, loading: false })
         })
         .catch(error => console.error('Could not get notifications', error))
   }
@@ -78,9 +78,14 @@ class Navbar extends Component {
             (
               <div className='user-nav'>
                 <div className='user-profile'>
-                  <Link id='navbar-link' to='/Profile' >
-                    <Image id='navbar-pic' src={this.state.profileImg} />
-                  </Link>
+                  {
+                    !this.state.loading ?
+                    <Link id='navbar-link' to='/Profile' >
+                      <Image id='navbar-pic' src={this.state.profileImg} />
+                    </Link>
+                    :
+                    <Loader active inline size='small'/>
+                  }
                   <small id='username'>{this.state.username}</small>
                 </div>
               </div>
@@ -149,7 +154,7 @@ class Navbar extends Component {
                 <Popup
                   trigger={
                     <div>
-                      <Icon name='bell outline' size={"medium"} />
+                      <Icon name='bell outline'  />
                       {
                         this.props._user &&
                         <Map
@@ -208,9 +213,9 @@ class Navbar extends Component {
 */}
                       {
                         this.state.pendingBoards &&
-                        this.state.pendingBoards.map(sentBoard => {
+                        this.state.pendingBoards.map((sentBoard, idx) => {
                           return (
-                            <Link to={`/SingleBoard/${sentBoard.board}`}>
+                            <Link key={idx} to={`/SingleBoard/${sentBoard.board}`}>
                               <List.Item icon='mail' content={`${sentBoard.sender} sent you a board!`} />
                             </Link>
 

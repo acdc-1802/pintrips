@@ -9,6 +9,7 @@
     "bootstrap-select": "^1.13.1",
     "bootstrap-switch": "^3.3.4",
     "firebase": "^4.13.0",
+    "firebase-cli": "^1.2.0",
     "fireview": "0.0.8",
     "gsap": "^1.20.4",
     "jsdf": "^0.3.2",

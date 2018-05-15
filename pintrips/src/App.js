@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { Navbar } from './client/components';
+<<<<<<< HEAD
 import Routes from './client/routes';
 import { Button, Icon, Popup, Image, Label } from 'semantic-ui-react';
+=======
+import Routes from './client/routes'
+>>>>>>> 50219660a1498c9414b7ace67c781087f0251465
 
 class App extends Component {
   constructor() {

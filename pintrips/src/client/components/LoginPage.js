@@ -4,7 +4,6 @@ import { Form, Message } from 'semantic-ui-react';
 import firebase from 'firebase';
 import history from '../../history';
 
-const emailProvider = new firebase.auth.EmailAuthProvider()
 
 export default class LoginPage extends Component {
 

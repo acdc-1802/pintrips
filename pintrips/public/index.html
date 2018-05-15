@@ -7,21 +7,15 @@
   <meta name="theme-color" content="#000000">
   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCw0-EOrBWW7uLEuumEW1bLFUfv52MKw80&libraries=places"></script>
   <link href="https://fonts.googleapis.com/css?family=Caveat|Special+Elite" rel="stylesheet">
-
-  <!--
-      manifest.json provides metadata used when your web app is added to the
-      homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
-    -->
   <link rel="manifest" href="/manifest.json">
-  <!-- <link rel="manifest" href="https://localhost:5000/"> -->
-  <link rel="apple-touch-icon" href="images/icons/icon-152x152.png"> 
+  <link rel="apple-touch-icon" href="images/icons/icon-152x152.png">
   <link rel="apple-touch-startup-image" href="/launch.png">
   <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
 
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css"></link>
-  <link href='https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.css' rel='stylesheet' />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css">
+  <link href='https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.css' rel='stylesheet'>
 
-  <link rel="stylesheet" href="/style.css" />
+  <link rel="stylesheet" href="/style.css">
 
   <!--
       Notice the use of %PUBLIC_URL% in the tags above.
@@ -34,7 +28,7 @@
   
     -->
   <title>PinTrips</title>
-  
+
 </head>
 
 <body>
@@ -55,22 +49,22 @@
     }
   </script> -->
 
-  <script>
-    if(window.indexedDB){
+  <!-- <script>
+    if (window.indexedDB) {
       console.log('IndexedDB is supported');
     }
 
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function () {
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
         navigator.serviceWorker.register('service-worker.js');
 
         //navigator.serviceWorker.ready always resolve
         navigator.serviceWorker.ready.then(function (registration) {
-            console.log('Service worker successfully registered on scope', registration.scope);
+          console.log('Service worker successfully registered on scope', registration.scope);
         });
-    });
-  }
-  </script>
+      });
+    }
+  </script> -->
 </body>
 <!-- <script>
   if ('serviceWorker' in navigator) {
@@ -83,7 +77,5 @@
      });
   }
  </script> -->
-<script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
-<script src="https://www.gstatic.com/firebasejs/4.13.0/firebase-firestore.js"></script>
 
 </html>

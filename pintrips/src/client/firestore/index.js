@@ -13,10 +13,13 @@ var config = {
   messagingSenderId: "1059240705357"
 }
 
-
 firebase.initializeApp(config)
 const db = firebase.firestore()
+const settings = { timestampsInSnapshots: true};
+db.settings(settings);
+export default db;
 
+<<<<<<< HEAD
 // //offline caching
 // db.collection('boards')
 //   .onSnapshot({ includeQueryMetadataChanges: true }, function(snapshot) {
@@ -33,3 +36,5 @@ const db = firebase.firestore()
 export default db
 
 
+=======
+>>>>>>> 50219660a1498c9414b7ace67c781087f0251465

@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import { Button } from 'semantic-ui-react'
 import { withAuth } from 'fireview'
-import firebase from 'firebase'
-import history from '../../history'
 import db from '../firestore';
 import PostCardStamp from './PostCardStamp';
 import PostCardMap from './PostCardMap';
 import PostCardTypeText from './PostCardTypeText';
-import { TweenLite, Back, Bounce } from "gsap";
+import { TweenLite, Back } from "gsap";
 
 
 class PostCardReceived extends Component {

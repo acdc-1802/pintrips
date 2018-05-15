@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Map, withAuth } from 'fireview';
 import db from '../firestore';
-import { Header, Icon, Grid, Segment, Image } from 'semantic-ui-react';
+import { Header, Icon } from 'semantic-ui-react';
 import FriendsList from './FriendsList';
 
 const Friends = (props) => {
