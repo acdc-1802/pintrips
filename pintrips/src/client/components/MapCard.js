@@ -95,7 +95,9 @@ class MapCard extends Component {
     }
     db.collection('users').get()
       .then(snapshot => snapshot.forEach(doc => {
-        this.state.users.push({ key: doc.data().username, value: doc.data().username, text: doc.data().username })
+        if (doc.data().id !== this.props.board.creator){
+          this.state.users.push({ key: doc.data().username, value: doc.data().username, text: doc.data().username })
+        }
       }))
       .catch(error => console.error('Unable to get users', error))
 
@@ -188,7 +190,7 @@ class MapCard extends Component {
         <Card id={this.props.board.locked === 'open' ? 'mapcard' : 'mapcard-closed'}>
           <Segment raised>
             {
-              <Label as='a' color="white" size='large' corner='right' onClick={this.favoriteBoard} icon={this.state.starred ? 'star' : 'empty star'} />
+              <Label as='a' size='large' corner='right' onClick={this.favoriteBoard} icon={this.state.starred ? 'star' : 'empty star'} />
             }
             <Map
               style={this.props.board.style}
