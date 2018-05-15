@@ -222,33 +222,36 @@ class MapCard extends Component {
                   trigger={<Icon name='mail outline' size='large' fitted={true} id="postcard-icon" />}
                   content={<p>Send a postcard!</p>} />
                 </Link>
-                <Popup
-                  trigger={<Icon name='external share' size='large' fitted={true} floated='right' />}
-                  content={
-                    !this.state.sent ?
-                      (<div>
-                        <p>Who would you like to share this board with?</p>
-                        <Dropdown
-                          fluid
-                          multiple
-                          search
-                          searchQuery={this.state.searchQuery}
-                          options={this.state.users}
-                          value={this.state.shareWith}
-                          placeholder='Search by username'
-                          onChange={this.handleChange}
-                          onSearchChange={this.handleSearchChange}
-                          selection
-                        />
-                        <br />
-                        <Button color='blue' size='mini' content='Share' onClick={this.handleSend} />
-                      </div>)
-                      :
-                      (<p>Board was successfully sent!</p>)
-                  }
-                  on='click'
-                  position='top right'
-                />
+                {
+                  !this.props.recipient &&
+                  <Popup
+                    trigger={<Icon name='external share' size='large' fitted={true} floated='right' />}
+                    content={
+                      !this.state.sent ?
+                        (<div>
+                          <p>Who would you like to share this board with?</p>
+                          <Dropdown
+                            fluid
+                            multiple
+                            search
+                            searchQuery={this.state.searchQuery}
+                            options={this.state.users}
+                            value={this.state.shareWith}
+                            placeholder='Search by username'
+                            onChange={this.handleChange}
+                            onSearchChange={this.handleSearchChange}
+                            selection
+                          />
+                          <br />
+                          <Button color='blue' size='mini' content='Share' onClick={this.handleSend} />
+                        </div>)
+                        :
+                        (<p>Board was successfully sent!</p>)
+                    }
+                    on='click'
+                    position='top right'
+                  />
+                }
               </div>
             </div>
           </Card.Content>

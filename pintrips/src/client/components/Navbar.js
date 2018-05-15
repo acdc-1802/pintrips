@@ -62,7 +62,7 @@ class Navbar extends Component {
     const user = this.props._user;
     const handleLogout = () => {
       firebase.auth().signOut()
-        .then(() => history.push('/'))
+        .then(() => history.push('/LoginPage'))
     }
     return (
       <div>

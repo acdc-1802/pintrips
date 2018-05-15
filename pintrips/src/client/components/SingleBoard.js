@@ -377,7 +377,7 @@ class SingleBoard extends Component {
         
         <Icon name= "angle double left" size="large" onClick={history.goBack}/>
           
-        <Dropdown className="settings" icon="settings" >
+        <Dropdown className="settings" icon="settings" upward >
        
           <Dropdown.Menu> 
             <Button.Group basic vertical>
