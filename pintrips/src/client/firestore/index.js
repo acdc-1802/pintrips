@@ -19,7 +19,6 @@ const settings = { timestampsInSnapshots: true};
 db.settings(settings);
 export default db;
 
-<<<<<<< HEAD
 // //offline caching
 // db.collection('boards')
 //   .onSnapshot({ includeQueryMetadataChanges: true }, function(snapshot) {
@@ -33,8 +32,6 @@ export default db;
 //     });
 //   });
 
-export default db
+// export default db
 
 
-=======
->>>>>>> 50219660a1498c9414b7ace67c781087f0251465

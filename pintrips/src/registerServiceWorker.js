@@ -143,72 +143,72 @@ export function unregister() {
 }
 
 
-import localforage from 'localforage';
-console.log('error')
-const request = self.IndexedDB.open('EXAMPLE_DB', 1);
-const db;
-const cacheName = 'WWW-EXAMPLE-COM-V1';
-const filesToCache = [
-    '/',                // index.html
-    '/index.html',
-    '/index.js',
-    '/style.css',
-    '/attributes/logo.png',
-    '/attributes/pin.png',
-    'https://localhost:5000/',
-    '/HomePage',
-    '/SingleBoard',
-    '/AddNewBoard',
-    '/CannotFind',
-    '/SharedWithMe',
-    '/manifest.json'
-   
-];
+// import localforage from 'localforage';
+// console.log('error')
+// const request = window.IndexedDB.open('EXAMPLE_DB', 1);
+// const cacheName = 'WWW-EXAMPLE-COM-V1';
+// const filesToCache = [
+//   '/',                // index.html
+//   '/index.html',
+//   '/index.js',
+//   '/style.css',
+//   '/attributes/logo.png',
+//   '/attributes/pin.png',
+//   'https://localhost:5000/',
+//   '/HomePage',
+//   '/SingleBoard',
+//   '/AddNewBoard',
+//   '/CannotFind',
+//   '/SharedWithMe',
+//   '/manifest.json'
+  
+// ];
+// // const db;
 
-self.addEventListener('install', function(event) {
-  event.waitUntil(
-    caches.open('WWW-EXAMPLE-COM-V1').then(function(cache) {
-      return cache.addAll([
-        '/style.css',
-        '/index.html',
-        '/',
-        '/HomePage.js',
-        '/SingleBoard.js',
-      ]);
-    })
-  );
-});
-
-
-// self.addEventListener('activate', function(event) {
-//   console.log("SW activated");
+// window.addEventListener('install', function(event) {
 //   event.waitUntil(
-//     caches.keys()
-//     .then(function(cacheNames) {
-//         return Promise.all(
-//             cacheNames.map(function(cName) {
-//                 if(cName !== cacheName){
-//                     return caches.delete(cName);
-//                 }
-//             })
-//         );
+//     caches.open('WWW-EXAMPLE-COM-V1').then(function(cache) {
+//       return cache.addAll([
+//         '/style.css',
+//         '/index.html',
+//         '/',
+//         '/HomePage.js',
+//         '/SingleBoard.js',
+//       ]);
 //     })
 //   );
 // });
-navigator.storage.requestPersistent().then(function(granted) {
-  if (granted) {
-    
-  }
-});
-self.addEventListener('fetch', function(event) {
-  event.respondWith(
-    caches.match(event.request).then(function(response) {
-      return response || fetch(event.request);
-    })
-  );
-});
 
-// self.addEventListener('fetch', function(event) {
+
+// // window.addEventListener('activate', function(event) {
+// //   console.log("SW activated");
+// //   event.waitUntil(
+// //     caches.keys()
+// //     .then(function(cacheNames) {
+// //         return Promise.all(
+// //             cacheNames.map(function(cName) {
+// //                 if(cName !== cacheName){
+// //                     return caches.delete(cName);
+// //                 }
+// //             })
+// //         );
+// //     })
+// //   );
+// // });
+// // navigator.storage.requestPersistent().then(function(granted) {
+// //   if (granted) {
+    
+// //   }
+// // });
+// window.addEventListener('fetch', function(event) {
+//   event.respondWith(
+//     caches.match(event.request).then(function(response) {
+//       return response || fetch(event.request);
+//     })
+//   );
+// });
+
+// window.addEventListener('fetch', function(event) {
 //   event.respondWith(
 //       caches.match(event.request)
 //       .then(function(response) {

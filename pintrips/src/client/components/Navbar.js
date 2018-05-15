@@ -59,6 +59,7 @@ class Navbar extends Component {
         .catch(error => console.error('Could not get notifications', error))
   }
   render() {
+    console.log('boards', this.state.pendingBoards)
     const user = this.props._user;
     const handleLogout = () => {
       firebase.auth().signOut()
@@ -212,8 +213,9 @@ class Navbar extends Component {
                         />
 */}
                       {
-                        this.state.pendingBoards &&
+                        !this.state.pendingBoards &&
                         this.state.pendingBoards.map((sentBoard, idx) => {
+                          console.log('should')
                           return (
                             <Link key={idx} to={`/SingleBoard/${sentBoard.board}`}>
                               <List.Item icon='mail' content={`${sentBoard.sender} sent you a board!`} />
