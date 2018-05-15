@@ -11,6 +11,7 @@ class App extends Component {
       }
     
   }
+  
   componentDidMount() {
     const isIos = () => {
       const userAgent = window.navigator.userAgent.toLowerCase();
@@ -33,7 +34,7 @@ class App extends Component {
     });
     
   }
-  
+ 
   render() {
     return (
       <div id='full-page'>
