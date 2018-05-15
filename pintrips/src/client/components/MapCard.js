@@ -98,6 +98,13 @@ class MapCard extends Component {
         this.state.users.push({ key: doc.data().username, value: doc.data().username, text: doc.data().username })
       }))
       .catch(error => console.error('Unable to get users', error))
+
+      //for sending postcards
+      const userId = this.props.board.creator
+      db.collection('users').doc(userId).get()
+        .then(doc => {
+          this.setState({ userName: doc.data().username })
+        })
   }
   checkStatus(boardStatus) {
     if (boardStatus === 'open') {
@@ -208,6 +215,11 @@ class MapCard extends Component {
                 </Link>
               </div>
               <div>
+                <Link to={`/postcard_send/${this.state.boardId}`}>
+                <Popup
+                  trigger={<Icon name='mail outline' size='large' fitted={true} id="postcard-icon" />}
+                  content={<p>Send a postcard!</p>} />
+                </Link>
                 <Popup
                   trigger={<Icon name='external share' size='large' fitted={true} floated='right' />}
                   content={

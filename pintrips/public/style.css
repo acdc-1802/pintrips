@@ -21,7 +21,7 @@ body {
   position: fixed;
   right: 12px;
   top: 109px;
-} 
+}
 #add-img-icon {
   z-index: 10;
   position: fixed;
@@ -264,7 +264,7 @@ i.angle.double.left.large.icon.back-icon {
 input.location-search-input {
   width: 100%;
   border-radius: 1em 1em;
-  
+
 }
 @keyframes typing {
   from { width: 0 }
@@ -479,7 +479,7 @@ input.location-search-input {
 .navbar a {
   color: #515151;
 }
-  
+
 #name {
   font-family: 'Special Elite', cursive;
   font-size: 175%;
@@ -520,7 +520,7 @@ input.location-search-input {
 .postcard-logo {
   width: 14vw;
   z-index:1
-} 
+}
 .postcard-container {
   display: flex;
   flex-direction: column;
@@ -540,6 +540,10 @@ input.location-search-input {
   text-align: center;
   margin-bottom: 5em;
 
+}
+
+#postcard-icon {
+  padding-right: 1em;
 }
 
 

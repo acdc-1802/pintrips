@@ -16,7 +16,7 @@ const Routes = props => {
             <Route path='/SignupPage' component={SignupPage} />
             <Route path='/HomePage' component={HomePage} />
             <Route path='/SharedWithMe' component={SharedWithMe} />
-            <Route path='/PostCard' component={PostCard} />
+            <Route path='/postcard_send/:boardId' component={PostCard} />
             <Route path={'/postcard_sent'} component={PostcardSent} />
             <Route path={'/postcard_received/:postcardId'} component={PostcardReceived} />
             <Route path='/404' component={CannotFind} />

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Map, withAuth } from 'fireview';
-import { Image, Button, Icon } from 'semantic-ui-react';
+import { withAuth } from 'fireview';
 
 export class PostCardTypeText extends Component {
   constructor(props) {
@@ -19,6 +18,7 @@ export class PostCardTypeText extends Component {
 
     fetch(url)
       .then(res => res.json())
+      .then(myJson => console.log('myJSON', myJson))
       .then(myJson => {
         this.setState({
           city: myJson.features[0].context[1].text,
