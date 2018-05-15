@@ -80,14 +80,43 @@ body {
   margin: .1em 1em 0 1em
 }
 
+.x-btn {
+  font-size: 25px;
+}
+
 #close-popup {
+  font-size: 20px;
   display: flex;
   border: none;
-  margin: auto auto 4px 0;
+  margin: auto auto 1px 0;
+  color: #515151; 
+  font-family: 'Special Elite', cursive;
+}
+
+#close-popup-add-pin {
+  font-size: 25px;
+  display: flex;
+  border: none;
+  margin: 3px auto 3px 0;
+  color: #515151; 
+  font-family: 'Special Elite', cursive;
+}
+
+#chevron {
+  display: flex;
+  margin: 3px auto 3px 0;
+}
+
+#label {
+  font-family: 'Special Elite', cursive;
+  color: #515151;
+  padding: 1px;
+  margin-bottom: 0;
 }
 
 #want-to-go {
-  margin-right: 17px;
+  margin-left: 13px;
+  margin-right: 23px;
 }
 
 .autocomplete-dropdown-container {
@@ -238,6 +267,31 @@ body {
     right: 12px;
     top: 109px;
   }
+  #add-pin {
+    display: flex;
+    margin: 0 0 auto auto;
+    border-radius: 5px;
+    border: none;
+    color: #5b5e5e;
+  }
+  #add-pin {
+    font-size: 20px;
+  }
+  #add-pin-options {
+    margin-top: 13px;
+  }
+  #add-pin-options * {
+    border-radius: 3px;
+    margin: 1px;
+  }
+  #edit-pin-options * {
+    border-radius: 3px;
+    margin: 1px;
+  }
+  #notes-input {
+    height: 4em;
+    border: solid 1px gray;
+  }
   #navbar-pic {
     display: flex;
     width: 25px;
@@ -305,12 +359,18 @@ body {
   }
   .mapboxgl-popup-content {
     text-align: center;
+    background-color: #bcbcbc;
+    opacity: .9;
+    font-family: 'Special Elite', cursive;
+    width: 170px;
+    height: 190px;
   }
-
+  .mapboxgl-popup-tip {
+    background-color: #bcbcbc;
+    opacity: .9;
+  }
 #menu {
   display: flex;
-  /* flex-direction: row; */
-  /* justify-content: center; */
   width: 100vw;
   z-index: 3;
   height: 5em;
@@ -339,7 +399,7 @@ body {
 }
 
 .board-container .mapboxgl-map {
-  position: absolute;
+  position: fixed;
   top: 7.5em;
 }
 
@@ -552,11 +612,21 @@ body {
   width: 1.5em;
   text-align: center;
 }
+
+  #pin-options {
+    margin-top: 13px;
+    color: #515151;
+  }
+  #pin-options * {
+    font-family: 'Special Elite', cursive;
+  }
+  #pin-trash-btns * {
+    padding: 0 20px;
+  }
   #pin-options button {
     border-radius: 5px;
     border: none;
    }
-
    #pin-options img {
     height: 45px;
     width: 45px;
@@ -569,7 +639,17 @@ body {
  .location-search {
    display: flex;
    width: 100%;
+ } 
+
+ #edit-btn {
+   display: flex;
+   margin: 0 0 auto auto;
  }
+
+.popup-label {
+  height: 75px;
+  width: 150px;
+}
 
  .search-container {
   /* position: fixed; */
@@ -583,10 +663,6 @@ body {
    color: black;
  }
 
- .mapboxgl-popup-content {
-   text-align: center;
- }
-
  #pin-options button {
   border-radius: 5px;
   border: none;
@@ -595,13 +671,12 @@ body {
  .options-container {
    display: flex;
    flex-direction: row;
-   align-items: center;
-   justify-content: space-between;
-   margin: 3px;
+   justify-content: flex-end;
  }
 
  .options-container * {
    padding: 4px;
+   font-family: 'Special Elite', cursive;
  }
 
  #pin-options img {
