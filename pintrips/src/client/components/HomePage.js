@@ -31,7 +31,7 @@ class HomePage extends Component{
             Render={(props) => {
               if(props.name !== 'world'){
                 return (
-                  <MapCard board={props} id={props._ref.id} owner={true}/>
+                  <MapCard board={props} id={props._ref.id} userId={user.uid} owner={true}/>
                 )
               } else {
                 return ('')
