@@ -14,7 +14,6 @@ class Navbar extends Component {
     this.state = {
       notifications: null,
       username: null,
-      pendingBoards: [],
       currentPage: 'HomePage',
       profileImg: '',
       loading: true
@@ -25,36 +24,15 @@ class Navbar extends Component {
     this.setState({ visible: !this.state.visible })
     console.log('visible', this.state.visible);
   }
-
   componentDidUpdate({ _user }) {
     if (this.props._user === _user) return
     const user = this.props._user;
-    let sum = 0;
     user &&
       db.collection('users').doc(user.uid).get()
         .then(doc => {
-          let boards = doc.data().canWrite;
-          let pendingBoards = [];
-          for (let i in boards) {
-            if (boards[i] === 'pending') {
-              sum += 1;
-              db.collection('boards').doc(i).get()
-                .then(doc => {
-                  return doc.data().creator;
-                })
-                .then((creator) => {
-                  db.collection('users').doc(creator).get()
-                    .then(doc => {
-                      pendingBoards.push({ board: i, sender: doc.data().username })
-                    })
-                    .catch(error => console.error('Could not find username', error))
-                })
-                .catch(error => console.error('Could not find creator', error))
-            }
-          }
           let username = doc.data().username;
           let profileImg = doc.data().profileImg;
-          this.setState({ notifications: sum, username, pendingBoards, profileImg, loading: false })
+          this.setState({ username, profileImg, loading: false })
         })
         .catch(error => console.error('Could not get notifications', error))
   }
@@ -80,11 +58,11 @@ class Navbar extends Component {
                 <div className='user-profile'>
                   {
                     !this.state.loading ?
-                    <Link id='navbar-link' to='/Profile' >
-                      <Image id='navbar-pic' src={this.state.profileImg} />
-                    </Link>
-                    :
-                    <Loader active inline size='small'/>
+                      <Link id='navbar-link' to='/Profile' >
+                        <Image id='navbar-pic' src={this.state.profileImg} />
+                      </Link>
+                      :
+                      <Loader active inline size='small' />
                   }
                   <small id='username'>{this.state.username}</small>
                 </div>
@@ -111,7 +89,7 @@ class Navbar extends Component {
                   <Dropdown.Item id='dropdown-item'>
                     <Link to={'/SharedWithMe'}>
                       <Menu.Item id='myboards' >
-                      <Icon name='share alternate'/>
+                        <Icon name='share alternate' />
                         Shared With Me
                     </Menu.Item>
                     </Link>
@@ -120,7 +98,7 @@ class Navbar extends Component {
                   <Dropdown.Item id='dropdown-item'>
                     <Link to={'/HomePage'}>
                       <Menu.Item id='myboards'>
-                      <Icon name='star'/>
+                        <Icon name='star' />
                         Starred
                     </Menu.Item>
                     </Link>
@@ -130,7 +108,7 @@ class Navbar extends Component {
                   <Dropdown.Item id='dropdown-item'>
                     <Link to={`/Friends/${this.props._user.uid}`}>
                       <Menu.Item id='myboards'>
-                      <Icon name='users'/>
+                        <Icon name='users' />
                         Friends
                     </Menu.Item>
                     </Link>
@@ -154,7 +132,7 @@ class Navbar extends Component {
                 <Popup
                   trigger={
                     <div>
-                      <Icon name='bell outline'  />
+                      <Icon name='bell outline' />
                       {
                         this.props._user &&
                         <Map
@@ -163,7 +141,7 @@ class Navbar extends Component {
                             let pending = props.canWrite;
                             let sum = 0;
                             for (let i in pending) {
-                              pending[i] === 'pending' && sum++
+                              pending[i].status === 'pending' && sum++
                             }
                             return (
                               sum > 0 &&
@@ -176,54 +154,30 @@ class Navbar extends Component {
                   }
                   content={
                     <List>
-
-                      {/*
+                      {
                         this.props._user &&
                         <Map
                           from={db.collection('users').doc(this.props._user.uid)}
-                          Loading={() => 'Loading...'}
                           Render={(props) => {
-                            let senders = []
-                            for (let i in props.canWrite) {
-                              props.canWrite[i] === 'pending' &&
-                                db.collection('boards').doc(i).get()
-                                  .then(board => {
-                                    let senderId = board.data().creator;
-                                    return senderId;
-                                  })
-                                  .then(sender => {
-                                    db.collection('users').doc(sender).get()
-                                      .then(boardCreator => {
-                                        senders.push({username: boardCreator.data().username, boardId: i});
-                                      })
-                                      .catch(error => console.error('could not get sender username', error))
-                                  })
+                            let pending = props.canWrite;
+                            let pendingBoards = [];
+                            for (let i in pending) {
+                              pending[i].status === 'pending' &&
+                                pendingBoards.push({ board: i, sender: pending[i].sender })
                             }
-                            senders &&
-                            senders.map(user => {
-                              return (
-                                <Link to={`/SingleBoard/${user.boardId}`}>
-                                  <List.Item icon='mail' content={`${user.username} sent you a board!`} />
-                                </Link>
-                              )
-                            })
-                          }
-                          }
+                            return (
+                              pendingBoards &&
+                              pendingBoards.map((sentBoard, idx) => {
+                                return(
+                                  <Link key={idx} to={`/SingleBoard/${sentBoard.board}`}>
+                                    <List.Item icon='mail' content={`${sentBoard.sender} sent you a board!`} />
+                                  </Link>
+                                )
+                              })
+                            )
+                          }}
                         />
-*/}
-                      {
-                        this.state.pendingBoards &&
-                        this.state.pendingBoards.map((sentBoard, idx) => {
-                          return (
-                            <Link key={idx} to={`/SingleBoard/${sentBoard.board}`}>
-                              <List.Item icon='mail' content={`${sentBoard.sender} sent you a board!`} />
-                            </Link>
-
-                          )
-                        })
                       }
-
-
                     </List>
                   }
                   on='click'
