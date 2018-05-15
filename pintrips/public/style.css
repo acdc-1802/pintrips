@@ -433,6 +433,7 @@ input.location-search-input {
   margin-left: 1.75em;
 }
 #profile-name {
+  font-family: 'Special Elite', cursive;
   font-size: 150%;
   margin-top: 2%;
   margin-bottom: auto;
@@ -639,7 +640,7 @@ input.location-search-input {
 }
 #profile-name {
   font-family: 'Special Elite', cursive;
-  font-size: 225%;
+  font-size: 150%;
   margin-top: 5%;
 }
 /* The typing effect */
@@ -648,34 +649,31 @@ input.location-search-input {
   to { width: 60% }
 }
 #profile-username {
-  font-family: 'Special Elite', cursive;
-  font-size: 180%;
+  font-size: 100%;
   margin: auto;
 }
 
 #profile-email {
-  font-family: 'Special Elite', cursive;
-  font-size: 140%;
+  font-size: 100%;
   margin: auto;
 }
 .profile-container {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-  width: 60%;
-  margin-left: 20%;
-  margin-right: 20%;
-  padding-top: 150px;
+  flex-direction: row;
+  margin-left: 4%;
+  margin-right: 10%;
+  padding-top: 110px;
+  color: #515151;
 }
 .profile-picture {
   display: flex;
   justify-content: center;
 }
 .profile-img{
-  width: 175px;
-  height: 175px;
+  width: 75px;
+  height: 75px;
   border-radius: 50%;
+  border: solid 2px #bcbcbc;
 }
 /* The typing effect */
 
@@ -776,13 +774,7 @@ input.location-search-input {
    margin-bottom: 0;
  }
 
- .profile-container {
-  display: flex;
-  flex-direction: row;
-  text-align: center;
-  padding-left: 20px;
-  padding-top: 110px;
- }
+
  .profile-page {
    width: 100vw;
  }
