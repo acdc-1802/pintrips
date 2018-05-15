@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Dropdown, Menu, Icon, Popup, Input, Button, List, Label, Sidebar } from 'semantic-ui-react';
 import LocationSearch from './LocationSearch';
 
 const pintripsStyle = 'mapbox://styles/destinmcmurrry/cjgy8hinv00192rp4obrfj9qq';

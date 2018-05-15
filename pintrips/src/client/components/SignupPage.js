@@ -5,7 +5,6 @@ import firebase from 'firebase';
 import db from '../firestore';
 import history from '../../history';
 
-const emailProvider = new firebase.auth.EmailAuthProvider()
 
 class SignupPage extends Component {
 

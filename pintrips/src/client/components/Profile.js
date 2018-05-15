@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Map, withAuth } from 'fireview';
+import { withAuth } from 'fireview';
 import db from '../firestore';
-import { Icon } from 'semantic-ui-react';
+import { Loader } from 'semantic-ui-react';
 import WorldMap from './WorldMap';
 
 class Profile extends Component {
@@ -13,7 +13,8 @@ class Profile extends Component {
       first: '',
       last: '',
       username: '',
-      bannerImg: ''
+      bannerImg: '',
+      loading: true
     }
   }
   componentDidUpdate({ _user }) {
@@ -23,7 +24,7 @@ class Profile extends Component {
     user &&
       db.collection('users').doc(user.uid).get()
         .then(user => this.setState({ userId: user.data().id, profileImg: user.data().profileImg, first: user.data().first, last: user.data().last, email: user.data().email, username: user.data().username, bannerImg: user.data().bannerImg }))
-        .then(() => console.log('state', this.state))
+        .then(() => this.setState({ loading: false }))
         .catch(error => console.error('unable to get user info', error))
   }
   render() {
@@ -31,8 +32,12 @@ class Profile extends Component {
       <div className='profile-page'>
         <div className='profile-container'>
           <div className='profile-picture'>
-            <img className='profile-img' src={this.state.profileImg} />
-            {/*<Icon id='add-img-icon' name='camera retro' size='big' />*/}
+            {
+              !this.state.loading ?
+                <img alt='profile-img' className='profile-img' src={this.state.profileImg} />
+                :
+                (<Loader active inline />)
+            }
           </div>
           <div className='profile-info'>
             <h2 id='profile-name'>{this.state.first} {this.state.last}</h2>

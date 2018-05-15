@@ -5,8 +5,7 @@ import db from '../firestore';
 import firebase from 'firebase';
 import { withAuth } from 'fireview';
 import history from '../../history';
-import { Button, Card, Dropdown, Icon, Input, Checkbox, Segment, Label, Menu, Search } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import { Button, Dropdown, Icon } from 'semantic-ui-react';
 require('firebase/firestore');
 
 const Map = ReactMapboxGl({
@@ -346,11 +345,11 @@ class SingleBoard extends Component {
                 <Popup
                   coordinates={this.state.newLocation}
                 >
-                  <button id='close-popup' onClick={()=> this.setState({ newLocation: null }) } id='close-popup'><i class="window close outline icon" size='medium'></i></button>
+                  <button id='close-popup' onClick={()=> this.setState({ newLocation: null }) }><i class="window close outline icon" size='medium'></i></button>
                   <p>Add new pin?</p>
                   <div id='pin-options'>
-                    <button onClick={() => this.handleShowLabel(false)}><img src='/attributes/hollowPinOption.png' /></button>
-                    <button onClick={() => this.handleShowLabel(true)}><img src='/attributes/pinOption.png' /></button>
+                    <button onClick={() => this.handleShowLabel(false)}><img alt='hollow-pin' src='/attributes/hollowPinOption.png' /></button>
+                    <button onClick={() => this.handleShowLabel(true)}><img alt='solid-pin' src='/attributes/pinOption.png' /></button>
                     <div>
                       <small id='want-to-go'>want to go</small>
                       <small id='here-now'>here now</small>
