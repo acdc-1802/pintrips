@@ -5,9 +5,7 @@ export class PostCardStamp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      city: '',
-      state: '',
-      country: '',
+      place: [],
       date: null,
       sentPostcard: false
     }
@@ -29,11 +27,12 @@ export class PostCardStamp extends Component {
     fetch(url)
       .then(res => res.json())
       .then(myJson => {
+        const array = [];
+        myJson.features[0].context.forEach(place => {
+          array.push(place.text)
+        })
         this.setState({
-          city: myJson.features[0].context[1].text,
-          state: myJson.features[0].context[4].text,
-          country: myJson.features[0].context[5].text,
-          sentPostcard: true
+          place: array.slice(2)
         })
       })
       .catch(err => console.log('error', err))
@@ -43,14 +42,16 @@ export class PostCardStamp extends Component {
     return (
       <div className="stamp-logo">
       <div className="stamp">
-          <div className="stamp-line">{this.state.city}</div>
-          <div className="stamp-line">{this.state.state}</div>
-          <div className="stamp-line">{this.state.country}</div>
-          <div className="stamp-line">{this.state.date}</div>
-        </div>
-        <div className="postcard-logo-div">
-          <img className='postcard-logo' alt='logo' src='/attributes/logo.png' />
-        </div>
+        {
+          this.state.place.map(aPlace => {
+            return <div className="stamp-line" key={aPlace}>{aPlace}</div>
+          })
+        }
+        <div className="stamp-line">{this.state.date}</div>
+      </div>
+      <div className="postcard-logo-div">
+        <img className='postcard-logo' alt='logo' src='/attributes/logo.png' />
+      </div>
       </div>
     )
   }
