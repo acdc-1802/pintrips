@@ -4,7 +4,6 @@ import { Form, Message } from 'semantic-ui-react';
 import firebase from 'firebase';
 import history from '../../history';
 
-const emailProvider = new firebase.auth.EmailAuthProvider()
 
 export default class LoginPage extends Component {
 
@@ -54,7 +53,7 @@ export default class LoginPage extends Component {
         <Form onSubmit={this.handleSubmit} error>
           <h3>Login</h3>
           <div className='forms'>
-            <Form.Group stackable='true' className="input-container">
+            {/*<Form.Group stackable='true' className="input-container">*/}
               <Form.Input stackable='true' fluid label='Email' placeholder='Email'
                 className="form-control"
                 name='email'
@@ -70,7 +69,7 @@ export default class LoginPage extends Component {
                 defaultValue={this.state.username}
                 onChange={this.handleChange}
               />
-            </Form.Group>
+            {/*</Form.Group>*/}
             {
               this.state.error &&
               <Message
@@ -79,12 +78,11 @@ export default class LoginPage extends Component {
                 content='email/password incorrect'
               />
             }
-
           </div>
           {this.state.password.length < 6 ?
-            <Form.Button disabled className="form-group">Log In</Form.Button>
+            <Form.Button disabled id="signup-button">Log In</Form.Button>
             :
-            <Form.Button active className="form-group">Log In</Form.Button>
+            <Form.Button active id="signup-button">Log In</Form.Button>
           }
         </Form>
         <br />

@@ -8,6 +8,7 @@
     "bootstrap": "^4.1.1",
     "bootstrap-select": "^1.13.1",
     "bootstrap-switch": "^3.3.4",
+    "emailjs-com": "^2.1.1",
     "firebase": "^4.13.0",
     "fireview": "0.0.8",
     "gsap": "^1.20.4",

@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import firebase from 'firebase'
-import db from '../firestore';
-import { Map, withAuth } from 'fireview';
-import { Image, Button, Icon } from 'semantic-ui-react';
+import { withAuth } from 'fireview';
+import { Image } from 'semantic-ui-react';
 
 export class PostCardMap extends Component {
 

@@ -5,8 +5,7 @@ import db from '../firestore';
 import firebase from 'firebase';
 import { withAuth } from 'fireview';
 import history from '../../history';
-import { Button, Card, Dropdown, Icon, Input, Checkbox, Segment, Label, Menu, Search } from 'semantic-ui-react';
-
+import { Button, Dropdown, Icon } from 'semantic-ui-react';
 require('firebase/firestore');
 
 const Map = ReactMapboxGl({
@@ -59,50 +58,59 @@ class SingleBoard extends Component {
       .then(thisBoard => {
         this.setState({
           center: [thisBoard.coordinates._long, thisBoard.coordinates._lat],
-          openStatus: thisBoard.locked
+          openStatus: thisBoard.locked,
+          style: thisBoard.style
         })
       })
       .catch(err => {
         console.error(err);
         history.push('/404');
-      });
-    // get all pins from board, organize by visited/unvisited
-    db.collection('boards').doc(boardId).collection('pins').orderBy('visited')
-      .onSnapshot((querySnapshot) => {
-        const visitedPins = [];
-        const unvisitedPins = [];
-        querySnapshot.forEach(doc => {
-          const pin = doc.data();
-          if (pin.visited) {
-            visitedPins.push({
-              label: pin.label,
-              notes: pin.notes,
-              coords: [pin.coordinates._long, pin.coordinates._lat],
-              pinId: doc.id,
-              visited: pin.visited
+      }).then(() => {
+        db.collection('boards').doc(boardId).collection('pins').orderBy('visited')
+          .onSnapshot((querySnapshot) => {
+            const visitedPins = [];
+            const unvisitedPins = [];
+            querySnapshot.forEach(doc => {
+              const pin = doc.data();
+              if (pin.visited) {
+                visitedPins.push({
+                  label: pin.label,
+                  notes: pin.notes,
+                  coords: [pin.coordinates._long, pin.coordinates._lat],
+                  pinId: doc.id,
+                  visited: pin.visited
+                })
+              } else {
+                unvisitedPins.push({
+                  label: pin.label,
+                  notes: pin.notes,
+                  coords: [pin.coordinates._long, pin.coordinates._lat],
+                  pinId: doc.id,
+                  visited: pin.visited
+                })
+              }
             })
-          } else {
-            unvisitedPins.push({
-              label: pin.label,
-              notes: pin.notes,
-              coords: [pin.coordinates._long, pin.coordinates._lat],
-              pinId: doc.id,
-              visited: pin.visited
+            this.setState({
+              visitedPins,
+              unvisitedPins,
+              yarnCoords: visitedPins.map(pin => pin.coords)
             })
-          }
-        })
-        this.setState({
-          visitedPins,
-          unvisitedPins,
-          yarnCoords: visitedPins.map(pin => pin.coords)
-        })
-      });
+          })
+      })
+      .catch(error => console.error('Unable to set state', error))
   }
 
   switchStyle = event => {
+    const boardId = this.props.match.params.boardId;
     this.setState({
       style: event.target.value
     });
+    db.collection('boards').doc(boardId).update(
+      {
+        style: event.target.value
+      }
+    )
+    .catch(error => console.error('Unable to update board style', error))
   }
 
   selectPlaceFromSearchBar = (label, coords) => {
@@ -170,7 +178,6 @@ class SingleBoard extends Component {
 
   updatePin = pinId => {
     const boardId = this.props.match.params.boardId;
-    const reselectSamePin = this.state.selectedPin;
     db.collection('boards').doc(boardId).collection('pins').doc(pinId).update(
       {
         label: this.state.newLabel,
@@ -197,7 +204,7 @@ class SingleBoard extends Component {
     if (this.state.selectedPin.visited) {
       db.collection('boards').doc(boardId).collection('pins').doc(pinId).update(
         {
-          visited: null
+          visited: null,
         }
       )
       .catch(error => console.error('Unable to unmark pin', error))
@@ -209,6 +216,13 @@ class SingleBoard extends Component {
       )
       .catch(error => console.error('Unable to mark as visited', error))
     }
+    this.setState({
+      selectedPin: null,
+      zoom: [12.3], 
+      editingMode: false, 
+      newLabel: '', 
+      newNotes: ''
+    })
   }
 
   handlePinDelete = pinId => {
@@ -224,6 +238,7 @@ class SingleBoard extends Component {
   }
 
   render() {
+    
     return (
       <div className='board-container'>
         <Map
@@ -297,13 +312,13 @@ class SingleBoard extends Component {
                 <button onClick={() => this.setState({ selectedPin: null, zoom: [12.5], newLocation: null, editingMode: false })} className='x-btn' id='close-popup'>x</button>
                 {
                   this.state.openStatus === 'open' &&
-                  <Icon id='edit-btn' name='edit outline' color='gray' size='large' fitted={true} onClick={() => (<Button onClick={this.toggleEditingMode()} />)} />
+                  <Icon id='edit-btn' name='edit' size='large' fitted={true} onClick={() => (<Button onClick={this.toggleEditingMode()} />)} />
                 }
               </div>
               <div>
                 <h4 id='label'>{this.state.selectedPin.label}</h4>
                 {
-                  // would like the ... when clicked to show full notes
+                  // would like truncated and the ... when clicked to show full notes
                   this.state.selectedPin.notes && <small id='notes'>{this.state.selectedPin.notes}</small>
                 }
               </div>
@@ -319,11 +334,11 @@ class SingleBoard extends Component {
             >
               <div className='options-container'>
                 <Icon id='chevron' name='chevron left' size='large' fitted={true} onClick={() => (<Button onClick={this.toggleEditingMode()} />)} />
-                <Icon id='add-pin' name='checkmark' color='gray' size='large' fitted={true} onClick={() => (<Button onClick={this.updatePin(this.state.selectedPin.pinId)} />)} />
+                <Icon id='add-pin' name='checkmark' size='large' fitted={true} onClick={() => (<Button onClick={this.updatePin(this.state.selectedPin.pinId)} />)} />
               </div>
               <div id='add-pin-options'>
                 <p>Label:</p>
-                <input type='text' name='newLabel' MaxLength='20' value={this.state.newLabel} onChange={this.handlePinChange} />
+                <input type='text' name='newLabel' maxLength='20' value={this.state.newLabel} onChange={this.handlePinChange} />
                 <p>Notes:</p>
                 <textarea id='notes-input' type='text' maxLength='150' name='newNotes' value={this.state.newNotes} onChange={this.handlePinChange} />
                 <div id='pin-trash-btns'>
@@ -351,8 +366,8 @@ class SingleBoard extends Component {
                     <button onClick={() => this.setState({ selectedPin: null, zoom: [12.5], newLocation: null })} className='x-btn' id='close-popup-add-pin'>x</button>
                     <div id='pin-options'>
                       <p>Want to put a pin in it?</p>
-                      <button onClick={() => this.handleShowLabel(false)}><img src='/attributes/hollowPinOption.png' /></button>
-                      <button onClick={() => this.handleShowLabel(true)}><img src='/attributes/pinOption.png' /></button>
+                      <button onClick={() => this.handleShowLabel(false)}><img alt='hollow-pin' src='/attributes/hollowPinOption.png' /></button>
+                      <button onClick={() => this.handleShowLabel(true)}><img alt='pin' src='/attributes/pinOption.png' /></button>
                       <div>
                         <span id='want-to-go'>plan</span>
                         <span id='here-now'>journal</span>
@@ -380,14 +395,17 @@ class SingleBoard extends Component {
             )
           }
         </Map>
-
-        <div className='footer'>
-          <Dropdown icon='settings' floating upward='true'>
-
-            <Dropdown.Menu>
-              <Button.Group basic vertical>
-                <Dropdown.Item>
-                  <Button basic content='Pintrips Style' onClick={this.switchStyle} id='basic' type='radio' name='rtoggle' value={pintripsStyle} />
+        
+        <div className="footer">
+        
+        <Icon name= "angle double left" size="large" onClick={history.goBack}/>
+          
+        <Dropdown className="settings" icon="settings" upward >
+       
+          <Dropdown.Menu> 
+            <Button.Group basic vertical>
+              <Dropdown.Item> 
+                  <Button basic content= "Pintrips Style" onClick={this.switchStyle} id='basic' type='radio' name='rtoggle' value={pintripsStyle} />
                 </Dropdown.Item>
                 <Dropdown.Item>
                   <Button basic content=' Moonlight' onClick={this.switchStyle} id='popArt' type='radio' name='rtoggle' value={moonLightStyle} />
@@ -396,13 +414,17 @@ class SingleBoard extends Component {
                   <Button basic content='Vintage' onClick={this.switchStyle} id='popArt' type='radio' name='rtoggle' value={vintageStyle} />
                 </Dropdown.Item>
               </Button.Group>
-            </Dropdown.Menu>
-          </Dropdown>
-
-          <div className='in-footer'>
-            <LocationSearch forAddPin={true} updateBoardPins={this.selectPlaceFromSearchBar} />
-          </div>
-
+          </Dropdown.Menu> 
+        </Dropdown>
+      
+        <div className="in-footer">
+        
+              <LocationSearch 
+              className="search-bar" forAddPin={true} updateBoardPins={this.selectPlaceFromSearchBar}>
+              <input placeholder="Search for places in  "/>
+              </LocationSearch>
+            </div> 
+          
         </div>
       </div>
     )

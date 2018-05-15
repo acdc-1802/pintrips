@@ -17,8 +17,36 @@ body {
   margin-right: 10px;
  }
 
+ #add-user-icon {
+  margin-bottom: 5px;
+  position: fixed;
+  right: 12px;
+  top: 109px;
+}
+
+#add-img-icon {
+  z-index: 10;
+  position: fixed;
+  margin-top: 150px;
+  margin-left: 50px;
+}
+
  .autocomplete-dropdown-container {
   color: black;
+  position: absolute;
+    bottom: 3em;
+  }
+
+i.angle.double.left.large.icon.back-icon {
+  margin-left: 12px;
+}
+
+  #banner-img {
+    display: flex;
+    z-index: -5;
+    position: fixed;
+    width: 100%;
+    height: 40%;
   }
 
  .board-container {
@@ -26,6 +54,11 @@ body {
   flex-direction: column;
   flex-wrap: wrap;
  }
+
+.board-container .mapboxgl-map {
+  position: absolute;
+  top: 7.5em;
+}
 
  .card-group {
   display: flex;
@@ -49,30 +82,34 @@ body {
   flex-direction: row;
   justify-content: space-between;
 }
+
+#checkmark {
+  border: none;
+}
+
+#close-popup {
+  display: flex;
+  border: none;
+  margin: auto auto 4px 0;
+}
+
 #login-signup-options {
   width: 300px;
 }
+
  .container {
    display: flex;
    flex-direction: row;
  }
 
- .ui.container.container {
-   width: 100vw;
- }
-
- input.location-search-input {
-   width: 100%;
- }
-
-/*
- input.location-search-input {
-  width: 100%;
-} */
-
 #dropdown {
   margin-left: 15px;
   margin-top: 7px;
+}
+
+#dropdown-item {
+  margin-left: 0px;
+  text-align: left;
 }
 
 .footer .dropdown {
@@ -124,6 +161,12 @@ body {
   bottom: 3em;
 }
 
+.map-container {
+  position: fixed;
+  width: 100vw;
+  height: 90vh;
+}
+
 #dropup {
   position: center;
   padding: 15px;
@@ -136,12 +179,14 @@ body {
   height: 2em;
   padding-top: 5px 1px 1px 0;
 }
+
 #username {
   font-family: 'Special Elite', cursive;
   height: 2em;
   padding-top: 5px 1px 1px 0;
   margin: auto;
 }
+
 .user-profile {
   display: flex;
   flex-direction: column;
@@ -149,27 +194,33 @@ body {
   align-content: center;
   margin-right: 10px;
 }
+
 .navbar-link {
   margin: auto;
 }
+
 #checkmark {
   border: none;
 }
+
 .profile-img{
   width: 75px;
   height: 75px;
   border-radius: 50%;
   border: solid 2px #bcbcbc;
 }
+
 .profile-info {
   text-align: left;
   margin-left: 10px;
   color: #515151;
 }
+
 .friend-img {
   width: 75px;
   height: 75px;
 }
+
 .footer {
   position: fixed;
   bottom: 0;
@@ -181,15 +232,59 @@ body {
 }
 
 .forms {
-  margin-left: 25%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 100%
+  width: 100%;
+  margin: auto;
+  max-width: 250px;
+  text-align: left;
 }
 
 .form-group {
-  padding-top: 2em;
+  padding-top: 1.5em;
+  text-align: left;
+}
+
+.friends-box-container{
+  display: flex;
+  width: 400px;
+}
+
+.friend-box {
+  display: flex;
+  flex-direction: row;
+}
+
+.friend-sub-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.friends-container {
+  display: flex;
+  padding-top: 100px;
+  flex-direction: column;
+  margin-left: 20px;
+  margin-right: 20px;
+  width: 100vw;
+}
+
+.friendsList-container {
+  display: flex;
+  justify-content: center;
+}
+
+#friend-name {
+  font-family: 'Special Elite', cursive;
+  font-size: 75%;
+  margin-left: 5px;
+}
+
+#friend-username {
+  font-family: 'Special Elite', cursive;
+  font-size: 65%;
+  margin-left: 5px;
 }
 
 #full-page {
@@ -217,56 +312,32 @@ body {
   padding: 15px;
 }
 
+#profile-board {
+  height: 76vh;
+}
+
 .input-container {
   display: flex;
   flex-direction: column;
   width: 100%;
 }
 
- .location-bar {
-   position: absolute;
-   top: 10vh;
-   border: 3px solid green;
-  }
+input.location-search-input {
+  width: 100%;
+  border-radius: 1em 1em;
+}
 
-  .login-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    width: 100%;
-    margin: 10em auto auto;
-  }
-  .welcome-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    padding-top: 150px;
-    width: 100%;
-    align-items: center;
-  }
-  .friends-container {
-    display: flex;
-    padding-top: 100px;
-    flex-direction: column;
-    margin-left: 20px;
-    margin-right: 20px;
-    width: 100vw;
-  }
-  .friendsList-container {
-    display: flex;
-    justify-content: center;
-  }
-  #users-icon {
-    margin-bottom: 5px;
-  }
-  #add-user-icon {
-    margin-bottom: 5px;
-    position: fixed;
-    right: 12px;
-    top: 109px;
-  }
+@keyframes typing {
+  from { width: 0 }
+  to { width: 60% }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: rgb(36, 25, 6) }
+}
+
   #add-pin {
     display: flex;
     margin: 0 0 auto auto;
@@ -274,24 +345,30 @@ body {
     border: none;
     color: #5b5e5e;
   }
+
   #add-pin {
     font-size: 20px;
   }
+
   #add-pin-options {
     margin-top: 13px;
   }
+
   #add-pin-options * {
     border-radius: 3px;
     margin: 1px;
   }
+
   #edit-pin-options * {
     border-radius: 3px;
     margin: 1px;
   }
+
   #notes-input {
     height: 4em;
     border: solid 1px gray;
   }
+
   #navbar-pic {
     display: flex;
     width: 25px;
@@ -300,6 +377,7 @@ body {
     border: solid 1px #bcbcbc;
     margin: auto;
   }
+
   .header-container {
     margin-top: 10px;
     margin-bottom: 20px;
@@ -308,22 +386,21 @@ body {
     justify-content: space-between;
     align-items: center;
   }
+  
   .logo{
     display: flex;
     width: 2em;
-  }
-
-  #logo {
-    width: 15%;
-    height: 15%;
-    margin: 3% 0 3% 3%;
-    min-width: 5em;
   }
 
 .location-bar {
   position: absolute;
   top: 10vh;
   border: 3px solid green;
+}
+
+.location-search {
+  display: flex;
+  width: 100%;
 }
 
 .login-container {
@@ -350,25 +427,35 @@ body {
 #logout {
   padding-top: 1px;
 }
-  #mapcard {
-    width: auto;
-  }
-  #mapcard-closed {
-    width: auto;
-    opacity: .45;
-  }
-  .mapboxgl-popup-content {
-    text-align: center;
-    background-color: #bcbcbc;
-    opacity: .9;
-    font-family: 'Special Elite', cursive;
-    width: 170px;
-    height: 190px;
-  }
-  .mapboxgl-popup-tip {
-    background-color: #bcbcbc;
-    opacity: .9;
-  }
+
+#mapcard {
+  width: auto;
+}
+
+.mapboxgl-popup-content {
+  text-align: center;
+  background-color: #bcbcbc;
+  opacity: .9;
+  font-family: 'Special Elite', cursive;
+  width: 170px;
+  height: 190px;
+}
+
+.mapboxgl-popup-tip {
+  background-color: #bcbcbc;
+  opacity: .9;
+}
+
+#mapcard-world {
+  width: 100vw;
+  padding:5px;
+}
+
+#mapcard-closed {
+  width: auto;
+  opacity: .45;
+}
+
 #menu {
   display: flex;
   width: 100vw;
@@ -383,18 +470,8 @@ body {
   padding: 10px;
   border-radius: 5px;
 }
-#add-img-icon {
-  z-index: 10;
-  position: fixed;
-  margin-top: 150px;
-  margin-left: 50px;
-}
-.profile-picture {
-  display: flex;
-  justify-content: center;
-}
+
 #menu * {
-  /* padding: .5em .5em .5em .5em; */
   margin: .5em
 }
 
@@ -414,65 +491,56 @@ body {
 #myboards  {
   margin-left: 10px;
 }
-.user-nav {
-  display: flex;
-  flex-direction: column;
-  height: 4em;
-  flex-grow: 1;
-  vertical-align: baseline;
-  margin-right: 5px;
-  justify-content: flex-end;
-}
 
-.user-nav * {
-  display: flex;
-  align-self: flex-end;
-}
-
-#name {
-  font-family: 'Special Elite', cursive;
-  font-size: 250%;
-  margin-left: 1.75em;
-}
 #profile-name {
+  font-family: 'Special Elite', cursive;
   font-size: 150%;
   margin-top: 2%;
   margin-bottom: auto;
 }
+
 #profile-username {
   font-size: 100%;
   margin: auto;
 }
+
 #friend-name {
   font-family: 'Special Elite', cursive;
   font-size: 75%;
   margin-left: 5px;
 }
+
 #friend-username {
   font-family: 'Special Elite', cursive;
   font-size: 65%;
   margin-left: 5px;
 }
+
 .no-friends-msg {
   margin: 20px;
 }
+
 .friends-box-container{
   display: flex;
   width: 400px;
 }
+
 .friend-box {
   display: flex;
   flex-direction: row;
 }
+
 .friend-sub-box {
   display: flex;
   flex-direction: column;
 }
+
 #profile-email {
   font-size: 100%;
   margin: auto;
   color: #515151;
 }
+
 .navbar {
   display: flex;
   margin-top: 0;
@@ -486,33 +554,79 @@ body {
   z-index: 3;
   }
 
-  #name {
-    font-family: 'Special Elite', cursive;
-    font-size: 175%;
-    margin-left: 1.75em;
-  }
+.navbar a {
+  color: #515151;
+}
 
-  .postcard-container {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    border: 1px solid rbg(188,143,143);
-    border-radius: 2%;
-    width: 80vw;
-    height: 65vh;
-    box-shadow: 10px 10px 8px #888888;
-    background-color:rgb(255,245,238);
-    z-index: -1;
-    position: absolute;
-    left: 50%;
-    top: 60%;
-    transform: translate(-50%, -50%);
-    padding: 20px;
-    text-align: center;
-    margin-bottom: 5em;
+#name {
+  font-family: 'Special Elite', cursive;
+  font-size: 175%;
+  margin-left: 1.75em;
+}
 
-  }
+.no-friends-msg {
+  margin: 20px;
+}
 
+#notification {
+  background-color: #a3151e;
+  color: white;
+  border-radius: 50%;
+  width: 1.5em;
+  text-align: center;
+}
+
+.options-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin: 3px;
+}
+
+.options-container * {
+  padding: 4px;
+}
+
+.options-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.options-container * {
+  padding: 4px;
+  font-family: 'Special Elite', cursive;
+}
+
+.postcard-logo {
+  width: 14vw;
+  z-index:1
+}
+
+.postcard-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  border: 1px solid rbg(188,143,143);
+  border-radius: 2%;
+  width: 80vw;
+  height: 75vh;
+  box-shadow: 10px 10px 8px #888888;
+  background-color:rgb(255,245,238);
+  z-index: -1;
+  position: absolute;
+  left: 50%;
+  top: 60%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 5em;
+}
+
+#postcard-icon {
+  padding-right: 1em;
+}
 
  .postcard-form-style {
   background: transparent;
@@ -571,6 +685,11 @@ body {
     line-height: 1.7em;
     white-space: nowrap;
   }
+
+  #postcard-received {
+    text-align: left;
+  }
+
   .postcard-message-form {
     text-align: left;
     clear: bloth;
@@ -579,67 +698,85 @@ body {
     width: 55vw;
   }
 
+.postcard-typewriter-text {
+  margin: 3em;
+  color: rgb(31, 29, 29);
+  font-size: 1.2em;
+  font-family: monospace;
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  border-right: .10em solid #EBEBEB; /* typewriter cursor */
+  white-space: nowrap; /* Keeps the content on a single line */
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  letter-spacing: .15em; /* Adjust as needed */
+  animation:
+  typing 3.5s steps(30, end),
+  blink-caret .5s step-end infinite;
+}
+
+#profile-name {
+  font-family: 'Special Elite', cursive;
+  font-size: 150%;
+  margin-top: 5%;
+}
+
 /* The typing effect */
 @keyframes typing {
   from { width: 0 }
   to { width: 60% }
 }
 
-/* The typewriter cursor effect */
-@keyframes blink-caret {
-  from, to { border-color: transparent }
-  50% { border-color: rgb(36, 25, 6) }
+#profile-username {
+  font-size: 100%;
+  margin: auto;
 }
 
-.navbar a {
+#profile-email {
+  font-size: 100%;
+  margin: auto;
+}
+
+.profile-container {
+  display: flex;
+  flex-direction: row;
+  margin-left: 4%;
+  margin-right: 10%;
+  padding-top: 110px;
   color: #515151;
 }
 
-.ui.sub-navbar.menu {
-   display: flex;
-   position: fixed;
-   font-size: 12px;
-   margin-top: 4.5em;
-   z-index: 3;
-   width: 100vw;
-   height: 3em;
-   justify-content: space-between;
+.profile-picture {
+  display: flex;
+  justify-content: center;
 }
-#notification {
-  background-color: #a3151e;
-  color: white;
+
+.profile-img{
+  width: 75px;
+  height: 75px;
   border-radius: 50%;
-  width: 1.5em;
-  text-align: center;
+  border: solid 2px #bcbcbc;
 }
 
   #pin-options {
     margin-top: 13px;
     color: #515151;
   }
+
   #pin-options * {
     font-family: 'Special Elite', cursive;
   }
+
   #pin-trash-btns * {
     padding: 0 20px;
   }
-  #pin-options button {
-    border-radius: 5px;
-    border: none;
-   }
-   #pin-options img {
+
+  #pin-options img {
     height: 45px;
     width: 45px;
-   }
+  }
 
  .routes {
   display: flex;
  }
-
- .location-search {
-   display: flex;
-   width: 100%;
- } 
 
  #edit-btn {
    display: flex;
@@ -651,12 +788,12 @@ body {
   width: 150px;
 }
 
- .search-container {
-  /* position: fixed; */
-  /* top: 8em; */
-  /* width: 100%; */
+.search-bar {
+  border-radius: 1em 1em 1em 1em;
+}
+
+.search-container {
   color: white;
-  /* padding: 10px; */
  }
 
  .autocomplete-dropdown-container {
@@ -667,21 +804,6 @@ body {
   border-radius: 5px;
   border: none;
   background-color: white;
- }
- .options-container {
-   display: flex;
-   flex-direction: row;
-   justify-content: flex-end;
- }
-
- .options-container * {
-   padding: 4px;
-   font-family: 'Special Elite', cursive;
- }
-
- #pin-options img {
-  height: 45px;
-  width: 45px;
  }
 
  .postcard-logo {
@@ -715,6 +837,11 @@ body {
   border-radius: 50%;
  }
 
+.settings {
+  margin-top: 3px;
+  margin-left: 2px;
+}
+
  .sign-up {
   font-family: sans-serif;
   font-size: 20px;
@@ -723,24 +850,27 @@ body {
   padding: 1em;
  }
 
+ #signup-button{
+   margin-top:10px;
+ }
+
  .signup-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-  width: 60%;
-  margin-left: 20%;
-  margin-right: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    margin: 7em auto auto;
  }
- .profile-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  text-align: center;
-  margin-left: 10%;
-  margin-right: 10%;
-  padding-top: 110px;
+
+ .signup-title {
+   margin-bottom: 0;
  }
+
+ .profile-page {
+   width: 100vw;
+ }
+
  #banner-img {
    display: flex;
    z-index: -5;
@@ -748,6 +878,7 @@ body {
    width: 100%;
    height: 40%;
  }
+
  .side-button {
   display: flex;
   flex-direction: column;
@@ -759,13 +890,12 @@ body {
   bottom: 0;
 }
 
-
  .title {
   display: flex;
   position: fixed;
   color: black;
-
  }
+
  .ui.form .fields {
   display: flex;
   flex-direction: column;
@@ -786,7 +916,6 @@ body {
   justify-content: right;
   }
 
-
 .stamp {
   z-index:1;
   font-family: Arial,sans-serif;
@@ -806,7 +935,6 @@ body {
   -webkit-text-shadow: 0 0 2px #F7BAB7;
   text-shadow: 0 0 2px #F7BAB7;
   box-shadow: 0 0 2px #F7BAB7;
-
   -webkit-animation-name: pulse;
   animation-name: pulse;
   animation-delay:2s;
@@ -818,6 +946,59 @@ body {
   animation-fill-mode:forwards;
 }
 
+ .title {
+  display: flex;
+  position: fixed;
+  color: black;
+ }
+
+ .ui.container.container {
+  width: 100vw;
+}
+
+ .ui.form .fields {
+  display: flex;
+  flex-direction: column;
+ }
+
+ .ui.form .fields .field {
+  width: 50%;
+  min-width: 100px;
+ }
+
+ .ui.menu:after {
+  content: none;
+}
+
+.ui.sub-navbar.menu {
+  display: flex;
+  position: fixed;
+  font-size: 12px;
+  margin-top: 4.5em;
+  z-index: 3;
+  width: 100vw;
+  height: 3em;
+  justify-content: space-between;
+}
+
+ #users-icon {
+  margin-bottom: 5px;
+}
+
+.user-nav {
+  display: flex;
+  flex-direction: column;
+  height: 4em;
+  flex-grow: 1;
+  vertical-align: baseline;
+  margin-right: 5px;
+  justify-content: flex-end;
+}
+
+.user-nav * {
+  display: flex;
+  align-self: flex-end;
+}
 
  @media only screen and (max-width: 600px) {
   .postcard-container {
@@ -839,19 +1020,21 @@ body {
     text-align: center;
     margin-bottom: 5em;
   }
+
   .postcard-map {
     margin-bottom: 2em;
     width: 72vw;
     height: 32vh;
   }
+
   .postcard-typewriter-text {
     margin: 1em;
     color: rgb(31, 29, 29);
-    font-size: 1.2em;
+    font-size: .9em;
     font-family: monospace;
-    overflow: hidden;
-    border-right: .10em solid #EBEBEB;
+    white-space: normal;
   }
+
   .postcard-message-container {
     display: flex;
     flex-direction: column;
@@ -865,13 +1048,15 @@ body {
     line-height: 1.7em;
     white-space: nowrap;
   }
+
   .postcard-message-form {
     text-align: left;
-    clear: bloth;
+    clear: both;
     float: left;
     margin-left: 1em;
     width: 55vw;
   }
+
   .stamp-logo {
     position: relative;
     top: -4em;
@@ -881,41 +1066,41 @@ body {
     flex-direction: row;
     justify-content: right;
   }
+
   .postcard-logo {
     width: 24vw;
     z-index:1
-    }
+  }
 
-.stamp {
-  z-index:1;
-  font-family: Arial,sans-serif;
-  -webkit-transform: rotate(20deg);
-  -moz-transform: rotate(20deg);
-  -ms-transform: rotate(20deg);
-  -o-transform: rotate(20deg);
-  transform: rotate(20deg);
-  font-size:.9em;
-  color: #F7BAB7;
-  border:solid 2px #F7BAB7;
-  padding:1.2em;
-  border-radius:50%;
-  zoom:1;
-  filter:alpha(opacity=20);
-  opacity:0.2;
-  -webkit-text-shadow: 0 0 2px #F7BAB7;
-  text-shadow: 0 0 2px #F7BAB7;
-  box-shadow: 0 0 2px #F7BAB7;
-
-  -webkit-animation-name: pulse;
-  animation-name: pulse;
-  animation-delay:2s;
-  -webkit-animation-delay:2s;
-  -webkit-animation-duration: 0.5s;
-  animation-duration: 0.5s;
-  opacity: 0;
-  -webkit-animation-fill-mode:forwards;
-  animation-fill-mode:forwards;
-}
+  .stamp {
+    z-index:1;
+    font-family: Arial,sans-serif;
+    -webkit-transform: rotate(20deg);
+    -moz-transform: rotate(20deg);
+    -ms-transform: rotate(20deg);
+    -o-transform: rotate(20deg);
+    transform: rotate(20deg);
+    font-size:.9em;
+    color: #F7BAB7;
+    border:solid 2px #F7BAB7;
+    padding:1.2em;
+    border-radius:50%;
+    zoom:1;
+    filter:alpha(opacity=20);
+    opacity:0.2;
+    -webkit-text-shadow: 0 0 2px #F7BAB7;
+    text-shadow: 0 0 2px #F7BAB7;
+    box-shadow: 0 0 2px #F7BAB7;
+    -webkit-animation-name: pulse;
+    animation-name: pulse;
+    animation-delay:2s;
+    -webkit-animation-delay:2s;
+    -webkit-animation-duration: 0.5s;
+    animation-duration: 0.5s;
+    opacity: 0;
+    -webkit-animation-fill-mode:forwards;
+    animation-fill-mode:forwards;
+  }
 }
 
 @media screen and (min-width: 600px) {
@@ -935,8 +1120,6 @@ body {
   }
 }
 
-
-
 @-webkit-keyframes pulse {
   0% {
     opacity: 0;
@@ -951,4 +1134,14 @@ body {
     opacity:1;
     transform: rotate(55deg) scale(1);
   };
+}
+
+.welcome-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding-top: 150px;
+  width: 100%;
+  align-items: center;
 }

@@ -12,7 +12,6 @@ class FriendsList extends Component {
     }
   }
   componentDidMount() {
-    console.log('this.state.friends', this.state.friends);
     let friendsInfo = [];
     for (let friend in this.state.friends) {
       this.state.friends[friend] &&
@@ -32,7 +31,6 @@ class FriendsList extends Component {
     }
   }
   render() {
-    console.log('friendsInfo', this.state.friendsInfo);
     return (
       <div >
         <Grid stackable columns={3} className='friendsList-container'>
@@ -43,9 +41,9 @@ class FriendsList extends Component {
             </div>
           }
           {
-            this.state.friendsInfo.map(friend => {
+            this.state.friendsInfo.map((friend, idx) => {
               return (
-                <Grid.Column className='friends-box-container'>
+                <Grid.Column key={idx} className='friends-box-container'>
                   <Segment className='friend-box'>
                     <Image className='friend-img' src={friend.profileImg} />
                     <Header as='h3' className='friend-sub-box'>
