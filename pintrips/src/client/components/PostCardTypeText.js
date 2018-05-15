@@ -22,7 +22,7 @@ export class PostCardTypeText extends Component {
           array.push(place.text)
         })
         this.setState({
-          place: array.slice(2)
+          place: array.slice(0,3)
         })
       })
       .catch(err => console.log('error', err))

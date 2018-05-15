@@ -22,11 +22,6 @@ class PostCardReceived extends Component {
     this.rotate = this.rotate.bind(this)
   }
 
-  //can be a toggle button for 'postcards' page
-  //create component for received postcards
-  //create component for sent postcards
-  //set up noti for postcard
-
   componentDidMount() {
     const user = this.props._auth.currentUser.email;
     const self = this;
@@ -55,11 +50,6 @@ class PostCardReceived extends Component {
     TweenLite.set([".postcard-back", ".postcard-front"], {backfaceVisibility:"hidden"})
   }
 
-  // componentWillUnmount() {
-  //   db.collection('postcards').where()
-  // }
-
-
   rotate() {
     if (this.state.cardIsFront) {
       this.rotateToBack();
@@ -80,7 +70,7 @@ class PostCardReceived extends Component {
   render() {
     if (!this.state.currentCoordinates.length)
       return <div className="login-container">loading...</div>
-    console.log('send coord to props', this.state.currentCoordinates)
+
     return (
         <div className="login-container">
           <div className='postcard-container'>
@@ -107,7 +97,7 @@ class PostCardReceived extends Component {
             </div>
           </div>
           <div className="postcard-flip-button">
-            <Button onClick={this.rotate} compact basic color='orange' size="mini">Flip</Button>
+            <Button onClick={this.rotate} compact basic color='orange' size="mini">View Other Side</Button>
           </div>
         </div>
     )
