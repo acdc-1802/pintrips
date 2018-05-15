@@ -97,9 +97,18 @@ class MapCard extends Component {
     }
     db.collection('users').get()
       .then(snapshot => snapshot.forEach(doc => {
-        this.state.users.push({ key: doc.data().username, value: doc.data().username, text: doc.data().username })
+        if (doc.data().id !== this.props.board.creator){
+          this.state.users.push({ key: doc.data().username, value: doc.data().username, text: doc.data().username })
+        }
       }))
       .catch(error => console.error('Unable to get users', error))
+
+      //for sending postcards
+      const userId = this.props.board.creator
+      db.collection('users').doc(userId).get()
+        .then(doc => {
+          this.setState({ userName: doc.data().username })
+        })
   }
   checkStatus(boardStatus) {
     if (boardStatus === 'open') {
@@ -183,7 +192,7 @@ class MapCard extends Component {
         <Card id={this.props.board.locked === 'open' ? 'mapcard' : 'mapcard-closed'}>
           <Segment raised>
             {
-              <Label as='a' color="white" size='large' corner='right' onClick={this.favoriteBoard} icon={this.state.starred ? 'star' : 'empty star'} />
+              <Label as='a' size='large' corner='right' onClick={this.favoriteBoard} icon={this.state.starred ? 'star' : 'empty star'} />
             }
             <Map
               style={this.props.board.style}
@@ -210,33 +219,41 @@ class MapCard extends Component {
                 </Link>
               </div>
               <div>
+                <Link to={`/postcard_send/${this.state.boardId}`}>
                 <Popup
-                  trigger={<Icon name='external share' size='large' fitted={true} floated='right' />}
-                  content={
-                    !this.state.sent ?
-                      (<div>
-                        <p>Who would you like to share this board with?</p>
-                        <Dropdown
-                          fluid
-                          multiple
-                          search
-                          searchQuery={this.state.searchQuery}
-                          options={this.state.users}
-                          value={this.state.shareWith}
-                          placeholder='Search by username'
-                          onChange={this.handleChange}
-                          onSearchChange={this.handleSearchChange}
-                          selection
-                        />
-                        <br />
-                        <Button color='blue' size='mini' content='Share' onClick={this.handleSend} />
-                      </div>)
-                      :
-                      (<p>Board was successfully sent!</p>)
-                  }
-                  on='click'
-                  position='top right'
-                />
+                  trigger={<Icon name='mail outline' size='large' fitted={true} id="postcard-icon" />}
+                  content={<p>Send a postcard!</p>} />
+                </Link>
+                {
+                  !this.props.recipient &&
+                  <Popup
+                    trigger={<Icon name='external share' size='large' fitted={true} floated='right' />}
+                    content={
+                      !this.state.sent ?
+                        (<div>
+                          <p>Who would you like to share this board with?</p>
+                          <Dropdown
+                            fluid
+                            multiple
+                            search
+                            searchQuery={this.state.searchQuery}
+                            options={this.state.users}
+                            value={this.state.shareWith}
+                            placeholder='Search by username'
+                            onChange={this.handleChange}
+                            onSearchChange={this.handleSearchChange}
+                            selection
+                          />
+                          <br />
+                          <Button color='blue' size='mini' content='Share' onClick={this.handleSend} />
+                        </div>)
+                        :
+                        (<p>Board was successfully sent!</p>)
+                    }
+                    on='click'
+                    position='top right'
+                  />
+                }
               </div>
             </div>
           </Card.Content>

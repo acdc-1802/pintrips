@@ -65,36 +65,37 @@ class SingleBoard extends Component {
       .catch(err => {
         console.error(err);
         history.push('/404');
-      });
-    // get all pins from board, organize by visited/unvisited
-    db.collection('boards').doc(boardId).collection('pins').orderBy('visited')
-      .onSnapshot((querySnapshot) => {
-        const visitedPins = [];
-        const unvisitedPins = [];
-        querySnapshot.forEach(doc => {
-          const pin = doc.data();
-          if (pin.visited) {
-            visitedPins.push({
-              label: pin.label,
-              coords: [pin.coordinates._long, pin.coordinates._lat],
-              pinId: doc.id,
-              visited: pin.visited
+      }).then(() => {
+        db.collection('boards').doc(boardId).collection('pins').orderBy('visited')
+          .onSnapshot((querySnapshot) => {
+            const visitedPins = [];
+            const unvisitedPins = [];
+            querySnapshot.forEach(doc => {
+              const pin = doc.data();
+              if (pin.visited) {
+                visitedPins.push({
+                  label: pin.label,
+                  coords: [pin.coordinates._long, pin.coordinates._lat],
+                  pinId: doc.id,
+                  visited: pin.visited
+                })
+              } else {
+                unvisitedPins.push({
+                  label: pin.label,
+                  coords: [pin.coordinates._long, pin.coordinates._lat],
+                  pinId: doc.id,
+                  visited: pin.visited
+                })
+              }
             })
-          } else {
-            unvisitedPins.push({
-              label: pin.label,
-              coords: [pin.coordinates._long, pin.coordinates._lat],
-              pinId: doc.id,
-              visited: pin.visited
+            this.setState({
+              visitedPins,
+              unvisitedPins,
+              yarnCoords: visitedPins.map(pin => pin.coords)
             })
-          }
-        })
-        this.setState({
-          visitedPins,
-          unvisitedPins,
-          yarnCoords: visitedPins.map(pin => pin.coords)
-        })
-      });
+          })
+      })
+      .catch(error => console.error('Unable to set state', error))
   }
 
   switchStyle = event => {
@@ -378,7 +379,7 @@ class SingleBoard extends Component {
         
         <Icon name= "angle double left" size="large" onClick={history.goBack}/>
           
-        <Dropdown className="settings" icon="settings" >
+        <Dropdown className="settings" icon="settings" upward >
        
           <Dropdown.Menu> 
             <Button.Group basic vertical>

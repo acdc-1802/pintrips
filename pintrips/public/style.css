@@ -21,7 +21,7 @@ body {
   position: fixed;
   right: 12px;
   top: 109px;
-} 
+}
 #add-img-icon {
   z-index: 10;
   position: fixed;
@@ -122,6 +122,10 @@ i.angle.double.left.large.icon.back-icon {
   margin-left: 15px;
   margin-top: 7px;
 }
+#dropdown-item {
+  margin-left: 0px;
+  text-align: left;
+}
 .footer .dropdown {
   display: flex;
   margin: .1em 1em 0 1em
@@ -197,15 +201,18 @@ i.angle.double.left.large.icon.back-icon {
 }
 
 .forms {
-  margin-left: 25%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 100%
+  width: 100%;
+  margin: auto;
+  max-width: 250px;
+  text-align: left;
 }
 
 .form-group {
-  padding-top: 2em;
+  padding-top: 1.5em;
+  text-align: left;
 }
 
 .friends-box-container{
@@ -286,7 +293,7 @@ i.angle.double.left.large.icon.back-icon {
 input.location-search-input {
   width: 100%;
   border-radius: 1em 1em;
-  
+
 }
 @keyframes typing {
   from { width: 0 }
@@ -448,6 +455,7 @@ input.location-search-input {
   margin-left: 1.75em;
 }
 #profile-name {
+  font-family: 'Special Elite', cursive;
   font-size: 150%;
   margin-top: 2%;
   margin-bottom: auto;
@@ -501,7 +509,7 @@ input.location-search-input {
 .navbar a {
   color: #515151;
 }
-  
+
 #name {
   font-family: 'Special Elite', cursive;
   font-size: 175%;
@@ -554,7 +562,7 @@ input.location-search-input {
 .postcard-logo {
   width: 14vw;
   z-index:1
-} 
+}
 .postcard-container {
   display: flex;
   flex-direction: column;
@@ -574,6 +582,10 @@ input.location-search-input {
   text-align: center;
   margin-bottom: 5em;
 
+}
+
+#postcard-icon {
+  padding-right: 1em;
 }
 
 
@@ -662,7 +674,7 @@ input.location-search-input {
 }
 #profile-name {
   font-family: 'Special Elite', cursive;
-  font-size: 225%;
+  font-size: 150%;
   margin-top: 5%;
 }
 /* The typing effect */
@@ -671,34 +683,31 @@ input.location-search-input {
   to { width: 60% }
 }
 #profile-username {
-  font-family: 'Special Elite', cursive;
-  font-size: 180%;
+  font-size: 100%;
   margin: auto;
 }
 
 #profile-email {
-  font-family: 'Special Elite', cursive;
-  font-size: 140%;
+  font-size: 100%;
   margin: auto;
 }
 .profile-container {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-  width: 60%;
-  margin-left: 20%;
-  margin-right: 20%;
-  padding-top: 150px;
+  flex-direction: row;
+  margin-left: 4%;
+  margin-right: 10%;
+  padding-top: 110px;
+  color: #515151;
 }
 .profile-picture {
   display: flex;
   justify-content: center;
 }
 .profile-img{
-  width: 175px;
-  height: 175px;
+  width: 75px;
+  height: 75px;
   border-radius: 50%;
+  border: solid 2px #bcbcbc;
 }
 /* The typing effect */
 
@@ -783,25 +792,23 @@ input.location-search-input {
   justify-items: center;
   padding: 1em;
  }
-
+ #signup-button{
+   margin-top:10px;
+ }
  .signup-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-  width: 60%;
-  margin-left: 20%;
-  margin-right: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    margin: 7em auto auto;
+ }
+
+ .signup-title {
+   margin-bottom: 0;
  }
 
 
- .profile-container {
-  display: flex;
-  flex-direction: row;
-  text-align: center;
-  padding-left: 20px;
-  padding-top: 110px;
- }
  .profile-page {
    width: 100vw;
  }
@@ -935,6 +942,23 @@ input.location-search-input {
  #want-to-go {
   margin-right: 17px;
 }
+
+@media screen and (min-width: 600px) {
+  .postcard-typewriter-text {
+    margin: 3em;
+    color: rgb(31, 29, 29);
+    font-size: 1.2em;
+    font-family: monospace;
+    overflow: hidden; /* Ensures the content is not revealed until the animation */
+    border-right: .10em solid #EBEBEB; /* typewriter cursor */
+    white-space: nowrap; /* Keeps the content on a single line */
+    margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+    letter-spacing: .15em; /* Adjust as needed */
+    animation:
+      typing 3.5s steps(30, end),
+      blink-caret .5s step-end infinite;
+  }
+}
  @media only screen and (max-width: 600px) {
   .postcard-container {
     display: flex;
@@ -963,10 +987,9 @@ input.location-search-input {
   .postcard-typewriter-text {
     margin: 1em;
     color: rgb(31, 29, 29);
-    font-size: 1.2em;
+    font-size: .9em;
     font-family: monospace;
-    overflow: hidden;
-    border-right: .10em solid #EBEBEB;
+    white-space: normal;
   }
   .postcard-message-container {
     display: flex;
@@ -1002,36 +1025,36 @@ input.location-search-input {
     z-index:1
     }
 
-.stamp {
-  z-index:1;
-  font-family: Arial,sans-serif;
-  -webkit-transform: rotate(20deg);
-  -moz-transform: rotate(20deg);
-  -ms-transform: rotate(20deg);
-  -o-transform: rotate(20deg);
-  transform: rotate(20deg);
-  font-size:.9em;
-  color: #F7BAB7;
-  border:solid 2px #F7BAB7;
-  padding:1.2em;
-  border-radius:50%;
-  zoom:1;
-  filter:alpha(opacity=20);
-  opacity:0.2;
-  -webkit-text-shadow: 0 0 2px #F7BAB7;
-  text-shadow: 0 0 2px #F7BAB7;
-  box-shadow: 0 0 2px #F7BAB7;
+  .stamp {
+    z-index:1;
+    font-family: Arial,sans-serif;
+    -webkit-transform: rotate(20deg);
+    -moz-transform: rotate(20deg);
+    -ms-transform: rotate(20deg);
+    -o-transform: rotate(20deg);
+    transform: rotate(20deg);
+    font-size:.9em;
+    color: #F7BAB7;
+    border:solid 2px #F7BAB7;
+    padding:1.2em;
+    border-radius:50%;
+    zoom:1;
+    filter:alpha(opacity=20);
+    opacity:0.2;
+    -webkit-text-shadow: 0 0 2px #F7BAB7;
+    text-shadow: 0 0 2px #F7BAB7;
+    box-shadow: 0 0 2px #F7BAB7;
 
-  -webkit-animation-name: pulse;
-  animation-name: pulse;
-  animation-delay:2s;
-  -webkit-animation-delay:2s;
-  -webkit-animation-duration: 0.5s;
-  animation-duration: 0.5s;
-  opacity: 0;
-  -webkit-animation-fill-mode:forwards;
-  animation-fill-mode:forwards;
-}
+    -webkit-animation-name: pulse;
+    animation-name: pulse;
+    animation-delay:2s;
+    -webkit-animation-delay:2s;
+    -webkit-animation-duration: 0.5s;
+    animation-duration: 0.5s;
+    opacity: 0;
+    -webkit-animation-fill-mode:forwards;
+    animation-fill-mode:forwards;
+  }
 }
 
 @media screen and (min-width: 600px) {
