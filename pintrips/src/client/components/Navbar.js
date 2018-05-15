@@ -59,7 +59,6 @@ class Navbar extends Component {
         .catch(error => console.error('Could not get notifications', error))
   }
   render() {
-    console.log('noties', this.state.notifications)
     const user = this.props._user;
     const handleLogout = () => {
       firebase.auth().signOut()
@@ -119,13 +118,7 @@ class Navbar extends Component {
                     </Link>
                   </Dropdown.Item>
 
-                  <Dropdown.Item>
-                    <Link to={'/PostCard'}>
-                      <Menu.Item id='myboards'>
-                        Send a Postcard
-                    </Menu.Item>
-                    </Link>
-                  </Dropdown.Item>
+
 
                   <Dropdown.Item>
                     <Link to={`/Friends/${this.props._user.uid}`}>
@@ -146,7 +139,7 @@ class Navbar extends Component {
                         <Icon name='plus square outline' size={'large'} />
                       </div>
                     }
-                    content={'Add a new board'} /> 
+                    content={'Add a new board'} />
                 </Menu.Item>
               </Link>
               <Menu.Item borderless='true' id='navbar-notifications'>
