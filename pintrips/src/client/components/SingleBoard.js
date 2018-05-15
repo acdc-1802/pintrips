@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactMapboxGl, { Popup, Layer, Feature, ZoomControl } from "react-mapbox-gl";
+import ReactMapboxGl, { Popup, Layer, Feature, ZoomControl } from 'react-mapbox-gl';
 import LocationSearch from './LocationSearch';
 import db from '../firestore';
 import firebase from 'firebase';
@@ -40,10 +40,11 @@ class SingleBoard extends Component {
     selectedPin: null,
     newLocation: null,
     needsTimestamp: false,
-    showLabel: null,
+    showLabel: false,
     newLabel: '',
+    newNotes: '',
     openStatus: '',
-    editLabel: false
+    editingMode: false
   }
 
   componentDidMount() {
@@ -74,6 +75,7 @@ class SingleBoard extends Component {
               if (pin.visited) {
                 visitedPins.push({
                   label: pin.label,
+                  notes: pin.notes,
                   coords: [pin.coordinates._long, pin.coordinates._lat],
                   pinId: doc.id,
                   visited: pin.visited
@@ -81,6 +83,7 @@ class SingleBoard extends Component {
               } else {
                 unvisitedPins.push({
                   label: pin.label,
+                  notes: pin.notes,
                   coords: [pin.coordinates._long, pin.coordinates._lat],
                   pinId: doc.id,
                   visited: pin.visited
@@ -135,9 +138,9 @@ class SingleBoard extends Component {
     })
   }
 
-  handleLabelChange = event => {
+  handlePinChange = event => {
     this.setState({
-      newLabel: event.target.value
+      [event.target.name]: event.target.value
     })
   }
 
@@ -148,60 +151,78 @@ class SingleBoard extends Component {
     this.state.newLabel && this.state.newLocation &&
       db.collection('boards').doc(boardId).collection('pins').add({
         label: this.state.newLabel,
+        notes: this.state.newNotes,
         coordinates: new firebase.firestore.GeoPoint(this.state.newLocation[1], this.state.newLocation[0]),
         visited: visitedValue
       })
         .then(() => {
-          this.setState({ newLocation: null, newLabel: '', showLabel: null, needsTimestamp: false });
+          this.setState({ newLocation: null, newLabel: '', newNotes: '', showLabel: null, needsTimestamp: false });
           console.log('Pin successfully added');
         })
         .catch((err) => console.error('Add unsuccessful: ', err))
-      db.collection('boards').doc(boardId).update({
-        coordinates: new firebase.firestore.GeoPoint(this.state.newLocation[1], this.state.newLocation[0])
-      })
+    db.collection('boards').doc(boardId).update({
+      coordinates: new firebase.firestore.GeoPoint(this.state.newLocation[1], this.state.newLocation[0])
+    })
       .catch(error => console.error('Unable to update center of board', error))
   }
-  toggleEditLabel = () => {
-    this.setState({ editLabel: !this.state.editLabel });
+
+  toggleEditingMode = () => {
+    if (this.state.selectedPin.label) {
+      this.setState({ newLabel: this.state.selectedPin.label })
+    }
+    if (this.state.selectedPin.notes) {
+      this.setState({ newNotes: this.state.selectedPin.notes })
+    }
+    this.setState({ editingMode: !this.state.editingMode });
   }
-  changeLabel = pinId => {
+
+  updatePin = pinId => {
     const boardId = this.props.match.params.boardId;
     db.collection('boards').doc(boardId).collection('pins').doc(pinId).update(
       {
-        label: this.state.newLabel
+        label: this.state.newLabel,
+        notes: this.state.newNotes
       }
     )
-    .then(() => this.setState({ editLabel: false}))
+    .then(() => this.setState({ newLabel: '', newNotes: '', showLabel: null, editingMode: false, selectedPin: null }))
+    // why why why why why doesn't it re-render with new info
+    // right now just setting selected pin to null 
     .catch(err => console.error('Unable to change label', err))
   }
 
   handlePinClick = pin => {
-      this.setState({
-        selectedPin: pin,
-        center: pin.coords,
-        zoom: [13.5],
-        newLocation: null
-      })
+    this.setState({
+      selectedPin: pin,
+      center: pin.coords,
+      zoom: [12.5],
+      newLocation: null
+    })
   }
 
-  markAsVisited = pinId => {
+  toggleVisited = pinId => {
     const boardId = this.props.match.params.boardId;
-    db.collection('boards').doc(boardId).collection('pins').doc(pinId).update(
-      {
-        visited: firebase.firestore.FieldValue.serverTimestamp()
-      }
-    )
-      .catch(error => console.error('Unable to mark as visited', error))
-  }
-
-  markAsUnvisited = pinId => {
-    const boardId = this.props.match.params.boardId;
-    db.collection('boards').doc(boardId).collection('pins').doc(pinId).update(
-      {
-        visited: null
-      }
-    )
+    if (this.state.selectedPin.visited) {
+      db.collection('boards').doc(boardId).collection('pins').doc(pinId).update(
+        {
+          visited: null,
+        }
+      )
       .catch(error => console.error('Unable to unmark pin', error))
+    } else {
+      db.collection('boards').doc(boardId).collection('pins').doc(pinId).update(
+        {
+          visited: firebase.firestore.FieldValue.serverTimestamp()
+        }
+      )
+      .catch(error => console.error('Unable to mark as visited', error))
+    }
+    this.setState({
+      selectedPin: null,
+      zoom: [12.3], 
+      editingMode: false, 
+      newLabel: '', 
+      newNotes: ''
+    })
   }
 
   handlePinDelete = pinId => {
@@ -211,7 +232,7 @@ class SingleBoard extends Component {
         console.log('Pin successfully deleted')
       })
       .then(() => {
-        this.setState({ selectedPin: null, zoom: [12] })
+        this.setState({ selectedPin: null, zoom: [12.3], editingMode: false, newLabel: '', newNotes: '' })
       })
       .catch(err => console.error('Delete unsuccessful: ', err))
   }
@@ -224,8 +245,8 @@ class SingleBoard extends Component {
           style={this.state.style}
           zoom={this.state.zoom}
           containerStyle={{
-            height: "100vh",
-            width: "100vw"
+            height: '100vh',
+            width: '100vw'
           }}
           onClick={this._onClickMap.bind(this)}
           center={this.state.center}>
@@ -279,96 +300,98 @@ class SingleBoard extends Component {
             }
           </Layer>
           {
-            this.state.selectedPin && (
-              <Popup
-                key={this.state.selectedPin.label}
-                coordinates={this.state.selectedPin.coords}
-                offset={50}
-              >
-                <div>
-                  <button onClick={()=> this.setState({ selectedPin: null, zoom: [13], newLocation: null }) } id='close-popup'><i class="window close outline icon" size='medium'></i></button>
-                  <div>
-                    {
-                      this.state.editLabel ?
-                        (
-                          <div>
-                            <Icon name='arrow left' color='black' size='large' fitted={true} onClick={() => (<Button onClick={this.toggleEditLabel()} />)} />
-                            <input type="text" name='newLabel' placeholder={this.state.selectedPin.label} value={this.state.newLabel} onChange={this.handleLabelChange} />
-                            <Icon name='checkmark' color='green' size='large' fitted={true} onClick={() => (<Button onClick={this.changeLabel(this.state.selectedPin.pinId)}/>)} />
-                          </div>
-                        )
-                        :
-                        (this.state.selectedPin.label + ' ')
-                    }
-
-                    {
-                      !this.state.editLabel && this.state.openStatus === 'open' &&
-                      <Icon name='write' color='black' size='large' fitted={true} onClick={() => (<Button onClick={this.toggleEditLabel()} />)} />
-                    }
-                  </div>
-                  <div className='options-container'>
-                    {/*<Popup
-                  trigger={<Icon name='trash outline' color='red' size='huge' fitted={true} />}
-                  content={
-                    <div>
-                      <p>Are you sure?</p>
-                      <Button color='red' content='Delete' onClick={()=>this.handlePinDelete(this.state.selectedPin.pinId)} />
-                    </div>
-                  }
-                  on='click'
-                />
-                */}
-                    {
-                      !this.state.selectedPin.visited && this.state.openStatus === 'open' &&
-                      <Icon name='checkmark box' color='grey' size='big' fitted={true} onClick={() => (<Button onClick={this.markAsVisited(this.state.selectedPin.pinId)} />)} />
-
-                    }
-                    {
-                      this.state.selectedPin.visited && this.state.openStatus === 'open' &&
-                      <Icon name='remove' color='grey' size='big' fitted={true} onClick={() => (<Button onClick={this.markAsUnvisited(this.state.selectedPin.pinId)} />)} />
-                    }
-                    {
-                      this.state.openStatus === 'open' &&
-                      <Icon name='trash outline' color='red' size='big' fitted={true} onClick={() => this.handlePinDelete(this.state.selectedPin.pinId)} />
-                    }
-
-
-                  </div>
+            this.state.selectedPin && !this.state.editingMode &&
+            // popup for existing pin label and notes 
+            <Popup
+              className='popup-label'
+              key={this.state.selectedPin.label}
+              coordinates={this.state.selectedPin.coords}
+              offset={50}
+            >
+              <div className='options-container'>
+                <button onClick={() => this.setState({ selectedPin: null, zoom: [12.5], newLocation: null, editingMode: false })} className='x-btn' id='close-popup'>x</button>
+                {
+                  this.state.openStatus === 'open' &&
+                  <Icon id='edit-btn' name='edit' size='large' fitted={true} onClick={() => (<Button onClick={this.toggleEditingMode()} />)} />
+                }
+              </div>
+              <div>
+                <h4 id='label'>{this.state.selectedPin.label}</h4>
+                {
+                  // would like truncated and the ... when clicked to show full notes
+                  this.state.selectedPin.notes && <small id='notes'>{this.state.selectedPin.notes}</small>
+                }
+              </div>
+            </Popup>
+          }
+          {
+            this.state.selectedPin && this.state.editingMode &&
+            // editing mode for existing pin label and notes
+            <Popup
+              key={this.state.selectedPin.label + '-edit'}
+              coordinates={this.state.selectedPin.coords}
+              offset={50}
+            >
+              <div className='options-container'>
+                <Icon id='chevron' name='chevron left' size='large' fitted={true} onClick={() => (<Button onClick={this.toggleEditingMode()} />)} />
+                <Icon id='add-pin' name='checkmark' size='large' fitted={true} onClick={() => (<Button onClick={this.updatePin(this.state.selectedPin.pinId)} />)} />
+              </div>
+              <div id='add-pin-options'>
+                <p>Label:</p>
+                <input type='text' name='newLabel' maxLength='20' value={this.state.newLabel} onChange={this.handlePinChange} />
+                <p>Notes:</p>
+                <textarea id='notes-input' type='text' maxLength='150' name='newNotes' value={this.state.newNotes} onChange={this.handlePinChange} />
+                <div id='pin-trash-btns'>
+                {
+                  this.state.openStatus === 'open' &&
+                  <Icon name='thumb tack' size='large' fitted={true} onClick={() => (<Button onClick={this.toggleVisited(this.state.selectedPin.pinId)} />)} />
+                }
+                {
+                  this.state.openStatus === 'open' &&
+                  <Icon name='trash outline' color='red' size='large' fitted={true} onClick={() => this.handlePinDelete(this.state.selectedPin.pinId)} />
+                }
                 </div>
-              </Popup>
-            )
+              </div>
+            </Popup>
           }
           {
             this.state.newLocation && this.state.openStatus === 'open' && (
               !this.state.showLabel
-              ? 
-                <Popup
-                  coordinates={this.state.newLocation}
-                >
-                  <button id='close-popup' onClick={()=> this.setState({ newLocation: null }) }><i class="window close outline icon" size='medium'></i></button>
-                  <p>Add new pin?</p>
-                  <div id='pin-options'>
-                    <button onClick={() => this.handleShowLabel(false)}><img alt='hollow-pin' src='/attributes/hollowPinOption.png' /></button>
-                    <button onClick={() => this.handleShowLabel(true)}><img alt='solid-pin' src='/attributes/pinOption.png' /></button>
-                    <div>
-                      <small id='want-to-go'>want to go</small>
-                      <small id='here-now'>here now</small>
+                ?
+                // popup for adding pin - choose type
+                (
+                  <Popup
+                    coordinates={this.state.newLocation}
+                  >
+                    <button onClick={() => this.setState({ selectedPin: null, zoom: [12.5], newLocation: null })} className='x-btn' id='close-popup-add-pin'>x</button>
+                    <div id='pin-options'>
+                      <p>Want to put a pin in it?</p>
+                      <button onClick={() => this.handleShowLabel(false)}><img alt='hollow-pin' src='/attributes/hollowPinOption.png' /></button>
+                      <button onClick={() => this.handleShowLabel(true)}><img alt='pin' src='/attributes/pinOption.png' /></button>
+                      <div>
+                        <span id='want-to-go'>plan</span>
+                        <span id='here-now'>journal</span>
+                      </div>
                     </div>
-                  </div>
-                </Popup>
-              :
-              <Popup
-                coordinates={this.state.newLocation}
-              >
-                <div>
-                  <button id='close-popup' onClick={() => this.setState({ showLabel: null })}><i class="chevron left icon"></i></button>
-                  <label>
-                    <p>Label:</p>
-                    <input type="text" name='newLabel' placeholder="ex: Best Ice Cream!" value={this.state.newLabel} onChange={this.handleLabelChange} />
-                    <button id='checkmark' onClick={this.handlePinAdd}><i class="check icon"></i></button>
-                  </label>
-                </div>
-              </Popup>
+                  </Popup>)
+                :
+                (
+                  // popup for adding pin - add label and notes
+                  <Popup
+                    coordinates={this.state.newLocation}
+                  >
+                    <div>
+                      <div className='options-container'>
+                        <button id='close-popup' onClick={() => this.setState({ showLabel: null })}><i class='chevron left icon'></i></button>
+                        <button id='add-pin' onClick={this.handlePinAdd}><i class="plus icon"></i></button>
+                      </div>
+                      <div id='edit-pin-options'>
+                        <p>Label:</p><input type='text' name='newLabel' placeholder='ex: Best Ice Cream!' maxLength='20' value={this.state.newLabel} onChange={this.handlePinChange} />
+                        <p>Notes:</p>
+                        <textarea id='notes-input' type='text' name='newNotes' placeholder='ex: saw this on a blog, and they have so many toppings' maxLength='150' value={this.state.newNotes} onChange={this.handlePinChange} />
+                      </div>
+                    </div>
+                  </Popup>)
             )
           }
         </Map>
@@ -384,18 +407,15 @@ class SingleBoard extends Component {
               <Dropdown.Item> 
                   <Button basic content= "Pintrips Style" onClick={this.switchStyle} id='basic' type='radio' name='rtoggle' value={pintripsStyle} />
                 </Dropdown.Item>
-              <Dropdown.Item> 
-                  <Button basic content=" Moonlight" onClick={this.switchStyle} id='popArt' type='radio' name='rtoggle' value={moonLightStyle} />
+                <Dropdown.Item>
+                  <Button basic content=' Moonlight' onClick={this.switchStyle} id='popArt' type='radio' name='rtoggle' value={moonLightStyle} />
                 </Dropdown.Item>
-              <Dropdown.Item> 
-                  <Button basic content="Vintage" onClick={this.switchStyle} id='popArt' type='radio' name='rtoggle' value={vintageStyle} />
+                <Dropdown.Item>
+                  <Button basic content='Vintage' onClick={this.switchStyle} id='popArt' type='radio' name='rtoggle' value={vintageStyle} />
                 </Dropdown.Item>
               </Button.Group>
           </Dropdown.Menu> 
         </Dropdown>
-        
-        
-        
       
         <div className="in-footer">
         
@@ -406,9 +426,6 @@ class SingleBoard extends Component {
             </div> 
           
         </div>
-        
-          
-        
       </div>
     )
   }
