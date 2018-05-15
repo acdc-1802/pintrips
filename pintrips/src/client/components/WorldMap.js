@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import { Button, Card, Icon, Checkbox, Segment, Label, Dropdown } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import { Card } from 'semantic-ui-react';
 import db from '../firestore';
-import history from '../../history';
-import ReactMapboxGl, { Popup, Layer, Feature, ZoomControl } from "react-mapbox-gl";
+import ReactMapboxGl, { Layer, Feature, ZoomControl } from "react-mapbox-gl";
 
 const Map = ReactMapboxGl({
   accessToken: 'pk.eyJ1IjoiZGVzdGlubWNtdXJycnkiLCJhIjoiY2plenRxaGw3MGdsNTJ3b2htMGRydWc3aiJ9.ycslnjgv2J9VZGZHT8EoIw'
@@ -26,7 +24,8 @@ class WorldMap extends Component {
       zoom: [0],
       pins: [],
       selectedPin: null,
-      yarnCoords: []
+      yarnCoords: [],
+      style: 'mapbox://styles/destinmcmurrry/cjgy8hinv00192rp4obrfj9qq'
     }
   }
 
@@ -86,7 +85,7 @@ class WorldMap extends Component {
       <div className='ind-card' id='profile-board'>
         <Card id='mapcard-world'>
           <Map
-            style={'mapbox://styles/destinmcmurrry/cjgy8hinv00192rp4obrfj9qq'}
+            style={this.state.style}
             zoom={this.state.zoom}
             containerStyle={{
               height: "100%",

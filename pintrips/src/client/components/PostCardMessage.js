@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import firebase from 'firebase'
 import db from '../firestore';
-import { Map, withAuth } from 'fireview';
+import { withAuth } from 'fireview';
 import { Button } from 'semantic-ui-react';
 import PostCardStamp from './PostCardStamp';
 import history from '../../history';

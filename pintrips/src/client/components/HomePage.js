@@ -7,21 +7,16 @@ import firebase from 'firebase';
 const allBoards = db.collection('boards')
 
 class HomePage extends Component{ 
-  constructor(props){
-    super(props);
-
-  }
   componentDidMount(){
     const userId = this.props.withAuth.auth.currentUser.uid;
     const user = db.collection("users").doc(userId);
-    let self = this;
     if(navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function(position) {
+      return navigator.geolocation.getCurrentPosition(function(position) {
         user.set({
           currentCoordinates: new firebase.firestore.GeoPoint(position.coords.latitude, position.coords.longitude)
           }, { merge: true })
-      }),
-      (err) => console.log('error', err.message)
+          .catch(err => console.log('error', err.message))
+      })
     }
   }
   render(){

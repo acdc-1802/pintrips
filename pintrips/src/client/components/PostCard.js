@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import firebase from 'firebase'
 import db from '../firestore';
 import { withAuth } from 'fireview';
-import { Button, Icon } from 'semantic-ui-react';
-import PostCardStamp from './PostCardStamp';
+import { Button } from 'semantic-ui-react';
 import PostCardMap from './PostCardMap';
 import PostCardTypeText from './PostCardTypeText';
 import { TweenLite, Back, Bounce } from "gsap";
@@ -42,9 +41,8 @@ export class PostCard extends Component {
             }, { merge: true })
           self.setState({
             currentCoordinates: [position.coords.latitude,position.coords.longitude]
-          })
-        }),
-        (err) => console.log('error', err.message)
+          }).catch((err) => console.log('error', err.message))
+        })
       }
     }
 
