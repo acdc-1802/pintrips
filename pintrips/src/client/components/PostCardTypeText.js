@@ -5,9 +5,7 @@ export class PostCardTypeText extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      city: '',
-      state: '',
-      country: ''
+      place: []
     }
   }
 
@@ -18,12 +16,13 @@ export class PostCardTypeText extends Component {
 
     fetch(url)
       .then(res => res.json())
-      .then(myJson => console.log('myJSON', myJson))
       .then(myJson => {
+        const array = [];
+        myJson.features[0].context.forEach(place => {
+          array.push(place.text)
+        })
         this.setState({
-          city: myJson.features[0].context[1].text,
-          state: myJson.features[0].context[4].text,
-          country: myJson.features[0].context[5].text
+          place: array.slice(2)
         })
       })
       .catch(err => console.log('error', err))
@@ -32,8 +31,13 @@ export class PostCardTypeText extends Component {
   render() {
     return (
       <div className="postcard-typewriter-text">
-        Greetings from {this.state.city}, {this.state.state}!
+        Greetings from&nbsp;
+        {
+          this.state.place.join(' ')
+        }
+        !
       </div>
+
     )
   }
 
