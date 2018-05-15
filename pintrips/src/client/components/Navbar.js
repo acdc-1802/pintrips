@@ -95,41 +95,46 @@ class Navbar extends Component {
               <Dropdown id='dropdown' icon="bars" floating>
                 <Dropdown.Menu>
 
-                  <Dropdown.Item>
+                  <Dropdown.Item id='dropdown-item'>
                     <Link to={'/HomePage'}>
                       <Menu.Item id='myboards'>
+                        <Icon name='map' />
                         My Boards
                     </Menu.Item>
                     </Link>
                   </Dropdown.Item>
 
-                  <Dropdown.Item>
+                  <Dropdown.Item id='dropdown-item'>
                     <Link to={'/SharedWithMe'}>
                       <Menu.Item id='myboards' >
+                      <Icon name='share alternate'/>
                         Shared With Me
                     </Menu.Item>
                     </Link>
                   </Dropdown.Item>
 
-                  <Dropdown.Item>
+                  <Dropdown.Item id='dropdown-item'>
                     <Link to={'/HomePage'}>
                       <Menu.Item id='myboards'>
+                      <Icon name='star'/>
                         Starred
                     </Menu.Item>
                     </Link>
                   </Dropdown.Item>
 
-                  <Dropdown.Item>
+                  <Dropdown.Item id='dropdown-item'>
                     <Link to={'/PostCard'}>
                       <Menu.Item id='myboards'>
+                      <Icon name='mail'/>
                         Send a Postcard
                     </Menu.Item>
                     </Link>
                   </Dropdown.Item>
 
-                  <Dropdown.Item>
+                  <Dropdown.Item id='dropdown-item'>
                     <Link to={`/Friends/${this.props._user.uid}`}>
                       <Menu.Item id='myboards'>
+                      <Icon name='users'/>
                         Friends
                     </Menu.Item>
                     </Link>
@@ -146,7 +151,7 @@ class Navbar extends Component {
                         <Icon name='plus square outline' size={'large'} />
                       </div>
                     }
-                    content={'Add a new board'} /> 
+                    content={'Add a new board'} />
                 </Menu.Item>
               </Link>
               <Menu.Item borderless='true' id='navbar-notifications'>

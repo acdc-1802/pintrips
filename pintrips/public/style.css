@@ -100,6 +100,10 @@ i.angle.double.left.large.icon.back-icon {
   margin-left: 15px;
   margin-top: 7px;
 }
+#dropdown-item {
+  margin-left: 0px;
+  text-align: left;
+}
 .footer .dropdown {
   display: flex;
   margin: .1em 1em 0 1em
