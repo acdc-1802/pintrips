@@ -126,7 +126,7 @@ i.angle.double.left.large.icon.back-icon {
   display: flex;
   border: none;
   margin: auto auto 1px 0;
-  color: #515151; 
+  color: #515151;
   font-family: 'Special Elite', cursive;
 }
 
@@ -135,7 +135,7 @@ i.angle.double.left.large.icon.back-icon {
   display: flex;
   border: none;
   margin: 3px auto 3px 0;
-  color: #515151; 
+  color: #515151;
   font-family: 'Special Elite', cursive;
 }
 
@@ -386,7 +386,7 @@ input.location-search-input {
     justify-content: space-between;
     align-items: center;
   }
-  
+
   .logo{
     display: flex;
     width: 2em;
@@ -1131,4 +1131,3 @@ input.location-search-input {
   width: 100%;
   align-items: center;
 }
-
