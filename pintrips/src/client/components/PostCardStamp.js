@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Map, withAuth } from 'fireview';
-import { Image, Button, Icon } from 'semantic-ui-react';
+import { withAuth } from 'fireview';
 
 export class PostCardStamp extends Component {
   constructor(props) {
@@ -41,7 +40,6 @@ export class PostCardStamp extends Component {
   }
 
   render() {
-    const userEmail = this.props.withAuth.auth.currentUser.email
     return (
       <div className="stamp-logo">
       <div className="stamp">

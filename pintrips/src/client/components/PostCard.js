@@ -22,19 +22,30 @@ export class PostCard extends Component {
   }
 
   componentDidMount() {
-    const userId = this.props.withAuth.auth.currentUser.uid
-    const user = db.collection("users").doc(userId)
     let self = this;
-    if(navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function(position) {
-        user.set({
-          currentCoordinates: new firebase.firestore.GeoPoint(position.coords.latitude, position.coords.longitude)
-          }, { merge: true })
-        self.setState({
-          currentCoordinates: [position.coords.latitude,position.coords.longitude]
+    const boardId = this.props.match.params.boardId;
+    if (boardId) {
+      db.collection('boards').doc(boardId).get()
+        .then(doc => {
+          self.setState({ currentCoordinates: [doc.data().coordinates._lat, doc.data().coordinates._long]})
         })
-      }),
-      (err) => console.log('error', err.message)
+        .catch(function(error) {
+          console.log("Error getting documents: ", error);
+        });
+    } else {
+      const userId = this.props.withAuth.auth.currentUser.uid
+      const user = db.collection("users").doc(userId)
+      if(navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+          user.set({
+            currentCoordinates: new firebase.firestore.GeoPoint(position.coords.latitude, position.coords.longitude)
+            }, { merge: true })
+          self.setState({
+            currentCoordinates: [position.coords.latitude,position.coords.longitude]
+          })
+        }),
+        (err) => console.log('error', err.message)
+      }
     }
 
   }
@@ -67,6 +78,7 @@ export class PostCard extends Component {
   }
 
   render() {
+
     if (!this.state.currentCoordinates.length)
       return <div className="login-container">loading...</div>
     return (
@@ -83,7 +95,7 @@ export class PostCard extends Component {
           </div>
         </div>
         <div className="postcard-flip-button">
-          <Button onClick={this.rotate} compact basic color='orange' size="mini">Flip</Button>
+          <Button onClick={this.rotate} compact basic color='orange' size="mini">View Other Side</Button>
         </div>
         </div>
     )
