@@ -698,21 +698,6 @@ input.location-search-input {
     width: 55vw;
   }
 
-.postcard-typewriter-text {
-  margin: 3em;
-  color: rgb(31, 29, 29);
-  font-size: 1.2em;
-  font-family: monospace;
-  overflow: hidden; /* Ensures the content is not revealed until the animation */
-  border-right: .10em solid #EBEBEB; /* typewriter cursor */
-  white-space: nowrap; /* Keeps the content on a single line */
-  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
-  letter-spacing: .15em; /* Adjust as needed */
-  animation:
-  typing 3.5s steps(30, end),
-  blink-caret .5s step-end infinite;
-}
-
 #profile-name {
   font-family: 'Special Elite', cursive;
   font-size: 150%;
@@ -1105,6 +1090,7 @@ input.location-search-input {
 
 @media screen and (min-width: 600px) {
   .postcard-typewriter-text {
+    padding-top:1em;
     margin: 3em;
     color: rgb(31, 29, 29);
     font-size: 1.2em;
@@ -1145,3 +1131,4 @@ input.location-search-input {
   width: 100%;
   align-items: center;
 }
+

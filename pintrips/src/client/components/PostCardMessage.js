@@ -51,7 +51,7 @@ export class PostCard extends Component {
     })
     .then(created => {
       this.setState({ postcardId: created.id})
-      const templateParams = { to_name: this.state.receiverEmail, postcard_id: this.state.postcardId }
+      const templateParams = { to_name: this.state.receiverEmail, from_name: this.state.senderEmail, postcard_id: this.state.postcardId }
       emailjs.send('default_service', 'pintrips_postcard', templateParams, 'user_y9Gpr6VKiWp0BpC5djRDe')
         .then(function(response) {
           console.log('SUCCESS!', response.status, response.text);
