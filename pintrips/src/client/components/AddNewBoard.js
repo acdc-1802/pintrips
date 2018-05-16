@@ -73,7 +73,7 @@ class AddNewBoard extends Component {
             <div className="form-group">
               <LocationSearch updateCoordinates={this.submitCoordinates} />
             </div>
-            <Form.Button type='submit' className="form-group">Add New Board</Form.Button>
+            <Form.Button type='submit' id="signup-button">Add New Board</Form.Button>
           </div>
         </Form>
       </div>

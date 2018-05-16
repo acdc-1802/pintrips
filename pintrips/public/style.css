@@ -21,7 +21,7 @@ body {
   margin-bottom: 5px;
   position: fixed;
   right: 12px;
-  top: 109px;
+  top: 106px;
 }
 
 #add-img-icon {
@@ -217,8 +217,8 @@ i.angle.double.left.large.icon.back-icon {
 }
 
 .friend-img {
-  width: 75px;
-  height: 75px;
+  width: 60px;
+  height: 60px;
 }
 
 .footer {
@@ -279,12 +279,14 @@ i.angle.double.left.large.icon.back-icon {
   font-family: 'Special Elite', cursive;
   font-size: 75%;
   margin-left: 5px;
+  color: #515151;
 }
 
 #friend-username {
   font-family: 'Special Elite', cursive;
   font-size: 65%;
   margin-left: 5px;
+  color: #515151;
 }
 
 #full-page {
@@ -294,6 +296,7 @@ i.angle.double.left.large.icon.back-icon {
 .homepage-container {
   display: flex;
   margin-top: 8em;
+  flex-direction: column;
 }
 
 .in-footer {
@@ -502,6 +505,7 @@ input.location-search-input {
 #profile-username {
   font-size: 100%;
   margin: auto;
+  color: #515151;
 }
 
 #friend-name {
@@ -1130,4 +1134,18 @@ input.location-search-input {
   padding-top: 150px;
   width: 100%;
   align-items: center;
+}
+
+h3.ui.header {
+  margin-top: 7px;
+}
+
+#add-user {
+  position: fixed;
+  margin-left: 180px;
+  margin-top: 32px;
+}
+
+.board-search-bar {
+  margin-left: 30px;
 }

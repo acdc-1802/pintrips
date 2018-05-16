@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import db from '../firestore';
-import { Grid, Segment, Image, Header } from 'semantic-ui-react';
+import { Grid, Segment, Image, Header, Icon } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 import { withAuth } from 'fireview';
 
 class FriendsList extends Component {
@@ -44,17 +45,35 @@ class FriendsList extends Component {
             this.state.friendsInfo.map((friend, idx) => {
               return (
                 <Grid.Column key={idx} className='friends-box-container'>
-                  <Segment className='friend-box'>
-                    <Image className='friend-img' src={friend.profileImg} />
-                    <Header as='h3' className='friend-sub-box'>
-                      <Header.Content id='friend-name'>
-                        {friend.first} {friend.last}
-                      </Header.Content>
-                      <Header.Content id='friend-username'>
-                        ({friend.username})
-                      </Header.Content>
-                    </Header>
-                  </Segment>
+                  {
+                    !this.props.addFriend ?
+                      (<Link to={`/Profile/${friend.id}`} >
+                        <Segment className='friend-box'>
+                          <Image className='friend-img' src={friend.profileImg} />
+                          <Header as='h3' className='friend-sub-box'>
+                            <Header.Content id='friend-name'>
+                              {friend.first} {friend.last}
+                            </Header.Content>
+                            <Header.Content id='friend-username'>
+                              ({friend.username})
+                        </Header.Content>
+                          </Header>
+                        </Segment>
+                      </Link>)
+                      :
+                      (<Segment className='friend-box'>
+                        <Image className='friend-img' src={friend.profileImg} />
+                        <Header as='h3' className='friend-sub-box'>
+                          <Header.Content id='friend-name'>
+                            {friend.first} {friend.last}
+                          </Header.Content>
+                          <Header.Content id='friend-username'>
+                            ({friend.username})
+                          </Header.Content>
+                            <Icon id='add-user' color='grey' size='mini' name='add user' />
+                        </Header>
+                      </Segment>)
+                  }
                 </Grid.Column>
               )
             })
