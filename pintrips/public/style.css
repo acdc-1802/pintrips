@@ -680,6 +680,7 @@ input.location-search-input {
     float: left;
     margin-left: 3em;
     width: 80vw;
+    margin-bottom: 42px;
   }
 
 #profile-name {
@@ -870,7 +871,7 @@ input.location-search-input {
  .stamp-logo {
   position: relative;
   top: -9em;
-  right: -17em;
+  right: -32em;
   width: 40vw;
   display: flex;
   flex-direction: row;
@@ -887,7 +888,7 @@ input.location-search-input {
   transform: rotate(20deg);
   font-size:1.6em;
   color: #F7BAB7;
-  border:solid 4px #F7BAB7;
+  /* border:solid 4px #F7BAB7; */
   padding:1.4em;
   border-radius:50%;
   zoom:1;
@@ -895,7 +896,7 @@ input.location-search-input {
   opacity:0.2;
   -webkit-text-shadow: 0 0 2px #F7BAB7;
   text-shadow: 0 0 2px #F7BAB7;
-  box-shadow: 0 0 2px #F7BAB7;
+  /* box-shadow: 0 0 2px #F7BAB7; */
   -webkit-animation-name: pulse;
   animation-name: pulse;
   animation-delay:2s;
