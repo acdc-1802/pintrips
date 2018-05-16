@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import { withAuth } from 'fireview';
 import { Image, Card } from 'semantic-ui-react';
 import ReactMapboxGl, { Layer, Feature, ZoomControl } from "react-mapbox-gl";
 import db from '../firestore';
@@ -81,6 +80,17 @@ export class PostCardMap extends Component {
               id='solidPins'
               layout={{ 'icon-image': 'solidImage', 'icon-allow-overlap': true }}
               images={solidPins}>
+              {this.state.visitedPins &&
+                this.state.visitedPins.map(pin => {
+                  return (
+                    <Feature
+                      key={pin.label}
+                      coordinates={pin.coords}
+                    />
+                  )
+                }
+                )
+              }
             </Layer> */}
           </div>
       }
