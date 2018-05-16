@@ -335,18 +335,16 @@ input.location-search-input {
     font-size: 20px;
   }
 
-  #add-pin-options {
-    margin-top: 13px;
-  }
-
   #add-pin-options * {
-    border-radius: 3px;
-    margin: 1px;
+    border-radius: 1em;
+    padding: 3px;
+    margin-bottom: 0;
   }
 
   #edit-pin-options * {
-    border-radius: 3px;
-    margin: 1px;
+    border-radius: 1em;
+    padding: 3px;
+    margin-bottom: 0;
   }
 
   #notes-input {
@@ -423,7 +421,8 @@ input.location-search-input {
   background-color: #bcbcbc;
   opacity: .9;
   font-family: 'Special Elite', cursive;
-  width: 170px;
+  box-shadow: 0 5px 5px rgba(0,0,0,0.10);
+  width: 190px;
   height: 190px;
 }
 
@@ -802,7 +801,7 @@ input.location-search-input {
 
 .settings {
   margin-top: 7px;
-  margin-left: 10px;
+  margin-left: 13px;
 }
 
  .sign-up {
