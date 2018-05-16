@@ -26,7 +26,10 @@ export class PostCard extends Component {
     if (boardId) {
       db.collection('boards').doc(boardId).get()
         .then(doc => {
-          self.setState({ currentCoordinates: [doc.data().coordinates._lat, doc.data().coordinates._long]})
+          self.setState({
+            currentCoordinates: [doc.data().coordinates._lat, doc.data().coordinates._long],
+            boardId: doc.id
+          })
         })
         .catch(function(error) {
           console.log("Error getting documents: ", error);
@@ -84,7 +87,7 @@ export class PostCard extends Component {
         <div className='postcard-container'>
           <div className="postcard-front"
             style={{ display: this.state.cardIsFront ? 'block' : 'none'}}>
-            <PostCardMap currentCoord={this.state.currentCoordinates}/>
+            <PostCardMap currentCoord={this.state.currentCoordinates} boardId={this.state.boardId}/>
             <PostCardTypeText currentCoord={this.state.currentCoordinates}/>
           </div>
           <div className="postcard-back"
