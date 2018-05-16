@@ -31,11 +31,11 @@ body {
   margin-left: 50px;
 }
 
- .autocomplete-dropdown-container {
+.autocomplete-dropdown-container {
   color: black;
   position: absolute;
-    bottom: 3em;
-  }
+  bottom: 3em;
+}
 
 i.angle.double.left.large.icon.back-icon {
   margin-left: 12px;
@@ -613,7 +613,7 @@ input.location-search-input {
   width: 80vw;
   height: 75vh;
   box-shadow: 10px 10px 8px #888888;
-  background-color:rgb(255,245,238);
+  background-color:rgb(255, 249, 246);
   z-index: -1;
   position: absolute;
   left: 50%;
@@ -995,7 +995,7 @@ input.location-search-input {
     width: 80vw;
     height: 48vh;
     box-shadow: 10px 10px 8px #888888;
-    background-color:rgb(255,245,238);
+    background-color:rgb(255, 249, 246);
     z-index: -1;
     position: absolute;
     left: 50%;
@@ -1130,4 +1130,12 @@ input.location-search-input {
   padding-top: 150px;
   width: 100%;
   align-items: center;
+}
+
+/* just added, don't delete! */
+.postcard-map-sizing {
+  height: 60vh;
+  display: flex;
+  padding: 9px;
+  width: 76vw;
 }

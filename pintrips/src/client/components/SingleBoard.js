@@ -188,7 +188,7 @@ class SingleBoard extends Component {
     )
     .then(() => this.setState({ newLabel: '', newNotes: '', showLabel: null, editingMode: false, selectedPin: null }))
     // why why why why why doesn't it re-render with new info
-    // right now just setting selected pin to null 
+    // right now just setting selected pin to null
     .catch(err => console.error('Unable to change label', err))
   }
 
@@ -220,9 +220,9 @@ class SingleBoard extends Component {
     }
     this.setState({
       selectedPin: null,
-      zoom: [12.3], 
-      editingMode: false, 
-      newLabel: '', 
+      zoom: [12.3],
+      editingMode: false,
+      newLabel: '',
       newNotes: ''
     })
   }
@@ -240,7 +240,7 @@ class SingleBoard extends Component {
   }
 
   render() {
-    
+
     return (
       <div className='board-container'>
         <Map
@@ -303,7 +303,7 @@ class SingleBoard extends Component {
           </Layer>
           {
             this.state.selectedPin && !this.state.editingMode &&
-            // popup for existing pin label and notes 
+            // popup for existing pin label and notes
             <Popup
               className='popup-label'
               key={this.state.selectedPin.label}
@@ -397,16 +397,16 @@ class SingleBoard extends Component {
             )
           }
         </Map>
-        
+
         <div className="footer">
-        
+
         <Icon name= "angle double left" size="large" onClick={history.goBack}/>
-          
+
         <Dropdown className="settings" icon="settings" upward >
-       
-          <Dropdown.Menu> 
+
+          <Dropdown.Menu>
             <Button.Group basic vertical>
-              <Dropdown.Item> 
+              <Dropdown.Item>
                   <Button basic content= "Pintrips Style" onClick={this.switchStyle} id='basic' type='radio' name='rtoggle' value={pintripsStyle} />
                 </Dropdown.Item>
                 <Dropdown.Item>
@@ -416,20 +416,20 @@ class SingleBoard extends Component {
                   <Button basic content='Vintage' onClick={this.switchStyle} id='popArt' type='radio' name='rtoggle' value={vintageStyle} />
                 </Dropdown.Item>
               </Button.Group>
-          </Dropdown.Menu> 
+          </Dropdown.Menu>
         </Dropdown>
-      
+
         <div className="in-footer">
-        
-              <LocationSearch 
+
+              <LocationSearch
                 value={this.state.title}
-                className="search-bar" 
-                forAddPin={true} 
+                className="search-bar"
+                forAddPin={true}
                 updateBoardPins={this.selectPlaceFromSearchBar}>
               <input placeholder="Search for places in  "/>
               </LocationSearch>
-            </div> 
-          
+            </div>
+
         </div>
       </div>
     )
