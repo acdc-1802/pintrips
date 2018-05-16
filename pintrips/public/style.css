@@ -31,23 +31,23 @@ body {
   margin-left: 50px;
 }
 
- .autocomplete-dropdown-container {
+.autocomplete-dropdown-container {
   color: black;
   position: absolute;
-    bottom: 3em;
-  }
+  top: 3em;
+}
 
 i.angle.double.left.large.icon.back-icon {
   margin-left: 12px;
 }
 
-  #banner-img {
-    display: flex;
-    z-index: -5;
-    position: fixed;
-    width: 100%;
-    height: 40%;
-  }
+#banner-img {
+  display: flex;
+  z-index: -5;
+  position: fixed;
+  width: 100%;
+  height: 40%;
+}
 
  .board-container {
   display: flex;
@@ -110,11 +110,6 @@ i.angle.double.left.large.icon.back-icon {
 #dropdown-item {
   margin-left: 0px;
   text-align: left;
-}
-
-.footer .dropdown {
-  display: flex;
-  margin: .1em 1em 0 1em
 }
 
 .x-btn {
@@ -221,16 +216,6 @@ i.angle.double.left.large.icon.back-icon {
   height: 75px;
 }
 
-.footer {
-  position: fixed;
-  bottom: 0;
-  width: 100vw;
-  background-color: white;
-  display: flex;
-  padding: .7em;
-  z-index: 4;
-}
-
 .forms {
   display: flex;
   flex-direction: column;
@@ -296,12 +281,6 @@ i.angle.double.left.large.icon.back-icon {
   margin-top: 8em;
 }
 
-.in-footer {
-  display: flex;
-  width: 75vw;
-  margin: auto;
-}
-
 .item#create-btn {
   padding-top: 9px;
 }
@@ -323,8 +302,9 @@ i.angle.double.left.large.icon.back-icon {
 }
 
 input.location-search-input {
-  width: 100%;
-  border-radius: 1em 1em;
+  width: 70%;
+  border-radius: 1em;
+  padding: 2px;
 }
 
 @keyframes typing {
@@ -401,6 +381,7 @@ input.location-search-input {
 .location-search {
   display: flex;
   width: 100%;
+  justify-content: center;
 }
 
 .login-container {
@@ -773,10 +754,6 @@ input.location-search-input {
   width: 150px;
 }
 
-.search-bar {
-  border-radius: 1em 1em 1em 1em;
-}
-
 .search-container {
   color: white;
  }
@@ -823,8 +800,8 @@ input.location-search-input {
  }
 
 .settings {
-  margin-top: 3px;
-  margin-left: 2px;
+  margin-top: 7px;
+  margin-left: 10px;
 }
 
  .sign-up {
@@ -1132,3 +1109,44 @@ input.location-search-input {
   align-items: center;
 }
 
+#back-btn {
+  display: flex;
+  position: absolute;
+  top: 7.65em;
+  left: .5em;
+  z-index: 5;
+}
+
+.ui.grey.button, .ui.grey.buttons .button {
+  background-color: #fff;
+  color: black;
+}
+
+#settings-btn {
+  display: flex;
+  position: absolute;
+  bottom: 1em;
+  left: 1em;
+  z-index: 5;
+}
+
+#map-search-bar {
+  display: flex;
+  position: absolute;
+  top: 8em;
+  width: 100%;
+  justify-content: center;
+  z-index: 3;
+}
+
+#footer {
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  border-radius: .28571429rem;
+  background-color: #f9f9f9;
+  z-index: 3;
+  height: 2.2em;
+  box-shadow: -2px 2px 15px 1px rgba(179,179,179,1);
+}
