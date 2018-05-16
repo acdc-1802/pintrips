@@ -253,10 +253,10 @@ class SingleBoard extends Component {
       if ((Math.abs(this.state.selectedPin.coords[0]) - Math.abs(this.state.userLocation[0])) + (Math.abs(this.state.selectedPin.coords[1]) - Math.abs(this.state.userLocation[1])) > .0075) {
         if (window.confirm('We noticed you aren\'t here right now. Do you still want to journal it?')) {
           this.toggleVisited(pinId);
-        } 
+        }
         return;
       }
-    } 
+    }
     this.toggleVisited(pinId);
   }
 

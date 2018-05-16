@@ -588,25 +588,20 @@ input.location-search-input {
   font-family: 'Special Elite', cursive;
 }
 
-.postcard-logo {
-  width: 14vw;
-  z-index:1
-}
-
 .postcard-container {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   border: 1px solid rbg(188,143,143);
-  border-radius: 2%;
-  width: 80vw;
-  height: 75vh;
+  width: 95vw;
+  height: 60vh;
+  max-width: 1000px;
   box-shadow: 10px 10px 8px #888888;
-  background-color:rgb(255, 249, 246);
+  background-color: white;
   z-index: -1;
   position: absolute;
   left: 50%;
-  top: 60%;
+  top: 50%;
   transform: translate(-50%, -50%);
   padding: 20px;
   text-align: center;
@@ -638,12 +633,12 @@ input.location-search-input {
   }
 
   .postcard-front {
-    margin: auto;
+    margin: 0;
   }
 
-  .postcard-back {
+  /* .postcard-back {
     margin: auto;
-  }
+  } */
 
   .postcard-label {
     text-align: left;
@@ -683,8 +678,8 @@ input.location-search-input {
     text-align: left;
     clear: bloth;
     float: left;
-    margin-left: -4em;
-    width: 55vw;
+    margin-left: 3em;
+    width: 80vw;
   }
 
 #profile-name {
@@ -773,7 +768,7 @@ input.location-search-input {
  }
 
  .postcard-logo {
-  width: 14vw;
+  width: 21vw;
   z-index:1
   }
 
@@ -966,26 +961,41 @@ input.location-search-input {
   align-self: flex-end;
 }
 
+/* just added, don't delete! */
+.postcard-map-sizing {
+  height: 53vh;
+  display: flex;
+  padding: 9px;
+  width: 76vw;
+  margin: auto;
+}
+
  @media only screen and (max-width: 600px) {
   .postcard-container {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     border: 1px solid rbg(188,143,143);
-    border-radius: 2%;
-    width: 80vw;
-    height: 48vh;
+    width: 95vw;
+    height: 68vh;
     box-shadow: 10px 10px 8px #888888;
-    background-color:rgb(255, 249, 246);
+    background-color: white;
     z-index: -1;
     position: absolute;
     left: 50%;
-    top: 47%;
-    /* transform: translate(-50%, -50%); */
+    top: 57%;
     padding: 20px;
     text-align: center;
     margin-bottom: 5em;
   }
+
+.postcard-map-sizing {
+  height: 60vh;
+  display: flex;
+  padding: 9px;
+  width: 76vw;
+  margin: auto;
+}
 
   .postcard-map {
     margin-bottom: 2em;
@@ -1026,7 +1036,7 @@ input.location-search-input {
   .stamp-logo {
     position: relative;
     top: -4em;
-    right: -7em;
+    right: -13em;
     width: -11vw;
     display: flex;
     flex-direction: row;
@@ -1034,7 +1044,7 @@ input.location-search-input {
   }
 
   .postcard-logo {
-    width: 24vw;
+    width: 21vw;
     z-index:1
   }
 
@@ -1113,13 +1123,6 @@ input.location-search-input {
   align-items: center;
 }
 
-/* just added, don't delete! */
-.postcard-map-sizing {
-  height: 60vh;
-  display: flex;
-  padding: 9px;
-  width: 76vw;
-}
 #back-btn {
   display: flex;
   position: absolute;
