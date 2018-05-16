@@ -26,14 +26,6 @@ class HomePage extends Component {
 
     return (
       <div className='homepage-container'>
-      <Search
-        // loading={this.state.isLoading}
-        // onSearchChange={this.handleChange}
-        placeholder='Search Boards'
-        // onChange={this.handleChange}
-        showNoResults={false}
-        className='board-search-bar'
-      />
       <div className='card-group'>
           <Map from={allBoards.where('creator', '==', `${user.uid}`)}
             Loading={() => 'Loading...'}
