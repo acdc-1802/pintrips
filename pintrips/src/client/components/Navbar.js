@@ -125,11 +125,13 @@ class Navbar extends Component {
                         <Icon name='plus square outline' size={'large'} />
                       </div>
                     }
-                    content={'Add a new board'} />
+                    content={'Add a new board'}
+                    position='bottom center' />
                 </Menu.Item>
               </Link>
               <Menu.Item borderless='true' id='navbar-notifications'>
                 <Popup
+                  position='bottom left'
                   trigger={
                     <div>
                       <Icon name='bell outline' />
@@ -166,14 +168,18 @@ class Navbar extends Component {
                                 pendingBoards.push({ board: i, sender: pending[i].sender })
                             }
                             return (
-                              pendingBoards &&
-                              pendingBoards.map((sentBoard, idx) => {
-                                return(
-                                  <Link key={idx} to={`/SingleBoard/${sentBoard.board}`}>
-                                    <List.Item icon='mail' content={`${sentBoard.sender} sent you a board!`} />
-                                  </Link>
+                              pendingBoards.length ?
+                                (
+                                  pendingBoards.map((sentBoard, idx) => {
+                                    return (
+                                      <Link key={idx} to={`/SingleBoard/${sentBoard.board}`}>
+                                        <List.Item icon='mail' content={`${sentBoard.sender} sent you a board!`} />
+                                      </Link>
+                                    )
+                                  })
                                 )
-                              })
+                                :
+                                (<List.Item content='You have no new notifications'/>)
                             )
                           }}
                         />
@@ -181,7 +187,6 @@ class Navbar extends Component {
                     </List>
                   }
                   on='click'
-                  position='bottom center'
                 />
               </Menu.Item>
 
@@ -192,7 +197,9 @@ class Navbar extends Component {
                       <Icon name="log out" onClick={handleLogout} size={"large"} />
                     </div>
                   }
-                  content={'Logout'} />
+                  content={'Logout'}
+                  position='bottom left'
+                />
 
               </Menu.Item>
               {/*</Link>*/}
