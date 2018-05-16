@@ -31,10 +31,20 @@ body {
   margin-left: 50px;
 }
 
-.autocomplete-dropdown-container {
+#map-search-bar .autocomplete-dropdown-container {
   color: black;
   position: absolute;
-  top: 3em;
+  top: 1.7em;
+  width: 69%;
+  border-radius: 1em;
+}
+
+.form-group .autocomplete-dropdown-container {
+  color: black;
+  position: absolute;
+  top: 10em;
+  width: 99%;
+  border-radius: 1em;
 }
 
 i.angle.double.left.large.icon.back-icon {
@@ -149,11 +159,6 @@ i.angle.double.left.large.icon.back-icon {
 #want-to-go {
   margin-left: 13px;
   margin-right: 23px;
-}
-
-.autocomplete-dropdown-container {
-  position: absolute;
-  bottom: 3em;
 }
 
 .map-container {
@@ -756,10 +761,6 @@ input.location-search-input {
 
 .search-container {
   color: white;
- }
-
- .autocomplete-dropdown-container {
-   color: black;
  }
 
  #pin-options button {
