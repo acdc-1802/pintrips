@@ -45,7 +45,8 @@ class SingleBoard extends Component {
     newLabel: '',
     newNotes: '',
     openStatus: '',
-    editingMode: false
+    editingMode: false,
+    userLocation: null
   }
 
   componentDidMount() {
@@ -102,6 +103,18 @@ class SingleBoard extends Component {
       .catch(error => console.error('Unable to set state', error))
   }
 
+  componentDidUpdate({ _user }) {
+    if (this.props._user === _user) return
+    const user = this.props._user;
+    user &&
+      db.collection('users').doc(user.uid).get()
+        .then(doc => {
+          this.setState({
+            userLocation: [doc.data().currentCoordinates._long, doc.data().currentCoordinates._lat]
+          })
+        })
+  }
+
   switchStyle = event => {
     const boardId = this.props.match.params.boardId;
     this.setState({
@@ -125,15 +138,23 @@ class SingleBoard extends Component {
   _onClickMap(map, evt) {
     this.setState({
       newLocation: [evt.lngLat.lng, evt.lngLat.lat],
-      selectedPin: null
+      selectedPin: null,
+      newLabel: '',
+      newNotes: ''
     })
   }
 
   handleShowLabel = visited => {
     if (visited) {
-      this.setState({
-        needsTimestamp: true
-      })
+      if ((Math.abs(this.state.newLocation[0]) - Math.abs(this.state.userLocation[0])) + (Math.abs(this.state.newLocation[1]) - Math.abs(this.state.userLocation[1])) > .0075) {
+        if (window.confirm('We noticed you aren\'t here right now. Do you still want to journal it?')) {
+          this.setState({
+            needsTimestamp: true
+          })
+        } else {
+          return;
+        }
+      }
     }
     this.setState({
       showLabel: true
@@ -225,6 +246,18 @@ class SingleBoard extends Component {
       newLabel: '', 
       newNotes: ''
     })
+  }
+
+  pinCheck = pinId => {
+    if (!this.state.selectedPin.visited) {
+      if ((Math.abs(this.state.selectedPin.coords[0]) - Math.abs(this.state.userLocation[0])) + (Math.abs(this.state.selectedPin.coords[1]) - Math.abs(this.state.userLocation[1])) > .0075) {
+        if (window.confirm('We noticed you aren\'t here right now. Do you still want to journal it?')) {
+          this.toggleVisited(pinId);
+        } 
+        return;
+      }
+    } 
+    this.toggleVisited(pinId);
   }
 
   handlePinDelete = pinId => {
@@ -346,7 +379,7 @@ class SingleBoard extends Component {
                 <div id='pin-trash-btns'>
                 {
                   this.state.openStatus === 'open' &&
-                  <Icon name='thumb tack' size='large' fitted={true} onClick={() => (<Button onClick={this.toggleVisited(this.state.selectedPin.pinId)} />)} />
+                  <Icon name='thumb tack' size='large' fitted={true} onClick={() => (<Button onClick={this.pinCheck(this.state.selectedPin.pinId)} />)} />
                 }
                 {
                   this.state.openStatus === 'open' &&

@@ -1160,9 +1160,9 @@ h3.ui.header {
 }
 
 #add-user {
-  position: fixed;
-  margin-left: 180px;
-  margin-top: 32px;
+  display: flex;
+  justify-content: flex-end;
+  margin: auto 0 0 auto;
 }
 
 .board-search-bar {

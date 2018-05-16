@@ -70,8 +70,8 @@ class FriendsList extends Component {
                           <Header.Content id='friend-username'>
                             ({friend.username})
                           </Header.Content>
-                            <Icon id='add-user' color='grey' size='mini' name='add user' />
                         </Header>
+                        <Icon id='add-user' color='grey' name='add user' />
                       </Segment>)
                   }
                 </Grid.Column>
