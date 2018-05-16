@@ -398,39 +398,38 @@ class SingleBoard extends Component {
           }
         </Map>
         
-        <div className="footer">
-        
-        <Icon name= "angle double left" size="large" onClick={history.goBack}/>
-          
-        <Dropdown className="settings" icon="settings" upward >
-       
-          <Dropdown.Menu> 
-            <Button.Group basic vertical>
-              <Dropdown.Item> 
-                  <Button basic content= "Pintrips Style" onClick={this.switchStyle} id='basic' type='radio' name='rtoggle' value={pintripsStyle} />
-                </Dropdown.Item>
-                <Dropdown.Item>
-                  <Button basic content=' Moonlight' onClick={this.switchStyle} id='popArt' type='radio' name='rtoggle' value={moonLightStyle} />
-                </Dropdown.Item>
-                <Dropdown.Item>
-                  <Button basic content='Vintage' onClick={this.switchStyle} id='popArt' type='radio' name='rtoggle' value={vintageStyle} />
-                </Dropdown.Item>
-              </Button.Group>
-          </Dropdown.Menu> 
-        </Dropdown>
-      
-        <div className="in-footer">
-        
-              <LocationSearch 
-                value={this.state.title}
-                className="search-bar" 
-                forAddPin={true} 
-                updateBoardPins={this.selectPlaceFromSearchBar}>
-              <input placeholder="Search for places in  "/>
-              </LocationSearch>
-            </div> 
-          
+        <div id='back-btn'>
+          <Button circular icon='chevron left' color='grey' onClick={history.goBack}/>
         </div>
+          
+        <div id='footer'>
+          <Dropdown className="settings" icon="settings" upward >
+            <Dropdown.Menu> 
+              <Button.Group basic vertical>
+                <Dropdown.Item> 
+                    <Button basic content= "Pintrips Style" onClick={this.switchStyle} id='basic' type='radio' name='rtoggle' value={pintripsStyle} />
+                  </Dropdown.Item>
+                  <Dropdown.Item>
+                    <Button basic content=' Moonlight' onClick={this.switchStyle} id='popArt' type='radio' name='rtoggle' value={moonLightStyle} />
+                  </Dropdown.Item>
+                  <Dropdown.Item>
+                    <Button basic content='Vintage' onClick={this.switchStyle} id='popArt' type='radio' name='rtoggle' value={vintageStyle} />
+                  </Dropdown.Item>
+                </Button.Group>
+            </Dropdown.Menu> 
+          </Dropdown>
+        </div>
+      
+        <div id='map-search-bar'>
+          <LocationSearch 
+            value={this.state.title}
+            className="search-bar" 
+            forAddPin={true} 
+            updateBoardPins={this.selectPlaceFromSearchBar}>
+          <input placeholder="Search in "/>
+          </LocationSearch>
+        </div> 
+
       </div>
     )
   }
