@@ -21,7 +21,7 @@ body {
   margin-bottom: 5px;
   position: fixed;
   right: 12px;
-  top: 109px;
+  top: 106px;
 }
 
 #add-img-icon {
@@ -31,23 +31,33 @@ body {
   margin-left: 50px;
 }
 
-.autocomplete-dropdown-container {
+#map-search-bar .autocomplete-dropdown-container {
   color: black;
   position: absolute;
-  bottom: 3em;
+  top: 1.7em;
+  width: 69%;
+  border-radius: 1em;
+}
+
+.form-group .autocomplete-dropdown-container {
+  color: black;
+  position: absolute;
+  top: 10em;
+  width: 99%;
+  border-radius: 1em;
 }
 
 i.angle.double.left.large.icon.back-icon {
   margin-left: 12px;
 }
 
-  #banner-img {
-    display: flex;
-    z-index: -5;
-    position: fixed;
-    width: 100%;
-    height: 40%;
-  }
+#banner-img {
+  display: flex;
+  z-index: -5;
+  position: fixed;
+  width: 100%;
+  height: 40%;
+}
 
  .board-container {
   display: flex;
@@ -112,11 +122,6 @@ i.angle.double.left.large.icon.back-icon {
   text-align: left;
 }
 
-.footer .dropdown {
-  display: flex;
-  margin: .1em 1em 0 1em
-}
-
 .x-btn {
   font-size: 25px;
 }
@@ -154,11 +159,6 @@ i.angle.double.left.large.icon.back-icon {
 #want-to-go {
   margin-left: 13px;
   margin-right: 23px;
-}
-
-.autocomplete-dropdown-container {
-  position: absolute;
-  bottom: 3em;
 }
 
 .map-container {
@@ -217,18 +217,8 @@ i.angle.double.left.large.icon.back-icon {
 }
 
 .friend-img {
-  width: 75px;
-  height: 75px;
-}
-
-.footer {
-  position: fixed;
-  bottom: 0;
-  width: 100vw;
-  background-color: white;
-  display: flex;
-  padding: .7em;
-  z-index: 4;
+  width: 60px;
+  height: 60px;
 }
 
 .forms {
@@ -279,12 +269,14 @@ i.angle.double.left.large.icon.back-icon {
   font-family: 'Special Elite', cursive;
   font-size: 75%;
   margin-left: 5px;
+  color: #515151;
 }
 
 #friend-username {
   font-family: 'Special Elite', cursive;
   font-size: 65%;
   margin-left: 5px;
+  color: #515151;
 }
 
 #full-page {
@@ -294,12 +286,7 @@ i.angle.double.left.large.icon.back-icon {
 .homepage-container {
   display: flex;
   margin-top: 8em;
-}
-
-.in-footer {
-  display: flex;
-  width: 75vw;
-  margin: auto;
+  flex-direction: column;
 }
 
 .item#create-btn {
@@ -323,8 +310,9 @@ i.angle.double.left.large.icon.back-icon {
 }
 
 input.location-search-input {
-  width: 100%;
-  border-radius: 1em 1em;
+  width: 70%;
+  border-radius: 1em;
+  padding: 2px;
 }
 
 @keyframes typing {
@@ -350,18 +338,16 @@ input.location-search-input {
     font-size: 20px;
   }
 
-  #add-pin-options {
-    margin-top: 13px;
-  }
-
   #add-pin-options * {
-    border-radius: 3px;
-    margin: 1px;
+    border-radius: 1em;
+    padding: 3px;
+    margin-bottom: 0;
   }
 
   #edit-pin-options * {
-    border-radius: 3px;
-    margin: 1px;
+    border-radius: 1em;
+    padding: 3px;
+    margin-bottom: 0;
   }
 
   #notes-input {
@@ -401,6 +387,7 @@ input.location-search-input {
 .location-search {
   display: flex;
   width: 100%;
+  justify-content: center;
 }
 
 .login-container {
@@ -437,7 +424,8 @@ input.location-search-input {
   background-color: #bcbcbc;
   opacity: .9;
   font-family: 'Special Elite', cursive;
-  width: 170px;
+  box-shadow: 0 5px 5px rgba(0,0,0,0.10);
+  width: 190px;
   height: 190px;
 }
 
@@ -502,6 +490,7 @@ input.location-search-input {
 #profile-username {
   font-size: 100%;
   margin: auto;
+  color: #515151;
 }
 
 #friend-name {
@@ -773,16 +762,8 @@ input.location-search-input {
   width: 150px;
 }
 
-.search-bar {
-  border-radius: 1em 1em 1em 1em;
-}
-
 .search-container {
   color: white;
- }
-
- .autocomplete-dropdown-container {
-   color: black;
  }
 
  #pin-options button {
@@ -823,8 +804,8 @@ input.location-search-input {
  }
 
 .settings {
-  margin-top: 3px;
-  margin-left: 2px;
+  margin-top: 7px;
+  margin-left: 13px;
 }
 
  .sign-up {
@@ -1138,4 +1119,59 @@ input.location-search-input {
   display: flex;
   padding: 9px;
   width: 76vw;
+}
+#back-btn {
+  display: flex;
+  position: absolute;
+  top: 7.65em;
+  left: .5em;
+  z-index: 5;
+}
+
+.ui.grey.button, .ui.grey.buttons .button {
+  background-color: #fff;
+  color: black;
+}
+
+#settings-btn {
+  display: flex;
+  position: absolute;
+  bottom: 1em;
+  left: 1em;
+  z-index: 5;
+}
+
+#map-search-bar {
+  display: flex;
+  position: absolute;
+  top: 8em;
+  width: 100%;
+  justify-content: center;
+  z-index: 3;
+}
+
+#footer {
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  border-radius: .28571429rem;
+  background-color: #f9f9f9;
+  z-index: 3;
+  height: 2.2em;
+  box-shadow: -2px 2px 15px 1px rgba(179,179,179,1);
+}
+
+h3.ui.header {
+  margin-top: 7px;
+}
+
+#add-user {
+  position: fixed;
+  margin-left: 180px;
+  margin-top: 32px;
+}
+
+.board-search-bar {
+  margin-left: 30px;
 }
