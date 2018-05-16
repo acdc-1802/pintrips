@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import db from '../firestore';
-import { Grid, Segment, Image, Header, Icon } from 'semantic-ui-react';
+import { Grid, Segment, Image, Header, Icon, Popup, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { withAuth } from 'fireview';
 
@@ -9,8 +9,10 @@ class FriendsList extends Component {
     super(props);
     this.state = {
       friends: props.friends,
-      friendsInfo: []
+      friendsInfo: [],
+      friendAdded: false
     }
+    this.handleAddFriend = this.handleAddFriend.bind(this);
   }
   componentDidMount() {
     let friendsInfo = [];
@@ -30,6 +32,27 @@ class FriendsList extends Component {
           .then(() => this.setState({ friendsInfo }))
           .catch(error => console.error('Unable to get friends info', error))
     }
+  }
+  handleAddFriend(userId) {
+    let user = this.props._user;
+    user &&
+      db.collection('users').doc(user.uid).set({
+        friends: {
+          [userId]: true
+        }
+      }, { merge: true }
+      ).then(() => {
+        db.collection('users').doc(userId).set({
+          friends: {
+            [user.uid]: true
+          }
+        }, { merge: true })
+          .catch(error => console.error('Unable to add you as a friend', error))
+      })
+        .then(() => { this.setState({ friendAdded: true }) })
+        .then(() => { setTimeout(() => this.setState({ friendAdded: false }), 3000) })
+        .catch(error => console.error('Unable to add friend', error))
+
   }
   render() {
     return (
@@ -71,7 +94,28 @@ class FriendsList extends Component {
                             ({friend.username})
                           </Header.Content>
                         </Header>
-                        <Icon id='add-user' color='grey' name='add user' />
+                        <Popup
+                          trigger={
+                            <Icon id='add-user' color='grey' name='add user' />
+                          }
+                          content={
+                            <div>
+                              {
+                                !this.state.friendAdded ?
+                                  (
+                                    <div>
+                                      <p>Would you like to add {friend.first}?</p>
+                                      <Button onClick={() => (<Button onClick={this.handleAddFriend(friend.id)} />)}>Add</Button>
+                                    </div>
+                                  )
+                                  :
+                                  <p>You and {friend.first} are now friends!</p>
+                              }
+                            </div>
+                          }
+                          position='bottom center'
+                          on='click' />
+
                       </Segment>)
                   }
                 </Grid.Column>
