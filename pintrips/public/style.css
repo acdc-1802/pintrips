@@ -19,7 +19,7 @@ body {
 
  #add-user-icon {
   margin-bottom: 5px;
-  position: fixed;
+  position: absolute;
   right: 12px;
   top: 106px;
 }
@@ -64,11 +64,6 @@ i.angle.double.left.large.icon.back-icon {
   flex-direction: column;
   flex-wrap: wrap;
  }
-
-.board-container .mapboxgl-map {
-  position: absolute;
-  top: 7.5em;
-}
 
  .card-group {
   display: flex;
@@ -162,7 +157,6 @@ i.angle.double.left.large.icon.back-icon {
 }
 
 .map-container {
-  position: fixed;
   width: 100vw;
   height: 90vh;
 }
@@ -313,6 +307,7 @@ input.location-search-input {
   width: 70%;
   border-radius: 1em;
   padding: 2px;
+  z-index: 2;
 }
 
 @keyframes typing {
@@ -436,12 +431,12 @@ input.location-search-input {
 
 #mapcard-world {
   width: 100vw;
-  padding:5px;
+  padding: 5px;
 }
 
 #mapcard-closed {
   width: auto;
-  opacity: .45;
+  opacity: .7;
 }
 
 #menu {
@@ -464,7 +459,7 @@ input.location-search-input {
 }
 
 .board-container .mapboxgl-map {
-  position: fixed;
+  position: absolute;
   top: 7.5em;
 }
 
@@ -488,9 +483,9 @@ input.location-search-input {
 }
 
 #profile-username {
-  font-size: 100%;
   margin: auto;
   color: #515151;
+  font-family: 'Special Elite', cursive;
 }
 
 #friend-name {
@@ -525,9 +520,9 @@ input.location-search-input {
 }
 
 #profile-email {
-  font-size: 100%;
   margin: auto;
   color: #515151;
+  font-family: 'Special Elite', cursive;
 }
 
 .navbar {
@@ -554,6 +549,7 @@ input.location-search-input {
 }
 
 .no-friends-msg {
+  font-family: 'Special Elite', cursive;
   margin: 20px;
 }
 
@@ -1126,10 +1122,10 @@ input.location-search-input {
 
 #back-btn {
   display: flex;
-  position: absolute;
+  position: fixed;
   top: 7.65em;
   left: .5em;
-  z-index: 5;
+  z-index: 2;
 }
 
 .ui.grey.button, .ui.grey.buttons .button {
@@ -1147,11 +1143,10 @@ input.location-search-input {
 
 #map-search-bar {
   display: flex;
-  position: absolute;
+  position: fixed;
   top: 8em;
   width: 100%;
   justify-content: center;
-  z-index: 3;
 }
 
 #footer {
@@ -1178,4 +1173,28 @@ h3.ui.header {
 
 .board-search-bar {
   margin-left: 30px;
+}
+
+#mapcard-world .mapboxgl-map .mapboxgl-popup-content {
+  padding: 0;
+  width: 150px;
+}
+
+#mapcard-world .mapboxgl-map .mapboxgl-popup-content .options-container {
+  height: 21px;
+}
+
+.center-message h3 {
+  font-family: 'Special Elite', cursive;
+  color: #515151;
+}
+.center-message img {
+  height: 150px;
+}
+.center-message {
+  width: 100%;
+  text-align: center;
+  height: 50vh;
+  position: absolute;
+  top: 7.5em;
 }

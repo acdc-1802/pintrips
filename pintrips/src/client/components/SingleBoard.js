@@ -109,6 +109,7 @@ class SingleBoard extends Component {
     user &&
       db.collection('users').doc(user.uid).get()
         .then(doc => {
+          doc.data().currentCoordinates &&
           this.setState({
             userLocation: [doc.data().currentCoordinates._long, doc.data().currentCoordinates._lat]
           })
@@ -146,14 +147,20 @@ class SingleBoard extends Component {
 
   handleShowLabel = visited => {
     if (visited) {
-      if ((Math.abs(this.state.newLocation[0]) - Math.abs(this.state.userLocation[0])) + (Math.abs(this.state.newLocation[1]) - Math.abs(this.state.userLocation[1])) > .0075) {
-        if (window.confirm('We noticed you aren\'t here right now. Do you still want to journal it?')) {
-          this.setState({
-            needsTimestamp: true
-          })
-        } else {
-          return;
+      if (this.state.userLocation) {
+        if ((Math.abs(this.state.newLocation[0]) - Math.abs(this.state.userLocation[0])) + (Math.abs(this.state.newLocation[1]) - Math.abs(this.state.userLocation[1])) > .0075) {
+          if (window.confirm('We noticed you aren\'t here right now. Do you still want to journal it?')) {
+            this.setState({
+              needsTimestamp: true
+            })
+          } else {
+            return;
+          }
         }
+      } else {
+        this.setState({
+          needsTimestamp: true
+        })
       }
     }
     this.setState({
@@ -250,11 +257,13 @@ class SingleBoard extends Component {
 
   pinCheck = pinId => {
     if (!this.state.selectedPin.visited) {
-      if ((Math.abs(this.state.selectedPin.coords[0]) - Math.abs(this.state.userLocation[0])) + (Math.abs(this.state.selectedPin.coords[1]) - Math.abs(this.state.userLocation[1])) > .0075) {
-        if (window.confirm('We noticed you aren\'t here right now. Do you still want to journal it?')) {
-          this.toggleVisited(pinId);
+      if (this.state.userLocation) {
+        if ((Math.abs(this.state.selectedPin.coords[0]) - Math.abs(this.state.userLocation[0])) + (Math.abs(this.state.selectedPin.coords[1]) - Math.abs(this.state.userLocation[1])) > .0075) {
+          if (window.confirm('We noticed you aren\'t here right now. Do you still want to journal it?')) {
+            this.toggleVisited(pinId);
+          }
+          return;
         }
-        return;
       }
     }
     this.toggleVisited(pinId);
@@ -319,7 +328,7 @@ class SingleBoard extends Component {
           <Layer
             type='symbol'
             id='hollowPins'
-            layout={{ 'icon-image': 'hollowImage' }}
+            layout={{ 'icon-image': 'hollowImage', 'icon-allow-overlap': true }}
             images={hollowPins}>
             {this.state.unvisitedPins &&
               this.state.unvisitedPins.map(pin => {
@@ -344,7 +353,7 @@ class SingleBoard extends Component {
               offset={50}
             >
               <div className='options-container'>
-                <button onClick={() => this.setState({ selectedPin: null, zoom: [12.5], newLocation: null, editingMode: false })} className='x-btn' id='close-popup'>x</button>
+                <button onClick={() => this.setState({ selectedPin: null, newLocation: null, editingMode: false })} className='x-btn' id='close-popup'>x</button>
                 {
                   this.state.openStatus === 'open' &&
                   <Icon id='edit-btn' name='edit' size='large' fitted={true} onClick={() => (<Button onClick={this.toggleEditingMode()} />)} />
@@ -398,7 +407,7 @@ class SingleBoard extends Component {
                   <Popup
                     coordinates={this.state.newLocation}
                   >
-                    <button onClick={() => this.setState({ selectedPin: null, zoom: [12.5], newLocation: null })} className='x-btn' id='close-popup-add-pin'>x</button>
+                    <button onClick={() => this.setState({ selectedPin: null, newLocation: null })} className='x-btn' id='close-popup-add-pin'>x</button>
                     <div id='pin-options'>
                       <p>Want to put a pin in it?</p>
                       <button onClick={() => this.handleShowLabel(false)}><img alt='hollow-pin' src='/attributes/hollowPinOption.png' /></button>
