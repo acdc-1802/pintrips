@@ -81,9 +81,7 @@ export class PostCard extends Component {
       {
         this.state.currentCoordinates.length
         ? <div>
-            <div>
               <PostCardStamp currentCoord={this.state.currentCoordinates}/>
-            </div>
             <div className="postcard-message-body">
               <form className="postcard-message-form" onSubmit={this.handleSubmit}>
                 <div className="field">

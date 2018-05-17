@@ -71,9 +71,10 @@ class AddNewBoard extends Component {
                 <input type="text" placeholder="Board Name" size="25" value={this.state.name} onChange={this.onTitleChange} />
             </label>
             <div className="form-group">
-              <LocationSearch updateCoordinates={this.submitCoordinates} />
+              <LocationSearch updateCoordinates={this.submitCoordinates}
+              />
             </div>
-            <Form.Button type='submit' className="form-group">Add New Board</Form.Button>
+            <Form.Button type='submit' id="signup-button">Add New Board</Form.Button>
           </div>
         </Form>
       </div>

@@ -45,7 +45,8 @@ class SingleBoard extends Component {
     newLabel: '',
     newNotes: '',
     openStatus: '',
-    editingMode: false
+    editingMode: false,
+    userLocation: null
   }
 
   componentDidMount() {
@@ -102,6 +103,18 @@ class SingleBoard extends Component {
       .catch(error => console.error('Unable to set state', error))
   }
 
+  componentDidUpdate({ _user }) {
+    if (this.props._user === _user) return
+    const user = this.props._user;
+    user &&
+      db.collection('users').doc(user.uid).get()
+        .then(doc => {
+          this.setState({
+            userLocation: [doc.data().currentCoordinates._long, doc.data().currentCoordinates._lat]
+          })
+        })
+  }
+
   switchStyle = event => {
     const boardId = this.props.match.params.boardId;
     this.setState({
@@ -125,15 +138,23 @@ class SingleBoard extends Component {
   _onClickMap(map, evt) {
     this.setState({
       newLocation: [evt.lngLat.lng, evt.lngLat.lat],
-      selectedPin: null
+      selectedPin: null,
+      newLabel: '',
+      newNotes: ''
     })
   }
 
   handleShowLabel = visited => {
     if (visited) {
-      this.setState({
-        needsTimestamp: true
-      })
+      if ((Math.abs(this.state.newLocation[0]) - Math.abs(this.state.userLocation[0])) + (Math.abs(this.state.newLocation[1]) - Math.abs(this.state.userLocation[1])) > .0075) {
+        if (window.confirm('We noticed you aren\'t here right now. Do you still want to journal it?')) {
+          this.setState({
+            needsTimestamp: true
+          })
+        } else {
+          return;
+        }
+      }
     }
     this.setState({
       showLabel: true
@@ -188,7 +209,7 @@ class SingleBoard extends Component {
     )
     .then(() => this.setState({ newLabel: '', newNotes: '', showLabel: null, editingMode: false, selectedPin: null }))
     // why why why why why doesn't it re-render with new info
-    // right now just setting selected pin to null 
+    // right now just setting selected pin to null
     .catch(err => console.error('Unable to change label', err))
   }
 
@@ -220,11 +241,23 @@ class SingleBoard extends Component {
     }
     this.setState({
       selectedPin: null,
-      zoom: [12.3], 
-      editingMode: false, 
-      newLabel: '', 
+      zoom: [12.3],
+      editingMode: false,
+      newLabel: '',
       newNotes: ''
     })
+  }
+
+  pinCheck = pinId => {
+    if (!this.state.selectedPin.visited) {
+      if ((Math.abs(this.state.selectedPin.coords[0]) - Math.abs(this.state.userLocation[0])) + (Math.abs(this.state.selectedPin.coords[1]) - Math.abs(this.state.userLocation[1])) > .0075) {
+        if (window.confirm('We noticed you aren\'t here right now. Do you still want to journal it?')) {
+          this.toggleVisited(pinId);
+        }
+        return;
+      }
+    }
+    this.toggleVisited(pinId);
   }
 
   handlePinDelete = pinId => {
@@ -240,7 +273,7 @@ class SingleBoard extends Component {
   }
 
   render() {
-    
+
     return (
       <div className='board-container'>
         <Map
@@ -303,7 +336,7 @@ class SingleBoard extends Component {
           </Layer>
           {
             this.state.selectedPin && !this.state.editingMode &&
-            // popup for existing pin label and notes 
+            // popup for existing pin label and notes
             <Popup
               className='popup-label'
               key={this.state.selectedPin.label}
@@ -346,7 +379,7 @@ class SingleBoard extends Component {
                 <div id='pin-trash-btns'>
                 {
                   this.state.openStatus === 'open' &&
-                  <Icon name='thumb tack' size='large' fitted={true} onClick={() => (<Button onClick={this.toggleVisited(this.state.selectedPin.pinId)} />)} />
+                  <Icon name='thumb tack' size='large' fitted={true} onClick={() => (<Button onClick={this.pinCheck(this.state.selectedPin.pinId)} />)} />
                 }
                 {
                   this.state.openStatus === 'open' &&
@@ -397,40 +430,39 @@ class SingleBoard extends Component {
             )
           }
         </Map>
-        
-        <div className="footer">
-        
-        <Icon name= "angle double left" size="large" onClick={history.goBack}/>
-          
-        <Dropdown className="settings" icon="settings" upward >
-       
-          <Dropdown.Menu> 
-            <Button.Group basic vertical>
-              <Dropdown.Item> 
-                  <Button basic content= "Pintrips Style" onClick={this.switchStyle} id='basic' type='radio' name='rtoggle' value={pintripsStyle} />
-                </Dropdown.Item>
-                <Dropdown.Item>
-                  <Button basic content=' Moonlight' onClick={this.switchStyle} id='popArt' type='radio' name='rtoggle' value={moonLightStyle} />
-                </Dropdown.Item>
-                <Dropdown.Item>
-                  <Button basic content='Vintage' onClick={this.switchStyle} id='popArt' type='radio' name='rtoggle' value={vintageStyle} />
-                </Dropdown.Item>
-              </Button.Group>
-          </Dropdown.Menu> 
-        </Dropdown>
-      
-        <div className="in-footer">
-        
-              <LocationSearch 
-                value={this.state.title}
-                className="search-bar" 
-                forAddPin={true} 
-                updateBoardPins={this.selectPlaceFromSearchBar}>
-              <input placeholder="Search for places in  "/>
-              </LocationSearch>
-            </div> 
-          
+
+        <div id='back-btn'>
+          <Button circular icon='chevron left' color='grey' onClick={history.goBack}/>
         </div>
+
+        <div id='footer'>
+          <Dropdown className="settings" icon="settings" upward >
+            <Dropdown.Menu>
+              <Button.Group basic vertical>
+                <Dropdown.Item>
+                    <Button basic content= "Pintrips Style" onClick={this.switchStyle} id='basic' type='radio' name='rtoggle' value={pintripsStyle} />
+                  </Dropdown.Item>
+                  <Dropdown.Item>
+                    <Button basic content=' Moonlight' onClick={this.switchStyle} id='popArt' type='radio' name='rtoggle' value={moonLightStyle} />
+                  </Dropdown.Item>
+                  <Dropdown.Item>
+                    <Button basic content='Vintage' onClick={this.switchStyle} id='popArt' type='radio' name='rtoggle' value={vintageStyle} />
+                  </Dropdown.Item>
+                </Button.Group>
+            </Dropdown.Menu>
+          </Dropdown>
+        </div>
+
+        <div id='map-search-bar'>
+          <LocationSearch
+            value={this.state.title}
+            className="search-bar"
+            forAddPin={true}
+            updateBoardPins={this.selectPlaceFromSearchBar}>
+          <input placeholder="Search in "/>
+          </LocationSearch>
+        </div>
+
       </div>
     )
   }
