@@ -18,4 +18,4 @@ ReactDOM.render(
   document.getElementById('root'))
 
 //don't turn on until deployment
-registerServiceWorker();
+// registerServiceWorker();
