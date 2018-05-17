@@ -17,17 +17,17 @@ class PostCardReceived extends Component {
       sender: '',
       message: '',
       date: null,
-      cardIsFront: true
+      cardIsFront: true,
+      boardId: ''
     }
     this.rotate = this.rotate.bind(this)
   }
 
   componentDidMount() {
-    const user = this.props._auth.currentUser.email;
     const self = this;
     const postcardId = this.props.match.params.postcardId;
     const postcard = db.collection('postcards')
-    user && postcard.doc(postcardId)
+    postcard.doc(postcardId)
     .get()
     .then((doc) => {
       self.setState({
@@ -35,7 +35,8 @@ class PostCardReceived extends Component {
         receiver: doc.data().receiver,
         sender: doc.data().sender,
         message: doc.data().message,
-        date: doc.data().dateSent
+        date: doc.data().dateSent,
+        boardId: doc.data().boardId
       })
     })
     .catch(function(error) {
@@ -76,7 +77,7 @@ class PostCardReceived extends Component {
           <div className='postcard-container'>
             <div className="postcard-front"
               style={{ display: this.state.cardIsFront ? 'block' : 'none'}}>
-              <PostCardMap currentCoord={this.state.currentCoordinates}/>
+              <PostCardMap currentCoord={this.state.currentCoordinates} boardId={this.state.boardId}/>
               <PostCardTypeText currentCoord={this.state.currentCoordinates}/>
             </div>
 
