@@ -81,7 +81,7 @@ export class PostCard extends Component {
   render() {
 
     if (!this.state.currentCoordinates.length)
-      return <div className="login-container">loading...</div>
+      return <div className="login-container"> Loading...</div>
     return (
       <div className="login-container">
         <div className='postcard-container'>
@@ -96,7 +96,7 @@ export class PostCard extends Component {
           </div>
         </div>
         <div className="postcard-flip-button">
-          <Button onClick={this.rotate} compact basic color='orange' size="mini">View Other Side</Button>
+          <Button onClick={this.rotate} compact basic color='red' size="mini">View Other Side</Button>
         </div>
         </div>
     )
