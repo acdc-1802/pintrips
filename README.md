@@ -1,37 +1,27 @@
 [![Waffle.io - Columns and their card count](https://badge.waffle.io/acdc-1802/pintrips.png?columns=all)](https://waffle.io/acdc-1802/pintrips?utm_source=badge)
-## PINTRIPS ##
 
-# Milestones
+### Pintrips ###
 
-User Trip Planning Phase:
+Create a board, add collaborators, and start pinning your next trip! 
 
-I. Render a map that you can pin with places you want to go to (travel dream board) 
-Yarn, weaving experience places, snapshots, memorable 
-Dreamcatcher 
-Tapestry of voyage
+![alt text](https://raw.githubusercontent.com/acdc-1802/pintrips/master/public/attributes/PintripsApp.png)
 
-  "Open a new board" which is  a map
-  Board is based on location, yarn visualizes the time between experiences on the board
+Pintrips is a progressive web app that allows users to plan for and journal trips by dropping custom pins to mark places they would like to go and places that they've been on individual 'place boards'. These boards, rendered with a React binding of MapboxGl, are shareable and can have multiple collaborators and styles. The real-time collaboration is possible because of the use of Google's Cloud Firestore, which allows board components to listen for any changes and automatically update when they happen. The app also uses service workers to give offline functionality to users while traveling so they can journal even in remote locations. At any point in the trip, users can send their pinned and styled boards as an online postcard that uses app geolocation and GreenSock animation to stamp and send to family and friends!
 
-  Create multiple boards and can go into a dream board
-  User can pick themes with a set color scheme (constellation map? modern print map? historical map?)
-  User create's their own categories
+# Features #
 
-II. Be able to place pins on what you want to do
+- Create an account and add friends
 
-III. Share this map with friends that can invite to edit so that pin can be added in real-time ****
-could each user have their own theme even though they're working on the same map board
+- Create, name, and start adding pins to your board
+
+- Once visited 
+
+- Add collaborators to your board
+
+- Add and edit custom labels and notes on individual pins 
+
+- Choose from a number of map styles
+
+# In Progress #
 
 
-User Actual Trip Phase:
-
-IV. During the trip app need to be opened to track location.
-If user/users get to a pre-determined pin spot pin can be "fullfilled"  "You fulfilled your dream pin!"
-A yarn line is started at the first pin fill (which is the timeline) A date stamp is started
-As more pins are fulfilled, yarn is a visualization of where you were from pin to pin
-Ends when user closes the board.
-They have options to clear the empty (unfulfilled pins) / Save as a new board "future jaunt" / Just keep as is
-
-  two words that characterize everything we do: Empathy & Innovation. 
-
-V. Save this board as a snapshot to be shared

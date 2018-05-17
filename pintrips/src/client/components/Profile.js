@@ -19,15 +19,15 @@ class Profile extends Component {
   }
   componentDidUpdate({ _user }) {
     if (this.props._user === _user) return
-    const user = this.props._user;
-
+    let user = this.props.match.params.id || (this.props._user && this.props._user.uid) 
     user &&
-      db.collection('users').doc(user.uid).get()
+      db.collection('users').doc(user).get()
         .then(user => this.setState({ userId: user.data().id, profileImg: user.data().profileImg, first: user.data().first, last: user.data().last, email: user.data().email, username: user.data().username, bannerImg: user.data().bannerImg }))
         .then(() => this.setState({ loading: false }))
         .catch(error => console.error('unable to get user info', error))
   }
   render() {
+    let user = this.props.match.params.id || (this.props._user && this.props._user.uid) 
     return (
       <div className='profile-page'>
         <div className='profile-container'>
@@ -47,8 +47,8 @@ class Profile extends Component {
         </div>
         <div className='map-container'>
           {
-            this.props._user &&
-            <WorldMap userId={this.props._user.uid} owner={true} />
+            user &&
+            <WorldMap userId={user} owner={true} />
           }
         </div>
       </div>
