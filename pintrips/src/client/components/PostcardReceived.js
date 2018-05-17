@@ -30,6 +30,7 @@ class PostCardReceived extends Component {
     postcard.doc(postcardId)
     .get()
     .then((doc) => {
+      console.log('data values', doc.data().dateSent)
       self.setState({
         currentCoordinates: [doc.data().messageCoordinates._lat, doc.data().messageCoordinates._long],
         receiver: doc.data().receiver,
@@ -69,6 +70,7 @@ class PostCardReceived extends Component {
   }
 
   render() {
+
     if (!this.state.currentCoordinates.length)
       return <div className="login-container">loading...</div>
 

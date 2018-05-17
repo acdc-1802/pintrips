@@ -13,7 +13,7 @@ export class PostCardStamp extends Component {
 
   componentWillMount() {
     if (this.props.dateSent) {
-      this.setState({ date: this.props.dateSent.toString().slice(0,16)})
+      this.setState({ date: this.props.dateSent.slice(0,16)})
     } else {
       this.setState({ date: new Date().toLocaleString().slice(0,9)})
     }

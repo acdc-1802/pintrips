@@ -870,7 +870,7 @@ input.location-search-input {
 
  .stamp-logo {
   position: relative;
-  top: -9em;
+  top: -8em;
   right: -32em;
   width: 40vw;
   display: flex;
@@ -879,6 +879,11 @@ input.location-search-input {
   }
 
 .stamp {
+  height: 7em;
+  width: 8em;
+  position: relative;
+  top: 3em;
+  right: -2em;
   z-index:1;
   font-family: Arial,sans-serif;
   -webkit-transform: rotate(20deg);
@@ -886,10 +891,10 @@ input.location-search-input {
   -ms-transform: rotate(20deg);
   -o-transform: rotate(20deg);
   transform: rotate(20deg);
-  font-size:1.6em;
+  font-size:1.2em;
   color: #F7BAB7;
-  /* border:solid 4px #F7BAB7; */
-  padding:1.4em;
+  border:solid 4px #F7BAB7;
+  /* padding:1.4em; */
   border-radius:50%;
   zoom:1;
   filter:alpha(opacity=20);
@@ -906,6 +911,9 @@ input.location-search-input {
   opacity: 0;
   -webkit-animation-fill-mode:forwards;
   animation-fill-mode:forwards;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
  .title {
@@ -1178,4 +1186,28 @@ h3.ui.header {
 
 .board-search-bar {
   margin-left: 30px;
+}
+
+#mapcard-world .mapboxgl-map .mapboxgl-popup-content {
+  padding: 0;
+  width: 150px;
+}
+
+#mapcard-world .mapboxgl-map .mapboxgl-popup-content .options-container {
+  height: 21px;
+}
+
+.center-message h3 {
+  font-family: 'Special Elite', cursive;
+  color: #515151;
+}
+.center-message img {
+  height: 150px;
+}
+.center-message {
+  width: 100%;
+  text-align: center;
+  height: 50vh;
+  position: absolute;
+  top: 7.5em;
 }
