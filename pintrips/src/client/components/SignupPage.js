@@ -5,7 +5,6 @@ import firebase from 'firebase';
 import db from '../firestore';
 import history from '../../history';
 
-const emailProvider = new firebase.auth.EmailAuthProvider()
 
 class SignupPage extends Component {
 
@@ -15,7 +14,7 @@ class SignupPage extends Component {
     last: '',
     email: '',
     password: '',
-    profileImg: 'https://fsmedia.imgix.net/66/36/85/56/af88/443a/a581/8952697f0fb1/morty-just-cant-hang-with-all-that-truth-tortoise-shit-stuck-in-his-head.jpeg',
+    profileImg: 'https://static1.squarespace.com/static/586c76466b8f5b6deb3d6942/58a33603f7e0abdf636c3434/58a33619cd0f68039a5f5d6f/1525807659422/grace.png?format=750w',
     error: false
   };
 
@@ -49,7 +48,7 @@ class SignupPage extends Component {
       })
       .then(newUserDoc => (history.push("/HomePage")))
       .catch(error => {
-        this.setState({error: true})
+        this.setState({ error: true })
         console.log(error)
       })
   }
@@ -57,89 +56,62 @@ class SignupPage extends Component {
     return (
       <div className="signup-container">
         <Form onSubmit={this.handleSignup} error>
-          <div className='login-container'>
-            <h3> Create An Account </h3>
-            <div className="form-group">
-              <label className="col-md-2 control-label"> Username </label>
-              <div className="col-md-10">
-                <input
-                  placeholder='Username'
-                  className="form-control"
-                  name='username'
-                  type='text'
-                  defaultValue={this.state.username}
-                  onChange={this.handleChange}
-                />
-              </div>
-            </div>
-            <div className="form-group">
-
-              <label className="control-label"> First Name   </label>
-              <div className="col-md-20">
-                <input
-                  placeholder='First Name'
-                  className="form-control"
-                  name='first'
-                  type='text'
-                  defaultValue={this.state.first}
-                  onChange={this.handleChange}
-                />
-              </div>
-            </div>
-            <div className="form-group">
-              <label className="control-label"> Last Name</label>
-              <div className="col-md-10">
-                <input
-                  placeholder='Last Name'
-                  className="form-control"
-                  name='last'
-                  type='text'
-                  defaultValue={this.state.last}
-                  onChange={this.handleChange}
-                />
-              </div>
-            </div>
-            <div className="form-group">
-              <label className="col-md-2 control-label"> Email </label>
-              <div className="col-md-10">
-                <input
-                  placeholder='Email'
-                  className="form-control"
-                  name='email'
-                  type='text'
-                  defaultValue={this.state.email}
-                  onChange={this.handleChange}
-                />
-              </div>
-            </div>
-            <div className="form-group">
-              <label className="col-md-2 control-label"> Password </label>
-              <div className="col-md-10">
-                <input
-                  placeholder='Minimum 6 Characters'
-                  className="form-control"
-                  name='password'
-                  type='password'
-                  defaultValue={this.state.password}
-                  onChange={this.handleChange}
-                />
-              </div>
-            </div>
+          <h3> Create An Account </h3>
+          <div className='forms'>
+            <Form.Input stackable='true'
+              fluid label='Username'
+              placeholder='Username'
+              className='form-control'
+              name='username'
+              type='text'
+              onChange={this.handleChange}
+            />
+            <Form.Input stackable='true'
+              fluid label='First Name'
+              placeholder='First Name'
+              className='form-control'
+              name='first'
+              type='text'
+              onChange={this.handleChange}
+            />
+            <Form.Input stackable='true'
+              fluid label='Last Name'
+              placeholder='Last Name'
+              className='form-control'
+              name='last'
+              type='text'
+              onChange={this.handleChange}
+            />
+            <Form.Input stackable='true'
+              fluid label='Email'
+              placeholder='Email'
+              className='form-control'
+              name='email'
+              type='text'
+              onChange={this.handleChange}
+            />
+            <Form.Input stackable='true'
+              fluid label='Password'
+              placeholder='Password'
+              className='form-control'
+              name='password'
+              type='password'
+              onChange={this.handleChange}
+            />
             {
               this.state.error &&
               <Message
-                  error
-                  header='Uh-oh Signup Unsuccessful!'
-                />
-            }
-            {
-              this.state.password < 6 ?
-              <Form.Button disabled type="submit" className="form-group">Sign Up</Form.Button>
-              :
-              <Form.Button active type="submit" className="form-group">Sign Up</Form.Button>
-
+                error
+                header='Uh-oh Signup Unsuccessful!'
+              />
             }
           </div>
+          {
+            this.state.password.length < 6 ?
+              <Form.Button disabled type="submit" id='signup-button'>Sign Up</Form.Button>
+              :
+              <Form.Button active type="submit" id='signup-button'>Sign Up</Form.Button>
+          }
         </Form>
         <br />
         <Link to={'/LoginPage'}>

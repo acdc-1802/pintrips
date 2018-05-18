@@ -14,3 +14,4 @@ export { default as PostcardReceived } from './PostcardReceived';
 export { default as Profile } from './Profile';
 export { default as Friends } from './Friends';
 export { default as WelcomePage } from './WelcomePage';
+export { default as AddFriend } from './AddFriend';

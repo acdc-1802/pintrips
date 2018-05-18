@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import firebase from 'firebase'
 import db from '../firestore';
-import { Map, withAuth } from 'fireview';
+import { withAuth } from 'fireview';
 import { Button } from 'semantic-ui-react';
 import PostCardStamp from './PostCardStamp';
 import history from '../../history';
+import * as emailjs from 'emailjs-com';
 
 require('firebase/firestore');
 
@@ -15,7 +16,8 @@ export class PostCard extends Component {
       currentCoordinates: [],
       receiverEmail: '',
       postCardBody: '',
-      senderEmail: ''
+      senderEmail: '',
+      postcardId: null
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -27,7 +29,6 @@ export class PostCard extends Component {
       currentCoordinates: this.props.currentCoord,
       senderEmail: this.props.withAuth.auth.currentUser.email
     })
-
   }
 
   handleChange(e) {
@@ -38,7 +39,6 @@ export class PostCard extends Component {
 
   handleSubmit(e, userEmail) {
     e.preventDefault();
-    // fetch('https://api:key-95837e680b6d16f52f990b2f991bd651@api.mailgun.net/v3/sandboxbbf6fecad8ad4b16b09b4853fc669703.mailgun.org')
 
     const postcards = db.collection('postcards')
     postcards.add({
@@ -49,7 +49,17 @@ export class PostCard extends Component {
       receiver: this.state.receiverEmail,
       sender: this.state.senderEmail
     })
-    .then(function() {
+    .then(created => {
+      this.setState({ postcardId: created.id})
+      const templateParams = { to_name: this.state.receiverEmail, from_name: this.state.senderEmail, postcard_id: this.state.postcardId }
+      emailjs.send('default_service', 'pintrips_postcard', templateParams, 'user_y9Gpr6VKiWp0BpC5djRDe')
+        .then(function(response) {
+          console.log('SUCCESS!', response.status, response.text);
+        }, function(err) {
+            console.log('FAILED...', err);
+        });
+    })
+    .then(res => {
       history.push('/postcard_sent')
     })
     .catch(function(error) {
@@ -71,9 +81,7 @@ export class PostCard extends Component {
       {
         this.state.currentCoordinates.length
         ? <div>
-            <div>
               <PostCardStamp currentCoord={this.state.currentCoordinates}/>
-            </div>
             <div className="postcard-message-body">
               <form className="postcard-message-form" onSubmit={this.handleSubmit}>
                 <div className="field">

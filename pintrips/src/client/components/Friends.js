@@ -1,24 +1,32 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Map, withAuth } from 'fireview';
 import db from '../firestore';
-import { Header, Icon, Grid, Segment, Image } from 'semantic-ui-react';
+import { Header, Icon } from 'semantic-ui-react';
 import FriendsList from './FriendsList';
+import { Link } from 'react-router-dom';
 
 const Friends = (props) => {
 
   const user = props._user;
   return (
     <div className='friends-container'>
-      <div className='header-container'>
-        <Header as='h3'>
-          <Icon name='users' id='users-icon' />
-          <Header.Content id='profile-username'>
-            Friends
-            </Header.Content>
-            <Icon name='add user' id='add-user-icon' />
-        </Header>
-
-      </div>
+      {
+        user && 
+        <div className='header-container'>
+          <Header as='h3'>
+            <Link to={`/Friends/${user.uid}`}>
+              <Icon name='users' color='grey' id='users-icon' size='large' />
+              <Header.Content id='profile-username'>
+                Friends
+              </Header.Content>
+            </Link>
+            <Link to='/AddFriend'>
+              <Icon name='add user' color='grey' size='large' id='add-user-icon' />
+            </Link>
+          </Header>
+  
+        </div>
+      }
       {
         user &&
         <Map

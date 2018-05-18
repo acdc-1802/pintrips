@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import { Button, Card, Icon, Checkbox, Segment, Label, Dropdown } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import { Card } from 'semantic-ui-react';
 import db from '../firestore';
-import history from '../../history';
-import ReactMapboxGl, { Popup, Layer, Feature, ZoomControl } from "react-mapbox-gl";
+import ReactMapboxGl, { Layer, Feature, ZoomControl } from "react-mapbox-gl";
 
 const Map = ReactMapboxGl({
   accessToken: 'pk.eyJ1IjoiZGVzdGlubWNtdXJycnkiLCJhIjoiY2plenRxaGw3MGdsNTJ3b2htMGRydWc3aiJ9.ycslnjgv2J9VZGZHT8EoIw'
@@ -26,7 +24,8 @@ class WorldMap extends Component {
       zoom: [0],
       pins: [],
       selectedPin: null,
-      yarnCoords: []
+      yarnCoords: [],
+      style: 'mapbox://styles/destinmcmurrry/cjgy8hinv00192rp4obrfj9qq'
     }
   }
 
@@ -46,9 +45,32 @@ class WorldMap extends Component {
               })
             }
           }))
-          .then(() => this.setState({ pins, yarnCoords: pins.map(pin => pin.coords) }))
           .catch(error => console.error('Unable to get pins', error))
       }))
+      .then(() => {
+        db.collection('boards').get()
+          .then(snapshot => snapshot.forEach(doc => {
+            if(doc.data().writers) {
+              if (doc.data().writers[this.props.userId]){
+                db.collection('boards').doc(doc.id).collection('pins').get()
+                .then(allPins => allPins.forEach(doc => {
+                  if (doc.data().visited) {
+                    pins.push({
+                      label: doc.data().label,
+                        coords: [doc.data().coordinates._long, doc.data().coordinates._lat],
+                        pinId: doc.id,
+                        visited: doc.data().visited
+                    })
+                  }
+                }))
+                .then(() => this.setState({ pins, yarnCoords: pins.map(pin => pin.coords) }))
+                .catch(error => console.log('unable to add shared pins', error))
+              }
+            }
+          }))
+          .catch(error => console.error('Unable to get pins from shared boards', error))
+      })
+      .catch(error => console.error('Unable to get pins', error))
   }
   handlePinClick = pin => {
     this.setState({
@@ -63,7 +85,7 @@ class WorldMap extends Component {
       <div className='ind-card' id='profile-board'>
         <Card id='mapcard-world'>
           <Map
-            style={'mapbox://styles/destinmcmurrry/cjgy8hinv00192rp4obrfj9qq'}
+            style={this.state.style}
             zoom={this.state.zoom}
             containerStyle={{
               height: "100%",
