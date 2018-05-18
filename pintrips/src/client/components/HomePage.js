@@ -3,7 +3,6 @@ import MapCard from './MapCard';
 import db from '../firestore';
 import { Map, withAuth } from 'fireview';
 import firebase from 'firebase';
-import { Search } from 'semantic-ui-react';
 
 const allBoards = db.collection('boards')
 

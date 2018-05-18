@@ -172,7 +172,7 @@ class Navbar extends Component {
                                 (
                                   pendingBoards.map((sentBoard, idx) => {
                                     return (
-                                      <Link key={idx} to={`/SingleBoard/${sentBoard.board}`}>
+                                      <Link key={idx} to={`/SharedWithMe`}>
                                         <List.Item icon='mail' content={`${sentBoard.sender} sent you a board!`} />
                                       </Link>
                                     )

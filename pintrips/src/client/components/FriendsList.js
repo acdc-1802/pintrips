@@ -61,7 +61,7 @@ class FriendsList extends Component {
           {
             !this.state.friends &&
             <div className='no-friends-msg'>
-              <h1 id='profile-email'>You have no friends :(</h1>
+              <small id='profile-email'>You don't have any friends  yet :(</small>
             </div>
           }
           {

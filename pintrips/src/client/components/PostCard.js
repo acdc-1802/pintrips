@@ -92,7 +92,7 @@ export class PostCard extends Component {
           </div>
           <div className="postcard-back"
                 style={{ display: this.state.cardIsFront ? 'none' : 'block'}}>
-            <PostCardMessage currentCoord={this.state.currentCoordinates}/>
+            <PostCardMessage currentCoord={this.state.currentCoordinates} boardId={this.state.boardId}/>
           </div>
         </div>
         <div className="postcard-flip-button">
