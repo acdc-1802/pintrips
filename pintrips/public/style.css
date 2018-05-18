@@ -774,7 +774,7 @@ input.location-search-input {
  }
 
  .postcard-logo {
-  width: 21vw;
+  width: 10vw;
   z-index:1;
   position: fixed;
   }
@@ -877,8 +877,8 @@ input.location-search-input {
  .stamp-logo {
   position: fixed;
   top: 2em;
-  right: 2em;
-  width: 35vw;
+  right: 0em;
+  width: 23vw;
   display: flex;
   flex-direction: row;
   justify-content: right;
