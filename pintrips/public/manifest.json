@@ -2,7 +2,7 @@
   "name": "Pintrips",
   "short_name": "Pintrips",
   "description": "pinning trips",
-  "start_url": "/",
+  "start_url": "/?homescreen=1",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#ffffff",
