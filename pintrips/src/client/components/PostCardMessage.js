@@ -39,7 +39,6 @@ export class PostCard extends Component {
 
   handleSubmit(e, userEmail) {
     e.preventDefault();
-
     const postcards = db.collection('postcards')
     postcards.add({
       dateSent: new Date(),
@@ -47,7 +46,8 @@ export class PostCard extends Component {
       messageCoordinates: new firebase.firestore.GeoPoint(this.state.currentCoordinates[0], this.state.currentCoordinates[1]),
       opened: false,
       receiver: this.state.receiverEmail,
-      sender: this.state.senderEmail
+      sender: this.state.senderEmail,
+      boardId: this.props.boardId
     })
     .then(created => {
       this.setState({ postcardId: created.id})

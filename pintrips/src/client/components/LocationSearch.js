@@ -45,12 +45,23 @@ class LocationSearch extends Component {
 
         {({ getInputProps, suggestions, getSuggestionItemProps }) => (
           <div className='location-search'>
-            <input
-              {...getInputProps({
-                placeholder: ` 🔍  Search in ${this.props.value}`,
-                className: 'location-search-input'
-              })}
-            />
+            {
+              this.props.value 
+              ?
+              <input
+                {...getInputProps({
+                  placeholder: ` 🔍  Search in ${this.props.value}`,
+                  className: 'location-search-input'
+                })}
+              />
+              :
+              <input
+                {...getInputProps({
+                  placeholder: ` 🔍  Board location`,
+                  className: 'location-search-input'
+                })}
+              />
+            }
             <div className="autocomplete-dropdown-container">
               {suggestions.map(suggestion => {
                 const className = suggestion.active ? 'suggestion-item--active' : 'suggestion-item';

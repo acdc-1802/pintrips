@@ -25,7 +25,7 @@ class MapCard extends Component {
       isFetching: false,
       multiple: true,
       search: true,
-      searchQuery: '',
+      searchQuery: null,
       users: [],
       senderUsername: ''
     }
@@ -216,6 +216,7 @@ class MapCard extends Component {
                 width: "289px"
               }}
               center={this.state.center}
+              onClick={() => history.push(`/SingleBoard/${this.state.boardId}`)}
             />
           </Segment>
           <Card.Content className='card-content'>
@@ -248,9 +249,9 @@ class MapCard extends Component {
                           <p>Who would you like to share this board with?</p>
                           <Dropdown
                             fluid
-                            multiple
-                            search
-                            searchQuery={this.state.searchQuery}
+                            selection
+                            multiple={true}
+                            search={this.state.search}
                             options={this.state.users}
                             value={this.state.shareWith}
                             placeholder='Search by username'

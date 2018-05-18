@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Card } from 'semantic-ui-react';
 import db from '../firestore';
-import ReactMapboxGl, { Layer, Feature, ZoomControl } from "react-mapbox-gl";
+import ReactMapboxGl, { Layer, Feature, Popup, ZoomControl } from "react-mapbox-gl";
 
 const Map = ReactMapboxGl({
   accessToken: 'pk.eyJ1IjoiZGVzdGlubWNtdXJycnkiLCJhIjoiY2plenRxaGw3MGdsNTJ3b2htMGRydWc3aiJ9.ycslnjgv2J9VZGZHT8EoIw'
@@ -20,7 +20,7 @@ class WorldMap extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      center: [-74.009464, 40.705089],
+      center: [-12.216874, 39.996723],
       zoom: [0],
       pins: [],
       selectedPin: null,
@@ -75,8 +75,7 @@ class WorldMap extends Component {
   handlePinClick = pin => {
     this.setState({
       selectedPin: pin,
-      center: pin.coords,
-      zoom: [5]
+      center: pin.coords
     })
   }
 
@@ -112,6 +111,25 @@ class WorldMap extends Component {
                 )
               }
             </Layer>
+            {
+              this.state.selectedPin &&
+              <Popup
+                className='popup-label'
+                key={this.state.selectedPin.label}
+                coordinates={this.state.selectedPin.coords}
+                offset={50}
+              >
+                <div className='options-container'>
+                  <button onClick={() => this.setState({ selectedPin: null })} className='x-btn' id='close-popup'>x</button>
+                </div>
+                <div>
+                  <h4 id='label'>{this.state.selectedPin.label}</h4>
+                  {
+                    this.state.selectedPin.notes && <small id='notes'>{this.state.selectedPin.notes}</small>
+                  }
+                </div>
+              </Popup>
+            }
             {
               this.state.yarnCoords.length > 1 &&
               <Layer
