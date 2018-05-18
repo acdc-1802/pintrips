@@ -265,7 +265,7 @@ class MapCard extends Component {
                         :
                         (<p>Board was successfully sent!</p>)
                     }
-                    
+                    on='click'
                     position='top right'
                   />
                 }
