@@ -77,6 +77,7 @@ export class PostCardMap extends Component {
               }}
               center={this.state.center}
               pitch={[60]}
+              zoom={[14]}
             >
               <Layer
                 type='symbol'
