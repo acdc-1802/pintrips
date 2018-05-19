@@ -66,12 +66,16 @@ class AddFriend extends Component {
               Loading={() => 'Loading'}
               Render={(props) => {
                 let nonFriends = {};
-                for (let userID in this.state.results){
-                  if (userID !== props.id){
-                    if (props.friends[userID]!==true){
-                      nonFriends[userID] = true;
+                if(props.friends){
+                  for (let userID in this.state.results){
+                    if (userID !== props.id){
+                      if (props.friends[userID]!==true){
+                        nonFriends[userID] = true;
+                      }
                     }
                   }
+                } else {
+                  nonFriends = this.state.results;
                 }
                 return (
                       <FriendsList friends={nonFriends} addFriend={true}/>
