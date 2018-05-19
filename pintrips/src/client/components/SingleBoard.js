@@ -224,7 +224,6 @@ class SingleBoard extends Component {
     this.setState({
       selectedPin: pin,
       center: pin.coords,
-      zoom: [12.5],
       newLocation: null
     })
   }
@@ -248,7 +247,6 @@ class SingleBoard extends Component {
     }
     this.setState({
       selectedPin: null,
-      zoom: [12.3],
       editingMode: false,
       newLabel: '',
       newNotes: ''
@@ -276,7 +274,7 @@ class SingleBoard extends Component {
         console.log('Pin successfully deleted')
       })
       .then(() => {
-        this.setState({ selectedPin: null, zoom: [12.3], editingMode: false, newLabel: '', newNotes: '' })
+        this.setState({ selectedPin: null, editingMode: false, newLabel: '', newNotes: '' })
       })
       .catch(err => console.error('Delete unsuccessful: ', err))
   }
