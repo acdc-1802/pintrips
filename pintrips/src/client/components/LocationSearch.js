@@ -1,3 +1,4 @@
+/*global google*/
 import React, { Component } from 'react';
 import PlacesAutoComplete from 'react-places-autocomplete';
 import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
@@ -36,17 +37,25 @@ class LocationSearch extends Component {
   }
 
   render() {
+
+    const searchOptions = {
+      location: new google.maps.LatLng(this.state.coordinates[0], this.state.coordinates[1]),
+      radius: 2000,
+      types: ['address']
+    }
+
     return (
       <PlacesAutoComplete
         value={this.state.address}
         onChange={this.handleChange}
         onSelect={this.handleSelect}
+        searchOptions={searchOptions}
       >
 
         {({ getInputProps, suggestions, getSuggestionItemProps }) => (
           <div className='location-search'>
             {
-              this.props.value 
+              this.props.value
               ?
               <input
                 {...getInputProps({

@@ -20,8 +20,8 @@ class WorldMap extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      center: [-12.216874, 39.996723],
-      zoom: [0],
+      center: [15, 32],
+      zoom: [.95],
       pins: [],
       selectedPin: null,
       yarnCoords: [],

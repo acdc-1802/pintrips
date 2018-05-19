@@ -132,7 +132,8 @@ class SingleBoard extends Component {
   selectPlaceFromSearchBar = (label, coords) => {
     this.setState({
       newLabel: label,
-      newLocation: [coords[1], coords[0]]
+      newLocation: [coords[1], coords[0]],
+      center: [coords[1], coords[0]]
     })
   }
 
@@ -224,7 +225,6 @@ class SingleBoard extends Component {
     this.setState({
       selectedPin: pin,
       center: pin.coords,
-      zoom: [12.5],
       newLocation: null
     })
   }
@@ -248,7 +248,6 @@ class SingleBoard extends Component {
     }
     this.setState({
       selectedPin: null,
-      zoom: [12.3],
       editingMode: false,
       newLabel: '',
       newNotes: ''
@@ -276,7 +275,7 @@ class SingleBoard extends Component {
         console.log('Pin successfully deleted')
       })
       .then(() => {
-        this.setState({ selectedPin: null, zoom: [12.3], editingMode: false, newLabel: '', newNotes: '' })
+        this.setState({ selectedPin: null, editingMode: false, newLabel: '', newNotes: '' })
       })
       .catch(err => console.error('Delete unsuccessful: ', err))
   }
@@ -382,7 +381,7 @@ class SingleBoard extends Component {
               </div>
               <div id='add-pin-options'>
                 <p>Label:</p>
-                <input type='text' name='newLabel' maxLength='20' value={this.state.newLabel} onChange={this.handlePinChange} />
+                <input type='text' name='newLabel' maxLength='30' value={this.state.newLabel} onChange={this.handlePinChange} />
                 <p>Notes:</p>
                 <textarea id='notes-input' type='text' maxLength='150' name='newNotes' value={this.state.newNotes} onChange={this.handlePinChange} />
                 <div id='pin-trash-btns'>
@@ -430,7 +429,7 @@ class SingleBoard extends Component {
                         <button id='add-pin' onClick={this.handlePinAdd}><i class="plus icon"></i></button>
                       </div>
                       <div id='edit-pin-options'>
-                        <p>Label:</p><input type='text' name='newLabel' placeholder='ex: Best Ice Cream!' maxLength='20' value={this.state.newLabel} onChange={this.handlePinChange} />
+                        <p>Label:</p><input type='text' name='newLabel' placeholder='ex: Best Ice Cream!' maxLength='30' value={this.state.newLabel} onChange={this.handlePinChange} />
                         <p>Notes:</p>
                         <textarea id='notes-input' type='text' name='newNotes' placeholder='ex: saw this on a blog, and they have so many toppings' maxLength='150' value={this.state.newNotes} onChange={this.handlePinChange} />
                       </div>
