@@ -392,6 +392,7 @@ input.location-search-input {
   text-align: center;
   width: 60%;
   margin: 10em auto auto;
+  font-family: 'Special Elite', cursive;
 }
 
 .logo{
@@ -588,10 +589,10 @@ input.location-search-input {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  border: 1px solid rbg(188,143,143);
+  /* border: 1px solid rbg(188,143,143); */
   width: 95vw;
   height: 60vh;
-  max-width: 1000px;
+  max-width: 750px;
   box-shadow: 10px 10px 8px #888888;
   background-color: white;
   z-index: -1;
@@ -602,10 +603,13 @@ input.location-search-input {
   padding: 20px;
   text-align: center;
   margin-bottom: 5em;
+  border: solid 1px #d8d5d5;
+
 }
 
 #postcard-icon {
   padding-right: 1em;
+
 }
 
  .postcard-form-style {
@@ -639,6 +643,7 @@ input.location-search-input {
   .postcard-label {
     text-align: left;
     display: inline;
+    font-family: 'Special Elite', cursive;
   }
 
   .postcard-map {
@@ -765,8 +770,9 @@ input.location-search-input {
  }
 
  .postcard-logo {
-  width: 21vw;
-  z-index:1
+  width: 10vw;
+  z-index:1;
+  position: fixed;
   }
 
  .search-coords {
@@ -865,10 +871,10 @@ input.location-search-input {
  }
 
  .stamp-logo {
-  position: relative;
-  top: -9em;
-  right: -32em;
-  width: 40vw;
+  position: fixed;
+  top: 2em;
+  right: 0em;
+  width: 23vw;
   display: flex;
   flex-direction: row;
   justify-content: right;
@@ -876,7 +882,7 @@ input.location-search-input {
 
 .stamp {
   z-index:1;
-  font-family: Arial,sans-serif;
+  font-family: 'Special Elite', cursive;
   -webkit-transform: rotate(20deg);
   -moz-transform: rotate(20deg);
   -ms-transform: rotate(20deg);
