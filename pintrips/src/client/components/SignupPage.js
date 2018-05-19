@@ -14,7 +14,7 @@ class SignupPage extends Component {
     last: '',
     email: '',
     password: '',
-    profileImg: 'https://static1.squarespace.com/static/586c76466b8f5b6deb3d6942/58a33603f7e0abdf636c3434/58a33619cd0f68039a5f5d6f/1525807659422/grace.png?format=750w',
+    profileImg: 'https://academist-app-production.s3.amazonaws.com/uploads/user/profile_image/361/default_user_icon.png',
     error: false
   };
 
