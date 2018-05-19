@@ -99,16 +99,21 @@ class MapCard extends Component {
         })
         .catch(error => console.error('could not get sender'))
     }
-    db.collection('users').get()
-      .then(snapshot => snapshot.forEach(doc => {
-        if (doc.data().id !== this.props.board.creator) {
-          this.state.users.push({ key: doc.data().username, value: doc.data().username, text: doc.data().username })
-        }
-      }))
-      .catch(error => console.error('Unable to get users', error))
+
     this.props.userId && (
       db.collection('users').doc(this.props.userId).get()
-      .then(doc => this.setState({ senderUsername: doc.data().username }))
+      .then(doc => {
+        let friends = doc.data().friends;
+        let userFriends = [];
+        for (let id in friends){
+          if (friends[id]){
+            db.collection('users').doc(id).get()
+              .then(friend => friend.data() && userFriends.push({ key: friend.data().username, value: friend.data().username, text: friend.data().username}))
+              .then(() => this.setState({ senderUsername: doc.data().username, users: userFriends}))
+              .catch(error => console.log('unable to get friends', error))
+          }
+        }
+      })
     )
     //for sending postcards
     const userId = this.props.board.creator
