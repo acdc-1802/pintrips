@@ -21,8 +21,8 @@ class WorldMap extends Component {
     super(props)
     this.state = {
       center: [-12.216874, 39.996723],
-      zoom: [0],
-      pins: null,
+      zoom: [1.5],
+      pins: [],
       selectedPin: null,
       yarnCoords: [],
       style: 'mapbox://styles/destinmcmurrry/cjgy8hinv00192rp4obrfj9qq'

@@ -41,7 +41,7 @@ export class PostCard extends Component {
     e.preventDefault();
     const postcards = db.collection('postcards')
     postcards.add({
-      dateSent: new Date(),
+      dateSent: new Date().toString(),
       message: this.state.postCardBody,
       messageCoordinates: new firebase.firestore.GeoPoint(this.state.currentCoordinates[0], this.state.currentCoordinates[1]),
       opened: false,

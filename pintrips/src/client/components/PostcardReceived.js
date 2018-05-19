@@ -70,7 +70,7 @@ class PostCardReceived extends Component {
 
   render() {
     if (!this.state.currentCoordinates.length)
-      return <div className="login-container">loading...</div>
+      return <div className="login-container"> Loading...</div>
 
     return (
         <div className="login-container">
@@ -85,20 +85,22 @@ class PostCardReceived extends Component {
                   style={{ display: this.state.cardIsFront ? 'none' : 'block'}}>
               <PostCardStamp currentCoord={this.state.currentCoordinates} dateSent={this.state.date}/>
               <div className="postcard-message-body" id="postcard-received">
-              <div>
-                To: {this.state.receiver}
-              </div>
-              <div>
-                From: {this.state.sender}
-              </div>
-              <div>
-                {this.state.message}
-              </div>
+              <div className='postcard-message-form'>
+                <div>
+                  To: {this.state.receiver}
+                </div>
+                <div>
+                  From: {this.state.sender}
+                </div>
+                <div>
+                  {this.state.message}
+                </div>
+                </div>
               </div>
             </div>
           </div>
           <div className="postcard-flip-button">
-            <Button onClick={this.rotate} compact basic color='orange' size="mini">View Other Side</Button>
+            <Button onClick={this.rotate} compact basic color='red' size="mini">View Other Side</Button>
           </div>
         </div>
     )
