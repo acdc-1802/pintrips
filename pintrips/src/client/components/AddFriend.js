@@ -65,8 +65,16 @@ class AddFriend extends Component {
               from={db.collection('users').doc(user.uid)}
               Loading={() => 'Loading'}
               Render={(props) => {
+                let nonFriends = {};
+                for (let userID in this.state.results){
+                  if (userID !== props.id){
+                    if (props.friends[userID]!==true){
+                      nonFriends[userID] = true;
+                    }
+                  }
+                }
                 return (
-                      <FriendsList friends={this.state.results} addFriend={true}/>
+                      <FriendsList friends={nonFriends} addFriend={true}/>
                 )
               }}
               Empty={() => 'You don`t have any friends ya loser'}
