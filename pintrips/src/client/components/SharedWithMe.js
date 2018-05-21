@@ -6,7 +6,7 @@ import { Map, withAuth } from 'fireview';
 const allBoards = db.collection('boards')
 
 const SharedWithMe = (props) => {
-  
+
   const user = props._user;
   if (!user) return 'Please login';
 

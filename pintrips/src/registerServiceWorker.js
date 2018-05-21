@@ -19,8 +19,9 @@ const isLocalhost = Boolean(
 );
 
 export default function register() {
-  if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
+  if ('serviceWorker' in navigator) {
     // The URL constructor is available in all browsers that support SW.
+    console.log('SERVICE WORKER REGISTERED')
     const publicUrl = new URL(process.env.PUBLIC_URL, window.location);
     if (publicUrl.origin !== window.location.origin) {
       // Our service worker won't work if PUBLIC_URL is on a different origin
@@ -49,9 +50,34 @@ export default function register() {
         registerValidSW(swUrl);
       }
     });
+
   }
 }
+window.addEventListener('fetch', function(event) {
+  event.respondWith(
+    caches.open('mysite-dynamic').then(function(cache) {
+      return cache.match(event.request).then(function (response) {
+        return response || fetch(event.request).then(function(response) {
+          cache.put(event.request, response.clone());
+          return response;
+        });
+      });
+    })
+  );
+});
 
+let deferredPrompt;
+
+// window.addEventListener('beforeinstallprompt', (e) => {
+//   // Prevent Chrome 67 and earlier from automatically showing the prompt
+//   e.preventDefault();
+//   // Stash the event so it can be triggered later.
+//   deferredPrompt = e;
+//   btnAdd.style.display = 'block';
+// });
+window.addEventListener('beforeinstallprompt', (event) => {
+  console.log('beforeinstallprompt fired index'); // It doesn't show at all
+});
 function registerValidSW(swUrl) {
   navigator.serviceWorker
     .register(swUrl)
@@ -115,3 +141,110 @@ export function unregister() {
     });
   }
 }
+
+
+// import localforage from 'localforage';
+// console.log('error')
+// const request = window.IndexedDB.open('EXAMPLE_DB', 1);
+// const cacheName = 'WWW-EXAMPLE-COM-V1';
+// const filesToCache = [
+//   '/',                // index.html
+//   '/index.html',
+//   '/index.js',
+//   '/style.css',
+//   '/attributes/logo.png',
+//   '/attributes/pin.png',
+//   'https://localhost:5000/',
+//   '/HomePage',
+//   '/SingleBoard',
+//   '/AddNewBoard',
+//   '/CannotFind',
+//   '/SharedWithMe',
+//   '/manifest.json'
+  
+// ];
+// // const db;
+
+// window.addEventListener('install', function(event) {
+//   event.waitUntil(
+//     caches.open('WWW-EXAMPLE-COM-V1').then(function(cache) {
+//       return cache.addAll([
+//         '/style.css',
+//         '/index.html',
+//         '/',
+//         '/HomePage.js',
+//         '/SingleBoard.js',
+//       ]);
+//     })
+//   );
+// });
+
+
+// // window.addEventListener('activate', function(event) {
+// //   console.log("SW activated");
+// //   event.waitUntil(
+// //     caches.keys()
+// //     .then(function(cacheNames) {
+// //         return Promise.all(
+// //             cacheNames.map(function(cName) {
+// //                 if(cName !== cacheName){
+// //                     return caches.delete(cName);
+// //                 }
+// //             })
+// //         );
+// //     })
+// //   );
+// // });
+// // navigator.storage.requestPersistent().then(function(granted) {
+// //   if (granted) {
+    
+// //   }
+// // });
+// window.addEventListener('fetch', function(event) {
+//   event.respondWith(
+//     caches.match(event.request).then(function(response) {
+//       return response || fetch(event.request);
+//     })
+//   );
+// });
+
+// window.addEventListener('fetch', function(event) {
+//   event.respondWith(
+//       caches.match(event.request)
+//       .then(function(response) {
+//           if(response){
+//               return response
+//           } else {
+//             // clone request stream
+//             // as stream once consumed, can not be used again
+//             var reqCopy = event.request.clone();
+
+//             return fetch(reqCopy, {credentials: 'include'}) // reqCopy stream consumed
+//             .then(function(response) {
+//                 // bad response
+//                 // response.type !== 'basic' means third party origin request
+//                 if(!response || response.status !== 200 || response.type !== 'basic') {
+//                     return response; // response stream consumed
+//                 }
+
+//                 // clone response stream
+//                 // as stream once consumed, can not be used again
+//                 var resCopy = response.clone();
+
+//                 // ================== IN BACKGROUND ===================== //
+
+//                 // add response to cache and return response
+//                 caches.open(cacheName)
+//                 .then(function(cache) {
+//                     return cache.put(reqCopy, resCopy); // reqCopy, resCopy streams consumed
+//                 });
+
+//                 // ====================================================== //
+
+
+//                 return response; // response stream consumed
+//               })
+//           }
+//       })
+//   );
+// });
