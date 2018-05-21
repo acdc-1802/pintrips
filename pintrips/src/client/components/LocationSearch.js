@@ -41,7 +41,7 @@ class LocationSearch extends Component {
     const searchOptions = {
       location: new google.maps.LatLng(this.state.coordinates[0], this.state.coordinates[1]),
       radius: 2000,
-      types: ['address']
+      // types: ['address', 'city']
     }
 
     return (
