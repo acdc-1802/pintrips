@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Card, Icon, Popup, Checkbox, Segment, Label, Dropdown } from 'semantic-ui-react';
+import { Button, Card, Icon, Popup, Checkbox, Segment, Label, Dropdown, Input } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import db from '../firestore';
 import history from '../../history';
@@ -26,10 +26,13 @@ class MapCard extends Component {
       search: true,
       searchQuery: null,
       users: [],
-      senderUsername: ''
+      senderUsername: '',
+      edit: false,
+      newName: ''
     }
     this.handleDelete = this.handleDelete.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleNameChange = this.handleNameChange.bind(this);
     this.handleSend = this.handleSend.bind(this);
     this.acceptBoard = this.acceptBoard.bind(this);
     this.declineBoard = this.declineBoard.bind(this);
@@ -37,6 +40,8 @@ class MapCard extends Component {
     this.checkStatus = this.checkStatus.bind(this);
     this.favoriteBoard = this.favoriteBoard.bind(this);
     this.handleSearchChange = this.handleSearchChange.bind(this);
+    this.handleRemove = this.handleRemove.bind(this);
+    this.toggleEditMode = this.toggleEditMode.bind(this);
   }
 
   handleChange = (e, { searchQuery, value }) => this.setState({ searchQuery, shareWith: value })
@@ -102,18 +107,18 @@ class MapCard extends Component {
 
     this.props.userId && (
       db.collection('users').doc(this.props.userId).get()
-      .then(doc => {
-        let friends = doc.data().friends;
-        let userFriends = [];
-        for (let id in friends){
-          if (friends[id]){
-            db.collection('users').doc(id).get()
-              .then(friend => friend.data() && userFriends.push({ key: friend.data().username, value: friend.data().username, text: friend.data().username}))
-              .then(() => this.setState({ senderUsername: doc.data().username, users: userFriends}))
-              .catch(error => console.log('unable to get friends', error))
+        .then(doc => {
+          let friends = doc.data().friends;
+          let userFriends = [];
+          for (let id in friends) {
+            if (friends[id]) {
+              db.collection('users').doc(id).get()
+                .then(friend => friend.data() && userFriends.push({ key: friend.data().username, value: friend.data().username, text: friend.data().username }))
+                .then(() => this.setState({ senderUsername: doc.data().username, users: userFriends }))
+                .catch(error => console.log('unable to get friends', error))
+            }
           }
-        }
-      })
+        })
     )
     //for sending postcards
     const userId = this.props.board.creator
@@ -166,6 +171,22 @@ class MapCard extends Component {
       }))
       .catch(error => console.error('Board unable to delete from user boards', error))
   }
+  handleNameChange(event) {
+    this.setState({newName: event.target.value});
+  }
+  handleRemove() {
+    db.collection('boards').doc(this.state.boardId).set(
+      {
+        readers: {
+          [this.props.recipient]: false
+        },
+        writers: {
+          [this.props.recipient]: false
+        }
+      },
+      { merge: true }
+    ).catch(error => console.error('Unable to remove board', error))
+  }
   handleSend() {
     this.state.shareWith.forEach(user => {
       db.collection('users').where('username', '==', user).get()
@@ -203,6 +224,17 @@ class MapCard extends Component {
   favoriteBoard() {
     this.setState({ starred: !this.state.starred })
   }
+
+  toggleEditMode() {
+    if(this.state.edit){
+      db.collection('boards').doc(this.state.boardId).update({
+        name: this.state.newName
+      })
+      .catch(error => console.error('Unable to update name', error))
+    }
+    this.setState({ edit: !this.state.edit })
+  }
+
   render() {
     return (
       <div className='ind-card'>
@@ -225,10 +257,19 @@ class MapCard extends Component {
           <Card.Content className='card-content'>
             <div className='card-description'>
               <div>
+                {
+                  !this.state.edit ?
+                    <Link to={`/SingleBoard/${this.props.id}`}>
+                      <Card.Header>
+                        {this.props.board.name}
+                      </Card.Header>
+                    </Link>
+                    :
+                    <Card.Header>
+                      <Input defaultValue={this.props.board.name} onChange={this.handleNameChange} />
+                    </Card.Header>
+                }
                 <Link to={`/SingleBoard/${this.props.id}`}>
-                  <Card.Header>
-                    {this.props.board.name}
-                  </Card.Header>
                   <Card.Meta>
                     <span className='date'>
                       {this.props.board.locked}
@@ -280,7 +321,7 @@ class MapCard extends Component {
               {
                 this.props.owner &&
                 <div className='card-description'>
-                  <div>
+                  <div className='edit-icons'>
                     <Popup
                       trigger={<Icon name='trash outline' color='red' size='large' fitted={true} />}
                       content={
@@ -291,6 +332,7 @@ class MapCard extends Component {
                       }
                       on='click'
                     />
+                    <Icon name='edit' size='large' fitted={true} onClick={this.toggleEditMode} />
                   </div>
                   <div>
                     <Checkbox defaultChecked={this.checkStatus(this.props.board.locked)} onClick={this.changeStatus} toggle />
@@ -299,8 +341,18 @@ class MapCard extends Component {
               }
               {
                 this.state.sender &&
-                <div>
+                <div className='card-description'>
                   <p>Created by: {this.state.sender}</p>
+                  <Popup
+                    trigger={<Icon name='trash outline' color='red' size='large' fitted={true} />}
+                    content={
+                      <div>
+                        <p>Remove from shared boards?</p>
+                        <Button color='red' content='Delete' onClick={this.handleRemove} />
+                      </div>
+                    }
+                    on='click'
+                  />
                 </div>
               }
               {

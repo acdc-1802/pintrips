@@ -1204,3 +1204,9 @@ h3.ui.header {
   position: absolute;
   top: 7.5em;
 }
+
+.edit-icons {
+  display: flex;
+  width: 50px;
+  justify-content: space-between;
+}

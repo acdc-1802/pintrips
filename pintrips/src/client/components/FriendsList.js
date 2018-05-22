@@ -38,13 +38,13 @@ class FriendsList extends Component {
     user &&
       db.collection('users').doc(user.uid).set({
         friends: {
-          [userId]: true
+          [userId]: true //'pending'
         }
       }, { merge: true }
       ).then(() => {
         db.collection('users').doc(userId).set({
           friends: {
-            [user.uid]: true
+            [user.uid]: true //'pending'
           }
         }, { merge: true })
           .catch(error => console.error('Unable to add you as a friend', error))
