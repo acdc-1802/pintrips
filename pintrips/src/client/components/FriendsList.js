@@ -38,16 +38,29 @@ class FriendsList extends Component {
     user &&
       db.collection('users').doc(user.uid).set({
         friends: {
-          [userId]: true //'pending'
+          [userId]: {
+            status: 'requested',
+            friends: false
+          }
         }
       }, { merge: true }
       ).then(() => {
-        db.collection('users').doc(userId).set({
-          friends: {
-            [user.uid]: true //'pending'
-          }
-        }, { merge: true })
-          .catch(error => console.error('Unable to add you as a friend', error))
+        let fullName = '';
+        db.collection('users').doc(user.uid).get()
+        .then(sender => {
+          fullName = sender.data().first + ' ' + sender.data().last;
+        })
+        .then(() => {
+          db.collection('users').doc(userId).set({
+            friends: {
+              [user.uid]: {
+                status: 'pending',
+                senderName: fullName
+              }
+            }
+          }, { merge: true })
+            .catch(error => console.error('Unable to add you as a friend', error))
+        })
       })
         .then(() => { this.setState({ friendAdded: true }) })
         .then(() => { setTimeout(() => this.setState({ friendAdded: false }), 3000) })
@@ -109,7 +122,7 @@ class FriendsList extends Component {
                                     </div>
                                   )
                                   :
-                                  <p>You and {friend.first} are now friends!</p>
+                                  <p>Friend requested!</p>
                               }
                             </div>
                           }

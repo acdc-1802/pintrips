@@ -14,7 +14,8 @@ class Profile extends Component {
       last: '',
       username: '',
       bannerImg: '',
-      loading: true
+      loading: true,
+      friendRequest: false
     }
   }
   componentDidUpdate({ _user }) {
