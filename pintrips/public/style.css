@@ -596,7 +596,7 @@ input.location-search-input {
   max-width: 750px;
   box-shadow: 10px 10px 8px #888888;
   background-color: white;
-  z-index: -1;
+  /* z-index: -1; */
   position: absolute;
   left: 50%;
   top: 50%;
@@ -658,12 +658,12 @@ input.location-search-input {
     justify-content: center;
   }
 
-  .postcard-message-container {
+  /* .postcard-message-container {
     display: flex;
     flex-direction: column;
     height: 70vh;
     justify-content: center;
-  }
+  } */
 
   .postcard-message-body {
     align-content: center;
@@ -1205,9 +1205,12 @@ h3.ui.header {
   position: absolute;
   top: 7.5em;
 }
+<<<<<<< HEAD
 
 .edit-icons {
   display: flex;
   width: 50px;
   justify-content: space-between;
 }
+=======
+>>>>>>> master

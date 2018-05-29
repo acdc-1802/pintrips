@@ -3,24 +3,30 @@
 
 <head>
   <meta charset="utf-8">
+  <meta name="mobile-web-app-capable" content="yes">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=yes">
+  <link rel="canonical" href="localhost:3000">
+  <link rel="manifest" href="/manifest.json">
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="white">
+  <meta name="apple-mobile-web-app-title" content="Pintrips">
+  <link rel="apple-touch-icon" href="/icon-152.png">
+  <link rel="apple-touch-startup-image" href="/icon-192.png">
+
+  <meta name="msapplication-TileImage" content="/images/icon-144.png">
+  <meta name="msapplication-TileColor" content="#2F3BA2">
+  <link rel="stylesheet" href="/style.css">
+
   <meta name="theme-color" content="#000000">
+
   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCw0-EOrBWW7uLEuumEW1bLFUfv52MKw80&libraries=places"></script>
   <link href="https://fonts.googleapis.com/css?family=Caveat|Special+Elite" rel="stylesheet">
+  <!-- <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico"> -->
 
-  <!--
-      manifest.json provides metadata used when your web app is added to the
-      homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
-    -->
-  <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
-  <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
-  <link rel="apple-touch-icon" href="/attributes/logo.png">
-  <link rel="apple-touch-startup-image" href="/attributes/logo.png">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css">
+  <link href='https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.css' rel='stylesheet'>
 
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css"></link>
-  <link href='https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.css' rel='stylesheet' />
-
-  <link rel="stylesheet" href="/style.css" />
 
   <!--
       Notice the use of %PUBLIC_URL% in the tags above.
@@ -30,15 +36,88 @@
       Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
+  
     -->
   <title>Pintrips</title>
 </head>
 
 <body>
   <div id="root"></div>
-</body>
+  <!-- <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('sWorker.js').then(function(registration) {
+          console.log('Worker registration successful', registration.scope);
+        }, function(err) {
+          console.log('Worker registration failed', err);
+        }).catch(function(err) {
+          console.log(err);
+        });
+      });
+    } else {
+      console.log('Service Worker is not supported by browser.');
+    }
+  </script> -->
 
-<script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
-<script src="https://www.gstatic.com/firebasejs/4.13.0/firebase-firestore.js"></script>
+  <!-- <script>
+    if (window.indexedDB) {
+      console.log('IndexedDB is supported');
+    }
+
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('./sWorker.js');
+
+        //navigator.serviceWorker.ready always resolve
+        navigator.serviceWorker.ready.then(function (registration) {
+          console.log('Service worker successfully registered on scope', registration.scope);
+        });
+      });
+    }
+  </script> -->
+</body>
+<!-- 
+<script async defer src=/bundle.js></script>
+<script async defer>
+"use strict";
+  (function () {
+    if ("serviceWorker" in navigator) {
+      console.log('worker registering')
+      navigator.serviceWorker
+        .register("./sWorker.js")
+        .then(function (reg) {
+          console.log('worker registered')
+        })
+        .catch(err => console.log("service worker failed to register", err));
+    }
+  })();
+</script> -->
+<script>
+  if ('serviceWorker' in navigator) {
+     console.log("Will the service worker register?");
+     navigator.serviceWorker.register('sWorker.js')
+       .then(function(reg){
+         console.log("Yes, it did.");
+      }).catch(function(err) {
+         console.log("No it didn't. This happened:", err)
+     });
+  }
+  //This is the "Offline page" service worker
+
+//Add this below content to your HTML page, or add the js file to your page at the very top to register sercie worker
+// if (navigator.serviceWorker.controller) {
+//   console.log('[PWA Builder] active service worker found, no need to register')
+// } else {
+//   //Register the ServiceWorker
+//   navigator.serviceWorker.register('pwabuilder-sw.js', {
+//     scope: './'
+//   }).then(function(reg) {
+//     console.log('Service worker has been registered for scope:'+ reg.scope);
+//   });
+// }
+
+
+ </script>
+ 
 
 </html>
