@@ -79,7 +79,6 @@ export class PostCard extends Component {
   }
 
   render() {
-
     if (!this.state.currentCoordinates.length)
       return <div className="login-container"> Loading...</div>
     return (
