@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
 import { Navbar } from './client/components';
 import Routes from './client/routes';
-import { Button, Icon, Popup, Image, Label } from 'semantic-ui-react';
 
 class App extends Component {
   constructor() {
-    super() 
+    super()
       this.state={
         showInstallMessage: false
       }
-    
+
   }
-  
+
   componentDidMount() {
     const isIos = () => {
       const userAgent = window.navigator.userAgent.toLowerCase();
@@ -19,7 +18,7 @@ class App extends Component {
     }
     // Detects if device is in standalone mode
     const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);
-    
+
     const isInStandalone = () => (window.matchMedia('(display-mode: standalone)').matches)
     // Checks if should display install popup notification:
     if (isIos() && !isInStandaloneMode()) {
@@ -32,16 +31,16 @@ class App extends Component {
 
       console.log('beforeinstallprompt fired index'); // It doesn't show at all
     });
-    
+
   }
- 
+
   render() {
     return (
       <div id='full-page'>
         <Navbar />
         <Routes />
         </div>
-     
+
     );
   }
 }
