@@ -1,15 +1,54 @@
 {
+  "name": "Pintrips",
   "short_name": "Pintrips",
-  "name": "Create React App Sample",
+  "description": "pinning trips",
+  "start_url": "/?homescreen=1",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
   "icons": [
     {
-      "src": "/attributes/logo.png",
-      "sizes": "64x64 32x32 24x24 16x16",
+      "src": "./images/icon-192.png",
+      "sizes": "192x192",
       "type": "image/png"
-    }
-  ],
-  "start_url": "./index.html",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+    },
+    {
+      "src": "./images/icon-152.png",
+      "sizes": "152x152",
+      "type": "image/png"
+    },
+    {
+      "src": "./images/icon-144.png",
+      "type": "image/png",
+      "sizes": "144x144"
+    },
+    {
+      "src": "./images/icon-128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "./images/icon-96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "./images/icon-48.png",
+      "sizes": "48x48",
+      "type": "image/png"
+    },
+    
+    {
+      "src": "./apple-touch-icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "favicon.ico",
+      "sizes": "144x144 64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+
+    }]
 }
+

@@ -72,7 +72,7 @@ export class PostCardMap extends Component {
             <Map
               style={this.state.style}
               containerStyle={{
-                height: '500px',
+                height: '442px',
                 width: '700px'
               }}
               center={this.state.center}

@@ -17,8 +17,8 @@ const Routes = props => {
             <Route path='/HomePage' component={HomePage} />
             <Route path='/SharedWithMe' component={SharedWithMe} />
             <Route path='/postcard_send/:boardId' component={PostCard} />
-            <Route path={'/postcard_sent'} component={PostcardSent} />
-            <Route path={'/postcard_received/:postcardId'} component={PostcardReceived} />
+            <Route path='/postcard_sent' component={PostcardSent} />
+            <Route path='/postcard_received/:postcardId' component={PostcardReceived} />
             <Route path='/404' component={CannotFind} />
             <Route exact path='/Profile' component={Profile} />
             <Route path='/Profile/:id' component={Profile} />
@@ -32,6 +32,7 @@ const Routes = props => {
           <Switch>
             <Route path='/LoginPage' component={LoginPage} />
             <Route path='/SignupPage' component={SignupPage} />
+            <Route path='/postcard_received/:postcardId' component={PostcardReceived} />
             <Route exact path='/' component={WelcomePage} />
           </Switch>
         )

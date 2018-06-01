@@ -10,6 +10,7 @@
     "bootstrap-switch": "^3.3.4",
     "emailjs-com": "^2.1.1",
     "firebase": "^4.13.0",
+    "firebase-cli": "^1.2.0",
     "fireview": "0.0.8",
     "gsap": "^1.20.4",
     "jsdf": "^0.3.2",
@@ -19,6 +20,7 @@
     "react": "^16.3.2",
     "react-autosuggest": "^9.3.4",
     "react-blur-admin": "^0.11.1",
+    "react-bootstrap": "^0.32.1",
     "react-dom": "^16.3.2",
     "react-flex-proto": "^1.0.0",
     "react-gl-maps": "^4.10.5",
@@ -33,9 +35,12 @@
     "redux": "^4.0.0",
     "redux-firestore": "^0.4.3",
     "semantic-ui-less": "^2.3.1",
-    "semantic-ui-react": "^0.80.0"
+    "semantic-ui-react": "^0.80.0",
+    "serve": "^6.5.6",
+    "source-map-explorer": "^1.5.0"
   },
   "scripts": {
+    "analyze": "source-map-explorer build/static/js/main.*",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",

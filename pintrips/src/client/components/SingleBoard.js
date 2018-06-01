@@ -425,7 +425,7 @@ class SingleBoard extends Component {
                   >
                     <div>
                       <div className='options-container'>
-                        <button id='close-popup' onClick={() => this.setState({ showLabel: null })}><i class='chevron left icon'></i></button>
+                        <button id='close-popup' onClick={() => this.setState({ showLabel: null })}><i className='chevron left icon'></i></button>
                         <button id='add-pin' onClick={this.handlePinAdd}><i class="plus icon"></i></button>
                       </div>
                       <div id='edit-pin-options'>
