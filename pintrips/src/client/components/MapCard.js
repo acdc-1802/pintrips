@@ -260,7 +260,6 @@ class MapCard extends Component {
                             placeholder='Search by username'
                             onChange={this.handleChange}
                             onSearchChange={this.handleSearchChange}
-                            selection
                           />
                           <br />
                           <Button color='blue' size='mini' content='Share' onClick={this.handleSend} />
