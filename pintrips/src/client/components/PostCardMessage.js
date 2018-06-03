@@ -92,7 +92,7 @@ export class PostCard extends Component {
                   <label className='postcard-label'>From: </label><input type='text' name='senderEmail' readOnly={userEmail} placeholder={userEmail} className='postcard-form-style' />
                 </div>
                 <div className='field' id='message-box'>
-                  <label className='postcard-label'>Message: </label><textarea type='text' name='postCardBody' value={this.state.postCardBody} onChange={this.handleChange} placeholder='Hello!' className='postcard-form-style' id='textarea'></textarea>
+                  <label className='postcard-label'>Message: </label><textarea type='text' name='postCardBody' maxLength='300' value={this.state.postCardBody} onChange={this.handleChange} placeholder='Hello!' className='postcard-form-style' id='textarea'></textarea>
                 </div>
                 <Button type='submit' color='teal' compact disabled={!isEnabled}>Send!</Button>
               </form>

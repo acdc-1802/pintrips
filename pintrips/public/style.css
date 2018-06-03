@@ -1047,7 +1047,7 @@ label.postcard-label {
 }
 
 .postcard-message-body#postcard-received {
-  margin-top: 50px;
+  margin-top: 10px;
   margin-left: 50px;
   text-align: left;
 }
