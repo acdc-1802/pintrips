@@ -3,7 +3,7 @@ import ReactMapboxGl, { Layer, Feature, Popup } from "react-mapbox-gl";
 import db from '../firestore';
 
 const Map = ReactMapboxGl({
-  accessToken: 'pk.eyJ1IjoiY2lsYXZlcnkiLCJhIjoiY2pmMW1paDd0MTQ0bzJwb2Rtemdna2g0MCJ9.64yg764mTUOrL3p77lXGSQ'
+  accessToken: 'pk.eyJ1IjoiZGVzdGlubWNtdXJycnkiLCJhIjoiY2plenRxaGw3MGdsNTJ3b2htMGRydWc3aiJ9.ycslnjgv2J9VZGZHT8EoIw'
 });
 
 const solid = new Image(75, 75);
@@ -13,7 +13,7 @@ const solidPins = ['solidImage', solid];
 
 const linePaint = {
   'line-color': '#a11823',
-  'line-width': 1
+  'line-width': 1.5
 };
 
 export class PostCardMap extends Component {
@@ -24,7 +24,8 @@ export class PostCardMap extends Component {
       visitedPins: [],
       yarnCoords: [],
       selectedPin: null,
-      style: 'mapbox://styles/cilavery/cjh9g0z111ibf2sqxyqx1nhas'
+      title: '',
+      style: 'mapbox://styles/destinmcmurrry/cjgy8hinv00192rp4obrfj9qq'
     }
   }
 
@@ -32,9 +33,25 @@ export class PostCardMap extends Component {
     const boardId = this.props.boardId
     const lat = this.props.currentCoord[0]
     const long = this.props.currentCoord[1]
+
     this.setState({
       center: [long, lat]
     })
+
+    db.collection('boards').doc(boardId).get()
+      .then(doc => {
+        let board = doc.data()
+        return board;
+      })
+      .then(thisBoard => {
+        console.log(thisBoard);
+        this.setState({
+          style: thisBoard.style
+        })
+      })
+      .catch(err => {
+        console.error(err);
+      });
 
     db.collection('boards').doc(boardId).collection('pins').orderBy('visited')
       .onSnapshot((querySnapshot) => {
@@ -66,37 +83,37 @@ export class PostCardMap extends Component {
   render() {
 
     return (
-      <div className='postcard-map-sizing'>
+      <div className='postcard-map'>
         {
           this.state.center.length &&
-            <Map
-              style={this.state.style}
-              containerStyle={{
-                height: '442px',
-                width: '700px'
-              }}
-              center={this.state.center}
-              pitch={[60]}
-              zoom={[14]}
-            >
-              <Layer
-                type='symbol'
-                id='postcardPins'
-                layout={{ 'icon-image': 'solidImage', 'icon-allow-overlap': true }}
-                images={solidPins}>
-                {this.state.visitedPins &&
-                  this.state.visitedPins.map(pin => {
-                    return (
-                      <Feature
-                        key={pin.label}
-                        coordinates={pin.coords}
-                        onClick={this.handlePinClick.bind(this, pin)}
-                      />
-                    )
-                  })
-                }
-              </Layer>
-              {
+          <Map
+            style={this.state.style}
+            containerStyle={{
+              height: "100%",
+              width: "100%"
+            }}
+            center={this.state.center}
+            pitch={[60]}
+            zoom={[14]}
+          >
+            <Layer
+              type='symbol'
+              id='postcardPins'
+              layout={{ 'icon-image': 'solidImage', 'icon-allow-overlap': true }}
+              images={solidPins}>
+              {this.state.visitedPins &&
+                this.state.visitedPins.map(pin => {
+                  return (
+                    <Feature
+                      key={pin.label}
+                      coordinates={pin.coords}
+                      onClick={this.handlePinClick.bind(this, pin)}
+                    />
+                  )
+                })
+              }
+            </Layer>
+            {
               this.state.yarnCoords.length > 1 &&
               <Layer
                 type='line'
@@ -107,8 +124,8 @@ export class PostCardMap extends Component {
                   offset={25}
                 />
               </Layer>
-              }
-              {
+            }
+            {
               this.state.selectedPin &&
               <Popup
                 className='popup-label'
@@ -120,12 +137,12 @@ export class PostCardMap extends Component {
                   <h4 id='label'>{this.state.selectedPin.label}</h4>
                   {
                     this.state.selectedPin.notes &&
-                      <small id='notes'>{this.state.selectedPin.notes}</small>
+                    <small id='notes'>{this.state.selectedPin.notes}</small>
                   }
                 </div>
               </Popup>
-              }
-            </Map>
+            }
+          </Map>
         }
       </div>
     )

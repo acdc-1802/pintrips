@@ -15,7 +15,7 @@ export class PostCardStamp extends Component {
     if (this.props.dateSent) {
       this.setState({ date: this.props.dateSent.toString().slice(0,16)})
     } else {
-      this.setState({ date: new Date().toLocaleString().slice(0,9)})
+      this.setState({ date: new Date().toLocaleString().slice(0,8)})
     }
   }
 
@@ -40,18 +40,18 @@ export class PostCardStamp extends Component {
 
   render() {
     return (
-      <div className="stamp-logo">
-      <div className="stamp">
-        {
-          this.state.place.map(aPlace => {
-            return <div className="stamp-line" key={aPlace}>{aPlace}</div>
-          })
-        }
-        <div className="stamp-line">{this.state.date}</div>
-      </div>
-      <div className="postcard-logo-div">
-        <img className='postcard-logo' alt='logo' src='/attributes/logo.png' />
-      </div>
+      <div className='stamp-logo'>
+        <div className='stamp'>
+          {
+            this.state.place.map(aPlace => {
+              return <div className='stamp-line' key={aPlace}>{aPlace}</div>
+            })
+          }
+          <div className='stamp-line'>{this.state.date}</div>
+        </div>
+        <div className='stamp'>
+          <img id='stamp' alt='logo' src='/attributes/stamp.png'/>
+        </div>
       </div>
     )
   }
