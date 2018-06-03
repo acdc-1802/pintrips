@@ -15,7 +15,8 @@ export class PostCard extends Component {
     super(props);
     this.state = {
       currentCoordinates: [],
-      cardIsFront: true
+      cardIsFront: true,
+      title: ''
     }
     this.rotate = this.rotate.bind(this)
   }
@@ -28,22 +29,23 @@ export class PostCard extends Component {
         .then(doc => {
           self.setState({
             currentCoordinates: [doc.data().coordinates._lat, doc.data().coordinates._long],
+            title: doc.data().name,
             boardId: doc.id
           })
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log("Error getting documents: ", error);
         });
     } else {
       const userId = this.props.withAuth.auth.currentUser.uid
       const user = db.collection("users").doc(userId)
-      if(navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
           user.set({
             currentCoordinates: new firebase.firestore.GeoPoint(position.coords.latitude, position.coords.longitude)
-            }, { merge: true })
+          }, { merge: true })
           self.setState({
-            currentCoordinates: [position.coords.latitude,position.coords.longitude]
+            currentCoordinates: [position.coords.latitude, position.coords.longitude]
           }).catch((err) => console.log('error', err.message))
         })
       }
@@ -52,17 +54,17 @@ export class PostCard extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    TweenLite.set(".postcard-container", {transformStyle:"preserve-3d"})
-    TweenLite.set(".postcard-back", {rotationY:-180})
-    TweenLite.set([".postcard-back", ".postcard-front"], {backfaceVisibility:"hidden"})
+    TweenLite.set(".postcard-container", { transformStyle: "preserve-3d" })
+    TweenLite.set(".postcard-back", { rotationY: -180 })
+    TweenLite.set([".postcard-back", ".postcard-front"], { backfaceVisibility: "hidden" })
   }
 
   postcardAnimation() {
-    TweenLite.fromTo(".postcard-container", 3, {width:0, height:0}, {width:"80vw", height:"75vh",  ease: Bounce.easeOut});
+    TweenLite.fromTo(".postcard-container", 3, { width: 0, height: 0 }, { width: "80vw", height: "75vh", ease: Bounce.easeOut });
   }
 
   rotate() {
-      if (this.state.cardIsFront) {
+    if (this.state.cardIsFront) {
       this.rotateToBack();
     } else {
       this.rotateToFront();
@@ -71,33 +73,40 @@ export class PostCard extends Component {
   }
 
   rotateToBack() {
-    TweenLite.to(".postcard-container", 1.2, {rotationY:180, ease:Back.easeOut});
+    TweenLite.to(".postcard-container", 1.2, { rotationY: 180, ease: Back.easeOut });
   }
 
   rotateToFront() {
-    TweenLite.to(".postcard-container", 1.2, {rotationY:0, ease:Back.easeOut});
+    TweenLite.to(".postcard-container", 1.2, { rotationY: 0, ease: Back.easeOut });
   }
 
   render() {
+
     if (!this.state.currentCoordinates.length)
       return <div className="login-container"> Loading...</div>
+
     return (
-      <div className="login-container">
+      <div className='page-container'>
         <div className='postcard-container'>
+
           <div className="postcard-front"
-            style={{ display: this.state.cardIsFront ? 'block' : 'none'}}>
-            <PostCardMap currentCoord={this.state.currentCoordinates} boardId={this.state.boardId}/>
-            <PostCardTypeText currentCoord={this.state.currentCoordinates}/>
+            style={{ display: this.state.cardIsFront ? 'block' : 'none' }}>
+            <p id='postcard-title'>{this.state.title}</p>
+            <PostCardMap currentCoord={this.state.currentCoordinates} boardId={this.state.boardId} />
+            <PostCardTypeText currentCoord={this.state.currentCoordinates} />
           </div>
+
           <div className="postcard-back"
-                style={{ display: this.state.cardIsFront ? 'none' : 'block'}}>
-            <PostCardMessage currentCoord={this.state.currentCoordinates} boardId={this.state.boardId}/>
+            style={{ display: this.state.cardIsFront ? 'none' : 'block' }}>
+            <PostCardMessage currentCoord={this.state.currentCoordinates} boardId={this.state.boardId} />
           </div>
         </div>
+
         <div className="postcard-flip-button">
           <Button onClick={this.rotate} compact basic color='red' size="mini">View Other Side</Button>
         </div>
-        </div>
+
+      </div>
     )
   }
 }

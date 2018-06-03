@@ -4,6 +4,10 @@ body {
   height: auto;
  }
 
+ .ui.menu:after {
+  content: none;
+}
+
  a {
   text-decoration: none;
  }
@@ -464,10 +468,6 @@ input.location-search-input {
   top: 7.5em;
 }
 
-.ui.menu:after {
-  content: none;
-}
-
 #message-box {
   height: 6em;
 }
@@ -585,105 +585,6 @@ input.location-search-input {
   font-family: 'Special Elite', cursive;
 }
 
-.postcard-container {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  /* border: 1px solid rbg(188,143,143); */
-  width: 95vw;
-  height: 60vh;
-  max-width: 750px;
-  box-shadow: 10px 10px 8px #888888;
-  background-color: white;
-  /* z-index: -1; */
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  padding: 20px;
-  text-align: center;
-  margin-bottom: 5em;
-  border: solid 1px #d8d5d5;
-
-}
-
-#postcard-icon {
-  padding-right: 1em;
-
-}
-
- .postcard-form-style {
-  background: transparent;
-  border: none;
-  font-size: 1em;
-  outline: none;
-  line-height: 1.3em;
-  width: 55vw;
-  display: inline;
- }
-
- #textarea {
-   vertical-align: top;
-   height: 15vh;
- }
-
-  .postcard-flip-button {
-    position: relative;
-    top: 1em;
-  }
-
-  .postcard-front {
-    margin: 0;
-  }
-
-  /* .postcard-back {
-    margin: auto;
-  } */
-
-  .postcard-label {
-    text-align: left;
-    display: inline;
-    font-family: 'Special Elite', cursive;
-  }
-
-  .postcard-map {
-    border: 1px solid rbg(188,143,143);
-    margin-bottom: 2em;
-  }
-
-  .postcard-map-message {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-  }
-
-  /* .postcard-message-container {
-    display: flex;
-    flex-direction: column;
-    height: 70vh;
-    justify-content: center;
-  } */
-
-  .postcard-message-body {
-    align-content: center;
-    font-size: 1.5em;
-    line-height: 1.7em;
-    white-space: nowrap;
-  }
-
-  #postcard-received {
-    text-align: left;
-  }
-
-  .postcard-message-form {
-    text-align: left;
-    clear: bloth;
-    float: left;
-    margin-left: 3em;
-    width: 80vw;
-    margin-bottom: 42px;
-  }
-
 #profile-name {
   font-family: 'Special Elite', cursive;
   font-size: 150%;
@@ -768,12 +669,6 @@ input.location-search-input {
   border: none;
   background-color: white;
  }
-
- .postcard-logo {
-  width: 10vw;
-  z-index:1;
-  position: fixed;
-  }
 
  .search-coords {
   display: flex;
@@ -930,10 +825,6 @@ input.location-search-input {
   min-width: 100px;
  }
 
- .ui.menu:after {
-  content: none;
-}
-
 .ui.sub-navbar.menu {
   display: flex;
   position: fixed;
@@ -964,7 +855,267 @@ input.location-search-input {
   align-self: flex-end;
 }
 
+.welcome-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding-top: 150px;
+  width: 100%;
+  align-items: center;
+}
+
+#back-btn {
+  display: flex;
+  position: fixed;
+  top: 7.65em;
+  left: .5em;
+  z-index: 2;
+}
+
+.ui.grey.button, .ui.grey.buttons .button {
+  background-color: #fff;
+  color: black;
+}
+
+#settings-btn {
+  display: flex;
+  position: absolute;
+  bottom: 1em;
+  left: 1em;
+  z-index: 5;
+}
+
+#map-search-bar {
+  display: flex;
+  position: fixed;
+  top: 8em;
+  width: 100%;
+  justify-content: center;
+}
+
+#footer {
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  border-radius: .28571429rem;
+  background-color: #f9f9f9;
+  z-index: 3;
+  height: 2.2em;
+  box-shadow: -2px 2px 15px 1px rgba(179,179,179,1);
+}
+
+h3.ui.header {
+  margin-top: 7px;
+}
+
+#add-user {
+  display: flex;
+  justify-content: flex-end;
+  margin: auto 0 0 auto;
+}
+
+.board-search-bar {
+  margin-left: 30px;
+}
+
+#mapcard-world .mapboxgl-map .mapboxgl-popup-content {
+  padding: 0;
+  width: 150px;
+}
+
+#mapcard-world .mapboxgl-map .mapboxgl-popup-content .options-container {
+  height: 21px;
+}
+
+.center-message h3 {
+  font-family: 'Special Elite', cursive;
+  color: #515151;
+}
+
+.center-message img {
+  height: 150px;
+}
+
+.center-message {
+  width: 100%;
+  text-align: center;
+  height: 50vh;
+  position: absolute;
+  top: 7.5em;
+}
+
+/* ------------ POSTCARD STUFF -------------- */
+
+#postcard-icon {
+  padding-right: 1em;
+}
+
+.page-container {
+  display: flex;
+  position: fixed;
+  top: 8em;
+  flex-direction: column;
+  text-align: center;
+  font-family: 'Special Elite', cursive;
+  width: 100%;
+  height: 100%;
+}
+
+.postcard-container {
+  background-color: #f9f9f9;
+  width: 90%;
+  max-width: 750px;
+  margin: 0 auto;
+  height: 60%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -4px 4px 20px 1px #515151;
+}
+
+.postcard-front {
+  width: 100%;
+  height: 100%;
+}
+
+#postcard-title {
+  color: #515151;
+  letter-spacing: .15em; 
+  margin-bottom: 0;
+  margin: .5em 0 .2em 0;
+}
+
+.postcard-map {
+  height: 85%;
+  width: 100%;
+  margin-bottom: .5em;
+}
+
+.postcard-typewriter-text {
+  color: #515151;
+  overflow: hidden; 
+  /* Ensures the content is not revealed until the animation */
+  border-right: .10em solid #EBEBEB; 
+  /* typewriter cursor */
+  white-space: nowrap; 
+  /* Keeps the content on a single line */
+  margin: 0 auto; 
+  /* Gives that scrolling effect as the typing happens */
+  letter-spacing: .15em; 
+  /* Adjust as needed */
+  animation:
+    typing 3.5s steps(30, end),
+    blink-caret .5s step-end infinite;
+}
+
+.postcard-flip-button {
+  margin-top: 2em;
+}
+
+/* ------------------------------------------------ */
+
+
+
+/* .postcard-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  /* border: 1px solid rbg(188,143,143); */
+  /*
+  width: 95vw;
+  height: 60vh;
+  max-width: 750px;
+  box-shadow: 10px 10px 8px #888888;
+  background-color: white;
+  /* z-index: -1; */
+  /*
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 5em;
+  border: solid 1px #d8d5d5;
+
+}
+
+ .postcard-form-style {
+  background: transparent;
+  border: none;
+  font-size: 1em;
+  outline: none;
+  line-height: 1.3em;
+  width: 55vw;
+  display: inline;
+ }
+
+ #textarea {
+   vertical-align: top;
+   height: 15vh;
+ }
+
+  .postcard-flip-button {
+    position: relative;
+    top: 1em;
+  }
+
+  .postcard-front {
+    margin: 0;
+  }
+
+  /* .postcard-back {
+    margin: auto;
+  } */
+/*
+  .postcard-label {
+    text-align: left;
+    display: inline;
+    font-family: 'Special Elite', cursive;
+  }
+
+  .postcard-map {
+    border: 1px solid rbg(188,143,143);
+    margin-bottom: 2em;
+  }
+
+  .postcard-map-message {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  /* .postcard-message-container {
+    display: flex;
+    flex-direction: column;
+    height: 70vh;
+    justify-content: center;
+  } */
+/*
+  .postcard-message-body {
+    align-content: center;
+    font-size: 1.5em;
+    line-height: 1.7em;
+    white-space: nowrap;
+  }
+
+  #postcard-received {
+    text-align: left;
+  }
+
+  .postcard-message-form {
+    text-align: left;
+    clear: bloth;
+    float: left;
+    margin-left: 3em;
+    width: 80vw;
+    margin-bottom: 42px;
+  }
+
+
 /* just added, don't delete! */
+/*
 .postcard-map-sizing {
   height: 53vh;
   display: flex;
@@ -1090,10 +1241,15 @@ input.location-search-input {
     font-size: 1.2em;
     font-family: monospace;
     overflow: hidden; /* Ensures the content is not revealed until the animation */
+    /*
     border-right: .10em solid #EBEBEB; /* typewriter cursor */
+    /*
     white-space: nowrap; /* Keeps the content on a single line */
+    /*
     margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+    /*
     letter-spacing: .15em; /* Adjust as needed */
+    /*
     animation:
       typing 3.5s steps(30, end),
       blink-caret .5s step-end infinite;
@@ -1116,91 +1272,9 @@ input.location-search-input {
   };
 }
 
-.welcome-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-  padding-top: 150px;
-  width: 100%;
-  align-items: center;
-}
 
-#back-btn {
-  display: flex;
+.postcard-logo {
+  width: 10vw;
+  z-index:1;
   position: fixed;
-  top: 7.65em;
-  left: .5em;
-  z-index: 2;
-}
-
-.ui.grey.button, .ui.grey.buttons .button {
-  background-color: #fff;
-  color: black;
-}
-
-#settings-btn {
-  display: flex;
-  position: absolute;
-  bottom: 1em;
-  left: 1em;
-  z-index: 5;
-}
-
-#map-search-bar {
-  display: flex;
-  position: fixed;
-  top: 8em;
-  width: 100%;
-  justify-content: center;
-}
-
-#footer {
-  display: flex;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  border-radius: .28571429rem;
-  background-color: #f9f9f9;
-  z-index: 3;
-  height: 2.2em;
-  box-shadow: -2px 2px 15px 1px rgba(179,179,179,1);
-}
-
-h3.ui.header {
-  margin-top: 7px;
-}
-
-#add-user {
-  display: flex;
-  justify-content: flex-end;
-  margin: auto 0 0 auto;
-}
-
-.board-search-bar {
-  margin-left: 30px;
-}
-
-#mapcard-world .mapboxgl-map .mapboxgl-popup-content {
-  padding: 0;
-  width: 150px;
-}
-
-#mapcard-world .mapboxgl-map .mapboxgl-popup-content .options-container {
-  height: 21px;
-}
-
-.center-message h3 {
-  font-family: 'Special Elite', cursive;
-  color: #515151;
-}
-.center-message img {
-  height: 150px;
-}
-.center-message {
-  width: 100%;
-  text-align: center;
-  height: 50vh;
-  position: absolute;
-  top: 7.5em;
-}
+  } */
