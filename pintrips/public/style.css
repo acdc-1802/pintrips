@@ -405,10 +405,9 @@ input.location-search-input {
 }
 
 #logo {
-  width: 15%;
-  height: 15%;
-  margin: 3% 0 3% 3%;
-  min-width: 5em;
+  width: 40px;
+  height: 40px;
+  margin: auto auto auto 5px;
 }
 
 #logout {
@@ -546,7 +545,7 @@ input.location-search-input {
 #name {
   font-family: 'Special Elite', cursive;
   font-size: 175%;
-  margin-left: 1.75em;
+  margin-left: 1em;
 }
 
 .no-friends-msg {
@@ -765,46 +764,6 @@ input.location-search-input {
   min-width: 100px;
  }
 
- .stamp-logo {
-  position: fixed;
-  top: 2em;
-  right: 0em;
-  width: 23vw;
-  display: flex;
-  flex-direction: row;
-  justify-content: right;
-  }
-
-.stamp {
-  z-index:1;
-  font-family: 'Special Elite', cursive;
-  -webkit-transform: rotate(20deg);
-  -moz-transform: rotate(20deg);
-  -ms-transform: rotate(20deg);
-  -o-transform: rotate(20deg);
-  transform: rotate(20deg);
-  font-size:1.6em;
-  color: #F7BAB7;
-  /* border:solid 4px #F7BAB7; */
-  padding:1.4em;
-  border-radius:50%;
-  zoom:1;
-  filter:alpha(opacity=20);
-  opacity:0.2;
-  -webkit-text-shadow: 0 0 2px #F7BAB7;
-  text-shadow: 0 0 2px #F7BAB7;
-  /* box-shadow: 0 0 2px #F7BAB7; */
-  -webkit-animation-name: pulse;
-  animation-name: pulse;
-  animation-delay:2s;
-  -webkit-animation-delay:2s;
-  -webkit-animation-duration: 0.5s;
-  animation-duration: 0.5s;
-  opacity: 0;
-  -webkit-animation-fill-mode:forwards;
-  animation-fill-mode:forwards;
-}
-
  .title {
   display: flex;
   position: fixed;
@@ -1010,8 +969,83 @@ h3.ui.header {
 }
 
 .postcard-flip-button {
+  z-index: 10;
   margin-top: 2em;
 }
+
+.postcard-back {
+  width: 100%;
+  height: 100%;
+}
+
+.postcard-message-container {
+  width: 100%;
+  height: 100%;
+}
+
+.stamp-logo {
+  display: flex;
+  margin: auto 10px auto auto;
+  width: 70%;
+  justify-content: flex-end;
+}
+
+.stamp {
+  margin-top: 10px;
+  z-index:1;
+  transform: rotate(20deg);
+  font-size:.9em;
+  color: #a3231a;
+  filter:alpha(opacity=20);
+  opacity:0.2;
+  text-shadow: 0 0 2px #515151;
+  animation-name: pulse;
+  animation-delay:2s;
+  animation-duration: 0.5s;
+  opacity: 0;
+  animation-fill-mode: forwards;
+}
+
+.stamp-line {
+  text-align: right;
+}
+
+#stamp {
+  width: 100px;
+}
+
+.postcard-message-body {
+  color: #515151;
+  margin-top: 20px;
+  text-align: right;
+  display: flex;
+  height: 70%;
+}
+
+.postcard-message-form {
+  width: 80%;
+}
+
+label.postcard-label {
+  vertical-align: top;
+}
+
+.postcard-message-body input {
+  padding: 3px;
+  border-radius: 5px;
+  margin: 5px;
+  width: 70%;
+}
+
+.postcard-message-body textarea {
+  padding: 3px;
+  border-radius: 5px;
+  margin: 5px;
+  width: 70%;
+  height: 3.5em;
+  border: solid 1px gray;
+}
+
 
 /* ------------------------------------------------ */
 
@@ -1277,4 +1311,47 @@ h3.ui.header {
   width: 10vw;
   z-index:1;
   position: fixed;
-  } */
+  } 
+
+
+ .stamp-logo {
+  position: fixed;
+  top: 2em;
+  right: 0em;
+  width: 23vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  }
+
+.stamp {
+  z-index:1;
+  font-family: 'Special Elite', cursive;
+  -webkit-transform: rotate(20deg);
+  -moz-transform: rotate(20deg);
+  -ms-transform: rotate(20deg);
+  -o-transform: rotate(20deg);
+  transform: rotate(20deg);
+  font-size:1.6em;
+  color: #F7BAB7;
+  /* border:solid 4px #F7BAB7; */
+  /*
+  padding:1.4em;
+  border-radius:50%;
+  zoom:1;
+  filter:alpha(opacity=20);
+  opacity:0.2;
+  -webkit-text-shadow: 0 0 2px #F7BAB7;
+  text-shadow: 0 0 2px #F7BAB7;
+  /* box-shadow: 0 0 2px #F7BAB7; */
+  /*
+  -webkit-animation-name: pulse;
+  animation-name: pulse;
+  animation-delay:2s;
+  -webkit-animation-delay:2s;
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+  opacity: 0;
+  -webkit-animation-fill-mode:forwards;
+  animation-fill-mode:forwards;
+}*/
