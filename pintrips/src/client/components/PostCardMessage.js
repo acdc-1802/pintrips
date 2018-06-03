@@ -49,23 +49,23 @@ export class PostCard extends Component {
       sender: this.state.senderEmail,
       boardId: this.props.boardId
     })
-    .then(created => {
-      this.setState({ postcardId: created.id})
-      const templateParams = { to_name: this.state.receiverEmail, from_name: this.state.senderEmail, postcard_id: this.state.postcardId }
-      emailjs.send('default_service', 'pintrips_postcard', templateParams, 'user_y9Gpr6VKiWp0BpC5djRDe')
-        .then(function(response) {
-          console.log('SUCCESS!', response.status, response.text);
-        }, function(err) {
+      .then(created => {
+        this.setState({ postcardId: created.id })
+        const templateParams = { to_name: this.state.receiverEmail, from_name: this.state.senderEmail, postcard_id: this.state.postcardId }
+        emailjs.send('default_service', 'pintrips_postcard', templateParams, 'user_y9Gpr6VKiWp0BpC5djRDe')
+          .then(function (response) {
+            console.log('SUCCESS!', response.status, response.text);
+          }, function (err) {
             console.log('FAILED...', err);
-        });
-    })
-    .then(res => {
-      history.push('/postcard_sent')
-    })
-    .catch(function(error) {
-        console.error("Error writing document: ", error);
+          });
+      })
+      .then(res => {
+        history.push('/postcard_sent')
+      })
+      .catch(function (error) {
+        console.error('Error writing document: ', error);
         history.pushState('/404')
-    });
+      });
 
   }
 
@@ -77,28 +77,30 @@ export class PostCard extends Component {
       postCardBody.length > 0;
 
     return (
-      <div className="postcard-message-container">
-      {
-        this.state.currentCoordinates.length
-        ? <div>
-              <PostCardStamp currentCoord={this.state.currentCoordinates}/>
-            <div className="postcard-message-body">
-              <form className="postcard-message-form" onSubmit={this.handleSubmit}>
-                <div className="field">
-                  <label className="postcard-label">To: </label><input type="text" name="receiverEmail" value={this.state.receiverEmail} onChange={this.handleChange} placeholder="email" className="postcard-form-style"/>
+      <div className='postcard-message-container'>
+        {
+          this.state.currentCoordinates.length
+          ? 
+          <div className='postcard-message-container'>
+            <PostCardStamp currentCoord={this.state.currentCoordinates} />
+            <div className='postcard-message-body'>
+              <form className='postcard-message-form' onSubmit={this.handleSubmit}>
+                <div className='field'>
+                  <label className='postcard-label'>To: </label><input type='text' name='receiverEmail' value={this.state.receiverEmail} onChange={this.handleChange} placeholder='email' className='postcard-form-style' />
                 </div>
-                <div className="field">
-                  <label className="postcard-label">From: </label><input type="text" name="senderEmail" readOnly={userEmail} placeholder={userEmail} className="postcard-form-style"/>
+                <div className='field'>
+                  <label className='postcard-label'>From: </label><input type='text' name='senderEmail' readOnly={userEmail} placeholder={userEmail} className='postcard-form-style' />
                 </div>
-                <div className="field" id="message-box">
-                  <label className="postcard-label">Message: </label><textarea type="text" name="postCardBody" value={this.state.postCardBody} onChange={this.handleChange} placeholder="Hello!" className="postcard-form-style" id="textarea"></textarea>
+                <div className='field' id='message-box'>
+                  <label className='postcard-label'>Message: </label><textarea type='text' name='postCardBody' maxLength='300' value={this.state.postCardBody} onChange={this.handleChange} placeholder='Hello!' className='postcard-form-style' id='textarea'></textarea>
                 </div>
-                  <Button type="submit" color='teal' compact disabled={!isEnabled}>Send!</Button>
+                <Button type='submit' color='teal' compact disabled={!isEnabled}>Send!</Button>
               </form>
             </div>
           </div>
-      : null
-      }
+          : 
+          null
+        }
       </div>
     )
   }

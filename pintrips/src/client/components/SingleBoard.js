@@ -467,7 +467,6 @@ class SingleBoard extends Component {
             className="search-bar"
             forAddPin={true}
             updateBoardPins={this.selectPlaceFromSearchBar}>
-          <input placeholder="Search in "/>
           </LocationSearch>
         </div>
 
