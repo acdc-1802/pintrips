@@ -200,9 +200,7 @@ class Navbar extends Component {
                   content={'Logout'}
                   position='bottom left'
                 />
-
               </Menu.Item>
-              {/*</Link>*/}
 
             </Menu>
           )
