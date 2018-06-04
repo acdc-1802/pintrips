@@ -20,15 +20,18 @@ class AddFriend extends Component {
     db.collection('users').get()
       .then(snapshot => snapshot.forEach(doc => {
         this.state.allUsers.push({ email: doc.data().email, first: doc.data().first, last: doc.data().last, id: doc.data().id, profileImg: doc.data().profileImg, username: doc.data().username })
-      }))
+      }))    
   }
   handleChange = (e) => {
     this.setState({ searchQuery: e.target.value })
+    console.log('target value', this.state.searchQuery);
     let results = {}
     this.state.allUsers.forEach(user => {
-      let username = user.username.toLowerCase();
-      if (username.includes(e.target.value.toLowerCase())) {
-        results[user.id] = true
+      let username = user && user.username && user.username.toLowerCase();
+      if (username) {
+        if (username.includes(e.target.value.toLowerCase())) {
+          results[user.id] = true
+        }
       }
     })
     this.setState({ results });
