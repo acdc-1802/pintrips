@@ -839,6 +839,7 @@ input.location-search-input {
 .ui.grey.button, .ui.grey.buttons .button {
   background-color: #fff !important;
   color: black !important;
+  box-shadow: -2px 2px 15px 1px rgba(179,179,179,1) !important;
 }
 
 #settings-btn {
