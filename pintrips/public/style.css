@@ -217,6 +217,7 @@ i.angle.double.left.large.icon.back-icon {
 .friend-img {
   width: 60px;
   height: 60px;
+  border-radius: 50%;
 }
 
 .forms {
@@ -1052,9 +1053,11 @@ label.postcard-label {
   text-align: left;
 }
 
+#edit-label-icon {
+  padding-left: 1em;
+}
 
 /* ------------------------------------------------ */
-
 
 
 /* .postcard-container {
