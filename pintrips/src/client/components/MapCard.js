@@ -333,7 +333,7 @@ class MapCard extends Component {
                       }
                       on='click'
                     />
-                    <Icon name='edit' size='large' fitted={true} onClick={this.toggleEditMode} />
+                    <Icon id='edit-label-icon' name='edit' size='large' fitted={true} onClick={this.toggleEditMode} />
                   </div>
                   <div>
                     <Checkbox defaultChecked={this.checkStatus(this.props.board.locked)} onClick={this.changeStatus} toggle />

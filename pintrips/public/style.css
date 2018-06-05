@@ -1053,6 +1053,9 @@ label.postcard-label {
   text-align: left;
 }
 
+#edit-label-icon {
+  padding-left: 1em;
+}
 
 /* ------------------------------------------------ */
 
