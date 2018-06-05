@@ -31,7 +31,7 @@ const Friends = (props) => {
         user &&
         <Map
           from={db.collection('users').doc(props._user.uid)}
-          Loading={() => 'Loading'}
+          Loading={() => 'Loading...'}
           Render={(props) => {
             let acceptedFriends = {};
             for (let friend in props.friends) {
