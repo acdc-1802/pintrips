@@ -33,8 +33,17 @@ const Friends = (props) => {
           from={db.collection('users').doc(props._user.uid)}
           Loading={() => 'Loading'}
           Render={(props) => {
+            let acceptedFriends = {};
+            for (let friend in props.friends) {
+              if (props.friends[friend].status === 'accepted') {
+                acceptedFriends[friend] = {
+                  friends: true,
+                  status: 'accepted'
+                }
+              }
+            }
             return (
-              <FriendsList friends={props.friends} />
+              <FriendsList friends={acceptedFriends} />
             )
           }}
           Empty={() =>

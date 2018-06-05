@@ -141,9 +141,13 @@ class Navbar extends Component {
                           from={db.collection('users').doc(this.props._user.uid)}
                           Render={(props) => {
                             let pending = props.canWrite;
+                            let pendingFriends = props.friends;
                             let sum = 0;
                             for (let i in pending) {
                               pending[i].status === 'pending' && sum++
+                            }
+                            for (let k in pendingFriends) {
+                              pendingFriends[k].status === 'pending' && sum++
                             }
                             return (
                               sum > 0 &&
@@ -162,24 +166,48 @@ class Navbar extends Component {
                           from={db.collection('users').doc(this.props._user.uid)}
                           Render={(props) => {
                             let pending = props.canWrite;
-                            let pendingBoards = [];
+                            let friends = props.friends;
+                            let notificationsList = [];
                             for (let i in pending) {
                               pending[i].status === 'pending' &&
-                                pendingBoards.push({ board: i, sender: pending[i].sender })
+                                notificationsList.push({
+                                  board: {
+                                    board: i,
+                                    sender: pending[i].sender
+                                  }
+                                })
+                            }
+                            for (let x in friends) {
+                              friends[x].status === 'pending' &&
+                                notificationsList.push({
+                                  friendRequest: {
+                                    id: x,
+                                    sender: friends[x].senderName
+                                  }
+                                })
                             }
                             return (
-                              pendingBoards.length ?
+                              notificationsList.length ?
                                 (
-                                  pendingBoards.map((sentBoard, idx) => {
-                                    return (
-                                      <Link key={idx} to={`/SharedWithMe`}>
-                                        <List.Item icon='mail' content={`${sentBoard.sender} sent you a board!`} />
-                                      </Link>
-                                    )
-                                  })
+                                  notificationsList.map((notification, idx) => {
+                                    if (notification.board) {
+                                      return (
+                                        <Link key={idx} to={`/SharedWithMe`}>
+                                          <List.Item icon='mail' content={`${notification.board.sender} sent you a board!`} />
+                                        </Link>
+                                      )
+                                    } else {
+                                      return (
+                                        <Link key={idx} to={`/Profile/${notification.friendRequest.id}`}>
+                                          <List.Item icon='add user' content={`${notification.friendRequest.sender} sent a friend request`} />
+                                        </Link>
+                                      )
+                                    }
+                                  }
+                                  )
                                 )
                                 :
-                                (<List.Item content='You have no new notifications'/>)
+                                (<List.Item content='You have no new notifications' />)
                             )
                           }}
                         />

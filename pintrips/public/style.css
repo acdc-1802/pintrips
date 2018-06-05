@@ -217,6 +217,7 @@ i.angle.double.left.large.icon.back-icon {
 .friend-img {
   width: 60px;
   height: 60px;
+  border-radius: 50%;
 }
 
 .forms {
@@ -462,10 +463,18 @@ input.location-search-input {
   margin: .5em
 }
 
+
 .board-container .mapboxgl-map {
-  /* map is still scrolling because position is set to absolute, and position fixed works on web to solve this but not on mobile because it disables scrolling - will come back to this */
-  position: absolute;
+  /* fixed the scrolling map issue in the web */
+  position: fixed;
   top: 7.5em;
+}
+
+@media only screen and (max-width: 600px) {
+  /* but added this so that the mobile has the scrollable map bug instead of the unable to interact with bug (will fix later but for now this bug is the better alternative) -d */
+  .board-container .mapboxgl-map {
+    position: absolute;
+  }
 }
 
 #message-box {
@@ -1058,6 +1067,9 @@ label.postcard-label {
   text-align: left;
 }
 
+#edit-label-icon {
+  padding-left: 1em;
+}
 
 /* 
 not totally sure what this was for so i'll leave it here for now
