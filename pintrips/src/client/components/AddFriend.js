@@ -66,7 +66,7 @@ class AddFriend extends Component {
           (
             <Map
               from={db.collection('users').doc(user.uid)}
-              Loading={() => 'Loading'}
+              Loading={() => 'Loading...'}
               Render={(props) => {
                 let nonFriends = {};
                 if(props.friends){
