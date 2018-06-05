@@ -463,6 +463,7 @@ input.location-search-input {
 }
 
 .board-container .mapboxgl-map {
+  /* map is still scrolling because position is set to absolute, and position fixed works on web to solve this but not on mobile because it disables scrolling - will come back to this */
   position: absolute;
   top: 7.5em;
 }
