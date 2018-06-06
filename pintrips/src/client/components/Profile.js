@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { withAuth } from 'fireview';
 import db from '../firestore';
-import { Loader, Button } from 'semantic-ui-react';
+import { Loader, Button, Popup } from 'semantic-ui-react';
 import WorldMap from './WorldMap';
+import history from '../../history';
 
 class Profile extends Component {
   constructor(props) {
@@ -16,27 +17,27 @@ class Profile extends Component {
       bannerImg: '',
       loading: true,
       friendRequest: false
-    }
+    };
     this.handleAccept = this.handleAccept.bind(this);
     this.handleDecline = this.handleDecline.bind(this);
   }
   componentDidUpdate({ _user }) {
-    if (this.props._user === _user) return
-    let user = this.props.match.params.id || (this.props._user && this.props._user.uid)
+    if (this.props._user === _user) return;
+    let user = this.props.match.params.id || (this.props._user && this.props._user.uid);
     if (user !== this.props._user.uid) {
       db.collection('users').doc(this.props._user.uid).get()
         .then(loggedInUser => {
           if (loggedInUser.data().friends[user].status === 'pending') {
-            this.setState({ friendRequest: true })
+            this.setState({ friendRequest: true });
           }
         })
-        .catch(error => console.log('unable to get friendRequest status', error))
+        .catch(error => console.error('unable to get friendRequest status', error));
     }
     user &&
       db.collection('users').doc(user).get()
         .then(user => this.setState({ userId: user.data().id, profileImg: user.data().profileImg, first: user.data().first, last: user.data().last, email: user.data().email, username: user.data().username, bannerImg: user.data().bannerImg }))
         .then(() => this.setState({ loading: false }))
-        .catch(error => console.error('unable to get user info', error))
+        .catch(error => console.error('unable to get user info', error));
   }
   handleAccept(loggedInUser) {
     db.collection('users').doc(loggedInUser).set(
@@ -47,25 +48,25 @@ class Profile extends Component {
             friends: true
           }
         }
-      }, 
-      {merge: true}
+      },
+      { merge: true }
     )
-    .then(() => {
-      db.collection('users').doc(this.props.match.params.id).set(
-        {
-          friends: {
-            [loggedInUser]: {
-              status: 'accepted',
-              friends: true
+      .then(() => {
+        db.collection('users').doc(this.props.match.params.id).set(
+          {
+            friends: {
+              [loggedInUser]: {
+                status: 'accepted',
+                friends: true
+              }
             }
-          }
-        }, 
-        {merge: true}
-      )
-      .catch(error => console.error('unable to accept request',error))
-    })
-    .then(() => this.setState({friendRequest: false}))
-    .catch(error => console.error('Unable to accept friend request', error))
+          },
+          { merge: true }
+        )
+          .catch(error => console.error('unable to accept request', error));
+      })
+      .then(() => this.setState({ friendRequest: false }))
+      .catch(error => console.error('Unable to accept friend request', error))
   }
   handleDecline(loggedInUser) {
     db.collection('users').doc(loggedInUser).set(
@@ -76,28 +77,29 @@ class Profile extends Component {
             friends: false
           }
         }
-      }, 
-      {merge: true}
+      },
+      { merge: true }
     )
-    .then(() => {
-      db.collection('users').doc(this.props.match.params.id).set(
-        {
-          friends: {
-            [loggedInUser]: {
-              status: 'declined',
-              friends: false
+      .then(() => {
+        db.collection('users').doc(this.props.match.params.id).set(
+          {
+            friends: {
+              [loggedInUser]: {
+                status: 'declined',
+                friends: false
+              }
             }
-          }
-        }, 
-        {merge: true}
-      )
-      .catch(error => console.error('unable to decline request',error))
-    })
-    .then(() => this.setState({friendRequest: false}))
-    .catch(error => console.error('Unable to decline friend request', error))
+          },
+          { merge: true }
+        )
+          .catch(error => console.error('unable to decline request', error));
+      })
+      .then(() => this.setState({ friendRequest: false }))
+      .then(() => history.push(`/Friends/${loggedInUser}`))
+      .catch(error => console.error('Unable to decline friend request', error));
   }
   render() {
-    let user = this.props.match.params.id || (this.props._user && this.props._user.uid)
+    let user = this.props.match.params.id || (this.props._user && this.props._user.uid);
     return (
       <div className='profile-page'>
         <div className='profile-container'>
@@ -113,15 +115,27 @@ class Profile extends Component {
             <h2 id='profile-name'>{this.state.first} {this.state.last}</h2>
             <h4 id='profile-username'>Username: {this.state.username}</h4>
             <small id='profile-email'>Email: {this.state.email}</small>
-            {
-              this.state.friendRequest &&
-              (
-                <div>
-                  <Button size='tiny' color='green' onClick={() => this.handleAccept(this.props._user && this.props._user.uid)} >Accept</Button>
-                  <Button size='tiny' color='red' onClick={() => this.handleDecline(this.props._user && this.props._user.uid)} >Decline</Button>
-                </div>
-              )
-            }
+            <div>
+              {
+                this.state.friendRequest ?
+                  (
+                    <div>
+                      <Button size='tiny' color='green' onClick={() => this.handleAccept(this.props._user && this.props._user.uid)} >Accept</Button>
+                      <Button size='tiny' color='red' onClick={() => this.handleDecline(this.props._user && this.props._user.uid)} >Decline</Button>
+                    </div>
+                  )
+                  :
+                  (
+                    <Popup
+                      trigger={<Button size='tiny'>Friends</Button>}
+                      content={<Button size='mini' color='red' onClick={() => this.handleDecline(this.props._user && this.props._user.uid)}>Unfriend</Button>}
+                      position='right-center'
+                      hideOnScroll
+                      hoverable
+                    />
+                  )
+              }
+            </div>
           </div>
         </div>
         <div className='map-container'>
@@ -131,7 +145,7 @@ class Profile extends Component {
           }
         </div>
       </div>
-    )
+    );
   }
 }
 
