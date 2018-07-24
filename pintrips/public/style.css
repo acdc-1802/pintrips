@@ -488,15 +488,17 @@ input.location-search-input {
 
 #profile-name {
   font-family: 'Special Elite', cursive;
-  font-size: 150%;
-  margin-top: 2%;
+  font-size: 105%;
+  margin: 3px 0;
   margin-bottom: auto;
+  margin-top: 12px;
 }
 
 #profile-username {
-  margin: auto;
-  color: #515151;
+  margin: 3px 0;
+  color: #7f7f7f;
   font-family: 'Special Elite', cursive;
+  font-size: 80%;
 }
 
 #friend-name {
@@ -531,9 +533,10 @@ input.location-search-input {
 }
 
 #profile-email {
-  margin: auto;
-  color: #515151;
+  margin: 3px 0;
+  color: #7f7f7f;
   font-family: 'Special Elite', cursive;
+  font-size: 80%;
 }
 
 .navbar {
@@ -599,26 +602,10 @@ input.location-search-input {
   font-family: 'Special Elite', cursive;
 }
 
-#profile-name {
-  font-family: 'Special Elite', cursive;
-  font-size: 150%;
-  margin-top: 5%;
-}
-
 /* The typing effect */
 @keyframes typing {
   from { width: 0 }
   to { width: 60% }
-}
-
-#profile-username {
-  font-size: 100%;
-  margin: auto;
-}
-
-#profile-email {
-  font-size: 100%;
-  margin: auto;
 }
 
 .profile-container {
@@ -636,8 +623,8 @@ input.location-search-input {
 }
 
 .profile-img{
-  width: 75px;
-  height: 75px;
+  width: 67px;
+  height: 67px;
   border-radius: 50%;
   border: solid 2px #bcbcbc;
 }

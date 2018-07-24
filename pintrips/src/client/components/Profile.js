@@ -111,8 +111,8 @@ class Profile extends Component {
           </div>
           <div className='profile-info'>
             <h2 id='profile-name'>{this.state.first} {this.state.last}</h2>
-            <h4 id='profile-username'>Username: {this.state.username}</h4>
-            <small id='profile-email'>Email: {this.state.email}</small>
+            <h2 id='profile-username'>username: {this.state.username}</h2>
+            <h2 id='profile-email'>email: {this.state.email}</h2>
             {
               this.state.friendRequest &&
               (
