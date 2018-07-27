@@ -113,7 +113,6 @@ class Profile extends Component {
           </div>
           <div className='profile-info'>
             <h2 id='profile-name'>{this.state.first} {this.state.last}</h2>
-<<<<<<< HEAD
             <h4 id='profile-username'>Username: {this.state.username}</h4>
             <small id='profile-email'>Email: {this.state.email}</small>
             <div>
@@ -137,19 +136,6 @@ class Profile extends Component {
                   )
               }
             </div>
-=======
-            <h2 id='profile-username'>username: {this.state.username}</h2>
-            <h2 id='profile-email'>email: {this.state.email}</h2>
-            {
-              this.state.friendRequest &&
-              (
-                <div>
-                  <Button size='tiny' color='green' onClick={() => this.handleAccept(this.props._user && this.props._user.uid)} >Accept</Button>
-                  <Button size='tiny' color='red' onClick={() => this.handleDecline(this.props._user && this.props._user.uid)} >Decline</Button>
-                </div>
-              )
-            }
->>>>>>> master
           </div>
         </div>
         <div className='map-container'>
