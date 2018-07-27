@@ -11,7 +11,7 @@ const Friends = (props) => {
   return (
     <div className='friends-container'>
       {
-        user && 
+        user &&
         <div className='header-container'>
           <Header as='h3'>
             <Link to={`/Friends/${user.uid}`}>
@@ -24,7 +24,7 @@ const Friends = (props) => {
               <Icon name='add user' color='grey' size='large' id='add-user-icon' />
             </Link>
           </Header>
-  
+
         </div>
       }
       {
@@ -39,20 +39,20 @@ const Friends = (props) => {
                 acceptedFriends[friend] = {
                   friends: true,
                   status: 'accepted'
-                }
+                };
               }
             }
-            return (
+            return(
               <FriendsList friends={acceptedFriends} />
-            )
+            );
           }}
           Empty={() =>
-            <h3 >You don't have any friends ya loser</h3>
+            <h3 >You don`t have any friends :(</h3>
           }
         />
       }
     </div>
-  )
-}
+  );
+};
 
 export default withAuth(Friends);

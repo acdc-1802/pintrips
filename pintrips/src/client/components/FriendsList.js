@@ -11,7 +11,7 @@ class FriendsList extends Component {
       friends: props.friends,
       friendsInfo: [],
       friendAdded: false
-    }
+    };
     this.handleAddFriend = this.handleAddFriend.bind(this);
   }
   componentDidMount() {
@@ -27,10 +27,10 @@ class FriendsList extends Component {
               profileImg: user.data().profileImg,
               username: user.data().username,
               id: user.data().id
-            })
+            });
           })
           .then(() => this.setState({ friendsInfo }))
-          .catch(error => console.error('Unable to get friends info', error))
+          .catch(error => console.error('Unable to get friends info', error));
     }
   }
   handleAddFriend(userId) {
@@ -47,24 +47,24 @@ class FriendsList extends Component {
       ).then(() => {
         let fullName = '';
         db.collection('users').doc(user.uid).get()
-        .then(sender => {
-          fullName = sender.data().first + ' ' + sender.data().last;
-        })
-        .then(() => {
-          db.collection('users').doc(userId).set({
-            friends: {
-              [user.uid]: {
-                status: 'pending',
-                senderName: fullName
+          .then(sender => {
+            fullName = sender.data().first + ' ' + sender.data().last;
+          })
+          .then(() => {
+            db.collection('users').doc(userId).set({
+              friends: {
+                [user.uid]: {
+                  status: 'pending',
+                  senderName: fullName
+                }
               }
-            }
-          }, { merge: true })
-            .catch(error => console.error('Unable to add you as a friend', error))
-        })
+            }, { merge: true })
+              .catch(error => console.error('Unable to add you as a friend', error));
+          });
       })
-        .then(() => { this.setState({ friendAdded: true }) })
-        .then(() => { setTimeout(() => this.setState({ friendAdded: false }), 3000) })
-        .catch(error => console.error('Unable to add friend', error))
+        .then(() => { this.setState({ friendAdded: true }); })
+        .then(() => { setTimeout(() => this.setState({ friendAdded: false }), 3000); })
+        .catch(error => console.error('Unable to add friend', error));
 
   }
   render() {
@@ -72,9 +72,9 @@ class FriendsList extends Component {
       <div >
         <Grid stackable columns={3} className='friendsList-container'>
           {
-            !this.state.friends &&
+            !Object.keys(this.state.friends).length &&
             <div className='no-friends-msg'>
-              <small id='profile-email'>You don't have any friends  yet :(</small>
+              <small id='profile-email'>You don`t have any friends  yet :(</small>
             </div>
           }
           {
@@ -92,7 +92,7 @@ class FriendsList extends Component {
                             </Header.Content>
                             <Header.Content id='friend-username'>
                               ({friend.username})
-                        </Header.Content>
+                            </Header.Content>
                           </Header>
                         </Segment>
                       </Link>)
@@ -132,12 +132,12 @@ class FriendsList extends Component {
                       </Segment>)
                   }
                 </Grid.Column>
-              )
+              );
             })
           }
         </Grid>
       </div>
-    )
+    );
   }
 }
 
