@@ -16,7 +16,8 @@ class Profile extends Component {
       username: '',
       bannerImg: '',
       loading: true,
-      friendRequest: false
+      friendRequest: false,
+      viewingAltUserProfile: false
     };
     this.handleAccept = this.handleAccept.bind(this);
     this.handleDecline = this.handleDecline.bind(this);
@@ -25,6 +26,7 @@ class Profile extends Component {
     if (this.props._user === _user) return;
     let user = this.props.match.params.id || (this.props._user && this.props._user.uid);
     if (user !== this.props._user.uid) {
+      this.setState({ viewingAltUserProfile: true });
       db.collection('users').doc(this.props._user.uid).get()
         .then(loggedInUser => {
           if (loggedInUser.data().friends[user].status === 'pending') {
@@ -115,6 +117,8 @@ class Profile extends Component {
             <h2 id='profile-name'>{this.state.first} {this.state.last}</h2>
             <h4 id='profile-username'>Username: {this.state.username}</h4>
             <small id='profile-email'>Email: {this.state.email}</small>
+            {
+            this.state.viewingAltUserProfile &&
             <div>
               {
                 this.state.friendRequest ?
@@ -129,13 +133,14 @@ class Profile extends Component {
                     <Popup
                       trigger={<Button size='tiny'>Friends</Button>}
                       content={<Button size='mini' color='red' onClick={() => this.handleDecline(this.props._user && this.props._user.uid)}>Unfriend</Button>}
-                      position='right-center'
+                      position='right center'
                       hideOnScroll
                       hoverable
                     />
                   )
               }
             </div>
+            }
           </div>
         </div>
         <div className='map-container'>

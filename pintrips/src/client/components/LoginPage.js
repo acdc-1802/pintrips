@@ -37,7 +37,7 @@ export default class LoginPage extends Component {
       .then(() => { setTimeout(() => this.setState({ success: false }), 3000) })
       .then(user => {
         // needs actual message ' sorry wrong user name and/or password '
-        console.log(firebase.auth().currentUser.uid)
+        // console.log(firebase.auth().currentUser.uid)
         history.push('/HomePage');
       })
       .catch(error => {
