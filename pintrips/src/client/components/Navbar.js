@@ -36,6 +36,11 @@ class Navbar extends Component {
         })
         .catch(error => console.error('Could not get notifications', error))
   }
+  userCheck = () => {
+    if (!this.props._user) {
+      document.getElementById('sign-up-message').style.opacity = '1';
+    }
+  }
   render() {
     const user = this.props._user;
     const handleLogout = () => {
@@ -45,12 +50,13 @@ class Navbar extends Component {
     return (
       <div>
         <div className='navbar'>
-          <Link className='logo' to='/HomePage'>
+          <Link onClick={this.userCheck} className='logo' to='/HomePage'>
             <img id='logo' alt='logo' src='/attributes/logo.png' />
           </Link>
-          <Link className='logo' to='/HomePage'>
+          <Link onClick={this.userCheck} className='logo' to='/HomePage'>
             <h1 id='name'>Pintrips</h1>
           </Link>
+          <div id='sign-up-message'>Please sign up or log in to continue</div>
           {
             user &&
             (

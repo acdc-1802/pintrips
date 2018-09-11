@@ -30,6 +30,7 @@ const Routes = props => {
       :
       (
         <Switch>
+          <Route path='/HomePage' component={WelcomePage} />
           <Route path='/LoginPage' component={LoginPage} />
           <Route path='/SignupPage' component={SignupPage} />
           <Route path='/postcard_received/:postcardId' component={PostcardReceived} />
