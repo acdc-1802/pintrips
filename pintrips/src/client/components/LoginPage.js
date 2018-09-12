@@ -48,6 +48,8 @@ export default class LoginPage extends Component {
   }
 
   render() {
+    document.getElementById('sign-up-message').style.transition = 'opacity 0s';
+    document.getElementById('sign-up-message').style.opacity = '0';
     return (
       <div className="login-container" >
         <Form onSubmit={this.handleSubmit} error>
