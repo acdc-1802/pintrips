@@ -53,6 +53,8 @@ class SignupPage extends Component {
       })
   }
   render() {
+    document.getElementById('sign-up-message').style.transition = 'opacity 0s';
+    document.getElementById('sign-up-message').style.opacity = '0';
     return (
       <div className="signup-container">
         <Form onSubmit={this.handleSignup} error>
